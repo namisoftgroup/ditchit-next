@@ -14,7 +14,7 @@ export default function Navigation() {
         <div className="w-full flex items-center gap-2">
           <Link
             href="/"
-            className="flex flex-col items-center gap-2 text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
+            className="flex flex-col items-center gap-2 text-[14px] text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
           >
             <House className="w-5 h-5 object-contain hidden max-lg:block" />
             Home
@@ -22,7 +22,7 @@ export default function Navigation() {
 
           <Link
             href="/all-posts"
-            className="flex flex-col items-center gap-2 text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
+            className="flex flex-col items-center gap-2 text-[14px] text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
           >
             <List className="w-5 h-5 object-contain hidden max-lg:block" />
             Listing
@@ -30,7 +30,7 @@ export default function Navigation() {
 
           <Link
             href="/chats"
-            className="flex flex-col items-center gap-2 text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
+            className="flex flex-col text-[14px] items-center gap-2 text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
           >
             <MessageSquare className="w-5 h-5 object-contain hidden max-lg:block" />
             Chats
