@@ -11,11 +11,14 @@ export default async function Home() {
     queryKey: ["home-categories"],
     queryFn: ({ pageParam = 1 }) => getHomeCategories(pageParam),
     initialPageParam: 1,
-    getNextPageParam: (lastPage: CategoryResponse) => {
-      const nextUrl = lastPage?.data?.links?.next;
-      return nextUrl
-        ? Number(new URL(nextUrl).searchParams.get("page"))
-        : undefined;
+    getNextPageParam: (
+      lastPage: CategoryResponse,
+      _: unknown,
+      lastPageParam: number
+    ) => {
+      const posts = lastPage?.data?.posts ?? [];
+      if (posts.length === 0) return undefined;
+      return lastPageParam + 1;
     },
   });
 

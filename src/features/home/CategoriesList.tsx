@@ -4,15 +4,11 @@ import { useEffect, useRef } from "react";
 import { Category } from "./types";
 import CategorySlider from "./CategorySlider";
 import useGetCategoriesWithPosts from "@/hooks/queries/useGetCategoriesWithPosts";
+import CategorySliderSkeleton from "./CategorySliderSkeleton";
 
 export default function CategoriesList() {
-  const {
-    categories,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useGetCategoriesWithPosts();
+  const { categories, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useGetCategoriesWithPosts();
 
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -34,10 +30,9 @@ export default function CategoriesList() {
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
-
-  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div ref={sectionRef} className="space-y-12">
@@ -45,9 +40,7 @@ export default function CategoriesList() {
         <CategorySlider key={category.value} category={category} />
       ))}
 
-      {isFetchingNextPage && (
-        <div className="text-center mt-6 text-gray-500">Loading more...</div>
-      )}
+      {isFetchingNextPage && <CategorySliderSkeleton />}
     </div>
   );
 }

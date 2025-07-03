@@ -1,6 +1,5 @@
 export interface CategoryResponse {
   data: {
-    links: any;
     slider: unknown[];
     posts: Category[];
   };
