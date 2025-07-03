@@ -3,6 +3,7 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 
 import "./globals.css";
+import MainProviders from "@/providers/MainProviders";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ditchit.com/"),
@@ -56,9 +57,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main className="min-h-[calc(100vh-126px)]">{children}</main>
-        <Footer />
+        <MainProviders>
+          <Header />
+          <main className="min-h-[calc(100vh-126px)]">{children}</main>
+          <Footer />
+        </MainProviders>
       </body>
     </html>
   );

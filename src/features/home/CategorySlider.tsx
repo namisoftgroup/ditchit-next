@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import ProductCard from "@/components/cards/ProductCard";
+import { Category } from "./types";
 import {
   Carousel,
   CarouselContent,
@@ -8,21 +11,21 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-export default function CategorySlider() {
+export default function CategorySlider({ category }: { category: Category }) {
   return (
-    <section className="py-[60px]">
+    <section className="py-[60px] m-0 even:bg-[#f5f5f5]">
       <div className="max-w-[1440px] mx-auto px-4">
         {/* Header */}
-        <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-1 mb-6">
+        <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
           <div className="px-2">
             <span className="block text-[14px] font-semibold not-italic tracking-[2.8px] uppercase text-[var(--mainColor)]">
-              Arts &amp; Crafts
+              {category.title}
             </span>
             <Link href="/all-posts?category=arts-and-crafts">
               <h4 className="text-[40px] font-bold text-[var(--darkColor)]">
                 Browse items by{" "}
                 <span className="text-[var(--mainColor)]">
-                  Arts &amp; Crafts
+                  {category.title}
                 </span>
               </h4>
             </Link>
@@ -38,10 +41,10 @@ export default function CategorySlider() {
             </div>
 
             <CarouselContent>
-              {Array.from({ length: 8 }).map((_, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
-                  <div className="p-1">
-                    <ProductCard />
+              {category.posts.map((post) => (
+                <CarouselItem key={post.id} className="md:basis-1/2 lg:basis-1/4">
+                  <div className="p-1 h-full">
+                    <ProductCard post={post} />
                   </div>
                 </CarouselItem>
               ))}

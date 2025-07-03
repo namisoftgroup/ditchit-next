@@ -25,7 +25,7 @@ export default function HeaderCategories({ categories }: Props) {
       <div className="mx-auto max-w-[1440px]">
         <div
           ref={containerRef}
-          className="flex items-center gap-5 overflow-hidden pb-3 px-2 pt-1.5 flex-wrap"
+          className="flex items-center gap-5 overflow-hidden pb-3 px-2 pt-1.5"
         >
           {isCalculating ? (
             <div className="flex gap-4 w-full">
