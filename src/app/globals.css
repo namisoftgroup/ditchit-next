@@ -60,6 +60,10 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  .left-initial {
+    left: initial !important;
+  }
+
   body {
     background-color: var(--background, #ffffff);
     color: var(--foreground, #111111);
