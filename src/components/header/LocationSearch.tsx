@@ -9,7 +9,7 @@ export default function LocationSearch() {
 
   return (
     <div className="flex items-center flex-1 gap-x-4 gap-y-2">
-      <form className="flex-1 m-0 mb-0 min-w-[200px] relative bg-[#f3f3f3] border border-[#e6e6e6] rounded-full w-[min(100%_-_16px,_1440px)]">
+      <form className="flex-1 m-0 mb-0 min-w-[300px] relative bg-[#f3f3f3] border border-[#e6e6e6] rounded-full w-[min(100%_-_16px,_1440px)]">
         <input
           type="search"
           name="search"

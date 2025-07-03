@@ -1,7 +1,13 @@
+import CategorySlider from "@/features/home/CategorySlider";
+
 export default function Home() {
   return (
-    <div>
-
-    </div>
+    <>
+      <CategorySlider />
+      <CategorySlider />
+      <CategorySlider />
+      <CategorySlider />
+      <CategorySlider />
+    </>
   );
 }

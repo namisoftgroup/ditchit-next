@@ -12,7 +12,7 @@ export function CategoryLink({ category, innerRef }: Props) {
     <Link
       href={`/all-posts?category=${category.id}`}
       ref={innerRef}
-      className="flex items-center gap-2 text-sm hover:text-blue-600 whitespace-nowrap"
+      className="flex items-center gap-2 text-sm text-[var(--darkColor)] hover:text-[var(--mainColor)] whitespace-nowrap"
     >
       <Image src={category.image} alt={category.title} width={20} height={20} />
       {category.title}

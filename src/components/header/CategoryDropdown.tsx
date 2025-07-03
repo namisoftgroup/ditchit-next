@@ -15,7 +15,7 @@ type Props = {
 export function CategoryDropdown({ categories }: Props) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-2 text-sm hover:text-blue-600 whitespace-nowrap">
+      <DropdownMenuTrigger className="flex items-center gap-2 text-sm text-[var(--darkColor)] hover:[text-var(--mainColor)] whitespace-nowrap">
         <Image src="/icons/more.svg" alt="More" width={20} height={20} />
         More
       </DropdownMenuTrigger>
@@ -24,7 +24,7 @@ export function CategoryDropdown({ categories }: Props) {
           <DropdownMenuItem key={cat.id} asChild>
             <Link
               href={`/all-posts?category=${cat.id}`}
-              className="flex items-center gap-2 whitespace-nowrap hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+              className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
             >
               <Image src={cat.image} alt={cat.title} width={20} height={20} />
               {cat.title}
