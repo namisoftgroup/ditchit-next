@@ -76,10 +76,92 @@
 
   .container {
     width: min(100% - 8px, 1440px) !important;
-    margin: 0 auto !important;
-    padding: 0 .5rem !important;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: .5rem;
+    padding-left: .5rem;
   }
 
+  .swiperControl {
+    position: relative;
+    padding: 8px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+
+    .swiperBtns {
+      display: flex;
+      gap: 8px;
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        position: unset !important;
+        right: unset;
+        left: unset;
+        top: unset;
+        bottom: unset;
+        margin: unset !important;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px !important;
+        height: 40px !important;
+        border: 1px solid var(--darkColor);
+        border-radius: 100%;
+        transition: var(--transition);
+        opacity: 0.8;
+
+        @media screen and (max-width: 768px) {
+          width: 32px;
+          height: 32px;
+        }
+
+        &::after {
+          content: "" !important;
+          width: 20px;
+          height: 20px;
+          border-radius: 100%;
+          background: none;
+          background-image: url("/icons/arrow.svg");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          transition: var(--transition);
+          filter: brightness(0);
+
+          @media screen and (max-width: 768px) {
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        &:hover {
+          opacity: 1;
+          background-color: var(--mainColor);
+          color: var(--mainColor);
+          border-color: var(--mainColor);
+
+          &::after {
+            filter: brightness(0) invert(1);
+          }
+        }
+
+        &.swiper-button-disabled {
+          opacity: 0.2;
+        }
+      }
+
+      .swiper-button-next {
+        right: unset;
+
+        &::after {
+          transform: scaleX(-1);
+        }
+      }
+    }
+
+  }
 
   .customBtn {
     border: none;

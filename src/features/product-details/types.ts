@@ -1,52 +1,71 @@
-export interface productResponse {
+export interface ProductDetailsResponse {
   id: number;
   type: string;
   condition: string;
-  user_id: number;
-  user: {
-    user: {
-      id: number;
-      name: string;
-      phone: string | null;
-      phone_code: string;
-      email: string;
-      image: string;
-      address: string;
-      zip_code: number;
-      latitude: number;
-      longitude: number;
-    };
-  };
-  category_id: number;
-  category: {
-    id: number;
-    title: string;
-    image: string;
-    is_condition: boolean;
-    options: unknown[];
-  };
+  userId: number;
+  user: User;
+  categoryId: number;
+  category: Category;
   title: string;
   description: string;
   image: string;
-  zip_code: string;
+  zipCode: string;
   address: string;
   latitude: number;
   longitude: number;
   price: number;
-  firm_price: boolean;
-  virtual_tour: boolean;
-  is_promoted: boolean;
-  old_promote: boolean;
-  promote_expire: string;
-  is_sold: boolean;
-  delivery_method: string;
-  is_love: boolean;
-  images: string[]; // Assuming it's an array of image URLs or file names
-  options: unknown[]; // Again, refine if structure is known
+  firmPrice: boolean;
+  virtualTour: boolean;
+  isPromoted: boolean;
+  oldPromote: boolean;
+  promoteExpire: string;
+  isSold: boolean;
+  deliveryMethod: string;
+  isLove: boolean;
+  images: Images[];
+  options: Option[];
   distance: number;
-  features: unknown[]; // Refine if structure is known
+  features: Feature[];
   views: number;
-  date: string; // Format: YYYY-MM-DD
-  time: string; // Format: hh:mm AM/PM
-  publishing_duration: string;
+  date: string;
+  time: string;
+  publishingDuration: string;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  phone?: string;
+  phoneCode: string;
+  email: string;
+  image: string;
+  address: string;
+  zipCode: number;
+  latitude: number;
+  longitude: number;
+}
+
+export interface Category {
+  id: number;
+  title: string;
+  image: string;
+  isCondition: boolean;
+  options: unknown[];
+}
+
+export interface Option {
+  id: number;
+  title: string;
+  value: string | number;
+}
+
+export interface Feature {
+  id: number;
+  title: string;
+  value: string | number;
+}
+
+export interface Images {
+  id: number;
+  image: string;
 }
