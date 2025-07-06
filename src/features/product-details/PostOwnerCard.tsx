@@ -16,7 +16,7 @@ export default function PostOwnerCard({
         href={`/profile/${owner.id}`}
         className="flex flex-col items-center gap-2"
       >
-        <Image src={owner.image} alt="user" width={120} height={120} />
+        <Image src={owner.image} alt="user" width={120} height={120} className="rounded-full" />
         <h3 className="font-bold transition-all capitalize text-[20px]">
           {owner.name}
         </h3>

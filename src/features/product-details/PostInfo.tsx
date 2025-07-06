@@ -2,9 +2,16 @@ import { Clock, Heart, MapPin } from "lucide-react";
 import { ProductDetailsResponse } from "./types";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment } from "react";
 
 export default function PostInfo({ post }: { post: ProductDetailsResponse }) {
+  const optionsToMap = post.options.filter((option) => option.value);
+
+  const encodedUrl = encodeURIComponent(
+    `https://ditchit.com/all-posts?id=${post.id}`
+  );
+
+  const encodedText = encodeURIComponent("DitchIt");
+
   return (
     <>
       <div className="flex flex-wrap items-center gap-3">
@@ -37,8 +44,9 @@ export default function PostInfo({ post }: { post: ProductDetailsResponse }) {
             </span>
 
             <a
-              href={`https://twitter.com/intent/tweet?url=https://ditchit.com//all-posts?id=${post.id}&text=DitchIt`}
+              href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`}
               target="_blank"
+              rel="noopener noreferrer"
               className="bg-[var(--whiteColor)] w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#1da1f2] group"
             >
               <Image
@@ -51,8 +59,9 @@ export default function PostInfo({ post }: { post: ProductDetailsResponse }) {
             </a>
 
             <a
-              href={`https://api.whatsapp.com/send?text=DitchIt https://ditchit.com//all-posts?id=${post.id}`}
+              href={`https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`}
               target="_blank"
+              rel="noopener noreferrer"
               className="bg-[var(--whiteColor)] w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#25d366] group"
             >
               <Image
@@ -65,8 +74,9 @@ export default function PostInfo({ post }: { post: ProductDetailsResponse }) {
             </a>
 
             <a
-              href={`https://www.instagram.com/?url=https://ditchit.com//all-posts?id=${post.id}`}
+              href={`https://www.instagram.com/?url=${encodedUrl}`}
               target="_blank"
+              rel="noopener noreferrer"
               className="bg-[var(--whiteColor)] w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#e1306c] group"
             >
               <Image
@@ -79,8 +89,9 @@ export default function PostInfo({ post }: { post: ProductDetailsResponse }) {
             </a>
 
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=https://ditchit.com//all-posts?id=${post.id}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
               target="_blank"
+              rel="noopener noreferrer"
               className="bg-[var(--whiteColor)] w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#1877f2] group"
             >
               <Image
@@ -104,8 +115,9 @@ export default function PostInfo({ post }: { post: ProductDetailsResponse }) {
         <div className="flex items-center justify-between pt-3 mt-2 border-t border-t-[var(--lightBorderColor)] gap-2 flex-wrap">
           <a
             href={`https://www.google.com/maps?q=${post.latitude},${post.longitude}`}
-            className="flex items-center gap-1 text-[13px] text-[var(--grayColor)]"
             target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-[13px] text-[var(--grayColor)]"
           >
             <MapPin height={16} width={16} />
             {post.address}
@@ -134,28 +146,28 @@ export default function PostInfo({ post }: { post: ProductDetailsResponse }) {
         </div>
       </div>
 
-      <div className="p-6 border border-[var(--lightBorderColor)] rounded-2xl bg-[var(--whiteColor)]">
-        <h4 className="font-bold text-[18px] mb-4 pb-4 border-b border-b-[var(--lightBorderColor)]">
-          Key Features
-        </h4>
-        <ul>
-          {post.options.map((option, index) => (
-            <Fragment key={index}>
-              {option.value && (
-                <li
-                  className={`flex flex-wrap p-4 rounded-2xl gap-2 ${index % 2 === 0 ? "bg-[#f5f5f5]" : ""}`}
-                  key={option.category_option_id}
-                >
-                  <span className="text-14px flex-1">
-                    {option.category_option.title}
-                  </span>
-                  <p className="flex-3 font-bold text-[14px]">{option.value}</p>
-                </li>
-              )}
-            </Fragment>
-          ))}
-        </ul>
-      </div>
+      {optionsToMap.length > 0 && (
+        <div className="p-6 border border-[var(--lightBorderColor)] rounded-2xl bg-[var(--whiteColor)]">
+          <h4 className="font-bold text-[18px] mb-4 pb-4 border-b border-b-[var(--lightBorderColor)]">
+            Key Features
+          </h4>
+          <ul>
+            {optionsToMap.map((option, index) => (
+              <li
+                key={option.category_option_id}
+                className={`flex flex-wrap p-4 rounded-2xl gap-2 ${index % 2 === 0 ? "bg-[#f5f5f5]" : ""}`}
+              >
+                <span className="text-[14px] flex-1">
+                  {option.category_option.title}
+                </span>
+                <p className="text-[14px] font-bold flex-3">
+                  {option.value}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </>
   );
 }

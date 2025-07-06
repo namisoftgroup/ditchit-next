@@ -5,8 +5,14 @@ import DitchNote from "@/features/product-details/DitchNote";
 import PostSlider from "@/features/product-details/PostSlider";
 import PostInfo from "@/features/product-details/PostInfo";
 
-export default async function PostDetails({ params } : { params: { productId: string } }) {
-  const id = Number(params.productId);
+interface PageProps {
+  params: Promise<{
+    productId: string;
+  }>;
+}
+
+export default async function PostDetails({ params }: PageProps) {
+  const id = (await params).productId;
   const post = await getProductDetails(id);
 
   const images: string[] = [
