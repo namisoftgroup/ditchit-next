@@ -3,7 +3,9 @@ export interface ProductDetailsResponse {
   type: string;
   condition: string;
   userId: number;
-  user: User;
+  user: {
+    user: User;
+  };
   categoryId: number;
   category: Category;
   title: string;
@@ -29,6 +31,8 @@ export interface ProductDetailsResponse {
   views: number;
   date: string;
   time: string;
+  firm_price: boolean;
+  delivery_method: string;
   publishingDuration: string;
 }
 
@@ -57,6 +61,10 @@ export interface Option {
   id: number;
   title: string;
   value: string | number;
+  category_option: {
+    title: string;
+  };
+  category_option_id: number;
 }
 
 export interface Feature {

@@ -1,7 +1,9 @@
 import serverAxios from "@/lib/axios/serverAxios";
-import { productResponse } from "./types";
+import { ProductDetailsResponse } from "./types";
 
-export async function getProductDetails(id: number): Promise<productResponse> {
+export async function getProductDetails(
+  id: number
+): Promise<ProductDetailsResponse> {
   try {
     const res = await serverAxios.get(`/home/post/${id}`);
 
