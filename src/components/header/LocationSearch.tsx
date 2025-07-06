@@ -27,7 +27,7 @@ export default function LocationSearch() {
       </form>
 
       <div
-        className="flex [flex:1_1_150px] gap-2 max-w-[300px] items-center cursor-pointer rounded-full"
+        className="flex gap-2 min-w-[250px] items-center cursor-pointer rounded-full"
         onClick={() => setShow(!show)}
       >
         <div className="min-w-[40px] aspect-square flex items-center justify-center bg-[var(--mainColor)] text-[var(--whiteColor)] rounded-full text-[20px]">
@@ -38,7 +38,7 @@ export default function LocationSearch() {
           <p className="font-bold capitalize text-[var(--grayColor)] text-[12px] whitespace-nowrap">
             Current Location
           </p>
-          <h4 className="text-[var(--darkColor)] capitalize overflow-hidden [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical]">
+          <h4 className="text-[var(--darkColor)] capitalize overflow-hidden [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] text-[18px]">
             United States
           </h4>
         </div>

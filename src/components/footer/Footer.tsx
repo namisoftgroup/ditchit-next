@@ -5,7 +5,7 @@ import LogoBrand from "../header/LogoBrand";
 export default function Footer() {
   return (
     <footer className="bg-[#212121] relative z-20 py-10 text-[--whiteColor]">
-      <div className="max-w-[1440px] mx-auto px-4 flex items-center flex-wrap py-2 pb-4 gap-y-1 gap-x-4 text-[var(--whiteColor)]">
+      <div className="container flex items-center flex-wrap py-2 pb-4 gap-y-1 gap-x-4 text-[var(--whiteColor)]">
         <LogoBrand />
         <div className=" px-1 py-1 flex flex-wrap justify-center gap-4 my-3">
           <Link href="/">Home</Link>
@@ -20,7 +20,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-[1440px] mx-auto px-4">
+      <div className="container">
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#3e3e3e] pt-4">
           <a
             href="#"

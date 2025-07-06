@@ -23,7 +23,7 @@ export default function PageBanner({
 }) {
   return (
     <div className="bg-[#f5f5f5] py-5 relative isolate">
-      <div className="mx-auto max-w-[1440px] px-2">
+      <div className="container px-2">
         <Breadcrumb>
           <BreadcrumbList>
             {links.map((item, index) => (

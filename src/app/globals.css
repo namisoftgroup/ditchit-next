@@ -74,6 +74,13 @@
     cursor: pointer !important;
   }
 
+  .container {
+    width: min(100% - 8px, 1440px) !important;
+    margin: 0 auto !important;
+    padding: 0 .5rem !important;
+  }
+
+
   .customBtn {
     border: none;
     outline: none;

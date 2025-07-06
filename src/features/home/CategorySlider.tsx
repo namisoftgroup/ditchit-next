@@ -14,7 +14,7 @@ import {
 export default function CategorySlider({ category }: { category: Category }) {
   return (
     <section className="py-[60px] m-0 even:bg-[#f5f5f5]">
-      <div className="max-w-[1440px] mx-auto px-4">
+      <div className="container">
         {/* Header */}
         <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
           <div className="px-2">

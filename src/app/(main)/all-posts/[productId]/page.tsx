@@ -1,6 +1,17 @@
+import { getProductDetails } from "@/features/product-details/service";
 import PageBanner from "@/components/shared/PageBanner";
 
-export default function PostDetails() {
+interface PostDetailsParams {
+  productId: string;
+}
+
+export default async function PostDetails({
+  params,
+}: {
+  params: PostDetailsParams;
+}) {
+  const id = Number(params.productId);
+  const post = await getProductDetails(id);
   return (
     <>
       <PageBanner
@@ -8,8 +19,10 @@ export default function PostDetails() {
           { title: "Home", link: "/" },
           { title: "All Posts", link: "/all-posts" },
         ]}
-        page="Post Details"
+        page={post.title}
       />
+
+      <div className="container">{post.title}</div>
     </>
   );
 }

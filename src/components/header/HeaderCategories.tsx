@@ -22,10 +22,10 @@ export default function HeaderCategories({ categories }: Props) {
 
   return (
     <div className="w-full">
-      <div className="mx-auto max-w-[1440px]">
+      <div className="container">
         <div
           ref={containerRef}
-          className="flex items-center gap-5 overflow-hidden pb-3 px-2 pt-1.5"
+          className="flex items-center gap-5 overflow-hidden px-2 py-3"
         >
           {isCalculating ? (
             <div className="flex gap-4 w-full">
