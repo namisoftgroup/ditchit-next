@@ -31,7 +31,7 @@ export default function PostCard({ post }: { post: Post }) {
 
       {/* Info Section */}
       <div className="relative flex flex-col gap-2 p-4 text-[var(--darkColor)] flex-1">
-        <Link href="/profile" className="absolute top-[-28px] right-4 z-30">
+        {/* <Link href="/profile" className="absolute top-[-28px] right-4 z-30">
           <Image
             src="/images/avatar.svg"
             alt="user"
@@ -39,7 +39,7 @@ export default function PostCard({ post }: { post: Post }) {
             height={48}
             className="w-12 h-12 rounded-full object-cover border-2 border-[var(--whiteColor)] hover:border-[var(--mainColor)] transition-all"
           />
-        </Link>
+        </Link> */}
 
         <div className="flex items-center gap-1 text-sm text-[var(--grayColor)]">
           <Clock width={16} height={16} />

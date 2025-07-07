@@ -17,9 +17,9 @@ export default function PostCardSkeleton() {
       {/* Info Section */}
       <div className="relative flex flex-col gap-2 p-4 flex-1">
         {/* Avatar */}
-        <div className="absolute top-[-28px] right-4 z-30  bg-gray-300 rounded-full">
+        {/* <div className="absolute top-[-28px] right-4 z-30  bg-gray-300 rounded-full">
           <Skeleton className="w-12 h-12 rounded-full border-2 border-[#e7e7e7]  bg-gray-200" />
-        </div>
+        </div> */}
 
         {/* Time */}
         <div className="flex items-center gap-1 text-sm">
