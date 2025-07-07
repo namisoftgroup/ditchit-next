@@ -11,10 +11,10 @@ export interface Category {
   title: string;
   type: "category";
   value: number;
-  posts: Product[];
+  posts: Post[];
 }
 
-export interface Product {
+export interface Post {
   id: number;
   type: string;
   condition: "new" | "used";

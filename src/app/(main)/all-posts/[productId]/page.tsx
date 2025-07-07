@@ -1,10 +1,10 @@
-import { getProductDetails } from "@/features/product-details/service";
+import { getProductDetails } from "@/features/post-details/service";
 import { notFound } from "next/navigation";
 import PageBanner from "@/components/shared/PageBanner";
-import PostOwnerCard from "@/features/product-details/PostOwnerCard";
-import DitchNote from "@/features/product-details/DitchNote";
-import PostSlider from "@/features/product-details/PostSlider";
-import PostInfo from "@/features/product-details/PostInfo";
+import PostOwnerCard from "@/features/post-details/PostOwnerCard";
+import DitchNote from "@/features/post-details/DitchNote";
+import PostSlider from "@/features/post-details/PostSlider";
+import PostInfo from "@/features/post-details/PostInfo";
 
 interface PageProps {
   params: Promise<{
