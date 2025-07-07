@@ -30,12 +30,13 @@ export default function PageBanner({
               <Fragment key={index}>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href={item.link} className="capitalize">
+                    <Link href={item.link} className="capitalize text-[var(--mainColor)]">
                       {item.title}
                     </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
+
+                <BreadcrumbSeparator className="text-[var(--mainColor)]" />
               </Fragment>
             ))}
 
