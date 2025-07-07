@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, LoginFormValues } from "./schema";
-import { useTransition, useState } from "react";
+import { useTransition } from "react";
 import { loginAction } from "./actions";
 import InputField from "@/components/shared/InputField";
 import FormFooterLink from "@/components/shared/FormFooterLink";
@@ -12,29 +12,28 @@ import SocialAuth from "./SocialAuth";
 
 export default function LoginForm() {
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState("");
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormValues>({
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = (values: LoginFormValues) => {
     const formData = new FormData();
+
     formData.append("email", values.email);
     formData.append("password", values.password);
 
     startTransition(() => {
       loginAction(formData).then((res) => {
         if (!res.success) {
-          setError(res.message || "Login failed");
+          console.log(res);
         } else {
-          setError("");
-          // handle login success (store token, redirect, etc.)
+          console.log(res);
         }
       });
     });
@@ -70,8 +69,6 @@ export default function LoginForm() {
         {...register("password")}
         error={errors.password?.message}
       />
-
-      {error && <p className="text-sm text-red-500 text-center">{error}</p>}
 
       <FormFooterLink
         question="Forgot your password?"
