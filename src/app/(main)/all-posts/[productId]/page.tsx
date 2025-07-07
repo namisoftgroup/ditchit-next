@@ -1,4 +1,5 @@
 import { getProductDetails } from "@/features/product-details/service";
+import { notFound } from "next/navigation";
 import PageBanner from "@/components/shared/PageBanner";
 import PostOwnerCard from "@/features/product-details/PostOwnerCard";
 import DitchNote from "@/features/product-details/DitchNote";
@@ -19,6 +20,10 @@ export default async function PostDetails({ params }: PageProps) {
     ...(post.image ? [post.image] : []),
     ...post.images.map(({ image }) => image),
   ];
+
+  if (!post) {
+    notFound();
+  }
 
   return (
     <>
