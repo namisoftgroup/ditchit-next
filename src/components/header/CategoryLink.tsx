@@ -10,7 +10,7 @@ type Props = {
 export function CategoryLink({ category, innerRef }: Props) {
   return (
     <Link
-      href={`/all-posts?category=${category.id}`}
+      href={`/all-posts?category_id=${category.id}`}
       ref={innerRef}
       className="flex items-center gap-2 text-sm text-[var(--darkColor)] hover:text-[var(--mainColor)] whitespace-nowrap"
     >

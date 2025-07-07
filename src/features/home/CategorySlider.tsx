@@ -21,7 +21,7 @@ export default function CategorySlider({ category }: { category: Category }) {
             <span className="block text-[14px] font-semibold not-italic tracking-[2.8px] uppercase text-[var(--mainColor)]">
               {category.title}
             </span>
-            <Link href="/all-posts?category=arts-and-crafts">
+            <Link href="/all-posts?category_id=arts-and-crafts">
               <h4 className="text-[40px] font-bold text-[var(--darkColor)]">
                 Browse items by{" "}
                 <span className="text-[var(--mainColor)]">

@@ -25,7 +25,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
 
         <div className="flex items-center flex-wrap gap-4">
           <Link
-            href={`/all-posts?category=${post.category.id}`}
+            href={`/all-posts?category_id=${post.category.id}`}
             className="flex items-center gap-2 border border-[var(--darkColor)] px-3 py-2 rounded-full h-[42px] font-bold text-[14px] transition-colors hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)] hover:border-[var(--mainColor)] group"
           >
             <Image

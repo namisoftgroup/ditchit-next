@@ -1,15 +1,12 @@
-import { listingResponse } from "./types";
+import { listingResponse, PostsFilterPayload } from "./types";
 import serverAxios from "@/lib/axios/serverAxios";
 import clientAxios from "@/lib/axios/clientAxios";
 
 export async function getFilteredPosts(
-  pageParam = 1
+  request: PostsFilterPayload
 ): Promise<listingResponse> {
   try {
-    const res = await serverAxios.post("/home/posts", {
-      page: pageParam,
-    });
-
+    const res = await serverAxios.post("/home/posts", request);
     return res.data;
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -18,12 +15,10 @@ export async function getFilteredPosts(
 }
 
 export async function getClientFilteredPosts(
-  pageParam = 1
+  request: PostsFilterPayload
 ): Promise<listingResponse> {
   try {
-    const res = await clientAxios.post("/home/posts", {
-      page: pageParam,
-    });
+    const res = await clientAxios.post("/home/posts", request);
 
     return res.data;
   } catch (error) {

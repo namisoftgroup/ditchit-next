@@ -7,14 +7,27 @@ import PageBanner from "@/components/shared/PageBanner";
 import FilterSideBar from "@/features/listing/FilterSideBar";
 import PostsList from "@/features/listing/PostsList";
 
-export default async function page() {
-  const { data: categories } = await getCategories();
+export default async function page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
 
+  const sort = typeof params.sort === "string" ? params.sort : null;
+  const category_id = typeof params.category_id === "string" ? params.category_id : null;
+
+  const { data: categories } = await getCategories();
   const queryClient = getQueryClient();
 
   await queryClient.prefetchInfiniteQuery({
-    queryKey: ["all-posts"],
-    queryFn: ({ pageParam = 1 }) => getFilteredPosts(pageParam),
+    queryKey: ["all-posts", { sort, category_id }],
+    queryFn: ({ pageParam = 1 }) =>
+      getFilteredPosts({
+        page: pageParam,
+        sort,
+        category_id,
+      }),
     initialPageParam: 1,
     getNextPageParam: (
       lastPage: listingResponse,

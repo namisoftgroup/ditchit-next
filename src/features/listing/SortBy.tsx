@@ -12,7 +12,7 @@ import useUrlFilters from "@/hooks/useFilterParams";
 
 export default function SortBy() {
   const { getParam, setParam } = useUrlFilters();
-  const selectedSort = getParam("sort") ?? SORT_BY[0].value;
+  const selectedSort = getParam("sort") ?? "";
 
   return (
     <AccordionItem value="item-1" className="border-[var(--lightBorderColor)]">
@@ -34,7 +34,7 @@ export default function SortBy() {
               <RadioGroupItem
                 value={item.value}
                 id={item.value}
-                className="border-[2px] border-[var(--mainColor)] data-[state=checked]:bg-[var(--mainColor)] data-[state=checked]:border-[var(--mainColor) data-[state=checked]:text-white data-[state=checked]:[&>span>svg]:fill-white"
+                className="border-[1px] border-[var(--darkColor)] data-[state=checked]:bg-[var(--mainColor)] data-[state=checked]:border-[var(--mainColor)] data-[state=checked]:text-white data-[state=checked]:[&>span>svg]:fill-white"
               />
             </div>
           ))}

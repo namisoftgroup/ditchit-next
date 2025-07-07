@@ -5,3 +5,9 @@ export interface listingResponse {
   message: string;
   code: number;
 }
+
+export interface PostsFilterPayload {
+  category_id: string | null;
+  page: number;
+  sort: string | null;
+}

@@ -78,7 +78,7 @@ export default function PostCard({ post }: { post: Post }) {
 
         <div className="flex items-center justify-between pt-3 mt-auto border-t border-[var(--lightBorderColor)]">
           <Link
-            href={`/all-posts?category=${post.category.id}`}
+            href={`/all-posts?category_id=${post.category.id}`}
             className="flex items-center gap-1 text-sm"
           >
             <span className="w-10 h-10 rounded-full bg-[var(--mainColor10)] flex items-center justify-center">
@@ -94,7 +94,7 @@ export default function PostCard({ post }: { post: Post }) {
           </Link>
 
           <div className="text-lg font-bold">
-            <span>$ {post.price}</span>
+            <span>$ {post.price.toFixed(2)}</span>
           </div>
         </div>
       </div>
