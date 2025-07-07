@@ -1,4 +1,4 @@
-import { getProductDetails } from "@/features/post-details/service";
+import { getPostDetails } from "@/features/post-details/service";
 import { notFound } from "next/navigation";
 import PageBanner from "@/components/shared/PageBanner";
 import PostOwnerCard from "@/features/post-details/PostOwnerCard";
@@ -8,13 +8,13 @@ import PostInfo from "@/features/post-details/PostInfo";
 
 interface PageProps {
   params: Promise<{
-    productId: string;
+    postId: string;
   }>;
 }
 
 export default async function PostDetails({ params }: PageProps) {
-  const id = (await params).productId;
-  const post = await getProductDetails(id);
+  const id = (await params).postId;
+  const post = await getPostDetails(id);
 
   const images: string[] = [
     ...(post.image ? [post.image] : []),

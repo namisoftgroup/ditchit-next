@@ -1,8 +1,8 @@
 import { Accordion } from "@/components/ui/accordion";
 import { Category } from "@/types/category";
-import SortBy from "./SortBy";
 import Categoryfilter from "./Categoryfilter";
 import PriceFilter from "./PriceFilter";
+import SortBy from './SortBy';
 
 export default function FilterSideBar({
   categories,

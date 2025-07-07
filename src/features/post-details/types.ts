@@ -1,4 +1,4 @@
-export interface ProductDetailsResponse {
+export interface PostDetailsResponse {
   id: number;
   type: string;
   condition: string;

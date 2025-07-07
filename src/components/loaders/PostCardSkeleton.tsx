@@ -2,7 +2,7 @@
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function ProductCardSkeleton() {
+export default function PostCardSkeleton() {
   return (
     <div className="relative flex flex-col gap-1 h-full rounded-2xl border border-[var(--lightBorderColor)] bg-[var(--whiteColor)]">
       {/* Favorite Button */}

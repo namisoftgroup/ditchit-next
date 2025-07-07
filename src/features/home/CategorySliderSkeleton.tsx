@@ -1,6 +1,6 @@
 "use client";
 
-import ProductCardSkeleton from "@/components/loaders/ProductCardSkeleton";
+import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CategorySliderSkeleton() {
@@ -14,7 +14,7 @@ export default function CategorySliderSkeleton() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {Array.from({ length: 4 }).map((_, i) => (
-            <ProductCardSkeleton key={i} />
+            <PostCardSkeleton key={i} />
           ))}
         </div>
       </div>

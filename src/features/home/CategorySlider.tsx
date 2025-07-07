@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import ProductCard from "@/components/cards/ProductCard";
 import { Category } from "./types";
 import {
   Carousel,
@@ -10,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import PostCard from "@/components/cards/PostCard";
 
 export default function CategorySlider({ category }: { category: Category }) {
   return (
@@ -44,7 +44,7 @@ export default function CategorySlider({ category }: { category: Category }) {
               {category.posts.map((post) => (
                 <CarouselItem key={post.id} className="md:basis-1/2 lg:basis-1/4">
                   <div className="p-1 h-full">
-                    <ProductCard post={post} />
+                    <PostCard post={post} />
                   </div>
                 </CarouselItem>
               ))}

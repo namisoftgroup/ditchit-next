@@ -1,9 +1,9 @@
 import { Clock, Heart, MapPin } from "lucide-react";
-import { ProductDetailsResponse } from "./types";
+import { PostDetailsResponse } from "./types";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function PostInfo({ post }: { post: ProductDetailsResponse }) {
+export default function PostInfo({ post }: { post: PostDetailsResponse }) {
   const optionsToMap = post.options.filter((option) => option.value);
 
   const encodedUrl = encodeURIComponent(

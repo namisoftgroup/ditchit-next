@@ -1,11 +1,11 @@
 "use client";
 
-import { Post } from "@/features/home/types";
+import { Post } from "@/types/post";
 import { Clock, Heart, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProductCard({ post }: { post: Post }) {
+export default function PostCard({ post }: { post: Post }) {
   return (
     <div className="relative flex flex-col gap-1 h-full rounded-2xl border border-[var(--lightBorderColor)] bg-[var(--whiteColor)] transition-all">
       {/* Favorite Button */}

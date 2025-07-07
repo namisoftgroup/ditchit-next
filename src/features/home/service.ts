@@ -14,8 +14,8 @@ export async function getHomeCategories(
 
     return res.data;
   } catch (error) {
-    console.error("Error fetching products:", error);
-    throw new Error("Failed to fetch products");
+    console.error("Error fetching home categories:", error);
+    throw new Error("Failed to fetch home categories");
   }
 }
 
@@ -31,7 +31,7 @@ export async function getClientHomeCategories(
 
     return res.data;
   } catch (error) {
-    console.error("Error fetching products:", error);
-    throw new Error("Failed to fetch products");
+    console.error("Error fetching home categories in client side:", error);
+    throw new Error("Failed to fetch home categories in client side");
   }
 }
