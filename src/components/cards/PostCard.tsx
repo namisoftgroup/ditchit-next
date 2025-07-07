@@ -26,6 +26,17 @@ export default function PostCard({ post }: { post: Post }) {
           loading="lazy"
           className="w-full h-full object-cover object-center transition-all hover:scale-110"
         />
+        
+        {post.is_promoted && (
+          <Image
+            src="/icons/promoted.svg"
+            alt="promoted"
+            width={24}
+            height={24}
+            className="absolute bottom-0 left-0 z-20 w-10 aspect-square bg-white rounded-t-md p-2"
+          />
+        )}
+
         <div className="absolute top-0 left-[-80%] w-1/2 h-full z-10 bg-gradient-to-r from-transparent to-white/30 skew-x-[-25deg]" />
       </Link>
 

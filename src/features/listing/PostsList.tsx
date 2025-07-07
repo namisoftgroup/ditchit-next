@@ -8,7 +8,7 @@ import useGetPostsList from "@/hooks/queries/useGetPostsList";
 export default function PostsList() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const { posts, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { posts, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetPostsList();
 
   useEffect(() => {
@@ -35,13 +35,13 @@ export default function PostsList() {
 
   return (
     <div ref={sectionRef} className="flex flex-wrap -mx-2">
-      {posts.map((post) => (
-        <div key={post.id + post.title} className="w-full lg:w-4/12 p-2">
+      {posts.map((post, index) => (
+        <div key={index} className="w-full lg:w-4/12 p-2">
           <PostCard post={post} />
         </div>
       ))}
 
-      {isFetchingNextPage && (
+      {(isFetchingNextPage || isLoading) && (
         <>
           {Array.from({ length: 3 }).map((_, index) => (
             <div key={index} className="w-full lg:w-4/12 p-2">

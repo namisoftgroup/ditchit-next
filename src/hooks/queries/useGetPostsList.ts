@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { getClientFilteredPosts } from "@/features/listing/service";
 
 export default function useGetPostsList() {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ["all-posts"],
 
@@ -21,6 +21,7 @@ export default function useGetPostsList() {
   return {
     fetchNextPage,
     hasNextPage,
+    isLoading,
     isFetchingNextPage,
     posts: data?.pages.flatMap((page) => page.data ?? []) ?? [],
   };

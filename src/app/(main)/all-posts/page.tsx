@@ -31,7 +31,7 @@ export default async function page() {
     <>
       <PageBanner links={[{ title: "Home", link: "/" }]} page="All Posts" />
 
-      <div className="container py-6">
+      <div className="container py-4">
         <div className="flex flex-wrap -mx-2">
           <div className="w-full lg:w-3/12 px-2 pb-2 pt-4">
             <FilterSideBar categories={categories} />
