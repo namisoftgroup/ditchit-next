@@ -37,6 +37,13 @@ export async function getProfile(): Promise<{
   user: User | null;
   token: string | null;
 }> {
+  if (!(await cookies()).has("token")) {
+    return {
+      user: null,
+      token: null,
+    };
+  }
+
   try {
     const response = await serverAxios.get(`${API_URL}/profile`);
     const token = (await cookies()).get("token")?.value || null;
@@ -51,5 +58,16 @@ export async function getProfile(): Promise<{
       user: null,
       token: null,
     };
+  }
+}
+
+export async function logOutAction() {
+  const res = await serverAxios.get(`${API_URL}/profile/logout`);
+
+  if (res.data.code === 200) {
+    (await cookies()).delete("token");
+    delete serverAxios.defaults.headers.common["Authorization"];
+
+    return res.data;
   }
 }

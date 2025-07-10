@@ -3,7 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
 
-  const PROTECTED_ROUTES = ["/profile", "/chats"];
+  const PROTECTED_ROUTES = [
+    "/my-posts",
+    "/my-favourites",
+    "/edit-profile",
+    "/chats",
+  ];
   const AUTH_ROUTES = ["/login", "/register"];
 
   const isProtectedRoute = PROTECTED_ROUTES.some((route) =>

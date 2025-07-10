@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, LoginFormValues } from "./schema";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { loginAction } from "./actions";
 import { toast } from "sonner";
@@ -14,7 +15,7 @@ import SocialAuth from "./SocialAuth";
 
 export default function LoginForm() {
   const [isPending, setIsPending] = useState<boolean>(false);
-
+  const router = useRouter();
   const setUser = useAuthStore((state) => state.setUser);
   const setToken = useAuthStore((state) => state.setToken);
 
@@ -40,7 +41,7 @@ export default function LoginForm() {
       if (res.code === 200) {
         setUser(res.data.user);
         setToken(res.data.auth.token);
-
+        router.push("/");
         toast.success("Login successful");
       } else {
         toast.error(res.message);

@@ -1,5 +1,5 @@
 import { MessagesSquare, PhoneCall } from "lucide-react";
-import { User } from "./types";
+import { User } from "@/types/user";
 import Link from "next/link";
 import Image from "next/image";
 
