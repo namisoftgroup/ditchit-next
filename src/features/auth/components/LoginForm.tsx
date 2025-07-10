@@ -2,22 +2,21 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, LoginFormValues } from "./schema";
+import { loginSchema, LoginFormValues } from "../schema";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { loginAction } from "./actions";
 import { toast } from "sonner";
-import { useAuthStore } from "./store";
+import { useAuthStore } from "../store";
+import { authAction } from "../actions";
 import InputField from "@/components/shared/InputField";
-import FormFooterLink from "@/components/shared/FormFooterLink";
+import FormFooterLink from "@/features/auth/components/FormFooterLink";
 import Image from "next/image";
 import SocialAuth from "./SocialAuth";
 
 export default function LoginForm() {
   const [isPending, setIsPending] = useState<boolean>(false);
   const router = useRouter();
-  const setUser = useAuthStore((state) => state.setUser);
-  const setToken = useAuthStore((state) => state.setToken);
+  const { setUser, setToken } = useAuthStore((state) => state);
 
   const {
     register,
@@ -36,7 +35,7 @@ export default function LoginForm() {
     formData.append("password", values.password);
 
     try {
-      const res = await loginAction(formData);
+      const res = await authAction(formData, "/auth/login");
 
       if (res.code === 200) {
         setUser(res.data.user);

@@ -6,9 +6,13 @@ import { cookies } from "next/headers";
 import { User } from "@/types/user";
 import serverAxios from "@/lib/axios/serverAxios";
 
-export async function loginAction(formData: FormData) {
+export async function authAction(formData: FormData, endPoint: string) {
   try {
-    const response = await serverAxios.post(`${API_URL}/auth/login`, formData);
+    const response = await serverAxios.post(API_URL + endPoint, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     const responseData = response.data;
 
     if (responseData.code === 200) {
@@ -37,7 +41,7 @@ export async function getProfile(): Promise<{
   user: User | null;
   token: string | null;
 }> {
-  if (!(await cookies()).has("token")) {
+  if (!(await cookies()).get("token")) {
     return {
       user: null,
       token: null,

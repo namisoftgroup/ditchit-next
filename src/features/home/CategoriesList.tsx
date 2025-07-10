@@ -3,44 +3,45 @@
 import { useEffect, useRef } from "react";
 import { Category } from "./types";
 import CategorySlider from "./CategorySlider";
-import useGetCategoriesWithPosts from "@/hooks/queries/useGetCategoriesWithPosts";
 import CategorySliderSkeleton from "./CategorySliderSkeleton";
+import useGetCategoriesWithPosts from "@/hooks/queries/useGetCategoriesWithPosts";
 
 export default function CategoriesList() {
   const { categories, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetCategoriesWithPosts();
 
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const section = sectionRef.current;
-      if (!section) return;
+    if (!observerRef.current || !hasNextPage) return;
 
-      const sectionBottom = section.getBoundingClientRect().bottom;
-      const viewportHeight = window.innerHeight;
-
-      if (
-        sectionBottom <= viewportHeight + 200 &&
-        hasNextPage &&
-        !isFetchingNextPage
-      ) {
-        fetchNextPage();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      {
+        rootMargin: "1200px",
       }
+    );
+
+    observer.observe(observerRef.current);
+
+    return () => {
+      observer.disconnect();
     };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
-    <div ref={sectionRef} className="space-y-12">
+    <div className="space-y-12">
       {categories.map((category: Category) => (
         <CategorySlider key={category.value} category={category} />
       ))}
 
       {isFetchingNextPage && <CategorySliderSkeleton />}
+
+      <div ref={observerRef} />
     </div>
   );
 }

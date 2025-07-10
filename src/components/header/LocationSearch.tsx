@@ -14,7 +14,7 @@ export default function LocationSearch() {
           type="search"
           name="search"
           required
-          className="rounded-[100px] px-4 py-2 border-none min-h-[40px] bg-transparent"
+          className="rounded-[100px] px-4 py-2 border-none min-h-[40px] bg-transparent placeholder:text-[var(--grayColor)] text-[var(--darkColor)] text-[14px] w-full"
           placeholder="Search"
         />
 
