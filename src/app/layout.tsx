@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { Toaster } from "@/components/ui/sonner";
+import { getProfile } from "@/features/auth/actions";
+import AuthProvider from "@/providers/AuthProvider";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 
 import "./globals.css";
-import MainProviders from "@/providers/MainProviders";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ditchit.com/"),
@@ -49,19 +52,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const data = await getProfile();
+
   return (
     <html lang="en">
       <body>
-        <MainProviders>
-          <Header />
-          <main className="min-h-[calc(100vh-126px)]">{children}</main>
-          <Footer />
-        </MainProviders>
+        <AuthProvider user={data?.user ?? null} token={data?.token ?? null}>
+          <ReactQueryProvider>
+            <Toaster
+              expand={false}
+              richColors
+              position="bottom-right"
+              theme="light"
+            />
+            <Header />
+            <main className="min-h-[calc(100vh-126px)]">{children}</main>
+            <Footer />
+          </ReactQueryProvider>
+        </AuthProvider>
       </body>
     </html>
   );

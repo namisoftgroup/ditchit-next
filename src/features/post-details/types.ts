@@ -1,3 +1,5 @@
+import { User } from "@/types/user";
+
 export interface PostDetailsResponse {
   id: number;
   type: string;
@@ -34,19 +36,6 @@ export interface PostDetailsResponse {
   firm_price: boolean;
   delivery_method: string;
   publishingDuration: string;
-}
-
-export interface User {
-  id: number;
-  name: string;
-  phone?: string;
-  phoneCode: string;
-  email: string;
-  image: string;
-  address: string;
-  zipCode: number;
-  latitude: number;
-  longitude: number;
 }
 
 export interface Category {

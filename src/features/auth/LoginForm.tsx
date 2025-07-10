@@ -3,40 +3,54 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, LoginFormValues } from "./schema";
-import { useTransition } from "react";
+import { useState } from "react";
 import { loginAction } from "./actions";
+import { toast } from "sonner";
+import { useAuthStore } from "./store";
 import InputField from "@/components/shared/InputField";
 import FormFooterLink from "@/components/shared/FormFooterLink";
 import Image from "next/image";
 import SocialAuth from "./SocialAuth";
 
 export default function LoginForm() {
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState<boolean>(false);
+
+  const setUser = useAuthStore((state) => state.setUser);
+  const setToken = useAuthStore((state) => state.setToken);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormValues>({
-    mode: "onBlur",
+    mode: "onChange",
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (values: LoginFormValues) => {
-    const formData = new FormData();
+  const onSubmit = async (values: LoginFormValues) => {
+    setIsPending(true);
 
+    const formData = new FormData();
     formData.append("email", values.email);
     formData.append("password", values.password);
 
-    startTransition(() => {
-      loginAction(formData).then((res) => {
-        if (!res.success) {
-          console.log(res);
-        } else {
-          console.log(res);
-        }
-      });
-    });
+    try {
+      const res = await loginAction(formData);
+
+      if (res.code === 200) {
+        setUser(res.data.user);
+        setToken(res.data.auth.token);
+
+        toast.success("Login successful");
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    } finally {
+      setIsPending(false);
+    }
   };
 
   return (
