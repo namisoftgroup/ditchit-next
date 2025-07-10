@@ -16,8 +16,6 @@ serverAxios.interceptors.request.use(async (config) => {
   const token = (await cookies()).get("token")?.value;
 
   if (token) {
-    console.log("setting auth header");
-    
     config.headers.Authorization = token;
   }
   return config;

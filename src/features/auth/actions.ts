@@ -42,7 +42,7 @@ export async function getProfile(): Promise<{
     const token = (await cookies()).get("token")?.value || null;
 
     return {
-      user: response.data.user || null,
+      user: response.data.data.user || null,
       token,
     };
   } catch (error) {

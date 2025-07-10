@@ -1,9 +1,13 @@
 "use client";
 
+import { useAuthStore } from "@/features/auth/store";
 import { UserRound } from "lucide-react";
 import Link from "next/link";
 
 export default function UserMenu() {
+  const { user, token } = useAuthStore((state) => state);
+  console.log(user, token);
+
   return (
     <Link
       href="/login"

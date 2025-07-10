@@ -2,6 +2,7 @@
 
 import axios, { AxiosInstance } from "axios";
 import { API_URL } from "@/utils/constants";
+import { useAuthStore } from "@/features/auth/store";
 
 const clientAxios: AxiosInstance = axios.create({
   baseURL: API_URL,
@@ -10,5 +11,16 @@ const clientAxios: AxiosInstance = axios.create({
     Accept: "application/json",
   },
 });
+
+clientAxios.interceptors.request.use(
+  (config) => {
+    const { token } = useAuthStore((state) => state);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 export default clientAxios;

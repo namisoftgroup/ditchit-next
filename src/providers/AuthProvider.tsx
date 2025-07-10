@@ -1,8 +1,8 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useLayoutEffect } from "react";
 import { User } from "@/types/user";
-import { AuthHydration } from "./AuthHydration";
+import { useAuthStore } from "@/features/auth/store";
 
 export default function AuthProvider({
   token,
@@ -13,10 +13,14 @@ export default function AuthProvider({
   user: User | null;
   children: ReactNode;
 }) {
-  return (
-    <>
-      <AuthHydration token={token} user={user} />
-      {children}
-    </>
-  );
+  const { setUser, setToken } = useAuthStore((state) => state);
+
+  useLayoutEffect(() => {
+    if (token && user) {
+      setToken(token);
+      setUser(user);
+    }
+  }, [token, user, setUser, setToken]);
+
+  return <>{children}</>;
 }
