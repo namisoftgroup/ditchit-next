@@ -2,7 +2,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
 interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   id: string;
   error: string | undefined;
 }
@@ -15,9 +15,11 @@ export default function InputField({
 }: InputFieldProps) {
   return (
     <div className="grid w-full items-center gap-1 relative">
-      <Label htmlFor={id} className="font-bold flex items-center gap-2 mb-2">
-        {label}
-      </Label>
+      {label && (
+        <Label htmlFor={id} className="font-bold flex items-center gap-2 mb-2">
+          {label}
+        </Label>
+      )}
 
       <Input
         id={id}

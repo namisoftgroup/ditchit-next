@@ -5,38 +5,31 @@ import { toast } from "sonner";
 import { AvatarUpload } from "@/components/shared/AvatarUpload";
 import { registerFormValues, registerSchema } from "../schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { authAction } from "../actions";
 import { useAuthStore } from "../store";
 import InputField from "@/components/shared/InputField";
 import SocialAuth from "./SocialAuth";
-import FormFooterLink from "@/features/auth/components/FormFooterLink";
+import ZipMapSearch from "./ZipMapSearch";
+import FormFooterLink from "./FormFooterLink";
 
 export default function RegisterForm() {
   const [isPending, setIsPending] = useState<boolean>(false);
   const { setUser, setToken } = useAuthStore((state) => state);
   const router = useRouter();
 
+  const methods = useForm<registerFormValues>({
+    mode: "onChange",
+    resolver: zodResolver(registerSchema),
+  });
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<registerFormValues>({
-    mode: "onChange",
-    resolver: zodResolver(registerSchema),
-    defaultValues: {
-      name: "",
-      phone: "",
-      address: "",
-      latitude: 34.05,
-      longitude: -118.24,
-      zip_code: "",
-      email: "",
-      password: "",
-    },
-  });
+  } = methods;
 
   const onSubmit = async (data: registerFormValues) => {
     setIsPending(true);
@@ -54,7 +47,6 @@ export default function RegisterForm() {
 
     try {
       const res = await authAction(formData, "/auth/register");
-      console.log(res);
 
       if (res?.code === 200) {
         setUser(res.data.user);
@@ -73,82 +65,84 @@ export default function RegisterForm() {
   };
 
   return (
-    <form
-      className="isolate p-[30px] rounded-[14px] shadow-[var(--BigShadow)] border-none flex flex-col gap-[16px]"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <AvatarUpload onImageChange={(file) => setValue("image", file)} />
-
-      <InputField
-        label="User Name"
-        id="username"
-        placeholder="User Name"
-        {...register("name")}
-        error={errors.name?.message}
-      />
-
-      <InputField
-        label="Phone Number"
-        id="phone"
-        placeholder="(123) 456-7890"
-        {...register("phone")}
-        error={errors.phone?.message}
-      />
-
-      <InputField
-        label="Email"
-        type="email"
-        id="email"
-        placeholder="Email"
-        {...register("email")}
-        error={errors.email?.message}
-      />
-
-      <InputField
-        label="Password"
-        type="password"
-        id="password"
-        placeholder="Password"
-        {...register("password")}
-        error={errors.password?.message}
-      />
-
-      <InputField
-        label="Address"
-        id="address"
-        placeholder="Address"
-        {...register("address")}
-        error={errors.address?.message}
-      />
-
-      <InputField
-        label="Zip Code"
-        type="text" // Changed from number to text to avoid automatic number conversion
-        id="zip"
-        placeholder="Zip Code"
-        {...register("zip_code")}
-        error={errors.zip_code?.message}
-      />
-
-      {/* Hidden fields for latitude and longitude */}
-      <input type="hidden" {...register("latitude")} />
-      <input type="hidden" {...register("longitude")} />
-
-      <button
-        type="submit"
-        className="customBtn w-full rounded-full"
-        disabled={isPending}
+    <FormProvider {...methods}>
+      <form
+        className="isolate p-[30px] rounded-[14px] shadow-[var(--BigShadow)] border-none flex flex-col gap-[16px]"
+        onSubmit={handleSubmit(onSubmit)}
       >
-        {isPending ? "Registering..." : "Register"}
-      </button>
+        <AvatarUpload onImageChange={(file) => setValue("image", file)} />
 
-      <FormFooterLink
-        question="Already have an account?"
-        linkText="Login"
-        href="/login"
-      />
+        <InputField
+          label="User Name"
+          id="username"
+          placeholder="User Name"
+          {...register("name")}
+          error={errors.name?.message}
+        />
 
-      <SocialAuth />
-    </form>
+        <InputField
+          label="Phone Number"
+          id="phone"
+          placeholder="(123) 456-7890"
+          {...register("phone")}
+          error={errors.phone?.message}
+        />
+
+        <InputField
+          label="Email"
+          type="email"
+          id="email"
+          placeholder="Email"
+          {...register("email")}
+          error={errors.email?.message}
+        />
+
+        <InputField
+          label="Password"
+          type="password"
+          id="password"
+          placeholder="Password"
+          {...register("password")}
+          error={errors.password?.message}
+        />
+
+        <InputField
+          label="Zip Code"
+          id="zip_code"
+          placeholder="Enter ZIP Code"
+          {...register("zip_code")}
+          error={errors.zip_code?.message}
+        />
+
+        <InputField
+          id="address"
+          readOnly
+          placeholder="Address"
+          {...register("address")}
+          error={errors.address?.message}
+        />
+
+        <input type="hidden" {...register("latitude")} />
+        <input type="hidden" {...register("longitude")} />
+
+        <ZipMapSearch />
+
+        <button
+          type="submit"
+          className="customBtn w-full rounded-full"
+          disabled={isPending}
+        >
+          {isPending ? "Registering..." : "Register"}
+        </button>
+
+        <FormFooterLink
+          question="Already have an account?"
+          linkText="Login"
+          href="/login"
+        />
+
+        <SocialAuth />
+      </form>
+    </FormProvider>
   );
 }
