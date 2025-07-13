@@ -6,6 +6,8 @@ import { cookies } from "next/headers";
 import { User } from "@/types/user";
 import serverAxios from "@/lib/axios/serverAxios";
 
+/* ~~~~~~~~~~~~ login and register actions ~~~~~~~~~~~~ */
+
 export async function authAction(formData: FormData, endPoint: string) {
   try {
     const response = await serverAxios.post(API_URL + endPoint, formData, {
@@ -37,6 +39,8 @@ export async function authAction(formData: FormData, endPoint: string) {
   }
 }
 
+/* ~~~~~~~~~~~~ get profile action ~~~~~~~~~~~~ */
+
 export async function getProfile(): Promise<{
   user: User | null;
   token: string | null;
@@ -65,6 +69,8 @@ export async function getProfile(): Promise<{
   }
 }
 
+/* ~~~~~~~~~~~~ logout action ~~~~~~~~~~~~ */
+
 export async function logOutAction() {
   const res = await serverAxios.get(`${API_URL}/profile/logout`);
 
@@ -73,5 +79,37 @@ export async function logOutAction() {
     delete serverAxios.defaults.headers.common["Authorization"];
 
     return res.data;
+  }
+}
+
+/* ~~~~~~~~~~~~ check code action ~~~~~~~~~~~~ */
+
+export async function checkCodeAction(formData: FormData) {
+  try {
+    const response = await serverAxios.post(
+      API_URL + "/auth/confirmCode",
+      formData
+    );
+    const responseData = response.data;
+
+    if (responseData.code === 200) {
+      (await cookies()).set("token", responseData.data.auth.token, {
+        path: "/",
+        httpOnly: true,
+        sameSite: "lax",
+        maxAge: 60 * 60 * 24 * 7,
+      });
+    }
+
+    return responseData;
+  } catch (error: unknown) {
+    const err = error as AxiosError<{ message?: string }>;
+    const message =
+      err.response?.data?.message || "Something went wrong during login";
+
+    return {
+      success: false,
+      message,
+    };
   }
 }

@@ -1,5 +1,6 @@
 import { User } from "@/types/user";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 interface AuthStore {
   isAuthenticated: boolean;
@@ -20,3 +21,23 @@ export const useAuthStore = create<AuthStore>((set) => ({
   setToken: (token) => set({ token }),
   logout: () => set({ user: null, token: null, isAuthenticated: false }),
 }));
+
+interface ResetState {
+  email: string;
+  clear: () => void;
+  setEmail: (email: string) => void;
+}
+
+export const useResetPasswordStore = create<ResetState>()(
+  persist(
+    (set) => ({
+      email: "",
+      setEmail: (email) => set({ email }),
+      clear: () => set({ email: "" }),
+    }),
+    {
+      name: "reset-password-session",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

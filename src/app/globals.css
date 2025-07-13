@@ -74,12 +74,16 @@
     cursor: pointer !important;
   }
 
+  .first\:border-l:first-child {
+    border-left: 0 !important;
+  }
+
   .container {
     width: min(100% - 8px, 1440px) !important;
     margin-right: auto;
     margin-left: auto;
-    padding-right: .5rem;
-    padding-left: .5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
   }
 
   .swiperControl {
@@ -160,7 +164,6 @@
         }
       }
     }
-
   }
 
   .customBtn {

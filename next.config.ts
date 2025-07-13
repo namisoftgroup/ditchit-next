@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "https://ditchit.com/api/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

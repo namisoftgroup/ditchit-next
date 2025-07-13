@@ -2,14 +2,29 @@
 
 import { useState } from "react";
 import { Search, MapPin } from "lucide-react";
+import { useRouter } from "next/navigation";
 import SearchByModal from "../modals/SearchByModal";
 
 export default function LocationSearch() {
   const [show, setShow] = useState<boolean>(false);
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const searchQuery = formData.get("search") as string;
+
+    if (searchQuery) {
+      router.push(`/all-posts?search=${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   return (
     <div className="flex items-center flex-1 gap-x-4 gap-y-2">
-      <form className="flex-1 m-0 mb-0 min-w-[300px] relative bg-[#f3f3f3] border border-[#e6e6e6] rounded-full w-[min(100%_-_16px,_1440px)]">
+      <form
+        className="flex-1 m-0 mb-0 min-w-[300px] relative bg-[#f3f3f3] border border-[#e6e6e6] rounded-full w-[min(100%_-_16px,_1440px)]"
+        onSubmit={handleSubmit}
+      >
         <input
           type="search"
           name="search"

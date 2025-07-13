@@ -71,7 +71,7 @@ export default async function RootLayout({
               theme="light"
             />
             <Header />
-            <main className="min-h-[calc(100vh-126px)]">{children}</main>
+            <main className="min-h-[calc(100vh-316px)]">{children}</main>
             <Footer />
           </ReactQueryProvider>
         </AuthProvider>

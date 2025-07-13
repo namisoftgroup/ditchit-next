@@ -22,3 +22,18 @@ export const SORT_BY = [
     value: "near",
   },
 ];
+
+export const SHIPPING_METHODS = [
+  {
+    name: "Local + Shipping",
+    value: "both",
+  },
+  {
+    name: "Local",
+    value: "local",
+  },
+  {
+    name: "Shipping",
+    value: "shipping",
+  },
+];

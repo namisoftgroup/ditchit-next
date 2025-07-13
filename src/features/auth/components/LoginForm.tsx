@@ -90,7 +90,7 @@ export default function LoginForm() {
         href="/reset-password"
       />
 
-      <button type="submit" className="customBtn w-full rounded-full">
+      <button type="submit" className="customBtn w-full rounded-full" disabled={isPending}>
         {isPending ? "Logging in..." : "Login"}
       </button>
 
