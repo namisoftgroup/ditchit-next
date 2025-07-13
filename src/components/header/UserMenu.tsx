@@ -29,7 +29,7 @@ export default function UserMenu() {
       <DropdownMenuContent className="bg-[var(--whiteColor)] shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[99999] min-w-[200px] flex-col rounded border border-[var(--lightBorderColor)] max-h-[400px] overflow-y-auto">
         <DropdownMenuItem asChild>
           <Link
-            href="/my-posts"
+            href="/profile"
             className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
           >
             <UserRound width={20} height={20} />
@@ -39,17 +39,17 @@ export default function UserMenu() {
 
         <DropdownMenuItem asChild>
           <Link
-            href="/my-favourites"
+            href="/profile/my-favorites"
             className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
           >
             <Heart width={20} height={20} />
-            Favourites
+            Favorites
           </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
           <Link
-            href="/edit-profile"
+            href="/profile/edit-profile"
             className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
           >
             <UserPen width={20} height={20} />

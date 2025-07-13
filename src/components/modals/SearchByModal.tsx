@@ -25,7 +25,6 @@ export default function SearchByModal({
   const { kilometers } = useHomeFilter((state) => state.filter);
 
   console.log("kilometers:", kilometers);
-  
 
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
     setFilter({ [key]: value });
@@ -46,7 +45,9 @@ export default function SearchByModal({
 
           <RadioGroup
             defaultValue={"both"}
-            onValueChange={(val) => onUpdateFilter("delivery_method", val)}
+            onValueChange={(val) =>
+              onUpdateFilter({ key: "delivery_method", value: val })
+            }
             className="flex flex-col gap-3"
           >
             {SHIPPING_METHODS.map((item) => (

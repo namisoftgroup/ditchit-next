@@ -19,7 +19,7 @@ export const useHomeFilter = create<HomeFilterStore>((set) => ({
     longitude: "",
     latitude: "",
     delivery_method: "",
-    kilometers: 0,
+    kilometers: 50,
   },
 
   setFilter: (newFilter) =>
