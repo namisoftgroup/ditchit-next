@@ -20,8 +20,8 @@ export default function ProfileSideBar() {
   };
 
   return (
-    <aside className="flex flex-col gap-8">
-      <div className="bg-whiteColor rounded-[20px] shadow-[var(--BigShadow)] p-5 relative flex flex-wrap items-center gap-4">
+    <aside className="flex flex-col gap-4">
+      <div className="bg-whiteColor rounded-[20px]  p-5 relative flex flex-wrap items-center gap-4 border border-[#ccc]">
         <Image
           src={user?.image || ""}
           width={80}

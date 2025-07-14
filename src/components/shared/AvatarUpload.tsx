@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, ChangeEvent } from "react";
+import { useState, useRef, ChangeEvent, useEffect } from "react";
 import { Plus, UserRound } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
@@ -19,6 +19,12 @@ export function AvatarUpload({
   const [previewUrl, setPreviewUrl] = useState<string | null>(
     initialImage || null
   );
+
+  useEffect(() => {
+    if (initialImage) {
+      setPreviewUrl(initialImage);
+    }
+  }, [initialImage]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
