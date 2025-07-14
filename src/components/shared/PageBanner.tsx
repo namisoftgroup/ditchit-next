@@ -22,7 +22,7 @@ export default function PageBanner({
   page: string;
 }) {
   return (
-    <div className="bg-[#f5f5f5] py-5 relative isolate">
+    <div className="bg-[#f5f5f5] py-7 relative isolate">
       <div className="container px-4">
         <Breadcrumb>
           <BreadcrumbList>

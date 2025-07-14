@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   InputOTP,
   InputOTPGroup,
@@ -19,6 +19,12 @@ export default function VerifyOtpForm() {
 
   const { setUser, setToken } = useAuthStore((state) => state);
   const { email } = useResetPasswordStore((state) => state);
+
+  useEffect(() => {
+    if (!email) {
+      router.push("/reset-password/send-code");
+    }
+  }, [email, router]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -2,7 +2,8 @@
 
 import { useAuthStore } from "@/features/auth/store";
 import { logOutAction } from "@/features/auth/actions";
-import { UserPen, Heart, UserRound, LogOut } from "lucide-react";
+import { UserPen, Heart, UserRound, LogOut, Megaphone } from "lucide-react";
+import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -12,12 +13,14 @@ import {
 import Link from "next/link";
 
 export default function UserMenu() {
+  const router = useRouter();
   const { isAuthenticated, logout } = useAuthStore((state) => state);
 
   const performLogout = async () => {
     const res = await logOutAction();
     if (res.code === 200) {
       logout();
+      router.push("/");
     }
   };
 
@@ -32,7 +35,7 @@ export default function UserMenu() {
             href="/profile"
             className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
           >
-            <UserRound width={20} height={20} />
+            <Megaphone width={20} height={20} />
             My Posts
           </Link>
         </DropdownMenuItem>

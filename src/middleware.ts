@@ -5,9 +5,9 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   const PROTECTED_ROUTES = [
-    "/my-posts",
-    "/my-favorites",
-    "/edit-profile",
+    "/profile",
+    "/profile/my-favorites",
+    "/profile/edit-profile",
     "/chats",
     "/reset-password/new-password",
   ];

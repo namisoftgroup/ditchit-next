@@ -1,7 +1,92 @@
+"use client";
+
+import { Heart, LogOut, Megaphone, UserPen } from "lucide-react";
+import { useAuthStore } from "../auth/store";
+import { logOutAction } from "../auth/actions";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+
 export default function ProfileSideBar() {
+  const { user, logout } = useAuthStore();
+  const router = useRouter();
+
+  const performLogout = async () => {
+    const res = await logOutAction();
+    if (res.code === 200) {
+      logout();
+      router.push("/");
+    }
+  };
+
   return (
-    <div className="p-1 w-full md:w-5/12 lg:w-4/12 xl:w-3/12">
-      
-    </div>
-  )
+    <aside className="flex flex-col gap-8">
+      <div className="bg-whiteColor rounded-[20px] shadow-[var(--BigShadow)] p-5 relative flex flex-wrap items-center gap-4">
+        <Image
+          src={user?.image || ""}
+          width={80}
+          height={80}
+          alt="user"
+          className="object-cover rounded-full border border-mainColor"
+        />
+
+        <div className="flex flex-col gap-2">
+          <h4 className="text-[18px] font-bold">{user?.name}</h4>
+          <p className="text-[14px] text-[var(--grayColor)]">
+            {user?.phone_code || "+1" + user?.phone}
+          </p>
+        </div>
+      </div>
+
+      <div className="bg-whiteColor rounded-[16px] p-4 border border-[#ccc] mb-[50px] sticky top-[90px] right-0 z-[2] flex flex-col gap-2">
+        <Link
+          href="/profile"
+          className="group px-4 py-3 flex gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+        >
+          <Megaphone
+            width={20}
+            height={20}
+            className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
+          />
+          My Posts
+        </Link>
+
+        <Link
+          href="/profile/my-favorites"
+          className="group px-4 py-3 flex gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+        >
+          <Heart
+            width={20}
+            height={20}
+            className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
+          />
+          Favorites
+        </Link>
+
+        <Link
+          href="/profile/edit-profile"
+          className="group px-4 py-3 flex gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+        >
+          <UserPen
+            width={20}
+            height={20}
+            className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
+          />
+          Edit Profile
+        </Link>
+
+        <button
+          className="group px-4 py-3 flex gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+          onClick={performLogout}
+        >
+          <LogOut
+            width={20}
+            height={20}
+            className="text-[#FF0000] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
+          />
+          Logout
+        </button>
+      </div>
+    </aside>
+  );
 }
