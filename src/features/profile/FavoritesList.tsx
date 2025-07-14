@@ -1,11 +1,11 @@
 "use client";
 
-import useGetMyPosts from "@/hooks/queries/useGetMyPosts";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import PostCard from "@/components/cards/PostCard";
+import useGetMyFavorites from "@/hooks/queries/useGetFavorites";
 
-export default function PostsList() {
-  const { data, isLoading } = useGetMyPosts();
+export default function FavoritesList() {
+  const { data, isLoading } = useGetMyFavorites();
 
   return (
     <section className="flex flex-wrap -mx-2">

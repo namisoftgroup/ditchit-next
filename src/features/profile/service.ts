@@ -20,3 +20,18 @@ export async function getMyPosts(pageParam = 1): Promise<myPostsResponse> {
     throw new Error("Failed to fetch home categories in client side");
   }
 }
+
+export async function getMyFavorites(pageParam = 1): Promise<myPostsResponse> {
+  try {
+    const res = await clientAxios.get("/profile/favorites", {
+      params: {
+        page: pageParam,
+      },
+    });
+
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching home categories in client side:", error);
+    throw new Error("Failed to fetch home categories in client side");
+  }
+}

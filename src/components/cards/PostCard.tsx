@@ -9,7 +9,9 @@ export default function PostCard({ post }: { post: Post }) {
   return (
     <div className="relative flex flex-col gap-1 h-full rounded-2xl border border-[var(--lightBorderColor)] bg-[var(--whiteColor)] transition-all">
       {/* Favorite Button */}
-      <button className="absolute top-4 left-4 z-20 w-8 h-8 flex items-center justify-center rounded-full text-[var(--whiteColor)] bg-black/30 backdrop-blur-sm transition-all hover:bg-red-600">
+      <button
+        className={`absolute top-4 left-4 z-20 w-8 h-8 flex items-center justify-center rounded-full text-[var(--whiteColor)] bg-black/30 backdrop-blur-sm transition-all hover:bg-red-600 ${post.is_love ? "bg-red-600" : ""}`}
+      >
         <Heart width={18} height={18} />
       </button>
 
@@ -26,7 +28,7 @@ export default function PostCard({ post }: { post: Post }) {
           loading="lazy"
           className="w-full h-full object-cover object-center transition-all hover:scale-110"
         />
-        
+
         {post.is_promoted && (
           <Image
             src="/icons/promoted.svg"
