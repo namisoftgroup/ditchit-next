@@ -11,10 +11,11 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function UserMenu() {
   const router = useRouter();
-  const { isAuthenticated, logout } = useAuthStore((state) => state);
+  const { user ,isAuthenticated, logout } = useAuthStore((state) => state);
 
   const performLogout = async () => {
     const res = await logOutAction();
@@ -26,8 +27,8 @@ export default function UserMenu() {
 
   return isAuthenticated ? (
     <DropdownMenu>
-      <DropdownMenuTrigger className="text-[var(--mainColor)] border-0 flex items-center justify-center gap-2 p-2 bg-[var(--mainColor10)] h-[40px] min-w-[40px] rounded-full transition-all relative">
-        <UserRound width={20} height={20} />
+      <DropdownMenuTrigger className="w-[40px] h-[40px] rounded-full overflow-hidden border border-[var(--lightBorderColor)]">
+        <Image src={user?.image || "" } alt={user?.name || "user image"} width={40} height={40} className="object-cover rounded-full w-[40px] h-[40px]" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-[var(--whiteColor)] shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[99999] min-w-[200px] flex-col rounded border border-[var(--lightBorderColor)] max-h-[400px] overflow-y-auto">
         <DropdownMenuItem asChild>

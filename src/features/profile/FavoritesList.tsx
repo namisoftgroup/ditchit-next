@@ -3,6 +3,7 @@
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import PostCard from "@/components/cards/PostCard";
 import useGetMyFavorites from "@/hooks/queries/useGetFavorites";
+import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
 
 export default function FavoritesList() {
   const { data, isLoading } = useGetMyFavorites();
@@ -11,7 +12,7 @@ export default function FavoritesList() {
     <section className="flex flex-wrap -mx-2">
       {data?.data.map((post, index) => (
         <div key={index} className="w-full lg:w-4/12 p-2">
-          <PostCard post={post} />
+          <PostCard post={post} showActions={false} />
         </div>
       ))}
 
@@ -23,6 +24,13 @@ export default function FavoritesList() {
             </div>
           ))}
         </>
+      )}
+
+      {data?.data.length === 0 && (
+        <div className="w-full flex flex-col justify-center items-center" >
+          <NoDataPlaceHolder />
+          You have no favorites yet
+        </div>
       )}
     </section>
   );

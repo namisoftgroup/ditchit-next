@@ -27,7 +27,7 @@ export default function ProfileSideBar() {
           width={80}
           height={80}
           alt="user"
-          className="object-cover rounded-full border border-mainColor"
+          className="object-cover rounded-full border border-[var(--lightBorderColor)] w-[80px] h-[80px]"
         />
 
         <div className="flex flex-col gap-2">

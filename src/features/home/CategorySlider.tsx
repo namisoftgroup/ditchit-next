@@ -42,9 +42,12 @@ export default function CategorySlider({ category }: { category: Category }) {
 
             <CarouselContent>
               {category.posts.map((post) => (
-                <CarouselItem key={post.id} className="md:basis-1/2 lg:basis-1/4">
+                <CarouselItem
+                  key={post.id}
+                  className="md:basis-1/2 lg:basis-1/4"
+                >
                   <div className="p-1 h-full">
-                    <PostCard post={post} />
+                    <PostCard post={post} showActions={false} />
                   </div>
                 </CarouselItem>
               ))}
