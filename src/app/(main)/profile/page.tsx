@@ -1,7 +1,5 @@
+import PostsList from "@/features/profile/PostsList";
+
 export default function page() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <PostsList />;
 }

@@ -20,8 +20,8 @@ export default function ProfileSideBar() {
   };
 
   return (
-    <aside className="flex flex-col gap-4">
-      <div className="bg-whiteColor rounded-[20px]  p-5 relative flex flex-wrap items-center gap-4 border border-[#ccc]">
+    <aside className="flex flex-col gap-4 mt-2">
+      <div className="bg-whiteColor rounded-[20px]  p-5 relative flex flex-wrap items-center gap-4 border border-[var(--lightBorderColor)]">
         <Image
           src={user?.image || ""}
           width={80}
@@ -38,7 +38,7 @@ export default function ProfileSideBar() {
         </div>
       </div>
 
-      <div className="bg-whiteColor rounded-[16px] p-4 border border-[#ccc] mb-[50px] sticky top-[90px] right-0 z-[2] flex flex-col gap-2">
+      <div className="bg-whiteColor rounded-[16px] p-4 border border-[var(--lightBorderColor)] mb-[50px] sticky top-[90px] right-0 z-[2] flex flex-col gap-2">
         <Link
           href="/profile"
           className="group px-4 py-3 flex gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
