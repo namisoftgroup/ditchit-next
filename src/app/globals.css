@@ -215,5 +215,18 @@
         right: -10px;
       }
     }
+
+    &.danger {
+      border-color: #ff0000;
+      color: #ff0000;
+    }
+
+    &.danger::after {
+      background: #ff0000;
+    }
+
+    &.danger:hover {
+      color: #fff;
+    }
   }
 }
