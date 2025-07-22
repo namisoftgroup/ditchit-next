@@ -21,13 +21,13 @@ export default function AddPostMenu() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56 space-y-2 p-2 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.1)] border border-[var(--lightBorderColor)]">
-        <p className="px-2 text-sm text-gray-500">What do you want?</p>
+        <p className="p-2 text-sm text-gray-500">What do you want?</p>
 
         <div className="flex gap-1">
           <DropdownMenuItem asChild>
             <Link
-              href="/create-post?type=wanted"
-              className="border border-[var(--lightBorderColor)] rounded-[12px] aspect-square w-[calc(50%-2px)] flex flex-col justify-center items-center gap-2 text-[var(--darkColor)] px-4 py-2 text-[14px] capitalize"
+              href="/create-post?postType=wanted"
+              className="border border-[var(--lightBorderColor)] !rounded-[14px] aspect-square w-[calc(50%-2px)] flex flex-col justify-center items-center gap-2 text-[var(--darkColor)] px-4 py-2 text-[14px] capitalize"
             >
               <Image
                 src="/icons/wanted.svg"
@@ -41,8 +41,8 @@ export default function AddPostMenu() {
 
           <DropdownMenuItem asChild>
             <Link
-              href="/create-post?type=sale"
-              className="border border-[var(--lightBorderColor)] rounded-[12px] aspect-square w-[calc(50%-2px)] flex flex-col justify-center items-center gap-2 text-[var(--darkColor)] px-4 py-2 text-[14px] capitalize"
+              href="/create-post?postType=sale"
+              className="border border-[var(--lightBorderColor)] !rounded-[14px] aspect-square w-[calc(50%-2px)] flex flex-col justify-center items-center gap-2 text-[var(--darkColor)] px-4 py-2 text-[14px] capitalize"
             >
               <Image src="/icons/sell.svg" alt="sell" width={40} height={40} />
               <span>Sell</span>

@@ -6,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import clientAxios from "@/lib/axios/clientAxios";
 import { useState } from "react";
 
 type GetAppModalProps = {
@@ -15,19 +14,19 @@ type GetAppModalProps = {
 };
 
 export default function BoostYourAd({ show, handleClose }: GetAppModalProps) {
-  const [isPending, setIsPending] = useState<boolean>(false);
+  const [isPending, ] = useState<boolean>(false);
 
-  const handlePromote = async () => {
-    setIsPending(true);
+  // const handlePromote = async () => {
+  //   setIsPending(true);
 
-    try {
-        const res = await clientAxios.post("/ads/promote");
+  //   try {
+  //       const res = await clientAxios.post("/ads/promote");
         
-    } catch (error) {
-        console.log(error);
+  //   } catch (error) {
+  //       console.log(error);
         
-    }
-  }
+  //   }
+  // }
 
   return (
     <Dialog open={show} onOpenChange={handleClose}>

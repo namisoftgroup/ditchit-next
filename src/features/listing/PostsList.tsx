@@ -37,7 +37,7 @@ export default function PostsList() {
     <div ref={sectionRef} className="flex flex-wrap -mx-2">
       {posts.map((post, index) => (
         <div key={index} className="w-full lg:w-4/12 p-2">
-          <PostCard post={post} />
+          <PostCard post={post} showActions={false} />
         </div>
       ))}
 
