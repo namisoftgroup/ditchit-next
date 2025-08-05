@@ -3,6 +3,7 @@
 import { Category } from "@/types/category";
 import { useFormContext } from "react-hook-form";
 import Image from "next/image";
+import FormFooter from "../FormFooter";
 
 interface CategoryStepProps {
   next: () => void;
@@ -63,18 +64,7 @@ export default function CategoryStep({ next, categories }: CategoryStepProps) {
           ))}
         </div>
 
-        <div className="flex justify-end mt-6">
-          <button className="rounded-[12px] text-[14px] text-[var(--whiteColor)] px-6 py-3 bg-[var(--mainColor)] flex justify-center items-center gap-1 capitalize">
-            Next
-            <Image
-              src="/icons/arrow.svg"
-              alt="Next"
-              width={14}
-              height={14}
-              className="brightness-0 invert scale-x-[-1]"
-            />
-          </button>
-        </div>
+        <FormFooter showBackBtn={false} />
       </form>
     </div>
   );

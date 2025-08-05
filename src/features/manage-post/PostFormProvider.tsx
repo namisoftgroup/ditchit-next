@@ -15,9 +15,9 @@ const schema = z.object({
   longitude: z.number(),
   brand_id: z.number(),
   model_id: z.number(),
-  price: z.number(),
-  firm_price: z.boolean(),
-  virtual_tour: z.boolean(),
+  price: z.string().regex(/^[0-9]+(\.[0-9]{1,2})?$/),
+  firm_price: z.union([z.literal(0), z.literal(1)]),
+  virtual_tour: z.union([z.literal(0), z.literal(1)]),
   delivery_method: z.string(),
   is_promote: z.boolean(),
   condition: z.enum(["new", "used"], {
@@ -64,6 +64,7 @@ export default function PostFormProvider({
   children: ReactNode;
 }) {
   const [step, setStep] = useState(0);
+  console.log(postId);
 
   const methods = useForm<PostFormData>({
     resolver: zodResolver(schema),
@@ -80,11 +81,11 @@ export default function PostFormProvider({
       brand_id: 0,
       model_id: 0,
       zip_code: "",
-      price: 0,
-      firm_price: false,
-      virtual_tour: false,
+      price: "",
+      firm_price: 0,
+      virtual_tour: 0,
       delivery_method: "shipping",
-      features: [""],
+      features: [],
       options: [],
       is_promote: false,
     },

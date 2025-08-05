@@ -3,11 +3,11 @@
 import { Category } from "@/types/category";
 import { usePostForm } from "./PostFormProvider";
 import { useFormContext } from "react-hook-form";
-import CategoryStep from "./steps/CategoryStep";
-import MainDetailsStep from "./steps/MainDetailsStep";
-import MoreDetailsStep from "./steps/MoreDetailsStep";
-import PriceDetailsStep from "./steps/PriceDetailsStep";
-import WizardTabs from "./WizardTabs";
+import CategoryStep from "./components/steps/CategoryStep";
+import MainDetailsStep from "./components/steps/MainDetailsStep";
+import MoreDetailsStep from "./components/steps/MoreDetailsStep";
+import PriceDetailsStep from "./components/steps/PriceDetailsStep";
+import WizardTabs from "./components/WizardTabs";
 
 export default function WizardForm({ categories }: { categories: Category[] }) {
   const { watch } = useFormContext();
