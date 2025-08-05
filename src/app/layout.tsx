@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { getProfile } from "@/features/auth/actions";
+import NextTopLoader from "nextjs-toploader";
 import AuthProvider from "@/providers/AuthProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import Header from "@/components/header/Header";
@@ -62,6 +63,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
+        <NextTopLoader showSpinner={false} color="#00a650" />
         <AuthProvider user={data?.user ?? null} token={data?.token ?? null}>
           <ReactQueryProvider>
             <Toaster

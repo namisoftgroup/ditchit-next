@@ -8,7 +8,7 @@ import { editProfileFormValues, editProfileSchema } from "./schema";
 import { toast } from "sonner";
 import { useAuthStore } from "../auth/store";
 import InputField from "@/components/shared/InputField";
-import ZipMapSearch from "../auth/components/ZipMapSearch";
+import ZipMapSearch from "../../components/shared/ZipMapSearch";
 import clientAxios from "@/lib/axios/clientAxios";
 
 export default function EditProfileForm() {

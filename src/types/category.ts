@@ -3,5 +3,10 @@ export interface Category {
   title: string;
   image: string;
   is_condition: boolean;
-  options: string[];
+  options: {
+    id: number;
+    title: string;
+    type: "input" | "select";
+    values: { id: number; title: string }[];
+  }[];
 }

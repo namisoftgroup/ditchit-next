@@ -1,4 +1,4 @@
-import EditPostForm from "@/features/manage-post/EditPostForm";
+import PostFormWrapper from "@/features/manage-post/PostFormWrapper";
 
 interface PageProps {
   params: Promise<{
@@ -9,5 +9,5 @@ interface PageProps {
 export default async function page({ params }: PageProps) {
   const id = (await params).postId;
 
-  return <EditPostForm id={id} />;
+  return <PostFormWrapper postId={id} />;
 }

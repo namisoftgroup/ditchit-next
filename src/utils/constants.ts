@@ -37,3 +37,10 @@ export const SHIPPING_METHODS = [
     value: "shipping",
   },
 ];
+
+export const POST_TABS = [
+  "Choose Category",
+  "Main Details",
+  "More Details",
+  "Price & Shipping",
+];

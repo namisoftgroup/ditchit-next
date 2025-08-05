@@ -11,7 +11,7 @@ import { authAction } from "../actions";
 import { useAuthStore } from "../store";
 import InputField from "@/components/shared/InputField";
 import SocialAuth from "./SocialAuth";
-import ZipMapSearch from "./ZipMapSearch";
+import ZipMapSearch from "../../../components/shared/ZipMapSearch";
 import FormFooterLink from "./FormFooterLink";
 
 export default function RegisterForm() {

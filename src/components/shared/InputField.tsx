@@ -4,7 +4,7 @@ import { Label } from "../ui/label";
 interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   id: string;
-  error: string | undefined;
+  error?: string | undefined;
 }
 
 export default function InputField({

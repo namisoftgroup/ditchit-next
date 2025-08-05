@@ -24,8 +24,6 @@ export default function SearchByModal({
   const setFilter = useHomeFilter((state) => state.setFilter);
   const { kilometers } = useHomeFilter((state) => state.filter);
 
-  console.log("kilometers:", kilometers);
-
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
     setFilter({ [key]: value });
   };

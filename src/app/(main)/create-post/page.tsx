@@ -1,4 +1,4 @@
-import CreatePostForm from "@/features/manage-post/CreatePostForm";
+import PostFormWrapper from "@/features/manage-post/PostFormWrapper";
 
 export default async function page({
   searchParams,
@@ -8,5 +8,5 @@ export default async function page({
   const params = await searchParams;
   const postType = params.postType as string;
 
-  return <CreatePostForm postType={postType} />;
+  return <PostFormWrapper postType={postType} />;
 }

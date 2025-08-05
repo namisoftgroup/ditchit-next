@@ -14,6 +14,7 @@ export default function Navigation() {
         <div className="w-full flex items-center gap-2">
           <Link
             href="/"
+            prefetch={true}
             className="flex flex-col items-center gap-2 text-[14px] text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
           >
             <House className="w-5 h-5 object-contain hidden max-lg:block" />
@@ -22,6 +23,7 @@ export default function Navigation() {
 
           <Link
             href="/all-posts"
+            prefetch={true}
             className="flex flex-col items-center gap-2 text-[14px] text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
           >
             <List className="w-5 h-5 object-contain hidden max-lg:block" />
