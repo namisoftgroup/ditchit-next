@@ -2,7 +2,7 @@
 
 import { Fragment } from "react";
 import { Category } from "@/types/category";
-import { useCategoryVisibility } from "@/hooks/useCategoryVisibility";
+import { useCategoryVisibility } from "@/hooks/utils/useCategoryVisibility";
 import { CategoryLink } from "./CategoryLink";
 import { CategoryDropdown } from "./CategoryDropdown";
 import { Skeleton } from "@/components/ui/skeleton";

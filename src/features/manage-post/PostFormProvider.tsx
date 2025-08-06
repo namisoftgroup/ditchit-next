@@ -3,7 +3,12 @@
 import { createContext, useContext, useState, useMemo, ReactNode } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
+import { toast } from "sonner";
+import { AxiosError } from "axios";
+import clientAxios from "@/lib/axios/clientAxios";
+import useGetMyPosts from "@/hooks/queries/useGetMyPosts";
 
 const schema = z.object({
   type: z.enum(["sale", "wanted"]),
@@ -13,12 +18,13 @@ const schema = z.object({
   address: z.string(),
   latitude: z.number(),
   longitude: z.number(),
-
-  price: z.string().regex(/^[0-9]+(\.[0-9]{1,2})?$/, "price must be a number"),
+  price: z.string().regex(/^[0-9]+(\.[0-9]{1,2})?$/, "Price must be a number"),
   firm_price: z.union([z.literal(0), z.literal(1)]),
   virtual_tour: z.union([z.literal(0), z.literal(1)]),
   delivery_method: z.string(),
-  is_promote: z.boolean(),
+  is_promote: z.union([z.literal(0), z.literal(1)]).optional(),
+  image: z.instanceof(File),
+  images: z.array(z.instanceof(File)).optional(),
   condition: z.enum(["new", "used"], {
     required_error: "Condition is required",
   }),
@@ -28,9 +34,7 @@ const schema = z.object({
       /^[0-9]{5}$/,
       "Invalid zip code. Please enter a valid 5-digit zip code"
     ),
-  features: z
-    .array(z.string().min(3, "Feature must be at least 3 characters"))
-    .optional(),
+  features: z.array(z.string().min(3)).optional(),
   options: z.array(
     z.object({
       category_option_id: z.number(),
@@ -45,6 +49,8 @@ const PostFormContext = createContext<{
   step: number;
   next: () => void;
   back: () => void;
+  savePost: (data: PostFormData) => void;
+  isSaving: boolean;
 } | null>(null);
 
 export const usePostForm = () => {
@@ -55,7 +61,6 @@ export const usePostForm = () => {
 
 export default function PostFormProvider({
   children,
-  postId,
   type,
 }: {
   postId?: string | null;
@@ -63,7 +68,7 @@ export default function PostFormProvider({
   children: ReactNode;
 }) {
   const [step, setStep] = useState(0);
-  console.log(postId);
+  const { refetch } = useGetMyPosts();
 
   const methods = useForm<PostFormData>({
     resolver: zodResolver(schema),
@@ -84,14 +89,54 @@ export default function PostFormProvider({
       delivery_method: "shipping",
       features: [],
       options: [],
-      is_promote: false,
+      is_promote: 0,
+      image: undefined,
+      images: [],
     },
   });
+
+  const { mutate: savePostMutation, isPending: isSaving } = useMutation({
+    mutationFn: async (data: PostFormData) => {
+      return await clientAxios.post("/posts", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+    },
+
+    onSuccess: (data) => {
+      console.log(data.data);
+      if (data.data.code == 200) {
+        toast.success("Post saved successfully");
+        refetch();
+      } else {
+        toast.error(data.data.message);
+      }
+    },
+
+    onError: (error) => {
+      const err = error as AxiosError<{ message?: string }>;
+      const message = err.response?.data?.message || "Something went wrong";
+      toast.error(message);
+    },
+  });
+
+  const savePost = (data: PostFormData) => {
+    savePostMutation(data);
+  };
 
   const next = () => setStep((s) => s + 1);
   const back = () => setStep((s) => s - 1);
 
-  const contextValue = useMemo(() => ({ step, next, back }), [step]);
+  const contextValue = useMemo(
+    () => ({
+      step,
+      next,
+      back,
+      savePost,
+      isSaving,
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [step, isSaving]
+  );
 
   return (
     <PostFormContext.Provider value={contextValue}>

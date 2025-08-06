@@ -9,11 +9,15 @@ import {
 
 type GetAppModalProps = {
   show: boolean;
+  isSaving: boolean;
+  addPost: () => void;
   handleClose: () => void;
 };
 
 export default function BoostAndPublish({
   show,
+  isSaving,
+  addPost,
   handleClose,
 }: GetAppModalProps) {
   return (
@@ -36,8 +40,12 @@ export default function BoostAndPublish({
         </div>
 
         <div className="flex items-center justify-end gap-2 border-t border-[var(--lightBorderColor)] mb-0 pt-4">
-          <button className="customBtn rounded-[12px] w-fit px-12 m-0">
-            Skip and Publish
+          <button
+            className="customBtn rounded-[12px] w-fit px-12 m-0"
+            onClick={addPost}
+            disabled={isSaving}
+          >
+            {isSaving ? "loading..." : "Skip and Publish"}
           </button>
 
           <button

@@ -1,3 +1,5 @@
+"use client";
+
 import { useFormContext } from "react-hook-form";
 import TextField from "@/components/shared/TextField";
 import InputField from "@/components/shared/InputField";
@@ -14,6 +16,7 @@ export default function MainDetailsStep({ next, back }: propTypes) {
   const {
     register,
     trigger,
+    watch,
     formState: { errors },
   } = useFormContext();
 
@@ -23,10 +26,15 @@ export default function MainDetailsStep({ next, back }: propTypes) {
       "title",
       "description",
       "zip_code",
+      "image",
       "address",
       "latitude",
       "longitude",
     ]);
+console.log(watch("image"));
+
+    console.log(errors);
+    
 
     if (isValid) {
       next();
@@ -36,12 +44,13 @@ export default function MainDetailsStep({ next, back }: propTypes) {
   return (
     <form className="flex flex-col gap-[16px]" onSubmit={handleSubmit}>
       <div className="flex gap-4">
-        <MediaUpload label="Cover Image" />
+        <MediaUpload name="image" label="Cover Image" />
         <MediaUpload
-          customStyle="w-full"
+          name="images"
           label="Post Images"
           multiple
           maxFiles={4}
+          className="w-full"
         />
       </div>
 

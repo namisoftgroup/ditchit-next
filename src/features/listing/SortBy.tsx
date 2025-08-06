@@ -8,7 +8,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { SORT_BY } from "@/utils/constants";
-import useUrlFilters from "@/hooks/useFilterParams";
+import useUrlFilters from "@/hooks/utils/useFilterParams";
 
 export default function SortBy() {
   const { getParam, setParam } = useUrlFilters();

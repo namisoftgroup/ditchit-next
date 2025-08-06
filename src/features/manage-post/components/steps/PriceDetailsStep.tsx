@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, SubmitHandler } from "react-hook-form";
 import { SHIPPING_METHODS } from "@/utils/constants";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { usePostForm } from "../../PostFormProvider";
+import type { PostFormData } from "../../PostFormProvider";
 import InputField from "@/components/shared/InputField";
-import FormFooter from "../FormFooter";
 import BoostAndPublish from "@/components/modals/BoostAndPublish";
+import FormFooter from "../FormFooter";
 
 export default function PriceDetailsStep({ back }: { back: () => void }) {
   const {
@@ -13,20 +15,26 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
     watch,
     trigger,
     setValue,
+    handleSubmit,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<PostFormData>();
 
   const [show, setShow] = useState(false);
   const selectedDelivery = watch("delivery_method");
+  const { savePost, isSaving } = usePostForm();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleNextClick = async (e: React.FormEvent) => {
     e.preventDefault();
     const isValid = await trigger("price");
-    if (isValid) setShow(true);
+    if (isValid) {
+      setShow(true);
+    }
   };
 
+  const onSubmit: SubmitHandler<PostFormData> = savePost;
+
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-4" onSubmit={handleNextClick}>
       <InputField
         label="Price"
         id="price"
@@ -60,7 +68,7 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
               )
             }
           />
-          <Label htmlFor="virtual_tour">Vitual tour</Label>
+          <Label htmlFor="virtual_tour">Virtual tour</Label>
         </div>
       </div>
 
@@ -93,7 +101,12 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
 
       <FormFooter back={back} nextBtnText="Confirm & Publish" />
 
-      <BoostAndPublish show={show} handleClose={() => setShow(false)} />
+      <BoostAndPublish
+        show={show}
+        isSaving={isSaving}
+        handleClose={() => setShow(false)}
+        addPost={handleSubmit(onSubmit)}
+      />
     </form>
   );
 }
