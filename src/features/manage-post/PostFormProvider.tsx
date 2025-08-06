@@ -13,9 +13,8 @@ const schema = z.object({
   address: z.string(),
   latitude: z.number(),
   longitude: z.number(),
-  brand_id: z.number(),
-  model_id: z.number(),
-  price: z.string().regex(/^[0-9]+(\.[0-9]{1,2})?$/),
+
+  price: z.string().regex(/^[0-9]+(\.[0-9]{1,2})?$/, "price must be a number"),
   firm_price: z.union([z.literal(0), z.literal(1)]),
   virtual_tour: z.union([z.literal(0), z.literal(1)]),
   delivery_method: z.string(),
@@ -57,10 +56,10 @@ export const usePostForm = () => {
 export default function PostFormProvider({
   children,
   postId,
-  postType,
+  type,
 }: {
   postId?: string | null;
-  postType?: string;
+  type?: string;
   children: ReactNode;
 }) {
   const [step, setStep] = useState(0);
@@ -70,7 +69,7 @@ export default function PostFormProvider({
     resolver: zodResolver(schema),
     mode: "onChange",
     defaultValues: {
-      type: postType === "sale" || postType === "wanted" ? postType : "sale",
+      type: type === "sale" || type === "wanted" ? type : "sale",
       condition: undefined,
       title: "",
       description: "",
@@ -78,8 +77,6 @@ export default function PostFormProvider({
       latitude: 0,
       longitude: 0,
       category_id: 0,
-      brand_id: 0,
-      model_id: 0,
       zip_code: "",
       price: "",
       firm_price: 0,

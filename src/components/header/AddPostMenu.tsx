@@ -26,7 +26,7 @@ export default function AddPostMenu() {
         <div className="flex gap-1">
           <DropdownMenuItem asChild>
             <Link
-              href="/create-post?postType=wanted"
+              href="/create-post?type=wanted"
               className="border border-[var(--lightBorderColor)] !rounded-[14px] aspect-square w-[calc(50%-2px)] flex flex-col justify-center items-center gap-2 text-[var(--darkColor)] px-4 py-2 text-[14px] capitalize"
             >
               <Image
@@ -41,7 +41,7 @@ export default function AddPostMenu() {
 
           <DropdownMenuItem asChild>
             <Link
-              href="/create-post?postType=sale"
+              href="/create-post?type=sale"
               className="border border-[var(--lightBorderColor)] !rounded-[14px] aspect-square w-[calc(50%-2px)] flex flex-col justify-center items-center gap-2 text-[var(--darkColor)] px-4 py-2 text-[14px] capitalize"
             >
               <Image src="/icons/sell.svg" alt="sell" width={40} height={40} />

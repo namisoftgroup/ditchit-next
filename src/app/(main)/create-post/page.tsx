@@ -6,7 +6,7 @@ export default async function page({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const params = await searchParams;
-  const postType = params.postType as string;
+  const type = params.type as string;
 
-  return <PostFormWrapper postType={postType} />;
+  return <PostFormWrapper type={type} />;
 }

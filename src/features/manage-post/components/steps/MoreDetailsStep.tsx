@@ -22,7 +22,6 @@ export default function MoreDetailsStep({
 }: propTypes) {
   const {
     trigger,
-    watch,
     control,
     formState: { errors },
   } = useFormContext();
@@ -30,9 +29,6 @@ export default function MoreDetailsStep({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const isValid = await trigger(["features", "condition", "options"]);
-
-    console.log(watch());
-    console.log(errors);
 
     if (isValid) next();
   };

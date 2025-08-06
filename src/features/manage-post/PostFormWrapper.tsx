@@ -4,15 +4,15 @@ import WizardForm from "./WizardForm";
 
 export default async function PostFormWrapper({
   postId,
-  postType,
+  type,
 }: {
   postId?: string | null;
-  postType?: string;
+  type?: string;
 }) {
   const { data: categories } = await getCategories();
 
   return (
-    <PostFormProvider postId={postId} postType={postType}>
+    <PostFormProvider postId={postId} type={type}>
       <div className="container py-6 flex gap-8 justify-center">
         <div className="flex flex-wrap -mx-2 justify-center w-full">
           <div className="p-2 w-full md:w-12/12 lg:w-12/12 xl:w-10/12">
