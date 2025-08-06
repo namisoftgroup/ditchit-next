@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 import { toast } from "sonner";
 import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 import clientAxios from "@/lib/axios/clientAxios";
 import useGetMyPosts from "@/hooks/queries/useGetMyPosts";
 
@@ -69,6 +70,7 @@ export default function PostFormProvider({
 }) {
   const [step, setStep] = useState(0);
   const { refetch } = useGetMyPosts();
+  const router = useRouter();
 
   const methods = useForm<PostFormData>({
     resolver: zodResolver(schema),
@@ -103,10 +105,10 @@ export default function PostFormProvider({
     },
 
     onSuccess: (data) => {
-      console.log(data.data);
       if (data.data.code == 200) {
         toast.success("Post saved successfully");
         refetch();
+        router.push("/profile");
       } else {
         toast.error(data.data.message);
       }
@@ -116,6 +118,13 @@ export default function PostFormProvider({
       const err = error as AxiosError<{ message?: string }>;
       const message = err.response?.data?.message || "Something went wrong";
       toast.error(message);
+    },
+
+    onSettled: () => {
+      if (typeof window !== "undefined") {
+        const event = new CustomEvent("close-post-modal");
+        window.dispatchEvent(event);
+      }
     },
   });
 

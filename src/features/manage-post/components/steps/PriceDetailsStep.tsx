@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormContext, SubmitHandler } from "react-hook-form";
 import { SHIPPING_METHODS } from "@/utils/constants";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -31,7 +31,16 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
     }
   };
 
-  const onSubmit: SubmitHandler<PostFormData> = savePost;
+  useEffect(() => {
+    const handleCloseModal = () => setShow(false);
+    window.addEventListener("close-post-modal", handleCloseModal);
+    return () =>
+      window.removeEventListener("close-post-modal", handleCloseModal);
+  }, []);
+
+  const onSubmit: SubmitHandler<PostFormData> = (data) => {
+    savePost(data);
+  };
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleNextClick}>
