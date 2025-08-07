@@ -59,11 +59,8 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
           <Checkbox
             id="firm_price"
             checked={watch("firm_price") === 1}
-            onChange={(e) =>
-              setValue(
-                "firm_price",
-                (e.target as HTMLInputElement).checked ? 1 : 0
-              )
+            onCheckedChange={(checked) =>
+              setValue("firm_price", checked ? 1 : 0)
             }
           />
           <Label htmlFor="firm_price">Firm Price</Label>
@@ -73,11 +70,8 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
           <Checkbox
             id="virtual_tour"
             checked={watch("virtual_tour") === 1}
-            onChange={(e) =>
-              setValue(
-                "virtual_tour",
-                (e.target as HTMLInputElement).checked ? 1 : 0
-              )
+            onCheckedChange={(checked) =>
+              setValue("virtual_tour", checked ? 1 : 0)
             }
           />
           <Label htmlFor="virtual_tour">Virtual tour</Label>

@@ -56,7 +56,7 @@ export default function PostFormProvider({
       price: post?.price.toString() || "",
       firm_price: post?.firm_price === false ? 0 : 1 || 0,
       virtual_tour: post?.virtualTour === false ? 0 : 1 || 0,
-      delivery_method: SHIPPING_METHODS.find((m) => m.name === post?.deliveryMethod)?.value || "",
+      delivery_method: SHIPPING_METHODS.find((m) => m.name === post?.delivery_method)?.value || "",
       features: post?.features?.map((f) => f.value) || [],
       options:
         post?.options?.map((opt) => ({
