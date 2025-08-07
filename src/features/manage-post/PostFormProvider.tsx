@@ -39,7 +39,7 @@ export default function PostFormProvider({
   const [step, setStep] = useState(0);
   const { refetch } = useGetMyPosts();
   const router = useRouter();
-  
+
   const methods = useForm<PostFormData>({
     resolver: zodResolver(postFormDataSchema),
     mode: "onChange",
