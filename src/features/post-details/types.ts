@@ -13,7 +13,7 @@ export interface PostDetailsResponse {
   title: string;
   description: string;
   image: string;
-  zipCode: string;
+  zip_code: string;
   address: string;
   latitude: number;
   longitude: number;
@@ -59,7 +59,7 @@ export interface Option {
 export interface Feature {
   id: number;
   title: string;
-  value: string | number;
+  value: string;
 }
 
 export interface Images {

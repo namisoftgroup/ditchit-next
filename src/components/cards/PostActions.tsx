@@ -17,6 +17,7 @@ import BoostYourAd from "../modals/BoostYourAd";
 import ConfirmModal from "../modals/ConfirmModal";
 import useStoreFavorites from "@/hooks/useStoreFavorites";
 import useDeletePost from "@/hooks/useDeletePost";
+import Link from "next/link";
 
 type propsTypes = {
   post: Post;
@@ -63,10 +64,10 @@ export default function PostActions({ post, showActions }: propsTypes) {
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>
-                <button className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm">
+                <Link href={`/edit-post?post_id=${post.id}`} className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm">
                   <FilePenLine width={16} height={16} />
                   Edit
-                </button>
+                </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>

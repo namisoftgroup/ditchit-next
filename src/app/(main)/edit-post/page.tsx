@@ -1,13 +1,14 @@
+import { getPostDetails } from "@/features/post-details/service";
 import PostFormWrapper from "@/features/manage-post/PostFormWrapper";
 
-interface PageProps {
-  params: Promise<{
-    postId: string;
-  }>;
-}
+export default async function page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
+  const id = params.post_id as string;
+  const post = await getPostDetails(id);
 
-export default async function page({ params }: PageProps) {
-  const id = (await params).postId;
-
-  return <PostFormWrapper postId={id} />;
+  return <PostFormWrapper post={post} />;
 }

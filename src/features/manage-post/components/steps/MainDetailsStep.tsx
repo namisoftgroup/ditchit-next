@@ -3,7 +3,7 @@
 import { useFormContext } from "react-hook-form";
 import TextField from "@/components/shared/TextField";
 import InputField from "@/components/shared/InputField";
-import MediaUpload from "@/components/shared/MediaUpload";
+import MediaUpload from "@/lib/media/MediaUpload";
 import ZipMapSearch from "@/components/shared/ZipMapSearch";
 import FormFooter from "../FormFooter";
 
@@ -16,7 +16,6 @@ export default function MainDetailsStep({ next, back }: propTypes) {
   const {
     register,
     trigger,
-    watch,
     formState: { errors },
   } = useFormContext();
 
@@ -31,10 +30,6 @@ export default function MainDetailsStep({ next, back }: propTypes) {
       "latitude",
       "longitude",
     ]);
-console.log(watch("image"));
-
-    console.log(errors);
-    
 
     if (isValid) {
       next();

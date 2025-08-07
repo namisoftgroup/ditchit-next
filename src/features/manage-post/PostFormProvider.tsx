@@ -4,47 +4,14 @@ import { createContext, useContext, useState, useMemo, ReactNode } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { z } from "zod";
 import { toast } from "sonner";
 import { AxiosError } from "axios";
+import { PostDetailsResponse } from "../post-details/types";
 import { useRouter } from "next/navigation";
+import { PostFormData, postFormDataSchema } from "./schema";
 import clientAxios from "@/lib/axios/clientAxios";
 import useGetMyPosts from "@/hooks/queries/useGetMyPosts";
-
-const schema = z.object({
-  type: z.enum(["sale", "wanted"]),
-  category_id: z.number(),
-  title: z.string().min(3, "Title must be at least 3 characters"),
-  description: z.string().min(10, "Description must be at least 10 characters"),
-  address: z.string(),
-  latitude: z.number(),
-  longitude: z.number(),
-  price: z.string().regex(/^[0-9]+(\.[0-9]{1,2})?$/, "Price must be a number"),
-  firm_price: z.union([z.literal(0), z.literal(1)]),
-  virtual_tour: z.union([z.literal(0), z.literal(1)]),
-  delivery_method: z.string(),
-  is_promote: z.union([z.literal(0), z.literal(1)]).optional(),
-  image: z.instanceof(File),
-  images: z.array(z.instanceof(File)).optional(),
-  condition: z.enum(["new", "used"], {
-    required_error: "Condition is required",
-  }),
-  zip_code: z
-    .string()
-    .regex(
-      /^[0-9]{5}$/,
-      "Invalid zip code. Please enter a valid 5-digit zip code"
-    ),
-  features: z.array(z.string().min(3)).optional(),
-  options: z.array(
-    z.object({
-      category_option_id: z.number(),
-      value: z.union([z.string(), z.number()]),
-    })
-  ),
-});
-
-export type PostFormData = z.infer<typeof schema>;
+import { SHIPPING_METHODS } from "@/utils/constants";
 
 const PostFormContext = createContext<{
   step: number;
@@ -63,44 +30,87 @@ export const usePostForm = () => {
 export default function PostFormProvider({
   children,
   type,
+  post,
 }: {
-  postId?: string | null;
+  post?: PostDetailsResponse;
   type?: string;
   children: ReactNode;
 }) {
   const [step, setStep] = useState(0);
   const { refetch } = useGetMyPosts();
   const router = useRouter();
-
+  
   const methods = useForm<PostFormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(postFormDataSchema),
     mode: "onChange",
     defaultValues: {
-      type: type === "sale" || type === "wanted" ? type : "sale",
-      condition: undefined,
-      title: "",
-      description: "",
-      address: "",
-      latitude: 0,
-      longitude: 0,
-      category_id: 0,
-      zip_code: "",
-      price: "",
-      firm_price: 0,
-      virtual_tour: 0,
-      delivery_method: "shipping",
-      features: [],
-      options: [],
-      is_promote: 0,
-      image: undefined,
-      images: [],
+      type: post?.type || type,
+      condition: post?.condition || undefined,
+      title: post?.title || "",
+      description: post?.description || "",
+      address: post?.description || "",
+      latitude: post?.latitude || 0,
+      longitude: post?.longitude || 0,
+      category_id: post?.category.id || 0,
+      zip_code: post?.zip_code || "",
+      price: post?.price.toString() || "",
+      firm_price: post?.firm_price === false ? 0 : 1 || 0,
+      virtual_tour: post?.virtualTour === false ? 0 : 1 || 0,
+      delivery_method: SHIPPING_METHODS.find((m) => m.name === post?.deliveryMethod)?.value || "",
+      features: post?.features?.map((f) => f.value) || [],
+      options:
+        post?.options?.map((opt) => ({
+          category_option_id: opt.category_option_id,
+          value: opt.value,
+        })) || [],
+      is_promote: post?.isPromoted === false ? 0 : 1 || 0,
+      image: post?.image || undefined,
+      images: post?.images?.map((img) => img.image) || [],
     },
   });
 
   const { mutate: savePostMutation, isPending: isSaving } = useMutation({
     mutationFn: async (data: PostFormData) => {
-      return await clientAxios.post("/posts", data, {
-        headers: { "Content-Type": "multipart/form-data" },
+      const endpoint = post?.id ? `/posts/${post.id}` : "/posts";
+      const formData = new FormData();
+
+      Object.entries(data).forEach(([key, value]) => {
+        if (key === "image" || key === "images") return;
+
+        if (Array.isArray(value)) {
+          value.forEach((item, index) => {
+            if (typeof item === "object" && item !== null) {
+              Object.entries(item).forEach(([k, v]) => {
+                formData.append(`${key}[${index}][${k}]`, v);
+              });
+            } else {
+              formData.append(`${key}[]`, item);
+            }
+          });
+        } else {
+          formData.append(key, value as string);
+        }
+      });
+
+      if (data.image instanceof File) {
+        formData.append("image", data.image);
+      }
+
+      if (Array.isArray(data.images)) {
+        const fileImages = data.images.filter((img) => img instanceof File);
+        fileImages.forEach((img) => {
+          formData.append("images[]", img);
+        });
+      }
+
+      if (post?.id) {
+        formData.append("_method", "PUT");
+      }
+
+      return await clientAxios.post(endpoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
     },
 

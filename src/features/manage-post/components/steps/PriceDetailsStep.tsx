@@ -4,7 +4,7 @@ import { SHIPPING_METHODS } from "@/utils/constants";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { usePostForm } from "../../PostFormProvider";
-import type { PostFormData } from "../../PostFormProvider";
+import type { PostFormData } from "../../schema";
 import InputField from "@/components/shared/InputField";
 import BoostAndPublish from "@/components/modals/BoostAndPublish";
 import FormFooter from "../FormFooter";
@@ -20,8 +20,8 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
   } = useFormContext<PostFormData>();
 
   const [show, setShow] = useState(false);
-  const selectedDelivery = watch("delivery_method");
   const { savePost, isSaving } = usePostForm();
+  const selectedDelivery = watch("delivery_method");
 
   const handleNextClick = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,6 +34,7 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
   useEffect(() => {
     const handleCloseModal = () => setShow(false);
     window.addEventListener("close-post-modal", handleCloseModal);
+
     return () =>
       window.removeEventListener("close-post-modal", handleCloseModal);
   }, []);
@@ -57,6 +58,7 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
         <div className="flex items-center gap-3">
           <Checkbox
             id="firm_price"
+            checked={watch("firm_price") === 1}
             onChange={(e) =>
               setValue(
                 "firm_price",
@@ -70,6 +72,7 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
         <div className="flex items-start gap-3">
           <Checkbox
             id="virtual_tour"
+            checked={watch("virtual_tour") === 1}
             onChange={(e) =>
               setValue(
                 "virtual_tour",
