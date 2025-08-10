@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { getProfile } from "@/features/auth/actions";
-import NextTopLoader from "nextjs-toploader";
-import AuthProvider from "@/providers/AuthProvider";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import GoogleOneTapAuth from "@/features/auth/components/GoogleOneTapAuth";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import AuthProvider from "@/providers/AuthProvider";
+import NextTopLoader from "nextjs-toploader";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 
@@ -64,19 +66,27 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <NextTopLoader showSpinner={false} color="#00a650" />
-        <AuthProvider user={data?.user ?? null} token={data?.token ?? null}>
-          <ReactQueryProvider>
-            <Toaster
-              expand={false}
-              richColors
-              position="bottom-right"
-              theme="light"
-            />
-            <Header />
-            <main className="min-h-[calc(100vh-316px)]">{children}</main>
-            <Footer />
-          </ReactQueryProvider>
-        </AuthProvider>
+
+        <GoogleOAuthProvider clientId={process.env.NEXT_GOOGLE_CLIENT_ID!}>
+          <AuthProvider user={data?.user ?? null} token={data?.token ?? null}>
+
+            <ReactQueryProvider>
+              <Toaster
+                expand={false}
+                richColors
+                position="bottom-right"
+                theme="light"
+              />
+
+              <GoogleOneTapAuth/>
+
+              <Header />
+              <main className="min-h-[calc(100vh-316px)]">{children}</main>
+              <Footer />
+            </ReactQueryProvider>
+
+          </AuthProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

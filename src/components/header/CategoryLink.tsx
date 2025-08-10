@@ -1,6 +1,6 @@
+import { Category } from "@/types/category";
 import Image from "next/image";
 import Link from "next/link";
-import { Category } from "@/types/category";
 
 type Props = {
   category: Category;
@@ -12,10 +12,17 @@ export function CategoryLink({ category, innerRef }: Props) {
     <Link
       href={`/all-posts?category_id=${category.id}`}
       ref={innerRef}
-      className="flex items-center gap-2 text-sm text-[var(--darkColor)] hover:text-[var(--mainColor)] whitespace-nowrap"
+      className="text-sm text-[var(--darkColor)] hover:text-[var(--mainColor)] whitespace-nowrap"
     >
-      <Image src={category.image} alt={category.title} width={20} height={20} />
-      {category.title}
+      <div className="flex items-center gap-2">
+        <Image
+          src={category.image}
+          alt={category.title}
+          width={20}
+          height={20}
+        />
+        <span className="block">{category.title}</span>
+      </div>
     </Link>
   );
 }

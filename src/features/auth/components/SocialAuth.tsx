@@ -1,4 +1,5 @@
-import Image from "next/image";
+import GoogleAuth from "./GoogleAuth";
+import AppleAuth from "./AppleAuth";
 
 export default function SocialAuth() {
   return (
@@ -9,15 +10,8 @@ export default function SocialAuth() {
         <span className="h-px flex-1 bg-[var(--lightBorderColor)]"></span>
       </div>
 
-      <button className="whitespace-nowrap rounded-full flex-1 flex items-center justify-center px-6 py-3 gap-2 bg-[#4c8bf5] text-[var(--whiteColor)]">
-        <Image src="/icons/google.svg" alt="google" width={24} height={24} />
-        <span className="flex-1 text-center text-sm">Continue with Google</span>
-      </button>
-
-      <button className="whitespace-nowrap rounded-full flex-1 flex items-center justify-center px-6 py-3 gap-2 border">
-        <Image src="/icons/apple.svg" alt="apple" width={24} height={24} />
-        <span className="flex-1 text-center text-sm">Continue with Apple</span>
-      </button>
+      <GoogleAuth />
+      <AppleAuth/>
     </div>
   );
 }

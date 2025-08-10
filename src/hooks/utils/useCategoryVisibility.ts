@@ -13,7 +13,7 @@ export function useCategoryVisibility(categories: Category[]) {
     if (!containerRef.current || categories.length === 0) return;
 
     const containerWidth = containerRef.current.offsetWidth;
-    const moreButtonWidth = 150;
+    const moreButtonWidth = 180;
     const padding = 32;
     const availableWidth = containerWidth - moreButtonWidth - padding;
 

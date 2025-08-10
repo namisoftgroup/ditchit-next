@@ -95,7 +95,7 @@ export default function LoginForm() {
       </button>
 
       <FormFooterLink
-        question="Don’t have an account?"
+        question="Don't have an account?"
         linkText="Create New Account"
         href="/register"
       />
