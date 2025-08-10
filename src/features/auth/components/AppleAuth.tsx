@@ -22,7 +22,7 @@ export default function AppleAuth() {
       authOptions={{
         clientId: "com.ditchit.webapp",
         scope: "name email",
-        redirectURI: "https://ditchit-next.vercel.app/",
+        redirectURI: "https://ditchit.com/auth/apple/callback",
         usePopup: true,
       }}
       onSuccess={handleSuccess}
