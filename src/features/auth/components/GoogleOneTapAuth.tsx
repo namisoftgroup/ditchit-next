@@ -5,36 +5,31 @@ import { useRouter } from "next/navigation";
 import { useAuthStore } from "../store";
 import { toast } from "sonner";
 import { authAction } from "../actions";
-
-import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 export default function GoogleOneTapAuth() {
   const router = useRouter();
   const { setUser, setToken } = useAuthStore((state) => state);
 
+  interface GoogleJwtPayload {
+    email: string;
+    name: string;
+    sub: string;
+  }
+
   useGoogleOneTapLogin({
     onSuccess: async (tokenResponse) => {
-
-      console.log(tokenResponse);
-
-      
-      const res = await axios.get(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
-        {
-          headers: {
-            Authorization: `Bearer ${tokenResponse.credential}`,
-          },
-        }
-      );
-
-      const formData = new FormData();
-
-      formData.append("email", res.data.email);
-      formData.append("name", res.data.name);
-      formData.append("social_type", "google");
-      formData.append("social_id", res.data.sub);
-
       try {
+        const userInfo = jwtDecode<GoogleJwtPayload>(
+          tokenResponse.credential as string
+        );
+
+        const formData = new FormData();
+        formData.append("email", userInfo.email);
+        formData.append("name", userInfo.name);
+        formData.append("social_id", userInfo.sub);
+        formData.append("social_type", "google");
+
         const res = await authAction(formData, "/auth/socialLogin");
 
         if (res.code === 200) {
@@ -46,7 +41,7 @@ export default function GoogleOneTapAuth() {
           toast.error(res.message);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
         toast.error("Something went wrong");
       }
     },
