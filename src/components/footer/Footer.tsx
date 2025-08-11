@@ -1,6 +1,7 @@
 import { Mail, MapPinned } from "lucide-react";
 import Link from "next/link";
 import LogoBrand from "../header/LogoBrand";
+import SubscribeBtn from "./SubscribeBtn";
 
 export default function Footer() {
   return (
@@ -16,7 +17,7 @@ export default function Footer() {
           <Link href="/about_us">About Us</Link>
           <Link href="/terms">terms and conditions</Link>
           <Link href="/privacy">Privacy Policy</Link>
-          <Link href="#!">subscribe</Link>
+          <SubscribeBtn />
         </div>
       </div>
 
