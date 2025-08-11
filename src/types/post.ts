@@ -22,6 +22,7 @@ export interface Post {
   old_promote: boolean;
   promote_expire: string | null;
   is_love: boolean;
+  is_sold: boolean;
   distance: number;
   views: number;
   date: string;
