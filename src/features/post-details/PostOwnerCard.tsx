@@ -13,7 +13,7 @@ export default function PostOwnerCard({
   return (
     <div className="flex flex-col gap-2 border border-[var(--lightBorderColor)] rounded-[16px] p-6 text-center bg-[var(--whiteColor)] bg-[url('/images/imgStatus.svg')] bg-no-repeat bg-[length:150px] bg-[position:top_right]">
       <Link
-        href={`/profile/${owner.id}`}
+        href={`/advertiser/${owner.id}`}
         className="flex flex-col items-center gap-2"
       >
         <Image src={owner.image} alt="user" width={120} height={120} className="rounded-full max-w-[120px] max-h-[120px] object-cover" />
