@@ -69,7 +69,6 @@ export default async function RootLayout({
 
         <GoogleOAuthProvider clientId={process.env.NEXT_GOOGLE_CLIENT_ID!}>
           <AuthProvider user={data?.user ?? null} token={data?.token ?? null}>
-
             <ReactQueryProvider>
               <Toaster
                 expand={false}
@@ -78,13 +77,12 @@ export default async function RootLayout({
                 theme="light"
               />
 
-              <GoogleOneTapAuth/>
+              {!data.token && <GoogleOneTapAuth />}
 
               <Header />
               <main className="min-h-[calc(100vh-316px)]">{children}</main>
               <Footer />
             </ReactQueryProvider>
-
           </AuthProvider>
         </GoogleOAuthProvider>
       </body>

@@ -14,6 +14,10 @@ export default function GoogleOneTapAuth() {
 
   useGoogleOneTapLogin({
     onSuccess: async (tokenResponse) => {
+
+      console.log(tokenResponse);
+
+      
       const res = await axios.get(
         "https://www.googleapis.com/oauth2/v3/userinfo",
         {
