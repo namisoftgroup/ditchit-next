@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 import { PostFormData, postFormDataSchema } from "./schema";
 import clientAxios from "@/lib/axios/clientAxios";
 import useGetMyPosts from "@/hooks/queries/useGetMyPosts";
-import { SHIPPING_METHODS } from "@/utils/constants";
 
 const PostFormContext = createContext<{
   step: number;
@@ -56,7 +55,10 @@ export default function PostFormProvider({
       price: post?.price.toString() || "",
       firm_price: post?.firm_price === false ? 0 : 1 || 0,
       virtual_tour: post?.virtualTour === false ? 0 : 1 || 0,
-      delivery_method: SHIPPING_METHODS.find((m) => m.name === post?.delivery_method)?.value || "",
+      delivery_method:
+        post?.delivery_method === "Local + Shipping"
+          ? "both"
+          : post?.delivery_method,
       features: post?.features?.map((f) => f.value) || [],
       options:
         post?.options?.map((opt) => ({
@@ -116,9 +118,13 @@ export default function PostFormProvider({
 
     onSuccess: (data) => {
       if (data.data.code == 200) {
-        toast.success("Post saved successfully");
-        refetch();
-        router.push("/profile");
+        if (data.data.data.link) {
+          window.location.href = data.data.data.link;
+        } else {
+          toast.success("Post saved successfully");
+          refetch();
+          router.push("/profile");
+        }
       } else {
         toast.error(data.data.message);
       }

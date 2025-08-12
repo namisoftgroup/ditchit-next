@@ -12,12 +12,14 @@ type GetAppModalProps = {
   isSaving: boolean;
   addPost: () => void;
   handleClose: () => void;
+  addAndPromote: () => void;
 };
 
 export default function BoostAndPublish({
   show,
   isSaving,
   addPost,
+  addAndPromote,
   handleClose,
 }: GetAppModalProps) {
   return (
@@ -49,10 +51,11 @@ export default function BoostAndPublish({
           </button>
 
           <button
-            type="submit"
+            onClick={addAndPromote}
+            disabled={isSaving}
             className="bg-[var(--mainColor)] text-white rounded-[12px] w-fit px-12 py-3 m-0 border border-[var(--mainColor)]"
           >
-            Promote
+            {isSaving ? "loading..." : "Promote"}
           </button>
         </div>
       </DialogContent>

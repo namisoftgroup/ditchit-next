@@ -9,7 +9,13 @@ import InputField from "@/components/shared/InputField";
 import BoostAndPublish from "@/components/modals/BoostAndPublish";
 import FormFooter from "../FormFooter";
 
-export default function PriceDetailsStep({ back }: { back: () => void }) {
+export default function PriceDetailsStep({
+  back,
+  postId,
+}: {
+  back: () => void;
+  postId?: number;
+}) {
   const {
     register,
     watch,
@@ -26,8 +32,13 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
   const handleNextClick = async (e: React.FormEvent) => {
     e.preventDefault();
     const isValid = await trigger("price");
+
     if (isValid) {
-      setShow(true);
+      if (postId) {
+        handleSubmit(onSubmit)();
+      } else {
+        setShow(true);
+      }
     }
   };
 
@@ -41,6 +52,10 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
 
   const onSubmit: SubmitHandler<PostFormData> = (data) => {
     savePost(data);
+  };
+
+  const onSubmitWithPromote: SubmitHandler<PostFormData> = (data) => {
+    savePost({ ...data, is_promote: 1 });
   };
 
   return (
@@ -105,13 +120,17 @@ export default function PriceDetailsStep({ back }: { back: () => void }) {
         </div>
       </div>
 
-      <FormFooter back={back} nextBtnText="Confirm & Publish" />
+      <FormFooter
+        back={back}
+        nextBtnText={postId ? "Update Post" : "Confirm & Publish"}
+      />
 
       <BoostAndPublish
         show={show}
         isSaving={isSaving}
         handleClose={() => setShow(false)}
         addPost={handleSubmit(onSubmit)}
+        addAndPromote={handleSubmit(onSubmitWithPromote)}
       />
     </form>
   );

@@ -106,7 +106,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <span className="bg-white rounded-[40px] px-3 py-1 text-[var(--darkColor)] block border border-[var(--lightBorderColor)]">
+          <span className="bg-white rounded-[40px] px-3 py-1 text-[var(--darkColor)] text-[14px] block border border-[var(--lightBorderColor)]">
             Available
           </span>
         </div>
