@@ -6,28 +6,19 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useState } from "react";
+import Link from "next/link";
 
 type GetAppModalProps = {
   show: boolean;
+  postId: number;
   handleClose: () => void;
 };
 
-export default function BoostYourAd({ show, handleClose }: GetAppModalProps) {
-  const [isPending, ] = useState<boolean>(false);
-
-  // const handlePromote = async () => {
-  //   setIsPending(true);
-
-  //   try {
-  //       const res = await clientAxios.post("/ads/promote");
-        
-  //   } catch (error) {
-  //       console.log(error);
-        
-  //   }
-  // }
-
+export default function BoostYourAd({
+  show,
+  postId,
+  handleClose,
+}: GetAppModalProps) {
   return (
     <Dialog open={show} onOpenChange={handleClose}>
       <DialogContent className="max-w-md p-6 bg-white shadow-xl space-y-6 rounded-[24px] gap-2">
@@ -48,13 +39,12 @@ export default function BoostYourAd({ show, handleClose }: GetAppModalProps) {
         </div>
 
         <div className="flex items-center justify-between border-t border-[var(--lightBorderColor)] mb-0 pt-4">
-          <button
-            type="submit"
+          <Link
             className="customBtn rounded-full w-fit px-12 ms-auto me-0 mb-0"
-            disabled={isPending}
+            href={`https://ditchit.com/api/promote-payment/${postId}`}
           >
-            {isPending ? "Promoting..." : "Promote"}
-          </button>
+            Boost Now
+          </Link>
         </div>
       </DialogContent>
     </Dialog>

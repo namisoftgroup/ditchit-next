@@ -16,9 +16,10 @@ import { useState } from "react";
 import { Post } from "@/types/post";
 import BoostYourAd from "../modals/BoostYourAd";
 import ConfirmModal from "../modals/ConfirmModal";
-import useStoreFavorites from "@/hooks/useStoreFavorites";
-import useDeletePost from "@/hooks/useDeletePost";
+import useStoreFavorites from "@/hooks/actions/useStoreFavorites";
+import useDeletePost from "@/hooks/actions/useDeletePost";
 import Link from "next/link";
+import useSellActivePost from "@/hooks/actions/useSellActivePost";
 
 type propsTypes = {
   post: Post;
@@ -30,7 +31,8 @@ export default function PostActions({ post, showActions }: propsTypes) {
   const [showConfirm, setShowConfirm] = useState(false);
 
   const { storeFavorites } = useStoreFavorites();
-  const { deletePost, isPending } = useDeletePost();
+  const { deletePost, isPending } = useDeletePost(setShowConfirm);
+  const { sellActivePost, isPending: isPendingSell } = useSellActivePost(setShowConfirm);
 
   return (
     <>
@@ -49,6 +51,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
             <DropdownMenuTrigger className="h-9 w-9 rounded-full flex items-center justify-center bg-white border border-[var(--lightBorderColor)] ">
               <EllipsisVertical width={16} height={16} />
             </DropdownMenuTrigger>
+
             <DropdownMenuContent className="bg-[var(--whiteColor)] shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[99999] min-w-[100px] flex-col rounded border border-[var(--lightBorderColor)] max-h-[400px] overflow-y-auto">
               {!post.is_promoted && !post.is_sold && (
                 <DropdownMenuItem asChild>
@@ -67,13 +70,17 @@ export default function PostActions({ post, showActions }: propsTypes) {
               )}
 
               <DropdownMenuItem asChild>
-                <button className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm">
+                <button
+                  className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+                  disabled={isPendingSell}
+                  onClick={() => sellActivePost(post?.id)}
+                >
                   <Tag
                     width={16}
                     height={16}
                     className="text-[var(--mainColor)]"
                   />
-                  Sold
+                  {post.is_sold ? "Active" : "Sold"}
                 </button>
               </DropdownMenuItem>
 
@@ -105,7 +112,12 @@ export default function PostActions({ post, showActions }: propsTypes) {
         </div>
       )}
 
-      <BoostYourAd show={showBoost} handleClose={() => setShowBoost(false)} />
+      <BoostYourAd
+        show={showBoost}
+        handleClose={() => setShowBoost(false)}
+        postId={post.id}
+      />
+
       <ConfirmModal
         show={showConfirm}
         modalTitle="Delete Post"

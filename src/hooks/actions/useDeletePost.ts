@@ -2,9 +2,9 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 import clientAxios from "@/lib/axios/clientAxios";
-import useGetMyPosts from "./queries/useGetMyPosts";
+import useGetMyPosts from "../queries/useGetMyPosts";
 
-export default function useDeletePost() {
+export default function useDeletePost(setShowConfirm: (show: boolean) => void) {
   const { refetch } = useGetMyPosts();
 
   const { mutate: deletePost, isPending } = useMutation({
@@ -14,7 +14,9 @@ export default function useDeletePost() {
     },
 
     onSuccess: () => {
+      toast.success("Post deleted successfully");
       refetch();
+      setShowConfirm(false);
     },
 
     onError: (error) => {
