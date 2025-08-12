@@ -86,7 +86,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
 
               <DropdownMenuItem asChild>
                 <Link
-                  href={`/edit-post?post_id=${post.id}`}
+                  href={`/edit-post/${post.id}`}
                   className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
                 >
                   <FilePenLine width={16} height={16} />
