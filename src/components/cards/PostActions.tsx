@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Post } from "@/types/post";
+import { useAuthStore } from "@/features/auth/store";
+import { useRouter } from "next/navigation";
 import BoostYourAd from "../modals/BoostYourAd";
 import ConfirmModal from "../modals/ConfirmModal";
 import useStoreFavorites from "@/hooks/actions/useStoreFavorites";
@@ -29,16 +31,28 @@ type propsTypes = {
 export default function PostActions({ post, showActions }: propsTypes) {
   const [showBoost, setShowBoost] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const { token } = useAuthStore();
+  const router = useRouter();
 
-  const { storeFavorites } = useStoreFavorites();
+  const { storeFavorites, isPending: isPendingFav } = useStoreFavorites();
   const { deletePost, isPending } = useDeletePost(setShowConfirm);
-  const { sellActivePost, isPending: isPendingSell } = useSellActivePost(setShowConfirm);
+  const { sellActivePost, isPending: isPendingSell } =
+    useSellActivePost(setShowConfirm);
+
+  const handleFav = (id: number) => {
+    if (token) {
+      storeFavorites(id);
+    } else {
+      router.push("/login");
+    }
+  };
 
   return (
     <>
       {!showActions && (
         <button
-          onClick={() => storeFavorites(post?.id)}
+          onClick={() => handleFav(post?.id)}
+          disabled={isPendingFav}
           className={`absolute top-4 left-4 z-20 w-8 h-8 flex items-center justify-center rounded-full text-[var(--whiteColor)] bg-black/30 backdrop-blur-sm transition-all hover:bg-red-600 ${post.is_love ? "bg-red-600" : ""}`}
         >
           <Heart width={18} height={18} />

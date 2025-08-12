@@ -1,16 +1,32 @@
+"use client"
+
 import { Clock, Heart, MapPin } from "lucide-react";
+import { useAuthStore } from "../auth/store";
+import { useRouter } from "next/navigation";
 import { PostDetailsResponse } from "./types";
 import Image from "next/image";
 import Link from "next/link";
+import useStoreFavorites from "@/hooks/actions/useStoreFavorites";
 
 export default function PostInfo({ post }: { post: PostDetailsResponse }) {
   const optionsToMap = post.options.filter((option) => option.value);
+  const { storeFavorites, isPending: isPendingFav } = useStoreFavorites();
+  const { token } = useAuthStore();
+  const router = useRouter();
 
   const encodedUrl = encodeURIComponent(
     `https://ditchit.com/all-posts?id=${post.id}`
   );
 
   const encodedText = encodeURIComponent("DitchIt");
+
+  const handleFav = (id: number) => {
+    if (token) {
+      storeFavorites(id);
+    } else {
+      router.push("/login");
+    }
+  };
 
   return (
     <>
@@ -19,7 +35,11 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
           ${post.price.toFixed(2)}
         </div>
 
-        <button className="min-w-[42px] h-[42px] flex items-center justify-center rounded-full border border-[var(--darkColor)] transition-all">
+        <button
+          onClick={() => handleFav(post.id)}
+          disabled={isPendingFav}
+          className={`min-w-[42px] h-[42px] flex items-center justify-center rounded-full border border-[var(--darkColor)] transition-all ${post.is_love ? "bg-[#ff0000]" : ""}`}
+        >
           <Heart width={20} height={20} />
         </button>
 
@@ -107,9 +127,24 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
       </div>
 
       <div className="flex flex-col gap-2 relative text-[var(--darkColor)]">
-        <span className="px-3 py-1 bg-[var(--mainColor)] text-[var(--whiteColor)] rounded-xl w-fit text-[14px]">
-          {post.type}
-        </span>
+        <div className="flex gap-2">
+          {post.is_promoted && (
+            <span className="inline-flex items-center gap-1 p-2 px-6 rounded-full border border-[var(--mainColor)] w-fit text-sm font-bold uppercase bg-[var(--mainColor20)]">
+              <Image
+                src="/icons/promoted2.svg"
+                width={20}
+                height={20}
+                alt="Promoted"
+              />
+              <span className="text-[12px]">Promoted</span>
+            </span>
+          )}
+
+          <span className="px-4 flex items-center py-1 bg-[var(--mainColor)] text-[var(--whiteColor)] rounded-full w-fit text-[14px]">
+            {post.type}
+          </span>
+        </div>
+
         <h3 className="text-[20px] font-bold">{post.title}</h3>
 
         <div className="flex items-center justify-between pt-3 mt-2 border-t border-t-[var(--lightBorderColor)] gap-2 flex-wrap">
@@ -160,9 +195,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
                 <span className="text-[14px] flex-1">
                   {option.category_option.title}
                 </span>
-                <p className="text-[14px] font-bold flex-3">
-                  {option.value}
-                </p>
+                <p className="text-[14px] font-bold flex-3">{option.value}</p>
               </li>
             ))}
           </ul>

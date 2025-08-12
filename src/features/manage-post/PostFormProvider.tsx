@@ -54,7 +54,7 @@ export default function PostFormProvider({
       zip_code: post?.zip_code || "",
       price: post?.price.toString() || "",
       firm_price: post?.firm_price === false ? 0 : 1 || 0,
-      virtual_tour: post?.virtualTour === false ? 0 : 1 || 0,
+      virtual_tour: post?.virtual_tour === false ? 0 : 1 || 0,
       delivery_method:
         post?.delivery_method === "Local + Shipping"
           ? "both"
@@ -65,7 +65,7 @@ export default function PostFormProvider({
           category_option_id: opt.category_option_id,
           value: opt.value,
         })) || [],
-      is_promote: post?.isPromoted === false ? 0 : 1 || 0,
+      is_promote: post?.is_promoted === false ? 0 : 1 || 0,
       image: post?.image || undefined,
       images: post?.images?.map((img) => img.image) || [],
     },

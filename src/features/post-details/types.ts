@@ -4,11 +4,11 @@ export interface PostDetailsResponse {
   id: number;
   type: string;
   condition: string;
-  userId: number;
+  user_id: number;
   user: {
     user: User;
   };
-  categoryId: number;
+  category_id: number;
   category: Category;
   title: string;
   description: string;
@@ -18,14 +18,14 @@ export interface PostDetailsResponse {
   latitude: number;
   longitude: number;
   price: number;
-  firmPrice: boolean;
-  virtualTour: boolean;
-  isPromoted: boolean;
-  oldPromote: boolean;
-  promoteExpire: string;
-  isSold: boolean;
-  deliveryMethod: string;
-  isLove: boolean;
+  firm_price: boolean;
+  virtual_tour: boolean;
+  is_promoted: boolean;
+  old_promote: boolean;
+  promote_expire: string;
+  is_sold: boolean;
+  delivery_method: string;
+  is_love: boolean;
   images: Images[];
   options: Option[];
   distance: number;
@@ -33,16 +33,14 @@ export interface PostDetailsResponse {
   views: number;
   date: string;
   time: string;
-  firm_price: boolean;
-  delivery_method: string;
-  publishingDuration: string;
+  publishing_duration: string;
 }
 
 export interface Category {
   id: number;
   title: string;
   image: string;
-  isCondition: boolean;
+  is_condition: boolean;
   options: unknown[];
 }
 
