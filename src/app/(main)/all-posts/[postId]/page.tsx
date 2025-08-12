@@ -12,6 +12,21 @@ interface PageProps {
   }>;
 }
 
+export const generateMetadata = async ({ params }: PageProps) => {
+  const id = (await params).postId;
+  const post = await getPostDetails(id);
+
+  return {
+    title: `DitchIt | ${post.title} `,
+    description: post.description,
+    openGraph: {
+      title: `DitchIt | ${post.title} `,
+      description: post.description,
+      images: post.image ? [post.image] : [],
+    },
+  };
+};
+
 export default async function PostDetails({ params }: PageProps) {
   const id = (await params).postId;
   const post = await getPostDetails(id);

@@ -12,12 +12,12 @@ import Footer from "@/components/footer/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ditchit.com/"),
+  metadataBase: new URL("https://DitchIt.com/"),
   title: "DitchIt",
   description:
-    "Buy, Sell, Ditchit - The Win-Win Marketplace. Ditchit offers a thrilling experience: list in 30 seconds, explore new arrivals daily, and connect with buyers and sellers in a secure community. Build your reputation, find hidden gems, and join millions of users shopping locally!",
+    "Buy, Sell, DitchIt - The Win-Win Marketplace. DitchIt offers a thrilling experience: list in 30 seconds, explore new arrivals daily, and connect with buyers and sellers in a secure community. Build your reputation, find hidden gems, and join millions of users shopping locally!",
   keywords: [
-    "Ditchit",
+    "DitchIt",
     "Marketplace",
     "Buy and Sell",
     "Local Shopping",
@@ -25,13 +25,13 @@ export const metadata: Metadata = {
     "List Fast",
     "Community Marketplace",
   ],
-  authors: [{ name: "DitchIt", url: "https://ditchit.com" }],
+  authors: [{ name: "DitchIt", url: "https://DitchIt.com" }],
   robots: "index, follow",
   openGraph: {
     title: "DitchIt",
     description:
-      "Buy, Sell, Ditchit - The Win-Win Marketplace. Ditchit offers a thrilling experience: list in 30 seconds, explore new arrivals daily, and connect with buyers and sellers in a secure community. Build your reputation, find hidden gems, and join millions of users shopping locally!",
-    url: "https://ditchit.com/",
+      "Buy, Sell, DitchIt - The Win-Win Marketplace. DitchIt offers a thrilling experience: list in 30 seconds, explore new arrivals daily, and connect with buyers and sellers in a secure community. Build your reputation, find hidden gems, and join millions of users shopping locally!",
+    url: "https://DitchIt.com/",
     type: "website",
     images: [
       {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DitchIt",
     description:
-      "Buy, Sell, Ditchit - The Win-Win Marketplace. Ditchit offers a thrilling experience: list in 30 seconds, explore new arrivals daily, and connect with buyers and sellers in a secure community.",
+      "Buy, Sell, DitchIt - The Win-Win Marketplace. DitchIt offers a thrilling experience: list in 30 seconds, explore new arrivals daily, and connect with buyers and sellers in a secure community.",
     images: ["/branding/store.png"],
   },
   icons: {

@@ -1,5 +1,6 @@
-"use client"
+"use client";
 
+import { useState } from "react";
 import { Clock, Heart, MapPin } from "lucide-react";
 import { useAuthStore } from "../auth/store";
 import { useRouter } from "next/navigation";
@@ -10,6 +11,8 @@ import useStoreFavorites from "@/hooks/actions/useStoreFavorites";
 
 export default function PostInfo({ post }: { post: PostDetailsResponse }) {
   const optionsToMap = post.options.filter((option) => option.value);
+  const [isLove, setIsLove] = useState(post.is_love);
+
   const { storeFavorites, isPending: isPendingFav } = useStoreFavorites();
   const { token } = useAuthStore();
   const router = useRouter();
@@ -21,11 +24,18 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
   const encodedText = encodeURIComponent("DitchIt");
 
   const handleFav = (id: number) => {
-    if (token) {
-      storeFavorites(id);
-    } else {
+    if (!token) {
       router.push("/login");
+      return;
     }
+
+    setIsLove((prev) => !prev);
+
+    storeFavorites(id, {
+      onError: () => {
+        setIsLove((prev) => !prev);
+      },
+    });
   };
 
   return (
@@ -38,7 +48,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
         <button
           onClick={() => handleFav(post.id)}
           disabled={isPendingFav}
-          className={`min-w-[42px] h-[42px] flex items-center justify-center rounded-full border border-[var(--darkColor)] transition-all ${post.is_love ? "bg-[#ff0000]" : ""}`}
+          className={`min-w-[42px] h-[42px] flex items-center justify-center rounded-full border border-[var(--darkColor)] transition-all ${isLove ? "bg-[#ff0000]" : ""}`}
         >
           <Heart width={20} height={20} />
         </button>

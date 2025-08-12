@@ -31,6 +31,8 @@ type propsTypes = {
 export default function PostActions({ post, showActions }: propsTypes) {
   const [showBoost, setShowBoost] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [isLove, setIsLove] = useState(post.is_love);
+
   const { token } = useAuthStore();
   const router = useRouter();
 
@@ -40,11 +42,18 @@ export default function PostActions({ post, showActions }: propsTypes) {
     useSellActivePost(setShowConfirm);
 
   const handleFav = (id: number) => {
-    if (token) {
-      storeFavorites(id);
-    } else {
+    if (!token) {
       router.push("/login");
+      return;
     }
+
+    setIsLove((prev) => !prev);
+
+    storeFavorites(id, {
+      onError: () => {
+        setIsLove((prev) => !prev);
+      },
+    });
   };
 
   return (
@@ -53,11 +62,15 @@ export default function PostActions({ post, showActions }: propsTypes) {
         <button
           onClick={() => handleFav(post?.id)}
           disabled={isPendingFav}
-          className={`absolute top-4 left-4 z-20 w-8 h-8 flex items-center justify-center rounded-full text-[var(--whiteColor)] bg-black/30 backdrop-blur-sm transition-all hover:bg-red-600 ${post.is_love ? "bg-red-600" : ""}`}
+          className={`absolute top-4 left-4 z-20 w-8 h-8 flex items-center justify-center rounded-full text-[var(--whiteColor)] bg-black/30 backdrop-blur-sm transition-all hover:bg-red-600 ${isLove ? "bg-red-600" : ""}`}
         >
           <Heart width={18} height={18} />
         </button>
       )}
+
+      <span className="absolute top-4 right-4 z-20 flex py-1 px-3 items-center justify-center rounded-full text-[12px] text-white bg-[var(--mainColor)]">
+        {post.type}
+      </span>
 
       {showActions && (
         <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between">
