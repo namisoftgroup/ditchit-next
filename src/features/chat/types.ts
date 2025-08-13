@@ -48,3 +48,21 @@ export interface ChatFile {
   name: string;
   size: string;
 }
+
+export interface Message {
+  sender_id: number;
+  room_id: number;
+  msg_type: "files" | "text" | "location";
+  date: string;
+  time: string;
+  duration: string;
+  timestamp: number;
+  latitude: number;
+  longitude: number;
+  file: string;
+  ext: string | null;
+  type: string;
+  name: string | null;
+  size: string | null;
+  message: string | null;
+}

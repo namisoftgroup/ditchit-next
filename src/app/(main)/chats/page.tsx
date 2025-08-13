@@ -1,3 +1,5 @@
+import ChatPlaceHolder from "@/features/chat/ChatPlaceHolder";
+
 export default function page() {
-  return <div></div>;
+  return <ChatPlaceHolder />;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useLottie } from "lottie-react";
-import noData from "@/assets/lotties/nodata.json";
+import noData from "@/lotties/nodata.json";
 
 export default function NoDataPlaceHolder() {
   const defaultOptions = {
