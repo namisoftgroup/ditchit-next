@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProfileSideBar() {
+export default function Sidebar() {
   const { user, logout } = useAuthStore();
   const router = useRouter();
 
@@ -33,7 +33,7 @@ export default function ProfileSideBar() {
         <div className="flex flex-col gap-2">
           <h4 className="text-[18px] font-bold">{user?.name}</h4>
           <p className="text-[14px] text-[var(--grayColor)]">
-            {user?.phone_code || "+1" + user?.phone}
+            {user?.phone && <>{(user?.phone_code || "+1") + user?.phone}</>}
           </p>
         </div>
       </div>

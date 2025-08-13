@@ -12,5 +12,5 @@ export default function NoDataPlaceHolder() {
 
   const { View } = useLottie(defaultOptions);
 
-  return <div className="w-[400px]">{View}</div>;
+  return <div className="w-[350px]">{View}</div>;
 }

@@ -13,7 +13,7 @@ export function useCategoryVisibility(categories: Category[]) {
     if (!containerRef.current || categories.length === 0) return;
 
     const containerWidth = containerRef.current.offsetWidth;
-    const moreButtonWidth = 180;
+    const moreButtonWidth = 150;
     const padding = 32;
     const availableWidth = containerWidth - moreButtonWidth - padding;
 
@@ -28,7 +28,7 @@ export function useCategoryVisibility(categories: Category[]) {
 
     for (const cat of categories) {
       const key = String(cat.id);
-      const width = measurements.get(key) ?? 130;
+      const width = measurements.get(key) ?? 150;
 
       if (used + width <= availableWidth && hidden.length === 0) {
         visible.push(cat);

@@ -10,10 +10,12 @@ import Link from "next/link";
 import useStoreFavorites from "@/hooks/actions/useStoreFavorites";
 
 export default function PostInfo({ post }: { post: PostDetailsResponse }) {
-  const optionsToMap = post.options.filter((option) => option.value);
   const [isLove, setIsLove] = useState(post.is_love);
 
+  const optionsToMap = post.options.filter((option) => option.value);
+
   const { storeFavorites, isPending: isPendingFav } = useStoreFavorites();
+
   const { token } = useAuthStore();
   const router = useRouter();
 
@@ -48,7 +50,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
         <button
           onClick={() => handleFav(post.id)}
           disabled={isPendingFav}
-          className={`min-w-[42px] h-[42px] flex items-center justify-center rounded-full border border-[var(--darkColor)] transition-all ${isLove ? "bg-[#ff0000]" : ""}`}
+          className={`min-w-[42px] h-[42px] flex items-center justify-center rounded-full border border-[var(--darkColor)] transition-all ${isLove ? "bg-[#ff0000] !border-[#ff0000] text-white" : ""}`}
         >
           <Heart width={20} height={20} />
         </button>
@@ -209,6 +211,25 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {post.features.length > 0 && (
+        <div className="p-6 border border-[var(--lightBorderColor)] rounded-2xl bg-[var(--whiteColor)]">
+          <h4 className="font-bold text-lg mb-4 pb-4 border-b border-[var(--lightBorderColor)]">
+            Extra Features
+          </h4>
+
+          <div className="flex flex-wrap gap-2">
+            {post.features.map((feature) => (
+              <span
+                key={feature.id}
+                className="flex justify-center items-center gap-1 border border-[var(--darkColor)] px-4 py-2 rounded-full text-[14px]"
+              >
+                {feature.value}
+              </span>
+            ))}
+          </div>
         </div>
       )}
     </>
