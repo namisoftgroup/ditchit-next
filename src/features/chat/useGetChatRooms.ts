@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { getChatRoomsClient } from "./service";
 
 export default function useGetChatRooms() {
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, isLoading, hasNextPage, isFetchingNextPage , refetch, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ["chat-rooms"],
       queryFn: ({ pageParam = 1 }) => getChatRoomsClient(pageParam),
@@ -18,10 +18,11 @@ export default function useGetChatRooms() {
     });
 
   return {
-    fetchNextPage,
+    rooms: data?.pages.flatMap((page) => page.data ?? [])  ?? [],
     hasNextPage,
     isLoading,
     isFetchingNextPage,
-    rooms: data?.pages.flatMap((page) => page.data ?? [])  ?? [],
+    refetch,
+    fetchNextPage,
   };
 }

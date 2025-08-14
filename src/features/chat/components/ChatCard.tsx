@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Room } from "../types";
 import { useParams } from "next/navigation";
 import {
@@ -21,10 +22,15 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
+import ConfirmModal from "@/components/modals/ConfirmModal";
+import useDeleteRoom from "../useDeleteRoom";
 
 export default function ChatCard({ room }: { room: Room }) {
   const params = useParams();
   const active = params?.roomId === String(room.id);
+  
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const { deleteRoom, isPending } = useDeleteRoom(setShowConfirm);
 
   return (
     <Link
@@ -49,7 +55,7 @@ export default function ChatCard({ room }: { room: Room }) {
             {room.another_user.user.name}
           </h6>
 
-          <p className="text-[12px] text-[var(--mainColor)]">
+          <p className="text-[12px] text-[var(--mainColor)] line-clamp-1">
             {room.latest_message.message}
             {room.latest_message.type === "location" && (
               <div className="flex items-center gap-1">
@@ -94,7 +100,13 @@ export default function ChatCard({ room }: { room: Room }) {
 
           <DropdownMenuContent className="bg-[var(--whiteColor)] shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[99999] min-w-[100px] flex-col rounded border border-[var(--lightBorderColor)] max-h-[400px] overflow-y-auto">
             <DropdownMenuItem asChild>
-              <button className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm">
+              <button
+                className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowConfirm(true);
+                }}
+              >
                 <Trash width={16} height={16} className="text-[#FF0000]" />
                 Delete
               </button>
@@ -111,6 +123,15 @@ export default function ChatCard({ room }: { room: Room }) {
       >
         <span className="text-[12px]">{room.post.title}</span>
       </div>
+
+      <ConfirmModal
+        show={showConfirm}
+        modalTitle="Delete Chat"
+        text="Are you sure you want to delete this chat room?"
+        handleClose={() => setShowConfirm(false)}
+        isPending={isPending}
+        event={() => deleteRoom(room.id)}
+      />
     </Link>
   );
 }

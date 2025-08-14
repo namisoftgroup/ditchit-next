@@ -1,4 +1,5 @@
 import { getRoomResponse, getRoomsResponse } from "./types";
+import clientAxios from "@/lib/axios/clientAxios";
 import serverAxios from "@/lib/axios/serverAxios";
 
 export async function getChatRooms(page: number): Promise<getRoomsResponse> {
@@ -16,9 +17,11 @@ export async function getChatRooms(page: number): Promise<getRoomsResponse> {
   }
 }
 
-export async function getChatRoomsClient(page: number): Promise<getRoomsResponse> {
+export async function getChatRoomsClient(
+  page: number
+): Promise<getRoomsResponse> {
   try {
-    const res = await serverAxios.get("/chat", {
+    const res = await clientAxios.get("/chat", {
       params: {
         page,
       },
