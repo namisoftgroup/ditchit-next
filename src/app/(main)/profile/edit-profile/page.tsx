@@ -1,4 +1,4 @@
-import EditProfileForm from "@/features/profile/EditProfileForm";
+import EditProfileForm from "@/features/profile/components/EditProfileForm";
 
 export default function page() {
   return (

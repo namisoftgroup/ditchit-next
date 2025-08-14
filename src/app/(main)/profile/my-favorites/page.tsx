@@ -1,4 +1,4 @@
-import FavoritesList from "@/features/profile/FavoritesList";
+import FavoritesList from "@/features/profile/components/FavoritesList";
 
 export default function page() {
   return <FavoritesList />;

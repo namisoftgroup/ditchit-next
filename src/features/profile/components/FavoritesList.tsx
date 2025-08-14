@@ -1,18 +1,18 @@
 "use client";
 
-import useGetMyPosts from "@/hooks/queries/useGetMyPosts";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import PostCard from "@/components/cards/PostCard";
+import useGetMyFavorites from "@/features/profile/hooks/useGetFavorites";
 import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
 
-export default function PostsList() {
-  const { data, isLoading } = useGetMyPosts();
+export default function FavoritesList() {
+  const { data, isLoading } = useGetMyFavorites();
 
   return (
     <section className="flex flex-wrap -mx-2">
       {data?.data.map((post, index) => (
         <div key={index} className="w-full lg:w-4/12 p-2">
-          <PostCard post={post} showActions={true} />
+          <PostCard post={post} showActions={false} />
         </div>
       ))}
 
@@ -27,9 +27,9 @@ export default function PostsList() {
       )}
 
       {data?.data.length === 0 && (
-        <div className="w-full flex flex-col justify-center items-center">
+        <div className="w-full flex flex-col justify-center items-center" >
           <NoDataPlaceHolder />
-          You have no posts yet
+          You have no favorites yet
         </div>
       )}
     </section>

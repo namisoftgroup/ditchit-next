@@ -1,26 +1,30 @@
-import { Message, Room } from "./types";
+import { getRoomResponse, getRoomsResponse } from "./types";
 import serverAxios from "@/lib/axios/serverAxios";
 
-type getRoomsResponse = {
-  data: [];
-  message: string;
-  code: number;
-};
-
-type getRoomResponse = {
-  data: {
-    room: Room;
-    messages: Message[];
-  };
-  message: string;
-  code: number;
-};
-
-export async function getChatRooms(): Promise<getRoomsResponse> {
+export async function getChatRooms(page: number): Promise<getRoomsResponse> {
   try {
-    const res = await serverAxios.get("/chat");
+    const res = await serverAxios.get("/chat", {
+      params: {
+        page,
+      },
+    });
 
-    return res.data;
+    return res.data as getRoomsResponse;
+  } catch (error) {
+    console.error("Error fetching chat rooms:", error);
+    throw new Error("Failed to fetch chat rooms");
+  }
+}
+
+export async function getChatRoomsClient(page: number): Promise<getRoomsResponse> {
+  try {
+    const res = await serverAxios.get("/chat", {
+      params: {
+        page,
+      },
+    });
+
+    return res.data as getRoomsResponse;
   } catch (error) {
     console.error("Error fetching chat rooms:", error);
     throw new Error("Failed to fetch chat rooms");

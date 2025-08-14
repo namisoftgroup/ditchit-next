@@ -3,7 +3,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getClientFilteredPosts } from "@/features/listing/service";
 import { PostsFilterPayload } from "@/features/listing/types";
-import useUrlFilters from "@/hooks/utils/useFilterParams";
+import useUrlFilters from "@/hooks/useFilterParams";
 
 export default function useGetPostsList() {
   const { getParam } = useUrlFilters();

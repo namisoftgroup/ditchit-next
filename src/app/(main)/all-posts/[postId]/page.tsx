@@ -1,10 +1,10 @@
 import { getPostDetails } from "@/features/post-details/service";
 import { notFound } from "next/navigation";
 import PageBanner from "@/components/shared/PageBanner";
-import PostOwnerCard from "@/features/post-details/PostOwnerCard";
-import DitchNote from "@/features/post-details/DitchNote";
-import PostSlider from "@/features/post-details/PostSlider";
-import PostInfo from "@/features/post-details/PostInfo";
+import PostOwnerCard from "@/features/post-details/components/PostOwnerCard";
+import DitchNote from "@/features/post-details/components/DitchNote";
+import PostSlider from "@/features/post-details/components/PostSlider";
+import PostInfo from "@/features/post-details/components/PostInfo";
 
 interface PageProps {
   params: Promise<{

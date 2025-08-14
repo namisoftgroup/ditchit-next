@@ -1,7 +1,7 @@
 "use client";
 
 import { MessagesSquare, PhoneCall } from "lucide-react";
-import { useAuthStore } from "../auth/store";
+import { useAuthStore } from "@/features/auth/store";
 import { User } from "@/types/user";
 import Link from "next/link";
 

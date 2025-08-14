@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Category } from "./types";
+import { Category } from "../types";
 import CategorySlider from "./CategorySlider";
 import CategorySliderSkeleton from "./CategorySliderSkeleton";
-import useGetCategoriesWithPosts from "@/hooks/queries/useGetCategoriesWithPosts";
+import useGetCategoriesWithPosts from "@/features/home/useGetCategoriesWithPosts";
 
 export default function CategoriesList() {
   const { categories, fetchNextPage, hasNextPage, isFetchingNextPage } =

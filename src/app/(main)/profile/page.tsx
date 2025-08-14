@@ -1,4 +1,4 @@
-import PostsList from "@/features/profile/PostsList";
+import PostsList from "@/features/profile/components/PostsList";
 
 export default function page() {
   return <PostsList />;

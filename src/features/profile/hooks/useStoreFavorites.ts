@@ -2,7 +2,7 @@ import clientAxios from "@/lib/axios/clientAxios";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
-import useGetMyFavorites from "../queries/useGetFavorites";
+import useGetMyFavorites from "./useGetFavorites";
 
 export default function useStoreFavorites() {
   const { refetch } = useGetMyFavorites();

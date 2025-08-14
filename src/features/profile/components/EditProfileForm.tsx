@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { AvatarUpload } from "@/components/shared/AvatarUpload";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { editProfileFormValues, editProfileSchema } from "./schema";
 import { toast } from "sonner";
-import { useAuthStore } from "../auth/store";
+import { useAuthStore } from "@/features/auth/store";
+import { editProfileFormValues, editProfileSchema } from "../schema";
 import InputField from "@/components/shared/InputField";
-import ZipMapSearch from "../../components/shared/ZipMapSearch";
 import clientAxios from "@/lib/axios/clientAxios";
+import ZipMapSearch from "@/components/shared/ZipMapSearch";
 
 export default function EditProfileForm() {
   const { user, setUser } = useAuthStore();

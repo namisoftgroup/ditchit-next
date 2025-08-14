@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Category } from "@/types/category";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import Image from "next/image";
-import useUrlFilters from "@/hooks/utils/useFilterParams";
+import useUrlFilters from "@/hooks/useFilterParams";
 
 export default function Categoryfilter({
   categories,

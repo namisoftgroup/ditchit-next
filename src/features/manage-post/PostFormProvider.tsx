@@ -10,7 +10,7 @@ import { PostDetailsResponse } from "../post-details/types";
 import { useRouter } from "next/navigation";
 import { PostFormData, postFormDataSchema } from "./schema";
 import clientAxios from "@/lib/axios/clientAxios";
-import useGetMyPosts from "@/hooks/queries/useGetMyPosts";
+import useGetMyPosts from "@/features/profile/hooks/useGetMyPosts";
 
 const PostFormContext = createContext<{
   step: number;

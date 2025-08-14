@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { Clock, Heart, MapPin } from "lucide-react";
-import { useAuthStore } from "../auth/store";
+import { PostDetailsResponse } from "../types";
+import { useAuthStore } from "@/features/auth/store";
 import { useRouter } from "next/navigation";
-import { PostDetailsResponse } from "./types";
 import Image from "next/image";
 import Link from "next/link";
-import useStoreFavorites from "@/hooks/actions/useStoreFavorites";
+import useStoreFavorites from "@/features/profile/hooks/useStoreFavorites";
 
 export default function PostInfo({ post }: { post: PostDetailsResponse }) {
   const [isLove, setIsLove] = useState(post.is_love);

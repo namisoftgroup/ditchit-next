@@ -2,7 +2,7 @@ import { getQueryClient } from "@/utils/queryClient";
 import { getHomeCategories } from "@/features/home/service";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { CategoryResponse } from "@/features/home/types";
-import CategoriesList from "@/features/home/CategoriesList";
+import CategoriesList from "@/features/home/components/CategoriesList";
 
 export default async function Home() {
   const queryClient = getQueryClient();

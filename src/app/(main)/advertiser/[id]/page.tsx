@@ -3,8 +3,8 @@ import { getAdvertiserServerPosts } from "@/features/advertiser/service";
 import { advertiserResponse } from "@/features/advertiser/types";
 import { getQueryClient } from "@/utils/queryClient";
 import PageBanner from "@/components/shared/PageBanner";
-import AdvertiserPostsList from "@/features/advertiser/AdvertiserPostsList";
-import AdvertiserCard from "@/features/advertiser/AdvertiserCard";
+import AdvertiserPostsList from "@/features/advertiser/components/AdvertiserPostsList";
+import AdvertiserCard from "@/features/advertiser/components/AdvertiserCard";
 
 interface PageProps {
   params: Promise<{

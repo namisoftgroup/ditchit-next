@@ -1,8 +1,8 @@
 "use client";
 
 import { Heart, LogOut, Megaphone, UserPen } from "lucide-react";
-import { useAuthStore } from "../auth/store";
-import { logOutAction } from "../auth/actions";
+import { logOutAction } from "@/features/auth/actions";
+import { useAuthStore } from "@/features/auth/store";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";

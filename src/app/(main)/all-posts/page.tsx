@@ -4,8 +4,8 @@ import { getFilteredPosts } from "@/features/listing/service";
 import { listingResponse } from "@/features/listing/types";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import PageBanner from "@/components/shared/PageBanner";
-import FilterSideBar from "@/features/listing/FilterSideBar";
-import PostsList from "@/features/listing/PostsList";
+import FilterSideBar from "@/features/listing/components/FilterSideBar";
+import PostsList from "@/features/listing/components/PostsList";
 
 export default async function page({
   searchParams,

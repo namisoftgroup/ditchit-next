@@ -1,5 +1,5 @@
 import PageBanner from "@/components/shared/PageBanner";
-import Sidebar from "@/features/profile/Sidebar";
+import Sidebar from "@/features/profile/components/Sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

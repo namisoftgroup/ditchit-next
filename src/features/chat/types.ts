@@ -1,6 +1,21 @@
 import { Post } from "@/types/post";
 import { User } from "@/types/user";
 
+export type getRoomsResponse = {
+  data: Room[];
+  message: string;
+  code: number;
+};
+
+export type getRoomResponse = {
+  data: {
+    room: Room;
+    messages: Message[];
+  };
+  message: string;
+  code: number;
+};
+
 export interface Room {
   another_user: {
     user: User;

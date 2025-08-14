@@ -3,13 +3,13 @@
 import { useEffect, useRef } from "react";
 import PostCard from "@/components/cards/PostCard";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
-import useGetPostsList from "@/hooks/queries/useGetPostsList";
+import useGetAdvertiserPosts from "@/features/advertiser/useGetAdvertiserPosts";
 
-export default function PostsList() {
+export default function AdvertiserPostsList({ advertiserId }: { advertiserId: string }) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const { posts, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetPostsList();
+    useGetAdvertiserPosts(advertiserId);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { MapPin, PhoneCall, Share2 } from "lucide-react";
-import useGetAdvertiserPosts from "@/hooks/queries/useGetAdvertiserPosts";
+import useGetAdvertiserPosts from "@/features/advertiser/useGetAdvertiserPosts";
 import Image from "next/image";
 import Link from "next/link";
 

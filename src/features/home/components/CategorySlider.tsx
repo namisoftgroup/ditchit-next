@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Category } from "./types";
+import { Category } from "../types";
 import {
   Carousel,
   CarouselContent,
