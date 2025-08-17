@@ -81,3 +81,12 @@ export interface Message {
   size: string | null;
   message: string | null;
 }
+
+export interface MessagePayload {
+  type: "text" | "location" | "files",
+  message: string,
+  room_id: number
+  longitude?: number,
+  latitude?: number,
+  files?: File[]
+} 

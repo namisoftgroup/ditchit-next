@@ -27,8 +27,9 @@ import useDeleteRoom from "../useDeleteRoom";
 
 export default function ChatCard({ room }: { room: Room }) {
   const params = useParams();
-  const active = params?.roomId === String(room.id);
-  
+  const currentRoomId = params?.roomId;
+  const active = currentRoomId === String(room.id);
+
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const { deleteRoom, isPending } = useDeleteRoom(setShowConfirm);
 
@@ -125,12 +126,14 @@ export default function ChatCard({ room }: { room: Room }) {
       </div>
 
       <ConfirmModal
-        show={showConfirm}
         modalTitle="Delete Chat"
         text="Are you sure you want to delete this chat room?"
-        handleClose={() => setShowConfirm(false)}
+        show={showConfirm}
         isPending={isPending}
-        event={() => deleteRoom(room.id)}
+        event={() =>
+          deleteRoom({ roomId: room.id, currentRoomId: Number(currentRoomId) })
+        }
+        handleClose={() => setShowConfirm(false)}
       />
     </Link>
   );

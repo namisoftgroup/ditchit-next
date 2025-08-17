@@ -1,14 +1,10 @@
-import { getRoomResponse, getRoomsResponse } from "./types";
+import { getRoomResponse, getRoomsResponse, MessagePayload } from "./types";
 import clientAxios from "@/lib/axios/clientAxios";
 import serverAxios from "@/lib/axios/serverAxios";
 
-export async function getChatRooms(page: number): Promise<getRoomsResponse> {
+export async function getChatRooms(): Promise<getRoomsResponse> {
   try {
-    const res = await serverAxios.get("/chat", {
-      params: {
-        page,
-      },
-    });
+    const res = await serverAxios.get("/chat");
 
     return res.data as getRoomsResponse;
   } catch (error) {
@@ -43,4 +39,14 @@ export async function getRoom(id: string): Promise<getRoomResponse> {
     console.error("Error fetching chat room:", error);
     throw new Error("Failed to fetch chat room");
   }
+}
+
+export async function sendMessage(messagePayload: MessagePayload) {
+  const res = await clientAxios.post("/chat", messagePayload, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+  return res;
 }

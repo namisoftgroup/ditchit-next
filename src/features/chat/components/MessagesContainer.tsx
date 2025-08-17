@@ -1,48 +1,48 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useChatStore } from "../store";
 import { Message } from "../types";
 import Image from "next/image";
 
 export default function MessagesContainer({
-  messages,
+  initialMessages,
   otherUserId,
 }: {
-  messages: Message[];
+  initialMessages: Message[];
   otherUserId: number;
 }) {
-  const [messagesToMap, setMessagesToMap] = useState<Message[]>([]);
-  const chatContainerRef = useRef(null);
+  const { messages, setMessages } = useChatStore((state) => state);
+  const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
-      (chatContainerRef.current as HTMLDivElement).scrollTop = (
-        chatContainerRef.current as HTMLDivElement
-      ).scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   };
 
   useEffect(() => {
-    setMessagesToMap([...messages].reverse());
-  }, [messages]);
+    setMessages(initialMessages);
+  }, [initialMessages, setMessages]);
 
   useEffect(() => {
     scrollToBottom();
-  }, [messagesToMap]);
+  }, [messages]);
 
   return (
     <div
       className="h-full p-4 flex flex-col gap-3 max-h-[420px] overflow-y-auto"
       ref={chatContainerRef}
     >
-      {messagesToMap.map((message: Message) => (
+      {messages?.map((message: Message) => (
         <div key={message.timestamp} className="flex flex-col gap-1">
           <div
-            className={`flex ${message.sender_id === otherUserId ? "justify-end" : "justify-start"}`}
+            className={`flex ${message.sender_id !== otherUserId ? "justify-end" : "justify-start"}`}
           >
             <div
               className={`max-w-[80%] rounded-lg p-3 text-[14px] ${
-                message.sender_id === otherUserId
+                message.sender_id !== otherUserId
                   ? "bg-[var(--mainColor)] text-white"
                   : "bg-white"
               }`}
@@ -88,7 +88,7 @@ export default function MessagesContainer({
           </div>
 
           <span
-            className={`text-[12px] text-[var(--grayColor)] px-1 flex ${message.sender_id === otherUserId ? "justify-end" : "justify-start"}`}
+            className={`text-[12px] text-[var(--grayColor)] px-1 flex ${message.sender_id !== otherUserId ? "justify-end" : "justify-start"}`}
           >
             {message.time}
           </span>

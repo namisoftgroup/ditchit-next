@@ -1,7 +1,4 @@
 import { getChatRooms } from "@/features/chat/service";
-import { getQueryClient } from "@/utils/queryClient";
-import { getRoomsResponse } from "@/features/chat/types";
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import ChatsSidebar from "@/features/chat/components/ChatsSidebar";
 import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
 
@@ -10,32 +7,14 @@ export default async function layout({
 }: {
   children: React.ReactNode;
 }) {
-  const queryClient = getQueryClient();
-  const rooms = await getChatRooms(1);
-
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: ["chat-rooms"],
-    queryFn: ({ pageParam = 1 }) => getChatRooms(pageParam),
-    initialPageParam: 1,
-    getNextPageParam: (
-      lastPage: getRoomsResponse,
-      _: unknown,
-      lastPageParam: number
-    ) => {
-      const posts = lastPage?.data ?? [];
-      if (posts.length === 0) return undefined;
-      return lastPageParam + 1;
-    },
-  });
+  const { data: rooms } = await getChatRooms();
 
   return (
     <section className="container py-6 flex gap-8">
-      {rooms.data.length > 0 ? (
+      {rooms.length > 0 ? (
         <div className="flex flex-wrap -mx-2 justify-center w-full">
           <div className="p-2 w-full md:w-5/12 lg:w-4/12 xl:w-3/12">
-            <HydrationBoundary state={dehydrate(queryClient)}>
-              <ChatsSidebar />
-            </HydrationBoundary>
+            <ChatsSidebar rooms={rooms} />
           </div>
 
           <div className="p-2 w-full md:w-7/12 lg:w-8/12 xl:w-9/12">
