@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { getProfile } from "@/features/auth/actions";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { getChatRooms } from "@/features/chat/service";
 import GoogleOneTapAuth from "@/features/auth/components/GoogleOneTapAuth";
+import NextTopLoader from "nextjs-toploader";
+
+import WebSocketProvider from "@/providers/WebSocketProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import AuthProvider from "@/providers/AuthProvider";
-import NextTopLoader from "nextjs-toploader";
+
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 
@@ -61,6 +65,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const data = await getProfile();
+  const { data: rooms } = await getChatRooms();
 
   return (
     <html lang="en">
@@ -70,18 +75,20 @@ export default async function RootLayout({
         <GoogleOAuthProvider clientId={process.env.NEXT_GOOGLE_CLIENT_ID!}>
           <AuthProvider user={data?.user ?? null} token={data?.token ?? null}>
             <ReactQueryProvider>
-              <Toaster
-                expand={false}
-                richColors
-                position="bottom-right"
-                theme="light"
-              />
+              <WebSocketProvider rooms={rooms.map((r) => ({ id: r.id }))}>
+                <Toaster
+                  expand={false}
+                  richColors
+                  position="bottom-right"
+                  theme="light"
+                />
 
-              {!data.token && <GoogleOneTapAuth />}
+                {!data.token && <GoogleOneTapAuth />}
 
-              <Header />
-              <main className="min-h-[calc(100vh-316px)]">{children}</main>
-              <Footer />
+                <Header />
+                <main className="min-h-[calc(100vh-316px)]">{children}</main>
+                <Footer />
+              </WebSocketProvider>
             </ReactQueryProvider>
           </AuthProvider>
         </GoogleOAuthProvider>

@@ -1,18 +1,34 @@
 import { create } from "zustand";
-import { Message } from "./types";
+import { Message, Room } from "./types";
 
 interface ChatStore {
-  messages: Message[];
-  addMessage: (message: Message) => void;
-  setMessages: (messages: Message[]) => void;
+  rooms: Room[];
+  messagesByRoom: Record<number, Message[]>;
+
+  setRooms: (rooms: Room[]) => void;
+  setMessages: (roomId: number, messages: Message[]) => void;
+  addMessage: (roomId: number, message: Message) => void;
 }
 
 export const useChatStore = create<ChatStore>((set) => ({
-  messages: [],
+  rooms: [],
+  messagesByRoom: {},
 
-  setMessages: (messages: Message[]) =>
-    set({ messages: [...messages].reverse() }),
+  setRooms: (rooms) => set({ rooms }),
 
-  addMessage: (message: Message) =>
-    set((state) => ({ messages: [...state.messages, message] })),
+  setMessages: (roomId, messages) =>
+    set((state) => ({
+      messagesByRoom: {
+        ...state.messagesByRoom,
+        [roomId]: [...messages].reverse(),
+      },
+    })),
+
+  addMessage: (roomId, message) =>
+    set((state) => ({
+      messagesByRoom: {
+        ...state.messagesByRoom,
+        [roomId]: [...(state.messagesByRoom[roomId] || []), message],
+      },
+    })),
 }));

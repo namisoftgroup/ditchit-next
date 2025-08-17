@@ -44,3 +44,16 @@ export const POST_TABS = [
   "More Details",
   "Price & Shipping",
 ];
+
+export const SOCKET_EVENTS = {
+  JOIN_USER: "ditch_it_user_join",
+
+  JOIN_ROOMS: "ditch_it_join_rooms",
+  LEAVE_ROOMS: "ditch_it_leaves_rooms",
+
+  SEND_FIRST_MESSAGE: "ditch_it_one_user_send_data",
+  RECEIVE_FIRST_MESSAGE: "ditch_it_one_user_receive_data",
+
+  SEND_MESSAGE: "ditch_it_one_room_send_data",
+  RECEIVE_MESSAGE: "ditch_it_one_room_receive_data",
+};

@@ -20,6 +20,7 @@ export default async function page({ params }: PageProps) {
       <RoomHeader room={room} />
       <MessagesContainer
         initialMessages={messages}
+        roomId={room.id}
         otherUserId={room.another_user_id}
       />
       <ChatForm roomId={room.id} />

@@ -25,7 +25,7 @@ import clsx from "clsx";
 import ConfirmModal from "@/components/modals/ConfirmModal";
 import useDeleteRoom from "../useDeleteRoom";
 
-export default function ChatCard({ room }: { room: Room }) {
+export default function RoomLink({ room }: { room: Room }) {
   const params = useParams();
   const currentRoomId = params?.roomId;
   const active = currentRoomId === String(room.id);
