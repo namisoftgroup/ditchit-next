@@ -4,6 +4,7 @@ import { API_URL } from "@/utils/constants";
 import { AxiosError } from "axios";
 import { cookies } from "next/headers";
 import { User } from "@/types/user";
+import { revalidatePath } from "next/cache";
 import serverAxios from "@/lib/axios/serverAxios";
 
 /* ~~~~~~~~~~~~ login and register actions ~~~~~~~~~~~~ */
@@ -77,7 +78,7 @@ export async function logOutAction() {
   if (res.data.code === 200) {
     (await cookies()).delete("token");
     delete serverAxios.defaults.headers.common["Authorization"];
-
+    revalidatePath("/", "layout");
     return res.data;
   }
 }

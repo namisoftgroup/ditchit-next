@@ -52,8 +52,14 @@ export default function RoomLink({ room }: { room: Room }) {
         />
 
         <div className="flex flex-col gap-[2px] flex-1 items-start p-2">
-          <h6 className="font-bold capitalize text-[12px]">
+          <h6 className="font-bold capitalize text-[12px] flex justify-between">
             {room.another_user.user.name}
+
+            {room.not_read && (
+              <span className="w-6 h-6 rounded-full bg-[var(--mainColor)] flex items-center justify-center text-white">
+                {room.not_read}
+              </span>
+            )}
           </h6>
 
           <p className="text-[12px] text-[var(--mainColor)] line-clamp-1">

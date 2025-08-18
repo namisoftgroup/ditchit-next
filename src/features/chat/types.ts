@@ -83,10 +83,17 @@ export interface Message {
 }
 
 export interface MessagePayload {
-  type: "text" | "location" | "files",
-  message: string,
-  room_id: number
-  longitude?: number,
-  latitude?: number,
-  files?: File[]
-} 
+  type: "text" | "location" | "files";
+  message: string;
+  room_id: number;
+  longitude?: number;
+  latitude?: number;
+  files?: File[];
+}
+
+export interface SocketMessage {
+  user_id: number;
+  room: Room;
+  messages: Message[];
+  html: string;
+}
