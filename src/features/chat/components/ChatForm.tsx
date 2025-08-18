@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { MessagePayload } from "../types";
 
-import { Message, MessagePayload } from "../types";
-import { useAuthStore } from "@/features/auth/store";
 import {
   CircleQuestionMark,
   HandCoins,
@@ -15,39 +14,26 @@ import {
 import useSendMessage from "../useSendMessage";
 
 export default function ChatForm({ roomId }: { roomId: number }) {
-  const { user } = useAuthStore();
-  const { sendMessageMutation, isPending } = useSendMessage();
-
-  const [message, setMessage] = useState<Message>({
-    sender_id: user?.id || 0,
-    room_id: roomId,
-    msg_type: "text",
-    date: "",
-    time: "",
-    duration: "",
-    timestamp: 0,
-    latitude: 0,
-    longitude: 0,
-    file: "",
-    ext: null,
-    type: "",
-    name: "",
-    size: "",
+  const [message, setMessage] = useState<MessagePayload>({
+    type: "text",
     message: "",
+    room_id: roomId,
+    latitude: undefined,
+    longitude: undefined,
+    files: undefined,
   });
+
+  const { sendMessageMutation, isPending } = useSendMessage(setMessage);
 
   const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!message.msg_type || !message.room_id) return;
-
     const formData: MessagePayload = {
-      type: message.msg_type,
+      type: message.type,
       room_id: message.room_id,
-      message: message.message || "",
     };
 
-    switch (message.msg_type) {
+    switch (message.type) {
       case "text":
         if (!message.message?.trim()) return;
         formData.message = message.message;
@@ -60,25 +46,15 @@ export default function ChatForm({ roomId }: { roomId: number }) {
         break;
 
       case "files":
-        if (!message.file) return;
-        formData.files = [message.file as unknown as File];
+        if (!message.files) return;
+        formData.files = message.files;
         break;
 
       default:
         return;
     }
 
-    sendMessageMutation(formData, {
-      onSuccess() {
-        setMessage((prev) => ({
-          ...prev,
-          message: "",
-          file: "",
-          latitude: 0,
-          longitude: 0,
-        }));
-      },
-    });
+    sendMessageMutation(formData);
   };
 
   return (

@@ -14,7 +14,7 @@ export default async function layout({
       {rooms.length > 0 ? (
         <div className="flex flex-wrap -mx-2 justify-center w-full">
           <div className="p-2 w-full md:w-5/12 lg:w-4/12 xl:w-3/12">
-            <ChatsSidebar rooms={rooms} />
+            <ChatsSidebar />
           </div>
 
           <div className="p-2 w-full md:w-7/12 lg:w-8/12 xl:w-9/12">

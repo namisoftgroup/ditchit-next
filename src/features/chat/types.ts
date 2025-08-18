@@ -84,7 +84,7 @@ export interface Message {
 
 export interface MessagePayload {
   type: "text" | "location" | "files";
-  message: string;
+  message?: string;
   room_id: number;
   longitude?: number;
   latitude?: number;

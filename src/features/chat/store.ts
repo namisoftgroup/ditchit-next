@@ -6,6 +6,9 @@ interface ChatStore {
   messagesByRoom: Record<number, Message[]>;
 
   setRooms: (rooms: Room[]) => void;
+  addRoom: (room: Room) => void;
+  updateRoom: (room: Room) => void;
+
   setMessages: (roomId: number, messages: Message[]) => void;
   addMessage: (roomId: number, message: Message) => void;
 }
@@ -15,6 +18,14 @@ export const useChatStore = create<ChatStore>((set) => ({
   messagesByRoom: {},
 
   setRooms: (rooms) => set({ rooms }),
+  addRoom: (room) => set((state) => ({ rooms: [...state.rooms, room] })),
+
+  updateRoom: (updatedRoom: Room) =>
+    set((state) => ({
+      rooms: state.rooms.map((room) =>
+        room.id === updatedRoom.id ? { ...room, ...updatedRoom } : room
+      ),
+    })),
 
   setMessages: (roomId, messages) =>
     set((state) => ({
@@ -28,7 +39,12 @@ export const useChatStore = create<ChatStore>((set) => ({
     set((state) => ({
       messagesByRoom: {
         ...state.messagesByRoom,
-        [roomId]: [...(state.messagesByRoom[roomId] || []), message],
+        [roomId]: [
+          ...(state.messagesByRoom[roomId] || []).filter(
+            (m) => m.timestamp !== message.timestamp
+          ),
+          message,
+        ],
       },
     })),
 }));

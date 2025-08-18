@@ -75,12 +75,12 @@ export default async function RootLayout({
         <GoogleOAuthProvider clientId={process.env.NEXT_GOOGLE_CLIENT_ID!}>
           <AuthProvider user={data?.user ?? null} token={data?.token ?? null}>
             <ReactQueryProvider>
-              <WebSocketProvider rooms={rooms.map((r) => ({ id: r.id }))}>
+              <WebSocketProvider rooms={rooms}>
                 <Toaster
-                  expand={false}
+                  expand={false} 
                   richColors
-                  position="bottom-right"
                   theme="light"
+                  position="bottom-right"
                 />
 
                 {!data.token && <GoogleOneTapAuth />}

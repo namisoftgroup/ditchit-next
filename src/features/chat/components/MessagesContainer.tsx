@@ -3,8 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useChatStore } from "../store";
 import { Message } from "../types";
-import { getSocket, initSocket } from "@/lib/socket/socket";
-import { SOCKET_EVENTS } from "@/utils/constants";
+import { useQueryClient } from "@tanstack/react-query";
 import MessageUI from "./MessageUI";
 
 export default function MessagesContainer({
@@ -16,7 +15,10 @@ export default function MessagesContainer({
   otherUserId: number;
   roomId: number;
 }) {
-  const { messagesByRoom, setMessages, addMessage } = useChatStore();
+  const { messagesByRoom, setMessages, rooms, updateRoom } = useChatStore();
+
+  const queryClient = useQueryClient();
+
   const messages = useMemo(
     () => messagesByRoom[roomId] || [],
     [messagesByRoom, roomId]
@@ -26,31 +28,18 @@ export default function MessagesContainer({
 
   useEffect(() => {
     setMessages(roomId, initialMessages);
+  }, [roomId, setMessages, initialMessages]);
 
-    initSocket();
-    const socket = getSocket();
+  useEffect(() => {
+    const room = rooms.find((r) => r.id === roomId);
+    if (!room) return;
 
-    try {
-      console.log("[ROOM] 🚪 Joining room:", roomId);
-      socket.emit(SOCKET_EVENTS.JOIN_ROOMS, JSON.stringify([roomId]));
+    if (room.count_not_read > 0) {
+      queryClient.invalidateQueries({ queryKey: ["unread-count"] });
 
-      const handleNewMessage = (message: Message) => {
-        if (message.room_id === roomId) {
-          addMessage(roomId, message);
-        }
-      };
-
-      socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, handleNewMessage);
-
-      return () => {
-        console.log("[ROOM] 🚪 Leaving room:", roomId);
-        socket.emit(SOCKET_EVENTS.LEAVE_ROOMS, JSON.stringify([roomId]));
-        socket.off(SOCKET_EVENTS.RECEIVE_MESSAGE, handleNewMessage);
-      };
-    } catch (error) {
-      console.error("Socket error:", error);
+      updateRoom({ ...room, count_not_read: 0 });
     }
-  }, [roomId, setMessages, addMessage, initialMessages]);
+  }, [rooms, roomId, updateRoom, queryClient]);
 
   useEffect(() => {
     if (chatContainerRef.current) {
