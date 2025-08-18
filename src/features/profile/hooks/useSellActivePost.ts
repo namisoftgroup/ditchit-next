@@ -1,11 +1,12 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 import clientAxios from "@/lib/axios/clientAxios";
-import useGetMyPosts from "./useGetMyPosts";
 
-export default function useSellActivePost(setShowConfirm: (show: boolean) => void) {
-  const { refetch } = useGetMyPosts();
+export default function useSellActivePost(
+  setShowConfirm: (show: boolean) => void
+) {
+  const queryClient = useQueryClient();
 
   const { mutate: sellActivePost, isPending } = useMutation({
     mutationFn: async (post_id: number) => {
@@ -16,7 +17,9 @@ export default function useSellActivePost(setShowConfirm: (show: boolean) => voi
     onSuccess: () => {
       toast.success("Post sold successfully");
       setShowConfirm(false);
-      refetch();
+      queryClient.invalidateQueries({
+        queryKey: ["my-posts"],
+      });
     },
 
     onError: (error) => {

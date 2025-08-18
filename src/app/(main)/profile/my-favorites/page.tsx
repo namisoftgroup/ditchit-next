@@ -1,5 +1,5 @@
 import FavoritesList from "@/features/profile/components/FavoritesList";
 
-export default function page() {
+export default async function page() {
   return <FavoritesList />;
 }

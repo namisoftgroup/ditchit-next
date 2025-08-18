@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { getProfile } from "@/features/auth/actions";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { getChatRooms } from "@/features/chat/service";
+import { getAllRoomsForSocket } from "@/features/chat/actions";
 import GoogleOneTapAuth from "@/features/auth/components/GoogleOneTapAuth";
 import NextTopLoader from "nextjs-toploader";
 
@@ -65,7 +65,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const data = await getProfile();
-  const { data: rooms } = await getChatRooms();
+  const { data: rooms } = await getAllRoomsForSocket();
 
   return (
     <html lang="en">

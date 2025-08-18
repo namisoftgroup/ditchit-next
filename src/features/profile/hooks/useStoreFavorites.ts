@@ -1,11 +1,10 @@
 import clientAxios from "@/lib/axios/clientAxios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
-import useGetMyFavorites from "./useGetFavorites";
 
 export default function useStoreFavorites() {
-  const { refetch } = useGetMyFavorites();
+  const queryClient = useQueryClient();
 
   const { mutate: storeFavorites, isPending } = useMutation({
     mutationFn: async (post_id: number) => {
@@ -19,7 +18,7 @@ export default function useStoreFavorites() {
     },
 
     onSuccess: () => {
-      refetch();
+     queryClient.invalidateQueries({ queryKey: ["my-favorites"] });
     },
 
     onError: (error) => {

@@ -68,9 +68,11 @@ export default function PostActions({ post, showActions }: propsTypes) {
         </button>
       )}
 
-      <span className="absolute top-4 right-4 z-20 flex py-1 px-3 items-center justify-center rounded-full text-[12px] text-white bg-[var(--mainColor)]">
-        {post.type}
-      </span>
+      {!showActions && (
+        <span className="absolute top-4 right-4 z-20 flex py-1 px-3 items-center justify-center rounded-full text-[12px] text-white bg-[var(--mainColor)]">
+          {post.type}
+        </span>
+      )}
 
       {showActions && (
         <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between">

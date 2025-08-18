@@ -10,7 +10,6 @@ import { PostDetailsResponse } from "../post-details/types";
 import { useRouter } from "next/navigation";
 import { PostFormData, postFormDataSchema } from "./schema";
 import clientAxios from "@/lib/axios/clientAxios";
-import useGetMyPosts from "@/features/profile/hooks/useGetMyPosts";
 
 const PostFormContext = createContext<{
   step: number;
@@ -36,7 +35,6 @@ export default function PostFormProvider({
   children: ReactNode;
 }) {
   const [step, setStep] = useState(0);
-  const { refetch } = useGetMyPosts();
   const router = useRouter();
 
   const methods = useForm<PostFormData>({
@@ -122,7 +120,6 @@ export default function PostFormProvider({
           window.location.href = data.data.data.link;
         } else {
           toast.success("Post saved successfully");
-          refetch();
           router.push("/profile");
         }
       } else {

@@ -1,11 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 import clientAxios from "@/lib/axios/clientAxios";
-import useGetMyPosts from "./useGetMyPosts";
 
 export default function useDeletePost(setShowConfirm: (show: boolean) => void) {
-  const { refetch } = useGetMyPosts();
+  const queryClient = useQueryClient();
 
   const { mutate: deletePost, isPending } = useMutation({
     mutationFn: async (post_id: number) => {
@@ -15,7 +14,7 @@ export default function useDeletePost(setShowConfirm: (show: boolean) => void) {
 
     onSuccess: () => {
       toast.success("Post deleted successfully");
-      refetch();
+     queryClient.invalidateQueries({ queryKey: ["my-posts"] });
       setShowConfirm(false);
     },
 
