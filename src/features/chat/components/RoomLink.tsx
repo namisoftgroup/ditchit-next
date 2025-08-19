@@ -46,9 +46,10 @@ export default function RoomLink({ room }: { room: Room }) {
       <div className="flex gap-2 w-full">
         <Image
           src={room.another_user.user.image}
+          alt={room.another_user.user.name}
+          className="w-[64px] h-[64px] rounded-full border-[2px] border-white object-cover"
           width={64}
           height={64}
-          alt={room.another_user.user.name}
         />
 
         <div className="flex flex-col gap-[2px] flex-1 items-start p-2">

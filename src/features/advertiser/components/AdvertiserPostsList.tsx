@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import PostCard from "@/components/cards/PostCard";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import useGetAdvertiserPosts from "@/features/advertiser/useGetAdvertiserPosts";
+import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
 
 export default function AdvertiserPostsList({ advertiserId }: { advertiserId: string }) {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -49,6 +50,13 @@ export default function AdvertiserPostsList({ advertiserId }: { advertiserId: st
             </div>
           ))}
         </>
+      )}
+
+      {posts.length === 0 && (
+        <div className="w-full flex flex-col justify-center items-center" >
+          <NoDataPlaceHolder />
+          User has no posts to display
+        </div>
       )}
     </div>
   );

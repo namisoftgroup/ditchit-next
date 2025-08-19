@@ -6,18 +6,18 @@ export default function RoomHeader({ room }: { room: Room }) {
   return (
     <>
       <div className="rounded-t-[14px] flex p-[14px] items-center justify-between gap-4 bg-[#fafafa]">
-        <div className="flex items-center gap-2">
+        <Link href={`/advertiser/${room.another_user_id}`} className="flex items-center gap-2">
           <Image
             src={room.another_user.user.image}
             alt={room.another_user.user.name}
             width={40}
             height={40}
-            className="rounded-full"
+            className="w-[40px] h-[40px] rounded-full object-cover"
           />
           <h6 className="text-[14px] font-bold">
             {room.another_user.user.name}
           </h6>
-        </div>
+        </Link>
       </div>
 
       <Link

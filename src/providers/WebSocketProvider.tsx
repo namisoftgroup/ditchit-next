@@ -58,12 +58,13 @@ export default function WebSocketProvider({
 
       addMessage(data.room.id, data.messages[0]);
       toast(
-        <Link href={`/chats/${data.room.id}`} className="flex gap-2 p-4">
+        <Link href={`/chats/${data.room.id}`} className="flex gap-4 p-1 w-full">
           <Image
             src={data.room.another_user.user.image}
+            alt={data.room.another_user.user.name}
+            className="w-[42px] h-42px] rounded-full"
             width={42}
             height={42}
-            alt={data.room.another_user.user.name}
           />
           <div>
             <h6>{data.room.another_user.user.name}</h6>
@@ -83,12 +84,13 @@ export default function WebSocketProvider({
 
       if (currentRoomId !== String(data.room.id)) {
         toast(
-          <Link href={`/chats/${data.room.id}`} className="flex gap-2 p-4">
+          <Link href={`/chats/${data.room.id}`} className="flex gap-3 p-1 w-full">
             <Image
               src={data.room.another_user.user.image}
+              alt={data.room.another_user.user.name}
+              className="w-[42px] h-42px] rounded-full"
               width={42}
               height={42}
-              alt={data.room.another_user.user.name}
             />
             <div>
               <h6>{data.room.another_user.user.name}</h6>

@@ -34,7 +34,7 @@ export default function AdvertiserCard({ id }: { id: string }) {
             alt="user"
             width={120}
             height={120}
-            className="rounded-full max-w-[120px] max-h-[120px] object-cover"
+            className="rounded-full w-[120px] h-[120px] object-cover"
           />
 
           <span
