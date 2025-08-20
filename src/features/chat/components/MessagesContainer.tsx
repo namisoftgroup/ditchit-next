@@ -37,7 +37,7 @@ export default function MessagesContainer({
     if (room.count_not_read > 0) {
       queryClient.invalidateQueries({ queryKey: ["unread-count"] });
 
-      updateRoom({ ...room, count_not_read: 0 });
+      updateRoom(room.id ,{ ...room, count_not_read: 0 });
     }
   }, [rooms, roomId, updateRoom, queryClient]);
 

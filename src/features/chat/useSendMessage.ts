@@ -35,7 +35,7 @@ export default function useSendMessage(
         .join("");
 
       const socketMessage: SocketMessage = {
-        user_id: data.user_id,
+        user_id: data.room.post.user_id,
         room: data.room,
         messages: data.messages,
         html,

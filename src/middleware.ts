@@ -21,7 +21,11 @@ export function middleware(request: NextRequest) {
     "/reset-password/verify-otp",
   ];
 
-  const isProtectedRoute = PROTECTED_ROUTES.includes(pathname);
+  let isProtectedRoute = PROTECTED_ROUTES.includes(pathname);
+
+  if (pathname.startsWith("/chats/")) {
+    isProtectedRoute = true;
+  }
 
   const isAuthRoute = AUTH_ROUTES.includes(pathname);
 

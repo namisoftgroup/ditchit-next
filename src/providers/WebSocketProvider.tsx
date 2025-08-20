@@ -21,7 +21,7 @@ export default function WebSocketProvider({
   rooms = [],
   children,
 }: ProviderProps) {
-  const { setRooms, addRoom, updateRoom, addMessage } = useChatStore();
+  const { setRooms, addRoom, addMessage } = useChatStore();
   const { user } = useAuthStore();
   const params = useParams();
   const currentRoomId = params?.roomId;
@@ -79,16 +79,36 @@ export default function WebSocketProvider({
       console.log("[SOCKET] 📥 New message:", data);
       queryClient.invalidateQueries({ queryKey: ["unread-count"] });
 
-      updateRoom(data.room);
+      useChatStore.setState((state) => {
+        const targetRoom = state.rooms.find((r) => r.id === data.room.id);
+        if (targetRoom) {
+          return {
+            rooms: state.rooms.map((r) =>
+              r.id === data.room.id
+                ? {
+                    ...targetRoom,
+                    latest_message: data.room.latest_message,
+                    count_not_read: data.room.count_not_read,
+                  }
+                : r
+            ),
+          };
+        }
+        return {};
+      });
+
       addMessage(data.room.id, data.messages[0]);
 
       if (currentRoomId !== String(data.room.id)) {
         toast(
-          <Link href={`/chats/${data.room.id}`} className="flex gap-3 p-1 w-full">
+          <Link
+            href={`/chats/${data.room.id}`}
+            className="flex gap-3 p-1 w-full"
+          >
             <Image
               src={data.room.another_user.user.image}
               alt={data.room.another_user.user.name}
-              className="w-[42px] h-42px] rounded-full"
+              className="w-[42px] h-[42px] rounded-full"
               width={42}
               height={42}
             />
@@ -114,16 +134,7 @@ export default function WebSocketProvider({
       );
       socket.disconnect();
     };
-  }, [
-    user,
-    rooms,
-    setRooms,
-    addMessage,
-    addRoom,
-    queryClient,
-    updateRoom,
-    currentRoomId,
-  ]);
+  }, [user, rooms, setRooms, addMessage, addRoom, queryClient, currentRoomId]);
 
   return <>{children}</>;
 }
