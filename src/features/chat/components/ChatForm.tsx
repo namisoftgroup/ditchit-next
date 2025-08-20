@@ -7,19 +7,19 @@ import {
   CircleQuestionMark,
   HandCoins,
   MapPinPlus,
-  Mic,
   Paperclip,
   Send,
 } from "lucide-react";
 import useSendMessage from "../useSendMessage";
+import Recorder from "./Recorder";
+import ChooseLocationModal from "@/components/modals/ChooseLocationModal";
 
 export default function ChatForm({ roomId }: { roomId: number }) {
+  const [show, setShow] = useState(false);
   const [message, setMessage] = useState<MessagePayload>({
     type: "text",
     message: "",
     room_id: roomId,
-    latitude: undefined,
-    longitude: undefined,
     files: undefined,
   });
 
@@ -37,12 +37,6 @@ export default function ChatForm({ roomId }: { roomId: number }) {
       case "text":
         if (!message.message?.trim()) return;
         formData.message = message.message;
-        break;
-
-      case "location":
-        if (!message.latitude || !message.longitude) return;
-        formData.latitude = message.latitude;
-        formData.longitude = message.longitude;
         break;
 
       case "files":
@@ -93,17 +87,30 @@ export default function ChatForm({ roomId }: { roomId: number }) {
           />
 
           <label className="p-1 cursor-pointer" htmlFor="file">
-            <input type="file" name="file" id="file" className="hidden" />
+            <input
+              type="file"
+              name="file"
+              id="file"
+              className="hidden"
+              accept="image/*,video/*"
+              onChange={(e) => {
+                e.preventDefault();
+                const formData: MessagePayload = {
+                  type: "files",
+                  files: e.target.files ? [e.target.files[0]] : undefined,
+                  room_id: message.room_id,
+                };
+                if (formData.files) sendMessageMutation(formData);
+              }}
+            />
             <Paperclip />
           </label>
 
-          <span className="p-1 cursor-pointer">
+          <span className="p-1 cursor-pointer" onClick={() => setShow(true)}>
             <MapPinPlus />
           </span>
 
-          <span className="p-1 cursor-pointer">
-            <Mic />
-          </span>
+          <Recorder setMessage={setMessage} roomId={roomId} />
         </div>
 
         <button
@@ -118,6 +125,13 @@ export default function ChatForm({ roomId }: { roomId: number }) {
           )}
         </button>
       </form>
+
+      <ChooseLocationModal
+        show={show}
+        roomId={roomId}
+        setMessage={setMessage}
+        handleClose={() => setShow(false)}
+      />
     </div>
   );
 }
