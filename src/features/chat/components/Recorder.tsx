@@ -8,9 +8,11 @@ import { MessagePayload } from "../types";
 export default function Recorder({
   setMessage,
   roomId,
+  setSound
 }: {
   setMessage: (message: MessagePayload) => void;
   roomId: number;
+  setSound: (sound: File) => void;
 }) {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
@@ -40,6 +42,7 @@ export default function Recorder({
       mediaRecorder.onstop = async () => {
         const blob = new Blob(chunksRef.current, { type: "audio/webm" });
         const wavBlob = await convertToWav(blob);
+        setSound(new File([wavBlob], `recording-${Date.now()}.wav`, { type: "audio/wav" }));
 
         const file = new File([wavBlob], `recording-${Date.now()}.wav`, {
           type: "audio/wav",

@@ -1,4 +1,5 @@
 import { getRoom } from "@/features/chat/service";
+import { getQuestions } from "@/services/getChatQuestions";
 import RoomHeader from "@/features/chat/components/RoomHeader";
 import MessagesContainer from "@/features/chat/components/MessagesContainer";
 import ChatForm from "@/features/chat/components/ChatForm";
@@ -11,6 +12,8 @@ interface PageProps {
 
 export default async function page({ params }: PageProps) {
   const id = (await params).roomId;
+  const {data: questions} = await getQuestions();
+
   const {
     data: { messages, room },
   } = await getRoom(id);
@@ -23,7 +26,7 @@ export default async function page({ params }: PageProps) {
         roomId={room.id}
         otherUserId={room.another_user_id}
       />
-      <ChatForm roomId={room.id} />
+      <ChatForm roomId={room.id} questions={questions} />
     </div>
   );
 }

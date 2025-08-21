@@ -21,6 +21,7 @@ export async function authAction(formData: FormData, endPoint: string) {
     if (responseData.code === 200) {
       (await cookies()).set("token", responseData.data.auth.token, {
         path: "/",
+        secure: true,
         httpOnly: true,
         sameSite: "lax",
         maxAge: 60 * 60 * 24 * 7,
@@ -97,6 +98,7 @@ export async function checkCodeAction(formData: FormData) {
       (await cookies()).set("token", responseData.data.auth.token, {
         path: "/",
         httpOnly: true,
+        secure: true,
         sameSite: "lax",
         maxAge: 60 * 60 * 24 * 7,
       });
