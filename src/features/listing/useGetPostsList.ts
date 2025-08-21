@@ -9,11 +9,17 @@ export default function useGetPostsList() {
   const { getParam } = useUrlFilters();
 
   const category = getParam("category_id");
+  const search = getParam("search");
   const sort = getParam("sort");
+  const priceFrom = getParam("price_from");
+  const priceTo = getParam("price_to");
 
   const filterBase: Omit<PostsFilterPayload, "page"> = {
     category_id: category,
+    search: search,
     sort: sort,
+    price_from: priceFrom,
+    price_to: priceTo,
   };
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =

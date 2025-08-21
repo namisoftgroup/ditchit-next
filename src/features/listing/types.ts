@@ -9,5 +9,8 @@ export interface listingResponse {
 export interface PostsFilterPayload {
   category_id: string | null;
   page: number;
+  search: string | null;
   sort: string | null;
+  price_from: string | null;
+  price_to: string | null;
 }
