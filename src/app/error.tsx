@@ -9,7 +9,7 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <div className="min-h-[500px] flex items-center justify-center bg-gradient-to-br from-red-50 via-white to-red-100 px-4">
+    <div className="min-h-[500px] h-full flex items-center justify-center bg-gradient-to-br from-red-50 via-white to-red-100 px-4">
       <div className="max-w-lg w-full p-8 rounded-2xl backdrop-blur-md bg-white/80 shadow-xl border border-red-100">
         <div className="flex flex-col items-center text-center space-y-5">
           <div className="p-4 bg-red-100 rounded-full shadow-inner">
