@@ -6,6 +6,7 @@ import AddPostMenu from "./AddPostMenu";
 import UserMenu from "./UserMenu";
 import LocationSearch from "./LocationSearch";
 import HeaderCategories from "./HeaderCategories";
+import ResponsiveMenu from "./ResponsiveMenu";
 
 export default async function Header() {
   const { data: categories } = await getCategories();
@@ -21,6 +22,7 @@ export default async function Header() {
           <GetApp />
           <AddPostMenu />
           <UserMenu />
+          <ResponsiveMenu categories={categories} />
         </div>
       </section>
 

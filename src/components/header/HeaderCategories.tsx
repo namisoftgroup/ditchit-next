@@ -21,7 +21,7 @@ export default function HeaderCategories({ categories }: Props) {
   } = useCategoryVisibility(categories);
 
   return (
-    <div className="w-full">
+    <div className="w-full hidden md:block">
       <div className="container">
         <div
           ref={containerRef}

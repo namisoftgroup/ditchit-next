@@ -14,8 +14,8 @@ export default function AddPostMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="border-0 flex items-center justify-center gap-2 p-2 h-[40px] min-w-[40px] cursor-pointer rounded-full transition-all relative px-4 py-2 whitespace-nowrap bg-[var(--mainColor)] text-[var(--whiteColor)]">
-          <CirclePlus width={20} height={20} />
+        <button className="border-0 flex items-center justify-center gap-2 p-2 h-[40px] min-w-[40px] cursor-pointer rounded-full transition-all relative md:px-4 px-3 py-2 whitespace-nowrap bg-[var(--mainColor)] text-[var(--whiteColor)] md:text-[16px] text-[14px]">
+          <CirclePlus width={18} height={18} />
           Add Post
         </button>
       </DropdownMenuTrigger>

@@ -9,7 +9,7 @@ export default function GetApp() {
   return (
     <>
       <button
-        className="m-0 rounded-full capitalize px-5 py-2 w-auto whitespace-nowrap cursor-pointer customBtn"
+        className="m-0 rounded-full capitalize px-5 py-2 w-auto whitespace-nowrap cursor-pointer customBtn hidden md:block"
         onClick={() => setShow(true)}
       >
         get the app

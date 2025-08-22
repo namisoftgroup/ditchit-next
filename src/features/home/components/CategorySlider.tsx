@@ -22,7 +22,7 @@ export default function CategorySlider({ category }: { category: Category }) {
               {category.title}
             </span>
             <Link href={`/all-posts?category_id=${category.value}`}>
-              <h4 className="text-[40px] font-bold text-[var(--darkColor)]">
+              <h4 className="md:text-[40px] text-[18px] sm:mt-2 font-bold text-[var(--darkColor)]">
                 Browse items by{" "}
                 <span className="text-[var(--mainColor)]">
                   {category.title}
