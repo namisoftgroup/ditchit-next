@@ -174,7 +174,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
           </div>
         </div>
 
-        <p className="py-4 text-[var(--grayColor)] text-[14px]">
+        <p className="py-4 text-[var(--grayColor)] text-[14px] whitespace-pre-line">
           {post.description}
         </p>
 
