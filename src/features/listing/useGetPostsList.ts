@@ -13,18 +13,20 @@ export default function useGetPostsList() {
   const sort = getParam("sort");
   const priceFrom = getParam("price_from");
   const priceTo = getParam("price_to");
+  const condition = getParam("condition");
 
   const filterBase: Omit<PostsFilterPayload, "page"> = {
     category_id: category,
     search: search,
     sort: sort,
     price_from: priceFrom,
+    condition: condition,
     price_to: priceTo,
   };
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ["all-posts", filterBase],
+      queryKey: ["posts", filterBase],
       queryFn: ({ pageParam = 1 }) =>
         getClientFilteredPosts({
           ...filterBase,

@@ -3,6 +3,7 @@ import { Category } from "@/types/category";
 import Categoryfilter from "./Categoryfilter";
 import PriceFilter from "./PriceFilter";
 import SortBy from "./SortBy";
+import Condition from "./Condition";
 
 export default function AccordionFilter({
   categories,
@@ -13,10 +14,11 @@ export default function AccordionFilter({
     <Accordion
       type="single"
       collapsible
-      defaultValue="item-2"
+      defaultValue="item-3"
       className="w-full"
     >
       <SortBy />
+      <Condition />
       <Categoryfilter categories={categories} />
       <PriceFilter />
     </Accordion>

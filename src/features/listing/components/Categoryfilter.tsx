@@ -20,7 +20,7 @@ export default function Categoryfilter({
   const selectedCategory = getParam("category_id") ?? "";
 
   return (
-    <AccordionItem value="item-2" className="border-[var(--lightBorderColor)]">
+    <AccordionItem value="item-3" className="border-[var(--lightBorderColor)]">
       <AccordionTrigger className="px-5 hover:no-underline data-[state=open]:bg-[var(--mainColor)] data-[state=open]:text-white rounded-none">
         Category
       </AccordionTrigger>

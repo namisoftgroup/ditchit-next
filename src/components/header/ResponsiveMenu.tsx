@@ -64,7 +64,7 @@ export default function ResponsiveMenu({
               </Link>
 
               <Link
-                href="/all-posts"
+                href="/posts"
                 prefetch={true}
                 className="flex flex-col items-center gap-2 text-[12px] text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)]"
                 onClick={() => setOpen(false)}
@@ -94,7 +94,7 @@ export default function ResponsiveMenu({
             <div className="flex flex-col gap-[8px] h-full overflow-y-auto">
               {categories.map((category) => (
                 <Link
-                  href={`/all-posts?category_id=${category.id}`}
+                  href={`/posts?category_id=${category.id}`}
                   key={category.id}
                   className="text-[12px] font-bold text-[var(--darkColor)] hover:text-[var(--mainColor)] whitespace-nowrap px-3 py-2"
                   onClick={() => setOpen(false)}

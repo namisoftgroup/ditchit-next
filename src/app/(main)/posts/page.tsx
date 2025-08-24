@@ -17,6 +17,7 @@ export default async function page({
   const sort = typeof params.sort === "string" ? params.sort : null;
   const search = typeof params.search === "string" ? params.search : null;
   const priceTo = typeof params.price_to === "string" ? params.price_to : null;
+  const condition = typeof params.condition === "string" ? params.condition : null;
   const priceFrom = typeof params.price_from === "string" ? params.price_from : null;
   const category_id = typeof params.category_id === "string" ? params.category_id : null;
 
@@ -32,6 +33,7 @@ export default async function page({
         search,
         price_from: priceFrom,
         price_to: priceTo,
+        condition,
         category_id,
       }),
     initialPageParam: 1,

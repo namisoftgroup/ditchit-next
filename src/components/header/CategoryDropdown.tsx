@@ -23,7 +23,7 @@ export function CategoryDropdown({ categories }: Props) {
         {categories.map((cat) => (
           <DropdownMenuItem key={cat.id} asChild>
             <Link
-              href={`/all-posts?category_id=${cat.id}`}
+              href={`/posts?category_id=${cat.id}`}
               className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
             >
               <Image src={cat.image} alt={cat.title} width={20} height={20} />

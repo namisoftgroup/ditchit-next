@@ -13,4 +13,5 @@ export interface PostsFilterPayload {
   sort: string | null;
   price_from: string | null;
   price_to: string | null;
+  condition: string | null;
 }

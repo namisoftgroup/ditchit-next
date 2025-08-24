@@ -21,7 +21,7 @@ export default function PostCard({
 
       {/* Item Image */}
       <Link
-        href={`/all-posts/${post.id}`}
+        href={`/posts/${post.id}`}
         className="relative overflow-hidden rounded-t-2xl aspect-[3/2] w-full max-h-[300px] transition-all"
       >
         <Image
@@ -54,7 +54,7 @@ export default function PostCard({
         </div>
 
         <Link
-          href={`/all-posts/${post.id}`}
+          href={`/posts/${post.id}`}
           className="font-bold text-[16px] overflow-hidden line-clamp-1"
         >
           {post.title}
@@ -74,7 +74,7 @@ export default function PostCard({
 
         <div className="flex items-center justify-between pt-3 mt-auto border-t border-[var(--lightBorderColor)]">
           <Link
-            href={`/all-posts?category_id=${post.category.id}`}
+            href={`/posts?category_id=${post.category.id}`}
             className="flex items-center gap-1 text-sm"
           >
             <span className="w-10 h-10 rounded-full bg-[var(--mainColor10)] flex items-center justify-center">

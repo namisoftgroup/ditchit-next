@@ -14,7 +14,7 @@ export default function PriceFilter() {
   const [priceTo, setPriceTo] = useState(getParam("price_to") ?? "");
 
   return (
-    <AccordionItem value="item-3" className="border-[var(--lightBorderColor)]">
+    <AccordionItem value="item-4" className="border-[var(--lightBorderColor)]">
       <AccordionTrigger className="px-5 hover:no-underline data-[state=open]:bg-[var(--mainColor)] data-[state=open]:text-white rounded-none">
         Price
       </AccordionTrigger>

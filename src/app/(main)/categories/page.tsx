@@ -11,7 +11,7 @@ export default async function Page() {
         {categories.map((category) => (
           <div key={category.id} className="w-full md:w-1/2 lg:w-1/4 p-2">
             <Link
-              href={`all-posts?category_id=${category.id}`}
+              href={`posts?category_id=${category.id}`}
               className="group relative block p-[20px] border border-[var(--lightBorderColor)] bg-white transition-all duration-300 ease-in-out rounded-[16px] hover:border-[var(--darkColor)]"
             >
               <span

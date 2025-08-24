@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="px-1 py-1 flex flex-wrap justify-center gap-4 my-3 text-[14px]">
           <Link href="/">Home</Link>
           <Link href="/categories">categories</Link>
-          <Link href="/all-posts">Posts</Link>
+          <Link href="/posts">Posts</Link>
           <Link href="/chats">Chats</Link>
           <Link href="/contact-us">contact us</Link>
           <Link href="/about">About Us</Link>

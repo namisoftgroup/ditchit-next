@@ -23,6 +23,17 @@ export const SORT_BY = [
   },
 ];
 
+export const CONDITIONS = [
+  {
+    name: "New",
+    value: "new",
+  },
+  {
+    name: "Used",
+    value: "used",
+  },
+];
+
 export const SHIPPING_METHODS = [
   {
     name: "Local + Shipping",

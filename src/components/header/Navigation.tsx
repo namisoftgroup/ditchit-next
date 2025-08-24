@@ -21,7 +21,7 @@ export default function Navigation() {
           </Link>
 
           <Link
-            href="/all-posts"
+            href="/posts"
             prefetch={true}
             className="flex flex-col items-center gap-2 text-[14px] text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
           >

@@ -15,7 +15,7 @@ export default function LocationSearch() {
     const searchQuery = formData.get("search") as string;
 
     if (searchQuery) {
-      router.push(`/all-posts?search=${encodeURIComponent(searchQuery)}`);
+      router.push(`/posts?search=${encodeURIComponent(searchQuery)}`);
     }
   };
 

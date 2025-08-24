@@ -21,7 +21,7 @@ export default function RoomHeader({ room }: { room: Room }) {
       </div>
 
       <Link
-        href={`/all-posts/${room.post_id}`}
+        href={`/posts/${room.post_id}`}
         className="flex items-center gap-4 p-2 bg-[#e5f6ed]"
       >
         <Image
