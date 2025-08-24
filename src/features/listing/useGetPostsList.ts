@@ -5,7 +5,10 @@ import { getClientFilteredPosts } from "@/features/listing/service";
 import { PostsFilterPayload } from "@/features/listing/types";
 import useUrlFilters from "@/hooks/useFilterParams";
 
-export default function useGetPostsList() {
+export default function useGetPostsList(userId: number | null) {
+
+  console.log(userId);
+  
   const { getParam } = useUrlFilters();
 
   const category = getParam("category_id");
@@ -22,6 +25,7 @@ export default function useGetPostsList() {
     category_id: category,
     price_from: priceFrom,
     price_to: priceTo,
+    user_id: userId
   };
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =

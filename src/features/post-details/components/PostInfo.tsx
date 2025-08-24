@@ -141,11 +141,11 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
       <div className="flex flex-col gap-2 relative text-[var(--darkColor)]">
         <div className="flex gap-2">
           {post.is_promoted && (
-            <span className="inline-flex items-center gap-1 p-2 px-6 rounded-full border border-[var(--mainColor)] w-fit text-sm font-bold uppercase bg-[var(--mainColor20)]">
+            <span className="inline-flex items-center gap-2 p-2 px-4 rounded-full border border-[var(--mainColor)] w-fit text-sm font-bold uppercase bg-[var(--mainColor20)]">
               <Image
                 src="/icons/promoted2.svg"
-                width={20}
-                height={20}
+                width={18}
+                height={18}
                 alt="Promoted"
               />
               <span className="text-[12px]">Promoted</span>

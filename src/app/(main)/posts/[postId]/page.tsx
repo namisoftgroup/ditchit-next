@@ -1,5 +1,6 @@
 import { getPostDetails } from "@/features/post-details/service";
 import { notFound } from "next/navigation";
+import { getProfile } from "@/features/auth/actions";
 import PageBanner from "@/components/shared/PageBanner";
 import PostOwnerCard from "@/features/post-details/components/PostOwnerCard";
 import DitchNote from "@/features/post-details/components/DitchNote";
@@ -29,7 +30,8 @@ export const generateMetadata = async ({ params }: PageProps) => {
 
 export default async function PostDetails({ params }: PageProps) {
   const id = (await params).postId;
-  const post = await getPostDetails(id);
+  const { user } = await getProfile();
+  const post = await getPostDetails(id, user?.id ?? null);
 
   const images: string[] = [
     ...(post.image ? [post.image] : []),

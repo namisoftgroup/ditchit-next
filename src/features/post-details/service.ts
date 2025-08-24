@@ -2,14 +2,21 @@ import serverAxios from "@/lib/axios/serverAxios";
 import { PostDetailsResponse } from "./types";
 import clientAxios from "@/lib/axios/clientAxios";
 
-export async function getPostDetails(id: string): Promise<PostDetailsResponse> {
+export async function getPostDetails(
+  id: string,
+  userId?: number | null
+): Promise<PostDetailsResponse> {
   try {
-    const res = await serverAxios.get(`/home/post/${id}`);
+    const res = await serverAxios.get(`/home/post/${id}`, {
+      params: {
+        user_id: userId ?? undefined,
+      },
+    });
 
     return res.data.data;
   } catch (error) {
-    console.error("Error fetching post: " + id, error);
-    throw new Error("Failed to fetch post" + id);
+    console.error("Error fetching post:", id, error);
+    throw new Error("Failed to fetch post " + id);
   }
 }
 

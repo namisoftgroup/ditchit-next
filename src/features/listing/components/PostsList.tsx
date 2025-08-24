@@ -5,11 +5,11 @@ import PostCard from "@/components/cards/PostCard";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import useGetPostsList from "@/features/listing/useGetPostsList";
 
-export default function PostsList() {
+export default function PostsList({userId} : {userId: number | null}) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const { posts, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetPostsList();
+    useGetPostsList(userId);
 
   useEffect(() => {
     const handleScroll = () => {

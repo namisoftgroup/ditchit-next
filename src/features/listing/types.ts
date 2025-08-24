@@ -14,4 +14,5 @@ export interface PostsFilterPayload {
   price_from: string | null;
   price_to: string | null;
   condition: string | null;
+  user_id: number | null
 }

@@ -6,12 +6,17 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import PageBanner from "@/components/shared/PageBanner";
 import FilterSideBar from "@/features/listing/components/FilterSideBar";
 import PostsList from "@/features/listing/components/PostsList";
+import { getProfile } from "@/features/auth/actions";
 
 export default async function page({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const queryClient = getQueryClient();
+  const { data: categories } = await getCategories();
+  const { user } = await getProfile();
+
   const params = await searchParams;
 
   const sort = typeof params.sort === "string" ? params.sort : null;
@@ -24,14 +29,12 @@ export default async function page({
   const category_id =
     typeof params.category_id === "string" ? params.category_id : null;
 
-  const { data: categories } = await getCategories();
-  const queryClient = getQueryClient();
-
   await queryClient.prefetchInfiniteQuery({
     queryKey: [
       "posts",
-      { search, sort, condition, category_id, price_from, price_to },
+      { search, sort, condition, category_id, price_from, price_to, user_id: user?.id },
     ],
+
     queryFn: ({ pageParam = 1 }) =>
       getFilteredPosts({
         page: pageParam,
@@ -41,6 +44,7 @@ export default async function page({
         price_to,
         condition,
         category_id,
+        user_id: user?.id ?? null
       }),
     initialPageParam: 1,
     getNextPageParam: (
@@ -66,7 +70,7 @@ export default async function page({
 
           <div className="w-full lg:w-9/12 px-2 py-2">
             <HydrationBoundary state={dehydrate(queryClient)}>
-              <PostsList />
+              <PostsList userId={user?.id ?? null}/>
             </HydrationBoundary>
           </div>
         </div>
