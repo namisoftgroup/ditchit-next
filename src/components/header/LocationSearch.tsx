@@ -4,9 +4,12 @@ import { useState } from "react";
 import { Search, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
 import SearchByModal from "../modals/SearchByModal";
+import ZipSearch from "../modals/ZipSearch";
 
 export default function LocationSearch() {
   const [show, setShow] = useState<boolean>(false);
+  const [showZipCodeSearch, setZipCodeSearch] = useState<boolean>(false);
+
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -59,7 +62,23 @@ export default function LocationSearch() {
         </div>
       </div>
 
-      <SearchByModal show={show} handleClose={() => setShow(false)} />
+      <SearchByModal
+        show={show}
+        handleClose={() => setShow(false)}
+        handleZipSearch={() => {
+          setZipCodeSearch(true);
+          setShow(false);
+        }}
+      />
+      
+      <ZipSearch
+        show={showZipCodeSearch}
+        handleClose={() => setZipCodeSearch(false)}
+        handleBack={() => {
+          setZipCodeSearch(false);
+          setShow(true);
+        }}
+      />
     </div>
   );
 }
