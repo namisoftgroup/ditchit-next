@@ -21,8 +21,7 @@ export default function SearchByModal({
   show,
   handleClose,
 }: SearchByModalProps) {
-  const setFilter = useHomeFilter((state) => state.setFilter);
-  const { kilometers } = useHomeFilter((state) => state.filter);
+  const { setFilter, filter } = useHomeFilter();
 
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
     setFilter({ [key]: value });
@@ -83,7 +82,7 @@ export default function SearchByModal({
               min="0"
               max="100"
               step="1"
-              value={kilometers}
+              value={filter.kilometers}
               onChange={(e) =>
                 onUpdateFilter({ key: "kilometers", value: e.target.value })
               }
@@ -91,7 +90,7 @@ export default function SearchByModal({
             />
             <div className="relative min-w-[100px] px-6 py-2 bg-[var(--mainColor)] text-[var(--whiteColor)] rounded-md flex justify-center items-center gap-1 text-sm">
               <span className="font-bold">
-                {kilometers === 100 ? "Maximum" : `Miles ${kilometers}`}
+                {filter.kilometers === 100 ? "Maximum" : `Miles ${filter.kilometers}`}
               </span>
               <div className="absolute w-4 h-4 bg-[var(--mainColor)] rotate-45 left-[-8px] top-1/2 -translate-y-1/2 rounded-sm" />
             </div>

@@ -1,7 +1,7 @@
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 type FilterState = {
-  user_id: string;
   longitude: string;
   latitude: string;
   delivery_method: string;
@@ -13,17 +13,24 @@ type HomeFilterStore = {
   setFilter: (newFilter: Partial<FilterState>) => void;
 };
 
-export const useHomeFilter = create<HomeFilterStore>((set) => ({
-  filter: {
-    user_id: "",
-    longitude: "",
-    latitude: "",
-    delivery_method: "",
-    kilometers: 50,
-  },
+export const useHomeFilter = create<HomeFilterStore>()(
+  persist(
+    (set) => ({
+      filter: {
+        longitude: "",
+        latitude: "",
+        delivery_method: "",
+        kilometers: 50,
+      },
 
-  setFilter: (newFilter) =>
-    set((state) => ({
-      filter: { ...state.filter, ...newFilter },
-    })),
-}));
+      setFilter: (newFilter) =>
+        set((state) => ({
+          filter: { ...state.filter, ...newFilter },
+        })),
+    }),
+    {
+      name: "home-filter-storage",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

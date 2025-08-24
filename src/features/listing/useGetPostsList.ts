@@ -16,11 +16,11 @@ export default function useGetPostsList() {
   const condition = getParam("condition");
 
   const filterBase: Omit<PostsFilterPayload, "page"> = {
-    category_id: category,
     search: search,
     sort: sort,
-    price_from: priceFrom,
     condition: condition,
+    category_id: category,
+    price_from: priceFrom,
     price_to: priceTo,
   };
 

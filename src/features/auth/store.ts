@@ -38,6 +38,6 @@ export const useResetPasswordStore = create<ResetState>()(
     {
       name: "reset-password-session",
       storage: createJSONStorage(() => sessionStorage),
-    }
+    },
   )
 );

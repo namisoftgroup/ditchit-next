@@ -16,23 +16,29 @@ export default async function page({
 
   const sort = typeof params.sort === "string" ? params.sort : null;
   const search = typeof params.search === "string" ? params.search : null;
-  const priceTo = typeof params.price_to === "string" ? params.price_to : null;
-  const condition = typeof params.condition === "string" ? params.condition : null;
-  const priceFrom = typeof params.price_from === "string" ? params.price_from : null;
-  const category_id = typeof params.category_id === "string" ? params.category_id : null;
+  const price_to = typeof params.price_to === "string" ? params.price_to : null;
+  const condition =
+    typeof params.condition === "string" ? params.condition : null;
+  const price_from =
+    typeof params.price_from === "string" ? params.price_from : null;
+  const category_id =
+    typeof params.category_id === "string" ? params.category_id : null;
 
   const { data: categories } = await getCategories();
   const queryClient = getQueryClient();
 
   await queryClient.prefetchInfiniteQuery({
-    queryKey: ["all-posts", { sort, category_id, search }],
+    queryKey: [
+      "posts",
+      { search, sort, condition, category_id, price_from, price_to },
+    ],
     queryFn: ({ pageParam = 1 }) =>
       getFilteredPosts({
         page: pageParam,
         sort,
         search,
-        price_from: priceFrom,
-        price_to: priceTo,
+        price_from,
+        price_to,
         condition,
         category_id,
       }),
