@@ -95,7 +95,7 @@ export default function PriceDetailsStep({
 
       <div>
         <h6 className="font-bold text-sm mb-2">Delivery methods</h6>
-        <div className="flex gap-2">
+        <div className="flex gap-2 md:flex-row flex-col">
           {SHIPPING_METHODS.map((method) => (
             <label
               key={method.value}

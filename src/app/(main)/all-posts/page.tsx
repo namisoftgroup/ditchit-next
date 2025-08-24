@@ -16,11 +16,9 @@ export default async function page({
 
   const sort = typeof params.sort === "string" ? params.sort : null;
   const search = typeof params.search === "string" ? params.search : null;
-  const priceFrom =
-    typeof params.price_from === "string" ? params.price_from : null;
   const priceTo = typeof params.price_to === "string" ? params.price_to : null;
-  const category_id =
-    typeof params.category_id === "string" ? params.category_id : null;
+  const priceFrom = typeof params.price_from === "string" ? params.price_from : null;
+  const category_id = typeof params.category_id === "string" ? params.category_id : null;
 
   const { data: categories } = await getCategories();
   const queryClient = getQueryClient();

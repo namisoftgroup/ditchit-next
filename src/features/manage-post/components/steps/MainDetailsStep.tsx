@@ -38,7 +38,7 @@ export default function MainDetailsStep({ next, back }: propTypes) {
 
   return (
     <form className="flex flex-col gap-[16px]" onSubmit={handleSubmit}>
-      <div className="flex gap-4">
+      <div className="flex gap-4 md:flex-row flex-col">
         <MediaUpload name="image" label="Cover Image" className="min-w-[236px]" />
         <MediaUpload
           name="images"

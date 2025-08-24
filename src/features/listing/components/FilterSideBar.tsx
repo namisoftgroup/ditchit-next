@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Accordion } from "@/components/ui/accordion";
 import { Category } from "@/types/category";
-import { Search } from "lucide-react";
-import Categoryfilter from "./Categoryfilter";
-import PriceFilter from "./PriceFilter";
-import SortBy from "./SortBy";
+import { ListFilter, Search, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import useUrlFilters from "@/hooks/useFilterParams";
+import AccordionFilter from "./AccordionFilter";
 
 export default function FilterSideBar({
   categories,
@@ -15,6 +13,7 @@ export default function FilterSideBar({
   categories: Category[];
 }) {
   const { getParam, setParam } = useUrlFilters();
+  const [openFilter, setOpenFilter] = useState(false);
   const [searchValue, setSearchValue] = useState(getParam("search") ?? "");
 
   return (
@@ -39,23 +38,46 @@ export default function FilterSideBar({
 
         <button
           type="submit"
-          className="absolute right-1 top-[4px] bottom-[4px] p-0 w-9  flex items-center justify-center rounded-xl text-[var(--whiteColor)] bg-[var(--mainColor)]"
+          className="absolute right-1 top-[4px] bottom-[4px] p-0 w-9 flex items-center justify-center rounded-xl text-[var(--whiteColor)] bg-[var(--mainColor)]"
         >
           <Search height={20} width={20} />
         </button>
       </form>
 
-      <div className="w-full rounded-xl border border-[var(--lightBorderColor)]">
-        <Accordion
-          type="single"
-          collapsible
-          defaultValue="item-2"
-          className="w-full"
-        >
-          <SortBy />
-          <Categoryfilter categories={categories} />
-          <PriceFilter />
-        </Accordion>
+      <button
+        className="ms-auto flex md:hidden items-center gap-2 text-[14px]"
+        onClick={() => setOpenFilter(true)}
+      >
+        <ListFilter width={16} height={16} /> Sort By
+      </button>
+
+      <AnimatePresence>
+        {openFilter && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            className="fixed top-0 right-0 w-[100vw] h-[100vh] bg-white z-[9999] p-5 flex flex-col gap-6 overflow-y-auto md:hidden"
+          >
+            <button
+              className="ms-auto w-7 h-7 min-h-[28px] flex items-center justify-center text-[14px] border rounded-full"
+              onClick={() => setOpenFilter(false)}
+            >
+              <X width={16} height={16} />
+            </button>
+
+            <div className="w-full rounded-xl border border-[var(--lightBorderColor)]">
+              <AccordionFilter categories={categories} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="hidden md:flex flex-col gap-6">
+        <div className="w-full rounded-xl border border-[var(--lightBorderColor)]">
+          <AccordionFilter categories={categories} />
+        </div>
       </div>
     </div>
   );

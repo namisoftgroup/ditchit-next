@@ -42,30 +42,34 @@ export default function PostFormProvider({
     mode: "onChange",
     defaultValues: {
       type: post?.type || type,
-      condition: post?.condition || undefined,
+      category_id: post?.category.id || 0,
+
+      image: post?.image || undefined,
+      images: post?.images?.map((img) => img.image) || [],
       title: post?.title || "",
       description: post?.description || "",
+      zip_code: post?.zip_code || "",
       address: post?.description || "",
       latitude: post?.latitude || 0,
       longitude: post?.longitude || 0,
-      category_id: post?.category.id || 0,
-      zip_code: post?.zip_code || "",
-      price: post?.price.toString() || "",
-      firm_price: post?.firm_price === false ? 0 : 1 || 0,
-      virtual_tour: post?.virtual_tour === false ? 0 : 1 || 0,
-      delivery_method:
-        post?.delivery_method === "Local + Shipping"
-          ? "both"
-          : post?.delivery_method,
+
+      condition: post?.condition || undefined,
       features: post?.features?.map((f) => f.value) || [],
       options:
         post?.options?.map((opt) => ({
           category_option_id: opt.category_option_id,
           value: opt.value,
         })) || [],
-      is_promote: post?.is_promoted === false ? 0 : 1 || 0,
-      image: post?.image || undefined,
-      images: post?.images?.map((img) => img.image) || [],
+
+      price: post?.price.toString() || "",
+      is_promote: post?.is_promoted === true ? 1 : 0,
+      firm_price: post?.firm_price === true ? 1 : 0,
+      virtual_tour: post?.virtual_tour === true ? 1 : 0,
+
+      delivery_method:
+        post?.delivery_method === "Local + Shipping"
+          ? "both"
+          : post?.delivery_method,
     },
   });
 

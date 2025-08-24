@@ -27,7 +27,7 @@ export default function CategoryStep({ next, categories }: CategoryStepProps) {
       <h2 className="text-[16px]">Please select your post category</h2>
 
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {categories.map((category) => (
             <label
               key={category.id}

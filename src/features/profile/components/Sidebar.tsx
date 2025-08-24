@@ -21,7 +21,7 @@ export default function Sidebar() {
 
   return (
     <aside className="flex flex-col gap-4 mt-2">
-      <div className="bg-whiteColor rounded-[20px]  p-5 relative flex flex-wrap items-center gap-4 border border-[var(--lightBorderColor)]">
+      <div className="bg-whiteColor rounded-[20px] p-5 relative flex flex-wrap items-center gap-4 border border-[var(--lightBorderColor)]">
         <Image
           src={user?.image || ""}
           width={80}
@@ -38,10 +38,10 @@ export default function Sidebar() {
         </div>
       </div>
 
-      <div className="bg-whiteColor rounded-[16px] p-4 border border-[var(--lightBorderColor)] mb-[50px] sticky top-[90px] right-0 z-[2] flex flex-col gap-2">
+      <div className="bg-whiteColor rounded-[16px] p-4 border border-[var(--lightBorderColor)] sticky top-[90px] right-0 z-[2] flex flex-wrap flex-row md:flex-col gap-2">
         <Link
           href="/profile"
-          className="group px-4 py-3 flex gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
         >
           <Megaphone
             width={20}
@@ -53,7 +53,7 @@ export default function Sidebar() {
 
         <Link
           href="/profile/my-favorites"
-          className="group px-4 py-3 flex gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
         >
           <Heart
             width={20}
@@ -65,7 +65,7 @@ export default function Sidebar() {
 
         <Link
           href="/profile/edit-profile"
-          className="group px-4 py-3 flex gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
         >
           <UserPen
             width={20}
@@ -76,7 +76,7 @@ export default function Sidebar() {
         </Link>
 
         <button
-          className="group px-4 py-3 flex gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
           onClick={performLogout}
         >
           <LogOut
