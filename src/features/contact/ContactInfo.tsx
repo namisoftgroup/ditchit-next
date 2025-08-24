@@ -1,14 +1,6 @@
+import { Setting } from "@/services/getSettings";
 import { MailIcon, MapPinIcon } from "lucide-react";
 
-type Setting = {
-  id: number;
-  about_us: string;
-  privacy: string;
-  terms: string;
-  email: string;
-  phone: string;
-  twitter: string;
-};
 
 export default function ContactInfo({ data }: { data: Setting }) {
 

@@ -82,6 +82,41 @@
     left: initial !important;
   }
 
+  .static_pages {
+    h1 {
+      display: block;
+      color: var(--mainColor);
+      margin: 12px 0;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    strong {
+      color: var(--mainColor);
+    }
+
+    table {
+      width: 100% !important;
+
+      th,
+      td {
+        padding: 8px;
+      }
+
+      ul {
+        list-style: disc;
+        font-size: 14px;
+        padding-left: 16px;
+      }
+    }
+
+    p {
+      color: var(--grayColor);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+  }
+
   body {
     background-color: var(--background, #ffffff);
     color: var(--foreground, #111111);

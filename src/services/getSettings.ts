@@ -1,10 +1,10 @@
 import { API_URL } from "@/utils/constants";
 
-type Setting = {
+export type Setting = {
   id: number;
-  about_us: string;
-  privacy: string;
-  terms: string;
+  about_us_text: string;
+  privacy_text: string;
+  terms_text: string;
   email: string;
   phone: string;
   twitter: string;

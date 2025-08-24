@@ -20,7 +20,7 @@ export default function GetAppModal({ show, handleClose }: GetAppModalProps) {
         <DialogHeader className="mb-0">
           <DialogTitle className="text-[28px] font-bold capitalize text-center">
             Get the free
-            <span className="text-[var(--mainColor)]">DitchIt</span> app
+            <span className="text-[var(--mainColor)]"> DitchIt</span> app
           </DialogTitle>
           
         </DialogHeader>

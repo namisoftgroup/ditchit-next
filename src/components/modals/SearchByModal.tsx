@@ -99,7 +99,7 @@ export default function SearchByModal({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mb-0">
           <button className="w-full px-4 py-2 rounded-full bg-[var(--mainColor)] text-white font-medium">
             See listings
           </button>

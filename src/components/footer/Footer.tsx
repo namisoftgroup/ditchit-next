@@ -14,9 +14,9 @@ export default function Footer() {
           <Link href="/all-posts">Posts</Link>
           <Link href="/chats">Chats</Link>
           <Link href="/contact-us">contact us</Link>
-          <Link href="/about_us">About Us</Link>
-          <Link href="/terms">terms and conditions</Link>
-          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/about">About Us</Link>
+          <Link href="/terms-conditions">terms and conditions</Link>
+          <Link href="/privacy-policy">Privacy Policy</Link>
           <SubscribeBtn />
         </div>
       </div>
