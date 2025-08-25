@@ -7,7 +7,7 @@ import { useHomeFilter } from "@/features/listing/store";
 import SearchByModal from "../modals/SearchByModal";
 import ZipSearch from "../modals/ZipSearch";
 
-export default function LocationSearch() {
+export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
   const [show, setShow] = useState<boolean>(false);
   const { filter } = useHomeFilter();
   const [showZipCodeSearch, setZipCodeSearch] = useState<boolean>(false);
@@ -25,9 +25,11 @@ export default function LocationSearch() {
   };
 
   return (
-    <div className="md:flex items-center flex-1 gap-x-4 gap-y-2 hidden">
+    <div
+      className={` items-center flex-1 gap-x-4 gap-y-2 ${hideSm ? "md:flex hidden" : "flex md:flex-row flex-col items-start !gap-4"} `}
+    >
       <form
-        className="flex-1 m-0 mb-0 min-w-[300px] relative bg-[#f3f3f3] border border-[#e6e6e6] rounded-full w-[min(100%_-_16px,_1440px)]"
+        className="flex-1 m-0 mb-0 min-w-[300px] relative md:bg-[#f3f3f3] bg-[#fff] border border-[#e6e6e6] rounded-full w-[min(100%_-_16px,_1440px)]"
         onSubmit={handleSubmit}
       >
         <input
