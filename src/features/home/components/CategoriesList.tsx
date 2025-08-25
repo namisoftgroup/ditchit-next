@@ -40,7 +40,11 @@ export default function CategoriesList({
   return (
     <div className="space-y-12">
       {categories.map((category: Category) => (
-        <CategorySlider key={category.value} category={category} />
+        <CategorySlider
+          key={category.value}
+          category={category}
+          filterParams={filterParams}
+        />
       ))}
 
       {isFetchingNextPage && <CategorySliderSkeleton />}
