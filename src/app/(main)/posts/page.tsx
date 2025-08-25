@@ -17,7 +17,7 @@ function normalize(param: string | string[] | undefined): string | null {
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const queryClient = getQueryClient();
   const cookieStore = await cookies();
@@ -26,12 +26,12 @@ export default async function Page({
   const { user } = await getProfile();
 
   const filterParams = {
-    sort: normalize(searchParams.sort),
-    search: normalize(searchParams.search),
-    price_from: normalize(searchParams.price_from),
-    price_to: normalize(searchParams.price_to),
-    condition: normalize(searchParams.condition),
-    category_id: normalize(searchParams.category_id),
+    sort: normalize((await searchParams).sort),
+    search: normalize((await searchParams).search),
+    price_from: normalize((await searchParams).price_from),
+    price_to: normalize((await searchParams).price_to),
+    condition: normalize((await searchParams).condition),
+    category_id: normalize((await searchParams).category_id),
     user_id: user?.id ?? null,
     longitude: cookieStore.get("longitude")?.value ?? null,
     latitude: cookieStore.get("latitude")?.value ?? null,
