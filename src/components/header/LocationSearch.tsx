@@ -58,7 +58,7 @@ export default function LocationSearch() {
           <p className="font-bold capitalize text-[var(--grayColor)] text-[12px] whitespace-nowrap">
             Current Location
           </p>
-          <h4 className="text-[var(--darkColor)] capitalize overflow-hidden [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] text-[18px]">
+          <h4 className="text-[var(--darkColor)] capitalize overflow-hidden [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] text-[16px]">
             {filter.address}
           </h4>
         </div>

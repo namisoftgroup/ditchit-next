@@ -108,7 +108,7 @@ export default function SearchByModal({
               <span className="font-bold">
                 {filter.kilometers === 100
                   ? "Maximum"
-                  : `Miles ${filter.kilometers}`}
+                  : `${filter.kilometers} Miles`}
               </span>
               <div className="absolute w-4 h-4 bg-[var(--mainColor)] rotate-45 left-[-8px] top-1/2 -translate-y-1/2 rounded-sm" />
             </div>
