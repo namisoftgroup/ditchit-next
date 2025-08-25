@@ -41,7 +41,7 @@ export default function CategorySlider({
     <section className="py-[60px] m-0 even:bg-[#f5f5f5]">
       <div className="container">
         {/* Header */}
-        <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
+        <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 mb-4">
           <div className="px-2">
             <span className="block text-[14px] font-semibold tracking-[2.8px] uppercase text-[var(--mainColor)]">
               {category.title}
@@ -84,15 +84,17 @@ export default function CategorySlider({
         </div>
 
         {/* Swiper Section */}
-        <div className="relative">
+        {combinedPosts.length > 0 && (
           <Swiper
             spaceBetween={16}
             modules={[Navigation]}
+            slidesPerView={4}
             navigation={{
               nextEl: `.swiper_next_${category.value}`,
               prevEl: `.swiper_prev_${category.value}`,
             }}
             breakpoints={{
+              0: { slidesPerView: 1 },
               640: { slidesPerView: 2 },
               1024: { slidesPerView: 4 },
             }}
@@ -100,9 +102,7 @@ export default function CategorySlider({
           >
             {combinedPosts.map((post) => (
               <SwiperSlide key={post.id}>
-                <div className="p-1 h-full">
                   <PostCard post={post} showActions={false} />
-                </div>
               </SwiperSlide>
             ))}
 
@@ -112,7 +112,7 @@ export default function CategorySlider({
               </SwiperSlide>
             )}
           </Swiper>
-        </div>
+        )}
       </div>
     </section>
   );
