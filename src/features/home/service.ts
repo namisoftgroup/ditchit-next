@@ -1,14 +1,16 @@
-import { CategoryResponse } from "./types";
+import { CategoryResponse, HomeFilterInterface } from "./types";
 import serverAxios from "@/lib/axios/serverAxios";
 import clientAxios from "@/lib/axios/clientAxios";
 
 export async function getHomeCategories(
-  pageParam = 1
+  pageParam = 1,
+  request: HomeFilterInterface
 ): Promise<CategoryResponse> {
   try {
     const res = await serverAxios.get("/home", {
       params: {
         page: pageParam,
+        ...request,
       },
     });
 
@@ -20,12 +22,14 @@ export async function getHomeCategories(
 }
 
 export async function getClientHomeCategories(
-  pageParam = 1
+  pageParam = 1,
+  request: HomeFilterInterface
 ): Promise<CategoryResponse> {
   try {
     const res = await clientAxios.get("/home", {
       params: {
         page: pageParam,
+        ...request,
       },
     });
 

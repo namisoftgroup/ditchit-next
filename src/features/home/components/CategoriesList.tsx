@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Category } from "../types";
+import { Category, HomeFilterInterface } from "../types";
 import CategorySlider from "./CategorySlider";
 import CategorySliderSkeleton from "./CategorySliderSkeleton";
 import useGetCategoriesWithPosts from "@/features/home/useGetCategoriesWithPosts";
 
-export default function CategoriesList() {
+export default function CategoriesList({
+  filterParams,
+}: {
+  filterParams: HomeFilterInterface;
+}) {
   const { categories, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetCategoriesWithPosts();
+    useGetCategoriesWithPosts(filterParams);
 
   const observerRef = useRef<HTMLDivElement | null>(null);
 

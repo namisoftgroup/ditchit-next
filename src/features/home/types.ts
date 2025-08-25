@@ -15,3 +15,11 @@ export interface Category {
   value: number;
   posts: Post[];
 }
+
+export interface HomeFilterInterface {
+  longitude: string | null;
+  latitude: string | null;
+  kilometers: string | null;
+  delivery_method: string | null;
+  user_id: number | null
+}

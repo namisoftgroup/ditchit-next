@@ -2,13 +2,15 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getClientHomeCategories } from "@/features/home/service";
+import { HomeFilterInterface } from "./types";
 
-export default function useGetCategoriesWithPosts() {
+export default function useGetCategoriesWithPosts(filter: HomeFilterInterface) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ["home-categories"],
+      queryKey: ["home-categories", filter],
 
-      queryFn: ({ pageParam = 1 }) => getClientHomeCategories(pageParam),
+      queryFn: ({ pageParam = 1 }) =>
+        getClientHomeCategories(pageParam, filter),
       initialPageParam: 1,
 
       getNextPageParam: (lastPage, _, lastPageParam) => {

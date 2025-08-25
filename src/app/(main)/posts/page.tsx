@@ -10,6 +10,7 @@ import FilterSideBar from "@/features/listing/components/FilterSideBar";
 import PostsList from "@/features/listing/components/PostsList";
 
 function normalize(param: string | string[] | undefined): string | null {
+  if (Array.isArray(param)) return param[0] ?? null;
   return typeof param === "string" ? param : null;
 }
 
