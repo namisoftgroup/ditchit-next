@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useHomeFilter } from "@/features/home/store";
+import { useHomeFilter } from "@/features/listing/store";
 import { saveLocationFilters } from "@/features/listing/action";
 import { SHIPPING_METHODS } from "@/utils/constants";
 import { useTransition } from "react";
@@ -27,6 +27,7 @@ export default function SearchByModal({
 }: SearchByModalProps) {
   const { filter, setFilter } = useHomeFilter();
   const [isPending, startTransition] = useTransition();
+  const selectedMethod = filter.delivery_method;
 
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
     setFilter({ [key]: value });
@@ -55,7 +56,7 @@ export default function SearchByModal({
           <label className="font-bold mb-2">Delivery methods</label>
 
           <RadioGroup
-            defaultValue={"both"}
+            defaultValue={selectedMethod}
             onValueChange={(val) =>
               onUpdateFilter({ key: "delivery_method", value: val })
             }
@@ -80,7 +81,7 @@ export default function SearchByModal({
             className="flex justify-between items-center border-0 cursor-pointer"
             onClick={handleZipSearch}
           >
-            <p className="text-sm text-dark">Astoria, NY 11101, USA</p>
+            <p className="text-sm text-dark">{filter.address}</p>
             <span className="text-lg font-bold">&gt;</span>
           </div>
         </div>

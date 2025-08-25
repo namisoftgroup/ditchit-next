@@ -10,16 +10,17 @@ export async function saveLocationFilters(data: {
   address?: string;
   delivery_method?: string;
 }) {
-  (await cookies()).set("latitude", data.latitude ?? "", { path: "/" });
-  (await cookies()).set("longitude", data.longitude ?? "", { path: "/" });
-  (await cookies()).set("kilometers", data.kilometers ?? "", { path: "/" });
-  (await cookies()).set("zip_code", data.zip_code ?? "", { path: "/" });
-  (await cookies()).set("address", data.address ?? "", {
-    path: "/",
-  });
-  (await cookies()).set("delivery_method", data.delivery_method ?? "", {
-    path: "/",
-  });
+  const store = await cookies();
+
+  if (data.latitude) store.set("latitude", data.latitude, { path: "/" });
+  if (data.longitude) store.set("longitude", data.longitude, { path: "/" });
+  if (data.address) store.set("address", data.address, { path: "/" });
+  if (data.kilometers)
+    store.set("kilometers", String(data.kilometers), { path: "/" });
+  if (data.zip_code)
+    store.set("zip_code", String(data.zip_code), { path: "/" });
+  if (data.delivery_method)
+    store.set("delivery_method", data.delivery_method, { path: "/" });
 
   return { success: true };
 }

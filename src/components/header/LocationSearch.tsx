@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { Search, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useHomeFilter } from "@/features/listing/store";
 import SearchByModal from "../modals/SearchByModal";
 import ZipSearch from "../modals/ZipSearch";
 
 export default function LocationSearch() {
   const [show, setShow] = useState<boolean>(false);
+  const { filter } = useHomeFilter();
   const [showZipCodeSearch, setZipCodeSearch] = useState<boolean>(false);
 
   const router = useRouter();
@@ -57,7 +59,7 @@ export default function LocationSearch() {
             Current Location
           </p>
           <h4 className="text-[var(--darkColor)] capitalize overflow-hidden [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] text-[18px]">
-            United States
+            {filter.address}
           </h4>
         </div>
       </div>
@@ -70,7 +72,7 @@ export default function LocationSearch() {
           setShow(false);
         }}
       />
-      
+
       <ZipSearch
         show={showZipCodeSearch}
         handleClose={() => setZipCodeSearch(false)}

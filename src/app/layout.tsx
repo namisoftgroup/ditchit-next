@@ -3,10 +3,13 @@ import { Toaster } from "@/components/ui/sonner";
 import { getProfile } from "@/features/auth/actions";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { getAllRoomsForSocket } from "@/features/chat/actions";
+import { cookies } from "next/headers";
+import { FilterState } from "@/features/listing/store";
 import GoogleOneTapAuth from "@/features/auth/components/GoogleOneTapAuth";
 import NextTopLoader from "nextjs-toploader";
 
 import WebSocketProvider from "@/providers/WebSocketProvider";
+import HydrateHomeFilter from "@/providers/HydrateHomeFilter";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import AuthProvider from "@/providers/AuthProvider";
 
@@ -64,8 +67,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
   const data = await getProfile();
   const { data: rooms } = await getAllRoomsForSocket();
+
+  const initialFilter: FilterState = {
+    latitude: cookieStore.get("latitude")?.value || "39.8283",
+    longitude: cookieStore.get("longitude")?.value || "-98.5795",
+    zip_code: cookieStore.get("zip_code")?.value ?? "20500",
+    address: cookieStore.get("address")?.value || "United States",
+    delivery_method: cookieStore.get("delivery_method")?.value || "both",
+    kilometers: Number(cookieStore.get("kilometers")?.value ?? 50),
+  };
 
   return (
     <html lang="en">
@@ -77,7 +90,7 @@ export default async function RootLayout({
             <ReactQueryProvider>
               <WebSocketProvider rooms={rooms}>
                 <Toaster
-                  expand={false} 
+                  expand={false}
                   richColors
                   theme="light"
                   position="bottom-right"
@@ -88,6 +101,7 @@ export default async function RootLayout({
                 <Header />
                 <main className="min-h-[calc(100vh-316px)]">{children}</main>
                 <Footer />
+                <HydrateHomeFilter initialFilter={initialFilter} />
               </WebSocketProvider>
             </ReactQueryProvider>
           </AuthProvider>

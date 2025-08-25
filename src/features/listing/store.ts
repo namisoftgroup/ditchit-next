@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
-type FilterState = {
-  longitude: string;
+export type FilterState = {
   latitude: string;
-  zip_code: number;
+  longitude: string;
+  zip_code: string;
   address: string;
   delivery_method: string;
   kilometers: number;
@@ -14,16 +14,17 @@ type HomeFilterStore = {
   setFilter: (newFilter: Partial<FilterState>) => void;
 };
 
-export const useHomeFilter = create<HomeFilterStore>()((set) => ({
-  filter: {
-    latitude: "39.8283",
-    longitude: "-98.5795",
-    zip_code: 20500,
-    address: "United States",
-    delivery_method: "both",
-    kilometers: 50,
-  },
+const DEFAULT_FILTER: FilterState = {
+  latitude: "39.8283",
+  longitude: "-98.5795",
+  zip_code: "20500",
+  address: "United States",
+  delivery_method: "both",
+  kilometers: 50,
+};
 
+export const useHomeFilter = create<HomeFilterStore>((set) => ({
+  filter: DEFAULT_FILTER,
   setFilter: (newFilter) =>
     set((state) => ({
       filter: { ...state.filter, ...newFilter },
