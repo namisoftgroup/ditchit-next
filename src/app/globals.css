@@ -148,6 +148,7 @@
   }
 
   .swiper-slide {
+    margin-right: 16px;
     height: auto !important;
   }
 
@@ -165,7 +166,6 @@
 
   @media (min-width: 1024px) {
     .swiper-slide {
-      margin-right: 16px;
       width: calc(25% - 12px) !important;
     }
   }
