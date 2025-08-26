@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="bg-[#212121] relative z-20 py-10 text-[--whiteColor]">
       <div className="container flex items-center flex-wrap py-2 pb-4 gap-y-1 gap-x-4 text-[var(--whiteColor)]">
         <LogoBrand />
-        <div className="px-1 py-1 flex flex-wrap justify-center gap-4 my-3 text-[14px]">
+        <div className="px-1 py-1 flex flex-wrap md:justify-center justify-start md:gap-4 gap-3 my-3 text-[14px]">
           <Link href="/">Home</Link>
           <Link href="/categories">categories</Link>
           <Link href="/posts">Posts</Link>

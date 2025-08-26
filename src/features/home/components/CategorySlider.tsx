@@ -38,7 +38,7 @@ export default function CategorySlider({
   };
 
   return (
-    <section className="py-[60px] m-0 even:bg-[#f5f5f5]">
+    <section className="py-[60px] m-0 even:bg-[#f5f5f5] home_slider">
       <div className="container">
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 mb-4">
