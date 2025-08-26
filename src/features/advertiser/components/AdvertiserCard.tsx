@@ -60,13 +60,15 @@ export default function AdvertiserCard({ id }: { id: string }) {
           <span> {user?.address} </span>
         </div>
 
-        <Link
-          href={`tel:${user?.phone_code ?? ""}${user?.phone ?? ""}`}
-          className="w-full py-[12px] px-[16px] rounded-2xl flex justify-center items-center gap-2 bg-[#2562d3] text-[var(--whiteColor)] mt-2"
-        >
-          <PhoneCall width={18} height={18} />
-          <span> call </span>
-        </Link>
+        {user?.phone && (
+          <Link
+            href={`tel:${user?.phone_code ?? ""}${user?.phone ?? ""}`}
+            className="w-full py-[12px] px-[16px] rounded-2xl flex justify-center items-center gap-2 bg-[#2562d3] text-[var(--whiteColor)] mt-2"
+          >
+            <PhoneCall width={18} height={18} />
+            <span> call </span>
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -7,10 +7,10 @@ import useGetPostsList from "@/features/listing/useGetPostsList";
 
 type PostListProps = {
   userId: number | null;
-  longitude: string;
-  latitude: string;
-  kilometers: string;
-  delivery_method: string;
+  longitude: string | null;
+  latitude: string | null;
+  kilometers: string | null;
+  delivery_method: string | null;
 };
 
 export default function PostsList(props: PostListProps) {

@@ -34,13 +34,15 @@ export default function ContactOwner({
               </>
             )}
           </button>
-          <Link
-            href={`tel:${owner.phone}`}
-            className="flex-1 px-4 py-3 rounded-[16px] flex items-center justify-center gap-2 bg-[#2562d3] text-[var(--whiteColor)] capitalize text-[16px]"
-          >
-            <PhoneCall />
-            <span> call </span>
-          </Link>
+          {owner.phone && (
+            <Link
+              href={`tel:${owner.phone}`}
+              className="flex-1 px-4 py-3 rounded-[16px] flex items-center justify-center gap-2 bg-[#2562d3] text-[var(--whiteColor)] capitalize text-[16px]"
+            >
+              <PhoneCall />
+              <span> call </span>
+            </Link>
+          )}
         </div>
       )}
     </>

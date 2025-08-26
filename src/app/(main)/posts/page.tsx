@@ -68,10 +68,10 @@ export default async function Page({
             <HydrationBoundary state={dehydrate(queryClient)}>
               <PostsList
                 userId={filterParams.user_id}
-                longitude={filterParams.longitude ?? ""}
-                latitude={filterParams.latitude ?? ""}
-                kilometers={filterParams.kilometers ?? ""}
-                delivery_method={filterParams.delivery_method ?? ""}
+                longitude={filterParams.longitude ?? null}
+                latitude={filterParams.latitude ?? null}
+                kilometers={filterParams.kilometers ?? null}
+                delivery_method={filterParams.delivery_method ?? null}
               />
             </HydrationBoundary>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, Heart, MapPin } from "lucide-react";
+import { Clock, Heart, MapPin, Share2 } from "lucide-react";
 import { PostDetailsResponse } from "../types";
 import { useAuthStore } from "@/features/auth/store";
 import { useRouter } from "next/navigation";
@@ -10,20 +10,36 @@ import Link from "next/link";
 import useStoreFavorites from "@/features/profile/hooks/useStoreFavorites";
 
 export default function PostInfo({ post }: { post: PostDetailsResponse }) {
-  const [isLove, setIsLove] = useState(post.is_love);
-
   const optionsToMap = post.options.filter((option) => option.value);
 
+  const [isLove, setIsLove] = useState(post.is_love);
   const { storeFavorites, isPending: isPendingFav } = useStoreFavorites();
 
   const { token } = useAuthStore();
   const router = useRouter();
 
-  const encodedUrl = encodeURIComponent(
-    `https://ditchit.com/posts?id=${post.id}`
-  );
-
-  const encodedText = encodeURIComponent("DitchIt");
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: post.title,
+          text: `Check out this ${post.category.title} listing: ${post.title} - $${post.price}`,
+          url: window.location.href,
+        })
+        .catch((error) => {
+          console.error("Error sharing:", error);
+          navigator.clipboard
+            .writeText(window.location.href)
+            .then(() => alert("Link copied to clipboard!"))
+            .catch((err) => console.error("Error copying:", err));
+        });
+    } else {
+      navigator.clipboard
+        .writeText(window.location.href)
+        .then(() => alert("Link copied to clipboard!"))
+        .catch((error) => console.error("Error copying:", error));
+    }
+  };
 
   const handleFav = (id: number) => {
     if (!token) {
@@ -56,6 +72,13 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
         </button>
 
         <div className="flex items-center flex-wrap gap-4">
+          <button
+            onClick={handleShare}
+            className={`min-w-[42px] h-[42px] flex items-center justify-center rounded-full border border-[var(--darkColor)] transition-all`}
+          >
+            <Share2 width={20} height={20} />
+          </button>
+
           <Link
             href={`/posts?category_id=${post.category.id}`}
             className="flex items-center gap-2 border border-[var(--darkColor)] px-3 py-2 rounded-full h-[42px] font-bold text-[14px] transition-colors hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)] hover:border-[var(--mainColor)] group"
@@ -69,72 +92,6 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
             />
             {post.category.title}
           </Link>
-
-          <div className="flex items-center gap-1 p-1 transition-all rounded-full border border-[var(--darkColor)]">
-            <span className="ps-2 capitalize font-bold text-[14px]">
-              share:
-            </span>
-
-            <a
-              href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[var(--whiteColor)] w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#1da1f2] group"
-            >
-              <Image
-                src="/icons/twitter.svg"
-                alt="Twitter"
-                width={16}
-                height={16}
-                className="group-hover:brightness-0 group-hover:invert transition"
-              />
-            </a>
-
-            <a
-              href={`https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[var(--whiteColor)] w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#25d366] group"
-            >
-              <Image
-                src="/icons/whatsapp.svg"
-                alt="WhatsApp"
-                width={16}
-                height={16}
-                className="group-hover:brightness-0 group-hover:invert transition"
-              />
-            </a>
-
-            <a
-              href={`https://www.instagram.com/?url=${encodedUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[var(--whiteColor)] w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#e1306c] group"
-            >
-              <Image
-                src="/icons/instagram.svg"
-                alt="Instagram"
-                width={16}
-                height={16}
-                className="group-hover:brightness-0 group-hover:invert transition"
-              />
-            </a>
-
-            <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[var(--whiteColor)] w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#1877f2] group"
-            >
-              <Image
-                src="/icons/facebook.svg"
-                alt="Facebook"
-                width={16}
-                height={16}
-                className="group-hover:brightness-0 group-hover:invert transition"
-              />
-            </a>
-          </div>
         </div>
       </div>
 

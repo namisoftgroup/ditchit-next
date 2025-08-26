@@ -9,8 +9,8 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <div className="min-h-[500px] h-full flex items-center justify-center bg-gradient-to-br from-red-50 via-white to-red-100 px-4">
-      <div className="max-w-lg w-full p-8 rounded-2xl backdrop-blur-md bg-white/80 shadow-xl border border-red-100">
+    <div className="min-h-[calc(100vh-316px)] py-24 h-full flex items-center justify-center bg-gradient-to-br from-red-50 via-white to-red-100 px-4">
+      <div className="max-w-lg w-full rounded-2xl backdrop-blur-md">
         <div className="flex flex-col items-center text-center space-y-5">
           <div className="p-4 bg-red-100 rounded-full shadow-inner">
             <AlertTriangle className="w-10 h-10 text-red-600" />
@@ -31,7 +31,7 @@ export default function Error({
 
           <button
             onClick={reset}
-            className="mt-4 inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-red-500 to-red-600 text-white shadow-md hover:shadow-lg hover:from-red-600 transition-all duration-200"
+            className="inline-flex items-center justify-center px-8 py-2 rounded-full bg-gradient-to-r from-red-500 to-red-600 text-white shadow-md hover:shadow-lg hover:from-red-600 transition-all duration-200"
           >
             Try Again
           </button>

@@ -34,7 +34,6 @@ export default function ZipSearch({
         latitude: result.latitude,
         longitude: result.longitude,
         address: result.address,
-        zip_code: String(zipCode),
       });
     } else {
       toast.error("Could not fetch coordinates. Please try a valid ZIP.");
@@ -42,6 +41,7 @@ export default function ZipSearch({
   };
 
   const handleGetLocation = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter({ zip_code: String(e.target.value) });
     fetchCoordinates(e.target.value);
   };
 

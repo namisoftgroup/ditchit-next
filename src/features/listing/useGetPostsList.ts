@@ -8,10 +8,10 @@ import useUrlFilters from "@/hooks/useFilterParams";
 
 export default function useGetPostsList(
   userId: number | null,
-  longitude: string,
-  latitude: string,
-  kilometers: string,
-  delivery_method: string
+  longitude: string | null,
+  latitude: string | null,
+  kilometers: string | null,
+  delivery_method: string | null
 ) {
   const { getParam } = useUrlFilters();
 
