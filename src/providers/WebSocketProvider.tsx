@@ -35,11 +35,9 @@ export default function WebSocketProvider({
     const socket = initSocket();
     if (!socket.connected) socket.connect();
 
-    /*  Join user */
     console.log("[SOCKET] 🚀 Emitting user join:", userId);
     socket.emit(SOCKET_EVENTS.JOIN_USER, JSON.stringify(userId));
 
-    /*  Join rooms */
     if (rooms.length > 0) {
       setRooms(rooms);
       const roomIds = rooms.map((r) => r.id);
@@ -48,7 +46,6 @@ export default function WebSocketProvider({
       socket.emit(SOCKET_EVENTS.JOIN_ROOMS, JSON.stringify(roomIds));
     }
 
-    /* Listen to first message */
     socket.on(SOCKET_EVENTS.RECEIVE_FIRST_MESSAGE, (data: SocketMessage) => {
       console.log("[SOCKET] 📥 User-level data:", data);
       queryClient.invalidateQueries({ queryKey: ["unread-count"] });
@@ -74,7 +71,6 @@ export default function WebSocketProvider({
       );
     });
 
-    /* Listen to normal messages */
     socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, (data: SocketMessage) => {
       console.log("[SOCKET] 📥 New message:", data);
       queryClient.invalidateQueries({ queryKey: ["unread-count"] });
@@ -121,7 +117,6 @@ export default function WebSocketProvider({
       }
     });
 
-    /* Debug any unexpected errors */
     socket.on("error", (err) => {
       console.error("[SOCKET] ❌ Server error:", err);
     });

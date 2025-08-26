@@ -1,8 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useChatStore } from "../store";
 import { Room } from "../types";
-import { useParams } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { useParams, useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { deleteRoomAction } from "../actions";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -23,15 +27,28 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 import ConfirmModal from "@/components/modals/ConfirmModal";
-import useDeleteRoom from "../useDeleteRoom";
 
 export default function RoomLink({ room }: { room: Room }) {
   const params = useParams();
+  const router = useRouter();
   const currentRoomId = params?.roomId;
   const active = currentRoomId === String(room.id);
+  const { removeRoom } = useChatStore();
 
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
-  const { deleteRoom, isPending } = useDeleteRoom(setShowConfirm);
+
+  const { mutate: deleteRoom, isPending } = useMutation({
+    mutationFn: () => deleteRoomAction(room.id),
+
+    onSuccess: () => {
+      if (currentRoomId === String(room.id)) {
+        router.push("/chats");
+      }
+      removeRoom(room.id);
+      toast.success("Chat deleted successfully");
+      setShowConfirm(false);
+    },
+  });
 
   return (
     <Link
@@ -58,31 +75,31 @@ export default function RoomLink({ room }: { room: Room }) {
           </h6>
 
           <p className="text-[12px] text-[var(--mainColor)] line-clamp-1  flex justify-between w-full">
-            {room.latest_message.message}
-            {room.latest_message.type === "location" && (
+            {room.latest_message?.message}
+            {room.latest_message?.type === "location" && (
               <div className="flex items-center gap-1">
                 <MapPin width={14} height={14} />
                 Shared Location
               </div>
             )}
 
-            {room.latest_message.type === "files" && (
+            {room.latest_message?.type === "files" && (
               <>
-                {room.latest_message.files[0].type === "audio" && (
+                {room.latest_message?.files[0].type === "audio" && (
                   <div className="flex items-center gap-1">
                     <Mic width={14} height={14} />
                     Audio
                   </div>
                 )}
 
-                {room.latest_message.files[0].type === "image" && (
+                {room.latest_message?.files[0].type === "image" && (
                   <div className="flex items-center gap-1">
                     <Images width={14} height={14} />
                     Photo
                   </div>
                 )}
 
-                {room.latest_message.files[0].type === "video" && (
+                {room.latest_message?.files[0].type === "video" && (
                   <div className="flex items-center gap-1">
                     <Video width={14} height={14} />
                     Video
@@ -98,7 +115,7 @@ export default function RoomLink({ room }: { room: Room }) {
             )}
           </p>
 
-          <span className="text-[10px]">{room.latest_message.time}</span>
+          <span className="text-[10px]">{room.latest_message?.time}</span>
         </div>
 
         <DropdownMenu>
@@ -137,9 +154,7 @@ export default function RoomLink({ room }: { room: Room }) {
         text="Are you sure you want to delete this chat room?"
         show={showConfirm}
         isPending={isPending}
-        event={() =>
-          deleteRoom({ roomId: room.id, currentRoomId: Number(currentRoomId) })
-        }
+        event={deleteRoom}
         handleClose={() => setShowConfirm(false)}
       />
     </Link>

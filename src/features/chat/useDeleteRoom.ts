@@ -4,13 +4,7 @@ import { deleteRoomAction } from "./actions";
 
 export default function useDeleteRoom(setShowConfirm: (show: boolean) => void) {
   const { mutate: deleteRoom, isPending } = useMutation({
-    mutationFn: ({
-      roomId,
-      currentRoomId,
-    }: {
-      roomId: number;
-      currentRoomId?: number;
-    }) => deleteRoomAction(roomId, currentRoomId),
+    mutationFn: ({ roomId }: { roomId: number }) => deleteRoomAction(roomId),
 
     onSuccess: () => {
       toast.success("Chat deleted successfully");

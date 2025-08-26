@@ -1,19 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { getRoomsResponse } from "./types";
 import serverAxios from "@/lib/axios/serverAxios";
 
-export async function deleteRoomAction(roomId: number, currentRoomId?: number) {
+export async function deleteRoomAction(roomId: number) {
   await serverAxios.delete(`/chat/${roomId}`);
-
   revalidatePath("/chats");
-
-  if (currentRoomId && roomId === currentRoomId) {
-    redirect("/chats");
-  }
 }
 
 export async function getAllRoomsForSocket(): Promise<getRoomsResponse> {
