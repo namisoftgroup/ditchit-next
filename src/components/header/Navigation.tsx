@@ -2,7 +2,7 @@
 
 import { useAuthStore } from "@/features/auth/store";
 import useGetUnreadCount from "@/hooks/useGetUnreadCount";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export default function Navigation() {
   const { token } = useAuthStore();

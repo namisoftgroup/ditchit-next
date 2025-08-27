@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { CirclePlus } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
 export default function AddPostMenu() {

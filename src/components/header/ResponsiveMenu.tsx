@@ -6,7 +6,7 @@ import { useAuthStore } from "@/features/auth/store";
 import { Category } from "@/types/category";
 import { House, List, Menu, MessageSquare } from "lucide-react";
 import useGetUnreadCount from "@/hooks/useGetUnreadCount";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
 export default function ResponsiveMenu({

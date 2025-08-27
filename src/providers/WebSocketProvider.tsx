@@ -9,7 +9,7 @@ import { Room, SocketMessage } from "./../features/chat/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
 type ProviderProps = {
@@ -59,7 +59,7 @@ export default function WebSocketProvider({
           <Image
             src={data.room.another_user.user.image}
             alt={data.room.another_user.user.name}
-            className="w-[42px] h-42px] rounded-full"
+            className="w-[42px] h-42px] rounded-full object-cover"
             width={42}
             height={42}
           />
@@ -104,7 +104,7 @@ export default function WebSocketProvider({
             <Image
               src={data.room.another_user.user.image}
               alt={data.room.another_user.user.name}
-              className="w-[42px] h-[42px] rounded-full"
+              className="w-[42px] h-[42px] rounded-full object-cover"
               width={42}
               height={42}
             />

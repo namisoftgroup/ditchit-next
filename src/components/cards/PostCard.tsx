@@ -4,7 +4,7 @@ import { Post } from "@/types/post";
 import { Clock, MapPin } from "lucide-react";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import PostActions from "./PostActions";
 

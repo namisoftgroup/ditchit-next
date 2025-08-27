@@ -1,4 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { routing } from "./i18n/routing";
+import createMiddleware from "next-intl/middleware";
+
+const intlMiddleware = createMiddleware(routing);
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
@@ -21,11 +25,8 @@ export function middleware(request: NextRequest) {
     "/reset-password/verify-otp",
   ];
 
-  let isProtectedRoute = PROTECTED_ROUTES.includes(pathname);
-
-  if (pathname.startsWith("/chats/")) {
-    isProtectedRoute = true;
-  }
+  const isProtectedRoute =
+    PROTECTED_ROUTES.includes(pathname) || pathname.startsWith("/chats/");
 
   const isAuthRoute = AUTH_ROUTES.includes(pathname);
 
@@ -37,5 +38,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  return NextResponse.next();
+  return intlMiddleware(request);
 }
+
+export const config = {
+  matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
+};

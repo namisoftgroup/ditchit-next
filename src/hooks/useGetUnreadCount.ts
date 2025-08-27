@@ -1,9 +1,12 @@
 "use client";
 
-import clientAxios from "@/lib/axios/clientAxios";
+import { useAuthStore } from "@/features/auth/store";
 import { useQuery } from "@tanstack/react-query";
+import clientAxios from "@/lib/axios/clientAxios";
 
 export default function useGetUnreadCount() {
+  const { token } = useAuthStore();
+
   const { data } = useQuery({
     queryKey: ["unread-count"],
     queryFn: async () => {
@@ -15,6 +18,7 @@ export default function useGetUnreadCount() {
         throw new Error("Failed");
       }
     },
+    enabled: !!token
   });
   return { data };
 }

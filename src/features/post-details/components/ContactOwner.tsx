@@ -3,7 +3,7 @@
 import { MessagesSquare, PhoneCall } from "lucide-react";
 import { useAuthStore } from "@/features/auth/store";
 import { User } from "@/types/user";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import useGenerateRoom from "../useGenerateRoom";
 
 export default function ContactOwner({

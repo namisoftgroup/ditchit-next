@@ -6,7 +6,7 @@ import { PostDetailsResponse } from "../types";
 import { useAuthStore } from "@/features/auth/store";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import useStoreFavorites from "@/features/profile/hooks/useStoreFavorites";
 
 export default function PostInfo({ post }: { post: PostDetailsResponse }) {

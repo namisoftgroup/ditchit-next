@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 type GetAppModalProps = {
   show: boolean;

@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import BoostYourAd from "../modals/BoostYourAd";
 import ConfirmModal from "../modals/ConfirmModal";
 import useStoreFavorites from "@/features/profile/hooks/useStoreFavorites";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import useDeletePost from "@/features/profile/hooks/useDeletePost";
 import useSellActivePost from "@/features/profile/hooks/useSellActivePost";
 

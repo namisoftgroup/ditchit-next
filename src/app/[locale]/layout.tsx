@@ -1,17 +1,14 @@
-import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { getProfile } from "@/features/auth/actions";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { getAllRoomsForSocket } from "@/features/chat/actions";
 import { cookies } from "next/headers";
 import { FilterState } from "@/features/listing/store";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 import GoogleOneTapAuth from "@/features/auth/components/GoogleOneTapAuth";
 import NextTopLoader from "nextjs-toploader";
-
-import WebSocketProvider from "@/providers/WebSocketProvider";
 import HydrateHomeFilter from "@/providers/HydrateHomeFilter";
-import ReactQueryProvider from "@/providers/ReactQueryProvider";
-import AuthProvider from "@/providers/AuthProvider";
+import ProvidersContainer from "../../providers/ProvidersContainer";
 
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
@@ -64,12 +61,12 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: string }>;
+}) {
   const cookieStore = await cookies();
-  const data = await getProfile();
-  const { data: rooms } = await getAllRoomsForSocket();
 
   const initialFilter: FilterState = {
     latitude: cookieStore.get("latitude")?.value || "39.8283",
@@ -80,32 +77,39 @@ export default async function RootLayout({
     kilometers: Number(cookieStore.get("kilometers")?.value ?? 50),
   };
 
+  const data = await getProfile();
+  const { data: rooms } = await getAllRoomsForSocket();
+
+  const lang = (await params).locale;
+
+  if (lang) {
+    setRequestLocale(lang);
+  }
+  const messages = await getMessages({ locale: lang });
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       <body>
         <NextTopLoader showSpinner={false} color="#00a650" />
+        <HydrateHomeFilter initialFilter={initialFilter} />
+        <Toaster
+          expand={false}
+          richColors
+          theme="light"
+          position="bottom-right"
+        />
 
-        <GoogleOAuthProvider clientId={process.env.NEXT_GOOGLE_CLIENT_ID!}>
-          <AuthProvider user={data?.user ?? null} token={data?.token ?? null}>
-            <ReactQueryProvider>
-              <WebSocketProvider rooms={rooms}>
-                <Toaster
-                  expand={false}
-                  richColors
-                  theme="light"
-                  position="bottom-right"
-                />
-
-                {!data.token && <GoogleOneTapAuth />}
-
-                <Header />
-                <main className="min-h-[calc(100vh-316px)]">{children}</main>
-                <Footer />
-                <HydrateHomeFilter initialFilter={initialFilter} />
-              </WebSocketProvider>
-            </ReactQueryProvider>
-          </AuthProvider>
-        </GoogleOAuthProvider>
+        <ProvidersContainer
+          rooms={rooms}
+          locale={lang}
+          messages={messages}
+          data={data}
+        >
+          {!data.token && <GoogleOneTapAuth />}
+          <Header />
+          <main className="min-h-[calc(100vh-316px)]">{children}</main>
+          <Footer />
+        </ProvidersContainer>
       </body>
     </html>
   );

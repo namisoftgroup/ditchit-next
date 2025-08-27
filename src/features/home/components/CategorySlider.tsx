@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { Category, HomeFilterInterface } from "../types";
 import { Navigation } from "swiper/modules";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import PostCard from "@/components/cards/PostCard";
 import Image from "next/image";
 import usePaginateCategory from "../usePaginateCategory";

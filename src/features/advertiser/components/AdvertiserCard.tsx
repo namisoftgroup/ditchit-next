@@ -3,7 +3,7 @@
 import { MapPin, PhoneCall, Share2 } from "lucide-react";
 import useGetAdvertiserPosts from "@/features/advertiser/useGetAdvertiserPosts";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export default function AdvertiserCard({ id }: { id: string }) {
   const { user } = useGetAdvertiserPosts(id);
