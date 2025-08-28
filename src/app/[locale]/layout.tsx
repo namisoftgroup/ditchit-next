@@ -107,7 +107,7 @@ export default async function RootLayout({
           data={data}
         >
           {!data.token && <GoogleOneTapAuth />}
-          <Header />
+          <Header locale={locale} />
           <main className="min-h-[calc(100vh-316px)]">{children}</main>
           <Footer />
         </ProvidersContainer>

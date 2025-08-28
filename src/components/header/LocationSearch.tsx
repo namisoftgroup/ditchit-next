@@ -45,7 +45,7 @@ export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
         hideSm ? "md:flex hidden" : "flex md:flex-row flex-col items-start"
       }`}
     >
-      <div className="flex items-center gap-2 w-fill">
+      <div className="flex items-center gap-2 w-full">
         <form
           className="flex-1 m-0 mb-0 min-w-[300px] relative md:bg-[#f3f3f3] bg-[#fff] border border-[#e6e6e6] rounded-full w-[min(100%_-_16px,_1440px)]"
           onSubmit={handleSubmit}

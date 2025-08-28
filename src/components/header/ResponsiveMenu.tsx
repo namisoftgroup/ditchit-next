@@ -7,13 +7,16 @@ import { Category } from "@/types/category";
 import { House, List, Menu, MessageSquare } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { RTL_LANGUAGES } from "@/utils/constants";
 import useGetUnreadCount from "@/hooks/useGetUnreadCount";
 import Image from "next/image";
 
 export default function ResponsiveMenu({
   categories,
+  locale
 }: {
   categories: Category[];
+  locale: string;
 }) {
   const { token } = useAuthStore();
   const { data: count } = useGetUnreadCount();
@@ -21,16 +24,16 @@ export default function ResponsiveMenu({
 
   const t = useTranslations("common");
 
+  const isRTL = RTL_LANGUAGES.includes(locale);
+
   return (
     <div className="md:hidden block relative">
-      {/* Toggle Button (hidden when menu is open) */}
       {!open && (
         <button className="p-1 z-50 relative" onClick={() => setOpen(true)}>
           <Menu className="w-5 h-5" />
         </button>
       )}
 
-      {/* Background Blur Layer */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -48,18 +51,18 @@ export default function ResponsiveMenu({
       <AnimatePresence>
         {open && (
           <motion.ul
-            initial={{ x: "-100%" }}
+            initial={{ x: isRTL ? "100%" : "-100%" }}
             animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
+            exit={{ x: isRTL ? "100%" : "-100%" }}
             transition={{ type: "spring", stiffness: 200, damping: 22 }}
-            className="fixed top-0 start-0 w-[65vw] h-[100vh] bg-white flex flex-col gap-[8px] p-2 py-4 z-50 shadow-lg"
+            className={`fixed top-0 start-0 w-[65vw] h-[100vh] bg-white flex flex-col gap-[8px] p-2 py-4 z-50 shadow-lg`}
           >
             {/* Main Links */}
             <div className="w-full flex items-center gap-2 mb-1">
               <Link
                 href="/"
                 prefetch={true}
-                className="flex flex-col items-center gap-2 text-[12px] text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)]"
+                className="flex flex-col items-center gap-2 text-[12px] text-[var(--darkColor)] font-bold capitalize px-3 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)]"
                 onClick={() => setOpen(false)}
               >
                 <House className="w-5 h-5 object-contain" />
@@ -69,7 +72,7 @@ export default function ResponsiveMenu({
               <Link
                 href="/posts"
                 prefetch={true}
-                className="flex flex-col items-center gap-2 text-[12px] text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)]"
+                className="flex flex-col items-center gap-2 text-[12px] text-[var(--darkColor)] font-bold capitalize px-3 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)]"
                 onClick={() => setOpen(false)}
               >
                 <List className="w-5 h-5 object-contain" />
@@ -79,7 +82,7 @@ export default function ResponsiveMenu({
               {token && (
                 <Link
                   href="/chats"
-                  className="flex flex-col text-[12px] items-center gap-2 text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)]"
+                  className="flex flex-col text-[12px] items-center gap-2 text-[var(--darkColor)] font-bold capitalize px-3 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)]"
                   onClick={() => setOpen(false)}
                 >
                   <MessageSquare className="w-5 h-5 object-contain" />

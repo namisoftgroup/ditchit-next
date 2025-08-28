@@ -8,7 +8,7 @@ import LocationSearch from "./LocationSearch";
 import HeaderCategories from "./HeaderCategories";
 import ResponsiveMenu from "./ResponsiveMenu";
 
-export default async function Header() {
+export default async function Header({ locale }: { locale: string }) {
   const { data: categories } = await getCategories();
 
   return (
@@ -23,7 +23,7 @@ export default async function Header() {
             <GetApp />
             <AddPostMenu />
             <UserMenu />
-            <ResponsiveMenu categories={categories} />
+            <ResponsiveMenu categories={categories} locale={locale} />
           </div>
         </section>
 
@@ -31,7 +31,7 @@ export default async function Header() {
       </header>
 
       <div className="md:hidden block p-3 bg-[var(--mainColor10)]">
-        <LocationSearch hideSm={false}/>
+        <LocationSearch hideSm={false} />
       </div>
     </>
   );
