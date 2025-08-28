@@ -12,12 +12,29 @@ const clientAxios: AxiosInstance = axios.create({
   },
 });
 
+const getLocaleFromCookie = (): string => {
+  if (typeof window === "undefined") return "en";
+
+  const cookies = document.cookie.split(";")
+  const localeCookie = cookies.find((cookie) =>
+    cookie.trim().startsWith("NEXT_LOCALE=")
+  );
+
+  if (localeCookie) {
+    return localeCookie.split("=")[1]?.trim() || "en";
+  }
+
+  return "en";
+};
+
 clientAxios.interceptors.request.use(
   (config) => {
     const token = useAuthStore.getState().token;
-    if (token) {
-      config.headers.Authorization = token;
-    }
+    const locale = getLocaleFromCookie();
+
+    config.headers.Authorization = token;
+    config.headers["lang"] = locale;
+
     return config;
   },
   (error) => Promise.reject(error)

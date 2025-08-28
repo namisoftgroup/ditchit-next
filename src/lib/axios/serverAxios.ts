@@ -14,10 +14,11 @@ const serverAxios: AxiosInstance = axios.create({
 
 serverAxios.interceptors.request.use(async (config) => {
   const token = (await cookies()).get("token")?.value;
+  const locale = (await cookies()).get("NEXT_LOCALE")?.value;
+  
+  config.headers["lang"] = locale;
+  config.headers.Authorization = token;
 
-  if (token) {
-    config.headers.Authorization = token;
-  }
   return config;
 });
 
