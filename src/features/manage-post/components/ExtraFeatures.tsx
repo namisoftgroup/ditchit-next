@@ -1,5 +1,6 @@
 import InputField from "@/components/shared/InputField";
 import { Plus, Trash } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 
 export default function ExtraFeatures() {
@@ -9,6 +10,7 @@ export default function ExtraFeatures() {
     setValue,
     formState: { errors },
   } = useFormContext();
+  const t = useTranslations("manage_post");
 
   const addFeature = () => {
     if (watch("features")?.length >= 5) return;
@@ -27,7 +29,7 @@ export default function ExtraFeatures() {
   return (
     <div>
       <h6 className="font-bold text-sm gap-2 my-4 flex items-center justify-between">
-        Extra Features
+        {t("extra_features")}
         <span
           className="w-[48px] flex justify-center cursor-pointer"
           onClick={addFeature}
@@ -44,7 +46,7 @@ export default function ExtraFeatures() {
         {watch("features")?.map((feature: string, index: number) => (
           <div className="flex items-center gap-2" key={index}>
             <InputField
-              placeholder="Enter feature"
+              placeholder={t("enter_feature")}
               {...register(`features.${index}`)}
               id={`features.${index}`}
               error={

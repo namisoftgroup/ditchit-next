@@ -6,9 +6,11 @@ import { useAuthStore } from "../store";
 import { toast } from "sonner";
 import { authAction } from "../actions";
 import { jwtDecode } from "jwt-decode";
+import { useTranslations } from "next-intl";
 
 export default function GoogleOneTapAuth() {
   const router = useRouter();
+  const t = useTranslations("auth");
   const { setUser, setToken } = useAuthStore((state) => state);
 
   interface GoogleJwtPayload {
@@ -36,13 +38,13 @@ export default function GoogleOneTapAuth() {
           setUser(res.data.user);
           setToken(res.data.auth.token);
           router.push("/");
-          toast.success("Login successful");
+          toast.success(t("login_success"));
         } else {
           toast.error(res.message);
         }
       } catch (error) {
         console.error(error);
-        toast.error("Something went wrong");
+        toast.error(t("something_went_wrong"));
       }
     },
 

@@ -58,7 +58,7 @@ export default function HeaderCategories({ categories }: Props) {
 
         {/* Hidden measure row */}
         <div
-          className="invisible absolute -top-96 left-0 flex gap-4 pointer-events-none"
+          className="invisible absolute -top-96 start-0 flex gap-4 pointer-events-none"
           aria-hidden="true"
         >
           {categories.map((cat) => (

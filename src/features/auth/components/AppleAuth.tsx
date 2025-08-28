@@ -1,10 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import { JSX, ClassAttributes, ButtonHTMLAttributes } from "react";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 import AppleSignin from "react-apple-signin-auth";
 
 export default function AppleAuth() {
+  const t = useTranslations("auth");
+
   const handleSuccess = (response: {
     authorization: { id_token: string; code: string };
     user?: { email: string; name: string };
@@ -39,7 +42,7 @@ export default function AppleAuth() {
         >
           <Image src="/icons/apple.svg" alt="apple" width={24} height={24} />
           <span className="flex-1 text-center text-sm">
-            Continue with Apple
+            {t("continue_with_apple")}
           </span>
         </button>
       )}

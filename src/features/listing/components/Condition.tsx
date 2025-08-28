@@ -6,16 +6,18 @@ import {
 import { Label } from "@/components/ui/label";
 import { CONDITIONS } from "@/utils/constants";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useTranslations } from "next-intl";
 import useUrlFilters from "@/hooks/useFilterParams";
 
 export default function Condition() {
   const { getParam, setParam } = useUrlFilters();
   const selectedSort = getParam("condition") ?? "";
+  const t = useTranslations("common");
 
   return (
     <AccordionItem value="item-2" className="border-[var(--lightBorderColor)]">
       <AccordionTrigger className="px-5 hover:no-underline data-[state=open]:bg-[var(--mainColor)] data-[state=open]:text-white rounded-none">
-        Condition
+        {t("condition")}
       </AccordionTrigger>
       <AccordionContent className="flex flex-col gap-4 text-balance px-5 py-4">
         <RadioGroup

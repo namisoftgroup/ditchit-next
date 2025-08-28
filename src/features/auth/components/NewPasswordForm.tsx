@@ -7,10 +7,13 @@ import { API_URL } from "@/utils/constants";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import InputField from "@/components/shared/InputField";
 import clientAxios from "@/lib/axios/clientAxios";
 
 export default function NewPasswordForm() {
+  const t = useTranslations("auth");
+
   const router = useRouter();
   const [isPending, setIsPending] = useState<boolean>(false);
 
@@ -32,14 +35,14 @@ export default function NewPasswordForm() {
       });
 
       if (res.data.code === 200) {
-        toast.success("Password updated successfully");
+        toast.success(t("password_updated"));
         router.push("/profile");
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error(t("something_went_wrong"));
     } finally {
       setIsPending(false);
     }
@@ -51,21 +54,27 @@ export default function NewPasswordForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <InputField
-        label="Password"
+        label={t("password")}
         type="password"
         id="password"
-        placeholder="Password"
+        placeholder={t("password")}
         {...register("password")}
-        error={errors.password?.message}
+        error={
+          errors.password?.message ? t(errors.password?.message) : undefined
+        }
       />
 
       <InputField
-        label="Password Confirmation"
+        label={t("password_confirmation")}
         type="password"
         id="passwordConfirmation"
-        placeholder="Password"
+        placeholder={t("password")}
         {...register("confirm_password")}
-        error={errors.confirm_password?.message}
+        error={
+          errors.confirm_password?.message
+            ? t(errors.confirm_password?.message)
+            : undefined
+        }
       />
 
       <button
@@ -73,7 +82,7 @@ export default function NewPasswordForm() {
         className="customBtn w-full rounded-full mt-3"
         disabled={isPending}
       >
-        {isPending ? "updating..." : "Reset Password"}
+        {isPending ? t("loading") : t("reset_password")}
       </button>
     </form>
   );

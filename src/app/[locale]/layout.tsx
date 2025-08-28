@@ -4,6 +4,7 @@ import { getAllRoomsForSocket } from "@/features/chat/actions";
 import { cookies } from "next/headers";
 import { FilterState } from "@/features/listing/store";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { RTL_LANGUAGES } from "@/utils/constants";
 import type { Metadata } from "next";
 import GoogleOneTapAuth from "@/features/auth/components/GoogleOneTapAuth";
 import NextTopLoader from "nextjs-toploader";
@@ -74,21 +75,21 @@ export default async function RootLayout({
     zip_code: cookieStore.get("zip_code")?.value ?? "20500",
     address: cookieStore.get("address")?.value || "United States",
     delivery_method: cookieStore.get("delivery_method")?.value || "both",
-    kilometers: Number(cookieStore.get("kilometers")?.value ?? 50),
+    kilometers: Number(cookieStore.get("kilometers")?.value ?? 0),
   };
 
   const data = await getProfile();
   const { data: rooms } = await getAllRoomsForSocket();
 
-  const lang = (await params).locale;
+  const locale = (await params).locale;
 
-  if (lang) {
-    setRequestLocale(lang);
+  if (locale) {
+    setRequestLocale(locale);
   }
-  const messages = await getMessages({ locale: lang });
+  const messages = await getMessages({ locale: locale });
 
   return (
-    <html lang={lang}>
+    <html lang={locale} dir={RTL_LANGUAGES.includes(locale) ? "rtl" : "ltr"}>
       <body>
         <NextTopLoader showSpinner={false} color="#00a650" />
         <HydrateHomeFilter initialFilter={initialFilter} />
@@ -101,7 +102,7 @@ export default async function RootLayout({
 
         <ProvidersContainer
           rooms={rooms}
-          locale={lang}
+          locale={locale}
           messages={messages}
           data={data}
         >

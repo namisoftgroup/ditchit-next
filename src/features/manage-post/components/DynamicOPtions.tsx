@@ -1,4 +1,5 @@
 import { Controller, useFormContext } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import InputField from "@/components/shared/InputField";
 import SelectField from "@/components/shared/SelectField";
 
@@ -17,6 +18,8 @@ export default function DynamicOPtions({ categoryOptions }: optionsPorps) {
     register,
     formState: { errors },
   } = useFormContext();
+
+  const t = useTranslations("manage_post");
 
   return (
     <>
@@ -38,7 +41,7 @@ export default function DynamicOPtions({ categoryOptions }: optionsPorps) {
                   <SelectField
                     label={opt.title}
                     id={`option-${opt.id}`}
-                    placeholder={`Select ${opt.title}`}
+                    placeholder={`${t("select")} ${opt.title}`}
                     error={
                       Array.isArray(errors.options) &&
                       errors.options[index]?.value?.message
@@ -58,7 +61,7 @@ export default function DynamicOPtions({ categoryOptions }: optionsPorps) {
                 render={({ field }) => (
                   <InputField
                     label={opt.title}
-                    placeholder={`Enter ${opt.title}`}
+                    placeholder={`${t("enter")} ${opt.title}`}
                     id={`option-${opt.id}`}
                     {...field}
                     error={

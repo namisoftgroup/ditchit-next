@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import PostCard from "@/components/cards/PostCard";
 import useGetMyFavorites from "@/features/profile/hooks/useGetFavorites";
 import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
@@ -7,6 +8,7 @@ import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 
 export default function FavoritesList() {
   const { posts, isLoading } = useGetMyFavorites();
+  const t = useTranslations("post");
 
   return (
     <section className="flex flex-wrap -mx-2">
@@ -27,9 +29,9 @@ export default function FavoritesList() {
       )}
 
       {posts.length === 0 && (
-        <div className="w-full flex flex-col justify-center items-center" >
+        <div className="w-full flex flex-col justify-center items-center">
           <NoDataPlaceHolder />
-          You have no favorites yet
+          {t("no_favs")}
         </div>
       )}
     </section>

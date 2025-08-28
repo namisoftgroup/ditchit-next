@@ -67,7 +67,7 @@ export default function PostSlider({ images }: { images: string[] }) {
                 src={src}
                 alt={`bg-blur-${idx}`}
                 fill
-                className="object-cover blur-[24px] absolute top-0 left-0 w-full h-full z-0"
+                className="object-cover blur-[24px] absolute top-0 start-0 w-full h-full z-0"
               />
 
               <a
@@ -87,7 +87,7 @@ export default function PostSlider({ images }: { images: string[] }) {
           ))}
         </Swiper>
 
-        <div className="swiperControl absolute right-0 bottom-0 z-[4]">
+        <div className="swiperControl absolute end-0 bottom-0 z-[4]">
           <div className="swiperBtns">
             <div className="swiper-button-prev"></div>
             <div className="swiper-button-next"></div>

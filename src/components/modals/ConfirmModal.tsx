@@ -6,6 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 
 type confirmModalProps = {
   show: boolean;
@@ -24,6 +25,8 @@ export default function ConfirmModal({
   isPending,
   handleClose,
 }: confirmModalProps) {
+  const t = useTranslations("common");
+
   return (
     <Dialog open={show} onOpenChange={handleClose}>
       <DialogContent className="max-w-md p-6 bg-white shadow-xl space-y-6 rounded-[24px] gap-2">
@@ -44,7 +47,7 @@ export default function ConfirmModal({
             disabled={isPending}
             onClick={event}
           >
-            {isPending ? "loading..." : "confirm"}
+            {isPending ? t("loading") : t("confirm")}
           </button>
         </div>
       </DialogContent>

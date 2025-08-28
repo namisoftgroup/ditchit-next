@@ -1,4 +1,5 @@
 import { Controller, useFormContext } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import DynamicOPtions from "../DynamicOPtions";
 import ExtraFeatures from "../ExtraFeatures";
 import SelectField from "@/components/shared/SelectField";
@@ -26,6 +27,8 @@ export default function MoreDetailsStep({
     formState: { errors },
   } = useFormContext();
 
+  const t = useTranslations("manage_post");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const isValid = await trigger(["features", "condition", "options"]);
@@ -40,15 +43,19 @@ export default function MoreDetailsStep({
         control={control}
         render={({ field }) => (
           <SelectField
-            label="Condition"
+            label={t("condition")}
             id="condition"
-            placeholder="Select Condition"
-            error={errors.condition?.message as string}
+            placeholder={t("select_condition")}
+            error={
+              errors.condition?.message
+                ? t(errors.condition?.message as string)
+                : undefined
+            }
             value={field.value}
             onChange={field.onChange}
             options={[
-              { label: "New", value: "new" },
-              { label: "Used", value: "used" },
+              { label: t("new"), value: "new" },
+              { label: t("used"), value: "used" },
             ]}
           />
         )}

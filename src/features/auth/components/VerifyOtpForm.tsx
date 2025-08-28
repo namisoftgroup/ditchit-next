@@ -10,12 +10,14 @@ import { useAuthStore, useResetPasswordStore } from "../store";
 import { toast } from "sonner";
 import { checkCodeAction } from "../actions";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 export default function VerifyOtpForm() {
   const [code, setCode] = useState("");
   const [isPending, setIsPending] = useState(false);
   const router = useRouter();
+  const t = useTranslations("auth");
 
   const { setUser, setToken } = useAuthStore((state) => state);
   const { email } = useResetPasswordStore((state) => state);
@@ -41,13 +43,13 @@ export default function VerifyOtpForm() {
         setUser(res.data.user);
         setToken(res.data.auth.token);
         router.push("/reset-password/new-password");
-        toast.success("Login successful");
+        toast.success(t("login_success"));
       } else {
         toast.error(res.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error(t("something_went_wrong"));
     } finally {
       setIsPending(false);
     }
@@ -67,7 +69,7 @@ export default function VerifyOtpForm() {
       />
 
       <p className="text-[var(--darkColor)] text-center text-[16px]">
-        Please enter the verification code sent to <br />
+        {t("enter_code_sent_to")} <br />
         {email}
       </p>
 
@@ -97,7 +99,7 @@ export default function VerifyOtpForm() {
         className="customBtn w-full rounded-full mt-3"
         disabled={code.length !== 6 || isPending}
       >
-        {isPending ? "Verifying..." : "Verify OTP"}
+        {isPending ? t("loading") : t("verify_otp")}
       </button>
     </form>
   );

@@ -1,10 +1,16 @@
+import { getTranslations } from "next-intl/server";
 import PageBanner from "@/components/shared/PageBanner";
 import RegisterForm from "@/features/auth/components/RegisterForm";
 
-export default function page() {
+export default async function page() {
+  const t = await getTranslations("common");
+
   return (
     <>
-      <PageBanner links={[{ title: "Home", link: "/" }]} page="Register" />
+      <PageBanner
+        links={[{ title: t("home"), link: "/" }]}
+        page={t("register")}
+      />
 
       <section className="container py-8">
         <div className="flex flex-wrap -mx-2 justify-center">

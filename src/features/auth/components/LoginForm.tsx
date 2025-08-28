@@ -8,6 +8,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useAuthStore } from "../store";
 import { authAction } from "../actions";
+import { useTranslations } from "next-intl";
 import InputField from "@/components/shared/InputField";
 import FormFooterLink from "@/features/auth/components/FormFooterLink";
 import Image from "next/image";
@@ -17,6 +18,7 @@ export default function LoginForm() {
   const [isPending, setIsPending] = useState<boolean>(false);
   const router = useRouter();
   const { setUser, setToken } = useAuthStore((state) => state);
+  const t = useTranslations("auth");
 
   const {
     register,
@@ -41,13 +43,13 @@ export default function LoginForm() {
         setUser(res.data.user);
         setToken(res.data.auth.token);
         router.push("/");
-        toast.success("Login successful");
+        toast.success(t("login_success"));
       } else {
         toast.error(res.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error(t("something_went_wrong"));
     } finally {
       setIsPending(false);
     }
@@ -67,36 +69,42 @@ export default function LoginForm() {
       />
 
       <InputField
-        label="Email"
+        label={t("email")}
         type="email"
         id="email"
-        placeholder="Email"
+        placeholder={t("email")}
         {...register("email")}
-        error={errors.email?.message}
+        error={errors.email?.message ? t(errors.email.message) : undefined}
       />
 
       <InputField
-        label="Password"
+        label={t("password")}
         type="password"
         id="password"
-        placeholder="Password"
+        placeholder={t("password")}
         {...register("password")}
-        error={errors.password?.message}
+        error={
+          errors.password?.message ? t(errors.password.message) : undefined
+        }
       />
 
       <FormFooterLink
-        question="Forgot your password?"
-        linkText="Reset your password"
+        question={t("forget_password")}
+        linkText={t("reset_your_password")}
         href="/reset-password"
       />
 
-      <button type="submit" className="customBtn w-full rounded-full" disabled={isPending}>
-        {isPending ? "Logging in..." : "Login"}
+      <button
+        type="submit"
+        className="customBtn w-full rounded-full"
+        disabled={isPending}
+      >
+        {isPending ? t("loading") : t("login")}
       </button>
 
       <FormFooterLink
-        question="Don't have an account?"
-        linkText="Create New Account"
+        question={t("don't_have_account")}
+        linkText={t("create_new_account")}
         href="/register"
       />
 

@@ -18,6 +18,7 @@ import {
   StandaloneSearchBox,
   useLoadScript,
 } from "@react-google-maps/api";
+import { useTranslations } from "next-intl";
 
 type ChooseLocationModalProps = {
   show: boolean;
@@ -48,6 +49,8 @@ export default function ChooseLocationModal({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
     libraries: ["places"],
   });
+
+    const t = useTranslations("chat");
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -119,7 +122,7 @@ export default function ChooseLocationModal({
       <DialogContent className="max-w-md p-6 bg-white shadow-xl rounded-[24px] gap-2">
         <DialogHeader className="mb-0">
           <DialogTitle className="text-[14px] font-bold capitalize">
-            Choose Your Location
+            {t("choose_your_location")}
           </DialogTitle>
         </DialogHeader>
 
@@ -149,8 +152,8 @@ export default function ChooseLocationModal({
             >
               <input
                 type="search"
-                placeholder="Search places..."
-                className="absolute top-2 left-1/2 -translate-x-1/2 w-[96%] z-10  rounded-md p-3 bg-white shadow"
+                placeholder={t("search_places")}
+                className="absolute top-2 start-1/2 -translate-x-1/2 w-[96%] z-10  rounded-md p-3 bg-white shadow"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
               />
@@ -162,7 +165,7 @@ export default function ChooseLocationModal({
             onClick={handleSendLocation}
             disabled={isPending}
           >
-           {isPending ? "Sending..." : "Send Location"}
+           {isPending ? t("sending") : t("send_location")}
           </Button>
         </div>
       </DialogContent>

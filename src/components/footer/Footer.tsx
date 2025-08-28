@@ -1,22 +1,25 @@
 import { Mail, MapPinned } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 import LogoBrand from "../header/LogoBrand";
 import SubscribeBtn from "./SubscribeBtn";
 
-export default function Footer() {
+export default async function Footer() {
+  const t = await getTranslations("common");
+  
   return (
     <footer className="bg-[#212121] relative z-20 py-10 text-[--whiteColor]">
       <div className="container flex items-center flex-wrap py-2 pb-4 gap-y-1 gap-x-4 text-[var(--whiteColor)]">
         <LogoBrand />
         <div className="px-1 py-1 flex flex-wrap md:justify-center justify-start md:gap-4 gap-3 my-3 text-[14px]">
-          <Link href="/">Home</Link>
-          <Link href="/categories">categories</Link>
-          <Link href="/posts">Posts</Link>
-          <Link href="/chats">Chats</Link>
-          <Link href="/contact-us">contact us</Link>
-          <Link href="/about">About Us</Link>
-          <Link href="/terms-conditions">terms and conditions</Link>
-          <Link href="/privacy-policy">Privacy Policy</Link>
+          <Link href="/">{t("home")}</Link>
+          <Link href="/categories">{t("categories")}</Link>
+          <Link href="/posts">{t("posts")}</Link>
+          <Link href="/chats">{t("chats")}</Link>
+          <Link href="/contact-us">{t("contact")}</Link>
+          <Link href="/about">{t("about")}</Link>
+          <Link href="/terms-conditions">{t("terms")}</Link>
+          <Link href="/privacy-policy">{t("privacy")}</Link>
           <SubscribeBtn />
         </div>
       </div>
@@ -48,7 +51,7 @@ export default function Footer() {
           </a>
 
           <p className="text-sm text-[var(--whiteColor)]">
-            {new Date().getFullYear()} © All rights reserved
+            {new Date().getFullYear()} © {t("rights_reserved")}
           </p>
         </div>
       </div>

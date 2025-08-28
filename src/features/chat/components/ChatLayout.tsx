@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { Room } from "../types";
 import { useChatStore } from "../store";
+import { useTranslations } from "next-intl";
 import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
 import ChatsSidebar from "./ChatsSidebar";
 
@@ -14,14 +15,15 @@ export default function ChatLayout({
   children: React.ReactNode;
 }) {
   const { rooms: storeRooms } = useChatStore();
+  const t = useTranslations("chat");
 
-const allRooms = useMemo(
-  () => [
-    ...rooms,
-    ...storeRooms.filter((r) => !rooms.some((apiR) => apiR.id === r.id)),
-  ],
-  [rooms, storeRooms]
-);
+  const allRooms = useMemo(
+    () => [
+      ...rooms,
+      ...storeRooms.filter((r) => !rooms.some((apiR) => apiR.id === r.id)),
+    ],
+    [rooms, storeRooms]
+  );
 
   return (
     <section className="container py-6 flex gap-8">
@@ -39,11 +41,10 @@ const allRooms = useMemo(
         <div className="w-full flex flex-col justify-center items-center">
           <NoDataPlaceHolder />
           <p className="text-center text-gray-600 mt-4 md:max-w-md mb-7">
-            No chat conversations found. Start a conversation from any post to
-            see your chats appear here.
+            {t("no_conversations_found")}
           </p>
         </div>
-      ) }
+      )}
     </section>
   );
 }

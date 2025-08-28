@@ -4,6 +4,7 @@ import { SHIPPING_METHODS } from "@/utils/constants";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { usePostForm } from "../../PostFormProvider";
+import { useTranslations } from "next-intl";
 import type { PostFormData } from "../../schema";
 import InputField from "@/components/shared/InputField";
 import BoostAndPublish from "@/components/modals/BoostAndPublish";
@@ -28,6 +29,7 @@ export default function PriceDetailsStep({
   const [show, setShow] = useState(false);
   const { savePost, isSaving } = usePostForm();
   const selectedDelivery = watch("delivery_method");
+  const t = useTranslations("manage_post");
 
   const handleNextClick = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,11 +63,13 @@ export default function PriceDetailsStep({
   return (
     <form className="flex flex-col gap-4" onSubmit={handleNextClick}>
       <InputField
-        label="Price"
+        label={t("price")}
         id="price"
         placeholder="$0.00"
         {...register("price")}
-        error={errors.price?.message as string}
+        error={
+          errors.price?.message ? t(errors.price?.message as string) : undefined
+        }
         className="w-full"
       />
 
@@ -78,7 +82,7 @@ export default function PriceDetailsStep({
               setValue("firm_price", checked ? 1 : 0)
             }
           />
-          <Label htmlFor="firm_price">Firm Price</Label>
+          <Label htmlFor="firm_price">{t("firm_price")}</Label>
         </div>
 
         <div className="flex items-start gap-3">
@@ -89,12 +93,12 @@ export default function PriceDetailsStep({
               setValue("virtual_tour", checked ? 1 : 0)
             }
           />
-          <Label htmlFor="virtual_tour">Virtual tour</Label>
+          <Label htmlFor="virtual_tour">{t("virtual_tour")}</Label>
         </div>
       </div>
 
       <div>
-        <h6 className="font-bold text-sm mb-2">Delivery methods</h6>
+        <h6 className="font-bold text-sm mb-2">{t("delivery_methods")}</h6>
         <div className="flex gap-2 md:flex-row flex-col">
           {SHIPPING_METHODS.map((method) => (
             <label
@@ -122,7 +126,7 @@ export default function PriceDetailsStep({
 
       <FormFooter
         back={back}
-        nextBtnText={postId ? "Update Post" : "Confirm & Publish"}
+        nextBtnText={postId ? t("update_post") : t("confirm_publish")}
       />
 
       <BoostAndPublish

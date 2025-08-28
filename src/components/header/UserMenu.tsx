@@ -11,11 +11,13 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 export default function UserMenu() {
   const router = useRouter();
   const { user ,isAuthenticated, logout } = useAuthStore((state) => state);
+  const t = useTranslations("header");
 
   const performLogout = async () => {
     const res = await logOutAction();
@@ -37,7 +39,7 @@ export default function UserMenu() {
             className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
           >
             <Megaphone width={20} height={20} />
-            My Posts
+            {t("my_posts")}
           </Link>
         </DropdownMenuItem>
 
@@ -47,7 +49,7 @@ export default function UserMenu() {
             className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
           >
             <Heart width={20} height={20} />
-            Favorites
+            {t("favorites")}
           </Link>
         </DropdownMenuItem>
 
@@ -57,7 +59,7 @@ export default function UserMenu() {
             className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
           >
             <UserPen width={20} height={20} />
-            Edit Profile
+            {t("edit_profile")}
           </Link>
         </DropdownMenuItem>
 
@@ -67,7 +69,7 @@ export default function UserMenu() {
             onClick={performLogout}
           >
             <LogOut width={20} height={20} />
-            Logout
+            {t("logout")}
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>

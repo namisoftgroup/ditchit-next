@@ -5,8 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuthStore } from "@/features/auth/store";
 import { Category } from "@/types/category";
 import { House, List, Menu, MessageSquare } from "lucide-react";
-import useGetUnreadCount from "@/hooks/useGetUnreadCount";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import useGetUnreadCount from "@/hooks/useGetUnreadCount";
 import Image from "next/image";
 
 export default function ResponsiveMenu({
@@ -17,6 +18,8 @@ export default function ResponsiveMenu({
   const { token } = useAuthStore();
   const { data: count } = useGetUnreadCount();
   const [open, setOpen] = useState(false);
+
+  const t = useTranslations("common");
 
   return (
     <div className="md:hidden block relative">
@@ -49,7 +52,7 @@ export default function ResponsiveMenu({
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", stiffness: 200, damping: 22 }}
-            className="fixed top-0 left-0 w-[65vw] h-[100vh] bg-white flex flex-col gap-[8px] p-2 py-4 z-50 shadow-lg"
+            className="fixed top-0 start-0 w-[65vw] h-[100vh] bg-white flex flex-col gap-[8px] p-2 py-4 z-50 shadow-lg"
           >
             {/* Main Links */}
             <div className="w-full flex items-center gap-2 mb-1">
@@ -60,7 +63,7 @@ export default function ResponsiveMenu({
                 onClick={() => setOpen(false)}
               >
                 <House className="w-5 h-5 object-contain" />
-                Home
+                {t("home")}
               </Link>
 
               <Link
@@ -70,7 +73,7 @@ export default function ResponsiveMenu({
                 onClick={() => setOpen(false)}
               >
                 <List className="w-5 h-5 object-contain" />
-                Listing
+                {t("listing")}
               </Link>
 
               {token && (
@@ -80,9 +83,9 @@ export default function ResponsiveMenu({
                   onClick={() => setOpen(false)}
                 >
                   <MessageSquare className="w-5 h-5 object-contain" />
-                  Chats
+                  {t("chats")}
                   {count > 0 && (
-                    <div className="absolute top-0 right-0 bg-[var(--mainColor)] text-[var(--whiteColor)] text-[10px] font-bold px-1 rounded-full h-4 min-w-[16px] flex items-center justify-center">
+                    <div className="absolute top-0 end-0 bg-[var(--mainColor)] text-[var(--whiteColor)] text-[10px] font-bold px-1 rounded-full h-4 min-w-[16px] flex items-center justify-center">
                       {count}
                     </div>
                   )}

@@ -2,6 +2,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getAdvertiserServerPosts } from "@/features/advertiser/service";
 import { advertiserResponse } from "@/features/advertiser/types";
 import { getQueryClient } from "@/utils/queryClient";
+import { getTranslations } from "next-intl/server";
 import PageBanner from "@/components/shared/PageBanner";
 import AdvertiserPostsList from "@/features/advertiser/components/AdvertiserPostsList";
 import AdvertiserCard from "@/features/advertiser/components/AdvertiserCard";
@@ -13,6 +14,8 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
+  const t = await getTranslations("common");
+
   const id = (await params).id;
   const queryClient = getQueryClient();
 
@@ -34,7 +37,10 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <>
-      <PageBanner links={[{ title: "Home", link: "/" }]} page="Advertiser" />
+      <PageBanner
+        links={[{ title: t("home"), link: "/" }]}
+        page={t("advertiser")}
+      />
 
       <div className="container py-4">
         <div className="flex flex-wrap -mx-2">

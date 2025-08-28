@@ -6,6 +6,7 @@ import { Check, Upload } from "lucide-react";
 import { Controller, useFormContext } from "react-hook-form";
 import { formatFileSize, getFileInfo } from "@/lib/media/helpers";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 type UploadStatus = "idle" | "uploading" | "success" | "failed";
 
@@ -34,6 +35,7 @@ function FilePreviews({
   onRemove: (index: number) => void;
 }) {
   const [previews, setPreviews] = useState<FilePreview[]>([]);
+  const t = useTranslations("common")
 
   useEffect(() => {
     const loadPreviews = async () => {
@@ -132,7 +134,7 @@ function FilePreviews({
             }}
             className="w-full px-3 py-2 border-t border-gray-200 text-[var(--grayColor)] text-xs hover:bg-gray-50 transition"
           >
-            Remove file
+            {t("remove_file")}
           </button>
         </div>
       ))}
@@ -148,6 +150,7 @@ export default function MediaUpload({
   className = "",
 }: MediaUploadProps) {
   const { control, setValue, getValues } = useFormContext();
+  const t = useTranslations("common");
 
   const handleAddFiles = useCallback(
     (acceptedFiles: File[]) => {
@@ -219,7 +222,7 @@ export default function MediaUpload({
                     <Upload className="text-gray-500" width={16} height={16} />
                   </div>
                   <p className="text-gray-800 text-center text-[14px]">
-                    Click or drag images here
+                    {t("drag_drop")}
                   </p>
                 </div>
               )}
@@ -228,7 +231,7 @@ export default function MediaUpload({
             </div>
 
             {error && (
-              <p className="text-red-500 text-xs mt-1">{error.message}</p>
+              <p className="text-red-500 text-xs mt-1">{error.message ? t(error.message) : undefined}</p>
             )}
           </div>
         );

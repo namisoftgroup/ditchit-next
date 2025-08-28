@@ -1,6 +1,6 @@
 import { Category } from "@/types/category";
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import Image from "next/image";
 
 type Props = {
   category: Category;

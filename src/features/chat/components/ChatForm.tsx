@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { MessagePayload } from "../types";
 import { MapPinPlus, Paperclip, Send, Trash } from "lucide-react";
+import { useTranslations } from "next-intl";
 import useSendMessage from "../useSendMessage";
 import Recorder from "./Recorder";
 import ChooseLocationModal from "@/components/modals/ChooseLocationModal";
@@ -18,6 +19,7 @@ export default function ChatForm({
   const [show, setShow] = useState(false);
   const [sound, setSound] = useState<File | null>(null);
   const [soundUrl, setSoundUrl] = useState<string | null>(null);
+  const t = useTranslations("auth");
 
   const [message, setMessage] = useState<MessagePayload>({
     type: "text",
@@ -88,7 +90,7 @@ export default function ChatForm({
               type="text"
               id="text-message"
               name="text-message"
-              placeholder="write here..."
+              placeholder={t("write_here")}
               autoComplete="off"
               value={message.message || ""}
               onChange={(e) =>

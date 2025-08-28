@@ -1,12 +1,14 @@
 "use client";
 
 import { MapPin, PhoneCall, Share2 } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import useGetAdvertiserPosts from "@/features/advertiser/useGetAdvertiserPosts";
 import Image from "next/image";
-import { Link } from "@/i18n/navigation";
 
 export default function AdvertiserCard({ id }: { id: string }) {
   const { user } = useGetAdvertiserPosts(id);
+  const t = useTranslations("common");
 
   const handleShare = () => {
     if (navigator.share) {
@@ -38,7 +40,7 @@ export default function AdvertiserCard({ id }: { id: string }) {
           />
 
           <span
-            className="absolute bottom-0 left-0 bg-white text-[var(--mainColor)] border rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
+            className="absolute bottom-0 start-0 bg-white text-[var(--mainColor)] border rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
             onClick={handleShare}
           >
             <span className="text-[12px]">
@@ -52,7 +54,7 @@ export default function AdvertiserCard({ id }: { id: string }) {
         </h3>
 
         <span className="text-[var(--grayColor)] text-[13px]">
-          Member : 1 day ago
+          {t("member")} : {user?.created_from}
         </span>
 
         <div className="flex items-center justify-center gap-1 text-[13px] text-[var(--grayColor)] [text-wrap:balance]">
@@ -66,7 +68,7 @@ export default function AdvertiserCard({ id }: { id: string }) {
             className="w-full py-[12px] px-[16px] rounded-2xl flex justify-center items-center gap-2 bg-[#2562d3] text-[var(--whiteColor)] mt-2"
           >
             <PhoneCall width={18} height={18} />
-            <span> call </span>
+            <span> {t("call")} </span>
           </Link>
         )}
       </div>

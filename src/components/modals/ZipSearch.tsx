@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogClose,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 
 export default function ZipSearch({
   show,
@@ -24,6 +25,7 @@ export default function ZipSearch({
 }) {
   const { filter, setFilter } = useHomeFilter();
   const [isPending, startTransition] = useTransition();
+    const t = useTranslations("common");
 
   const fetchCoordinates = async (zipCode: string) => {
     if (!zipCode) return;
@@ -62,18 +64,18 @@ export default function ZipSearch({
     <Dialog open={show} onOpenChange={(isOpen) => !isOpen && handleClose()}>
       <DialogContent className="max-w-md p-6 rounded-lg bg-white shadow-xl space-y-6">
         <DialogHeader className="relative">
-          <DialogTitle className="text-[28px] font-bold">ZIP Code</DialogTitle>
-          <DialogClose className="absolute top-4 right-4 text-gray-400 hover:text-gray-600" />
+          <DialogTitle className="text-[28px] font-bold">{t("zip_code")}</DialogTitle>
+          <DialogClose className="absolute top-4 end-4 text-gray-400 hover:text-gray-600" />
         </DialogHeader>
 
         <div className="flex flex-col gap-6">
           <div className="grid w-full gap-1 relative">
             <Label htmlFor="zip" className="font-bold mb-2">
-              Enter ZIP code
+             {t("enter_zip")}
             </Label>
             <Input
               id="zip"
-              placeholder="Enter ZIP code"
+              placeholder={t("enter_zip")}
               value={filter.zip_code}
               onChange={handleGetLocation}
               className="px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
@@ -81,14 +83,14 @@ export default function ZipSearch({
           </div>
 
           <div className="flex justify-center items-center relative">
-            <span className="bg-white px-3 z-20">OR</span>
+            <span className="bg-white px-3 z-20">{t("or")}</span>
             <span className="absolute h-[1px] w-full bg-gray-100 z-0" />
           </div>
 
           <Input
             id="address"
             readOnly
-            placeholder="Address"
+            placeholder={t("address")}
             value={filter.address}
             className="px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
           />
@@ -99,13 +101,13 @@ export default function ZipSearch({
             onClick={handleBack}
             className="px-4 py-2 rounded-full bg-[var(--darkColor)] text-white"
           >
-            Back
+            {t("back")}
           </button>
           <button
             className="w-full px-4 py-2 rounded-full bg-[var(--mainColor)] text-white font-medium"
             onClick={handleSeeListings}
           >
-            {isPending ? "loading..." : "Change"}
+            {isPending ? t("loading") : t("change")}
           </button>
         </div>
       </DialogContent>

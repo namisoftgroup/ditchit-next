@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import InputField from "@/components/shared/InputField";
 import TextField from "@/components/shared/TextField";
+import { useTranslations } from 'next-intl';
 
 export default function ContactForm() {
   const {
@@ -10,22 +11,24 @@ export default function ContactForm() {
     formState: { errors },
   } = useForm();
 
+  const t = useTranslations("contact");
+
   return (
     <div className="w-full h-full rounded-2xl p-6 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.102)]">
       <form className="flex flex-col gap-4">
         <div className="flex gap-5">
           <InputField
-            label="Full Name"
+            label={t("full_name")}
             id="username"
-            placeholder="User Name"
+            placeholder={t("full_name")}
             {...register("name")}
             error={errors.name?.message as string}
           />
 
           <InputField
-            label="Email"
+            label={t("email")}
             id="email"
-            placeholder="Email"
+            placeholder={t("email")}
             {...register("email")}
             error={errors.email?.message as string}
           />
@@ -41,16 +44,16 @@ export default function ContactForm() {
           />
 
           <InputField
-            label="Subject"
+            label={t("subject")}
             id="subject"
-            placeholder="Subject"
+            placeholder={t("subject")}
             {...register("subject")}
             error={errors.subject?.message as string}
           />
         </div>
 
         <TextField
-          label="Message"
+          label={t("message")}
           {...register("message")}
           error={errors.message?.message as string}
           id="message"
@@ -58,7 +61,7 @@ export default function ContactForm() {
 
         <div className="flex justify-end mt-4">
           <button type="submit" className="customBtn rounded-full ms-auto me-0">
-            send
+            {t("send")}
           </button>
         </div>
       </form>

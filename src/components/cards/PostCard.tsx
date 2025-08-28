@@ -2,10 +2,9 @@
 
 import { Post } from "@/types/post";
 import { Clock, MapPin } from "lucide-react";
-
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 import PostActions from "./PostActions";
 
 export default function PostCard({
@@ -15,6 +14,8 @@ export default function PostCard({
   post: Post;
   showActions: boolean;
 }) {
+  const t = useTranslations("post");
+
   return (
     <div className="relative flex flex-col gap-1 h-full rounded-2xl border border-[var(--lightBorderColor)] bg-[var(--whiteColor)] transition-all">
       <PostActions post={post} showActions={showActions} />
@@ -39,15 +40,27 @@ export default function PostCard({
             alt="promoted"
             width={24}
             height={24}
-            className="absolute bottom-0 left-0 z-20 w-10 aspect-square bg-white rounded-t-md p-2"
+            className="absolute bottom-0 start-0 z-20 w-10 aspect-square bg-white rounded-t-md p-2"
           />
         )}
 
-        <div className="absolute top-0 left-[-80%] w-1/2 h-full z-10 bg-gradient-to-r from-transparent to-white/30 skew-x-[-25deg]" />
+        <div className="absolute top-0 start-[-80%] w-1/2 h-full z-10 bg-gradient-to-r from-transparent to-white/30 skew-x-[-25deg]" />
       </Link>
 
       {/* Info Section */}
       <div className="relative flex flex-col gap-2 p-4 text-[var(--darkColor)] flex-1">
+        <div className="absolute top-[-28px] end-4 z-30  bg-gray-300 rounded-full">
+          <Link href={`/advertiser/${post.user.user.id}`}>
+            <Image
+              src={post.user.user.image}
+              alt={post.user.user.name}
+              width={48}
+              height={48}
+              className="w-[48px] h-[48px] border border-white rounded-full object-fit"
+            />
+          </Link>
+        </div>
+
         <div className="flex items-center gap-1 text-sm text-[var(--grayColor)]">
           <Clock width={16} height={16} />
           <span>{post.publishing_duration}</span>
@@ -69,7 +82,9 @@ export default function PostCard({
           <span>{post.address}</span>
         </div>
         {post.is_promoted && (
-          <span className="capitalize text-[var(--mainColor)]">promoted</span>
+          <span className="capitalize text-[var(--mainColor)]">
+            {t("promoted")}
+          </span>
         )}
 
         <div className="flex items-center justify-between pt-3 mt-auto border-t border-[var(--lightBorderColor)]">

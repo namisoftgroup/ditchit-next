@@ -6,6 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 type GetAppModalProps = {
@@ -14,6 +15,8 @@ type GetAppModalProps = {
 };
 
 export default function GetAppModal({ show, handleClose }: GetAppModalProps) {
+  const t = useTranslations("common");
+
   return (
     <Dialog open={show} onOpenChange={handleClose}>
       <DialogContent className="max-w-md p-6 bg-white shadow-xl space-y-6 rounded-[24px] gap-2">
@@ -26,7 +29,7 @@ export default function GetAppModal({ show, handleClose }: GetAppModalProps) {
         </DialogHeader>
 
         <p className="text-sm text-gray-600 text-center mb-0">
-          Scan QR code to download DitchIt
+          {t("scan_code")}
         </p>
 
         <Image

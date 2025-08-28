@@ -4,8 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useMemo, useState } from "react";
 import { Category, HomeFilterInterface } from "../types";
 import { Navigation } from "swiper/modules";
-import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import PostCard from "@/components/cards/PostCard";
 import Image from "next/image";
 import usePaginateCategory from "../usePaginateCategory";
@@ -20,6 +21,7 @@ export default function CategorySlider({
   filterParams: HomeFilterInterface;
 }) {
   const [enabled, setEnabled] = useState<boolean>(false);
+  const t = useTranslations("common");
 
   const {
     posts: extraPosts,
@@ -48,7 +50,7 @@ export default function CategorySlider({
             </span>
             <Link href={`/posts?category_id=${category.value}`}>
               <h4 className="md:text-[40px] text-[18px] sm:mt-2 font-bold text-[var(--darkColor)]">
-                Browse items by{" "}
+                {t("browse_by")}{" "}
                 <span className="text-[var(--mainColor)]">
                   {category.title}
                 </span>
@@ -65,7 +67,7 @@ export default function CategorySlider({
                 width={14}
                 height={14}
                 alt="arrow-prev"
-                className="filter brightness-0"
+                className="filter brightness-0 rtl:-scale-x-100"
               />
             </button>
 
@@ -77,7 +79,7 @@ export default function CategorySlider({
                 width={14}
                 height={14}
                 alt="arrow-next"
-                className="-scale-x-100 filter brightness-0"
+                className="ltr:-scale-x-100 filter brightness-0"
               />
             </button>
           </div>
@@ -102,7 +104,7 @@ export default function CategorySlider({
           >
             {combinedPosts.map((post) => (
               <SwiperSlide key={post.id}>
-                  <PostCard post={post} showActions={false} />
+                <PostCard post={post} showActions={false} />
               </SwiperSlide>
             ))}
 

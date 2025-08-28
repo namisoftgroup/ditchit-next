@@ -27,7 +27,7 @@ export default function PostOwnerCard({
           {owner.name}
         </h3>
         <span className="text-[var(--grayColor)] text-[13px]">
-          Member : 1 day ago
+          {owner.created_from}
         </span>
       </Link>
 

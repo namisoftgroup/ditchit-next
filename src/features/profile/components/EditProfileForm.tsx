@@ -5,6 +5,7 @@ import { AvatarUpload } from "@/components/shared/AvatarUpload";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import { useAuthStore } from "@/features/auth/store";
 import { editProfileFormValues, editProfileSchema } from "../schema";
 import InputField from "@/components/shared/InputField";
@@ -14,6 +15,7 @@ import ZipMapSearch from "@/components/shared/ZipMapSearch";
 export default function EditProfileForm() {
   const { user, setUser } = useAuthStore();
   const [isPending, setIsPending] = useState(false);
+  const t = useTranslations("auth");
 
   const methods = useForm<editProfileFormValues>({
     mode: "onChange",
@@ -87,45 +89,51 @@ export default function EditProfileForm() {
         />
 
         <InputField
-          label="User Name"
+          label={t("user_name")}
           id="username"
-          placeholder="User Name"
+          placeholder={t("user_name")}
           {...register("name")}
-          error={errors.name?.message}
+          error={errors.name?.message ? t(errors.name?.message) : undefined}
         />
 
         <InputField
-          label="Email"
+          label={t("email")}
           type="email"
           id="email"
-          placeholder="Email"
+          placeholder={t("email")}
           {...register("email")}
-          error={errors.email?.message}
+          error={errors.email?.message ? t(errors.email?.message) : undefined}
         />
 
         <InputField
-          label="Password"
+          label={t("password")}
           type="password"
           id="password"
-          placeholder="Password"
+          placeholder={t("password")}
           {...register("password")}
-          error={errors.password?.message}
+          error={
+            errors.password?.message ? t(errors.password?.message) : undefined
+          }
         />
 
         <InputField
-          label="Zip Code"
+          label={t("zip_code")}
           id="zip_code"
-          placeholder="Enter ZIP Code"
+          placeholder={t("enter_zip")}
           {...register("zip_code")}
-          error={errors.zip_code?.message}
+          error={
+            errors.zip_code?.message ? t(errors.zip_code?.message) : undefined
+          }
         />
 
         <InputField
           id="address"
           readOnly
-          placeholder="Address"
+          placeholder={t("address")}
           {...register("address")}
-          error={errors.address?.message}
+          error={
+            errors.address?.message ? t(errors.address?.message) : undefined
+          }
         />
 
         <input type="hidden" {...register("latitude")} />
@@ -138,7 +146,7 @@ export default function EditProfileForm() {
           className="customBtn rounded-full w-fit px-12 ms-auto me-0 mt-4"
           disabled={isPending}
         >
-          {isPending ? "Updating..." : "Update"}
+          {isPending ? t("loading") : t("update")}
         </button>
       </form>
     </FormProvider>

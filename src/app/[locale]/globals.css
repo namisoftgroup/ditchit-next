@@ -140,6 +140,15 @@
   }
 
   .home_slider {
+    .swiper {
+      padding-bottom: 2px;
+    }
+
+    .swiper-button-disabled {
+      filter: grayscale(1);
+      opacity: 0.3;
+    }
+
     .swiper-not-initialized .swiper-wrapper {
       visibility: hidden;
     }
@@ -313,6 +322,15 @@
 
     &.danger:hover {
       color: #fff;
+    }
+  }
+
+  html[dir="rtl"] {
+    .home_slider {
+      .swiper-slide {
+        margin-left: 16px !important;
+        margin-right: 0 !important;
+      }
     }
   }
 }

@@ -25,6 +25,7 @@ import {
 
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import clsx from "clsx";
 import ConfirmModal from "@/components/modals/ConfirmModal";
 
@@ -34,6 +35,7 @@ export default function RoomLink({ room }: { room: Room }) {
   const currentRoomId = params?.roomId;
   const active = currentRoomId === String(room.id);
   const { removeRoom } = useChatStore();
+  const t = useTranslations("chat");
 
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
 
@@ -45,7 +47,7 @@ export default function RoomLink({ room }: { room: Room }) {
         router.push("/chats");
       }
       removeRoom(room.id);
-      toast.success("Chat deleted successfully");
+      toast.success(t("deleted_success"));
       setShowConfirm(false);
     },
   });
@@ -79,7 +81,7 @@ export default function RoomLink({ room }: { room: Room }) {
             {room.latest_message?.type === "location" && (
               <div className="flex items-center gap-1">
                 <MapPin width={14} height={14} />
-                Shared Location
+                {t("shared_location")}
               </div>
             )}
 
@@ -88,21 +90,21 @@ export default function RoomLink({ room }: { room: Room }) {
                 {room.latest_message?.files[0].type === "audio" && (
                   <div className="flex items-center gap-1">
                     <Mic width={14} height={14} />
-                    Audio
+                    {t("audio")}
                   </div>
                 )}
 
                 {room.latest_message?.files[0].type === "image" && (
                   <div className="flex items-center gap-1">
                     <Images width={14} height={14} />
-                    Photo
+                    {t("photo")}
                   </div>
                 )}
 
                 {room.latest_message?.files[0].type === "video" && (
                   <div className="flex items-center gap-1">
                     <Video width={14} height={14} />
-                    Video
+                    {t("video")}
                   </div>
                 )}
               </>
@@ -133,7 +135,7 @@ export default function RoomLink({ room }: { room: Room }) {
                 }}
               >
                 <Trash width={16} height={16} className="text-[#FF0000]" />
-                Delete
+                {t("delete")}
               </button>
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -150,8 +152,8 @@ export default function RoomLink({ room }: { room: Room }) {
       </div>
 
       <ConfirmModal
-        modalTitle="Delete Chat"
-        text="Are you sure you want to delete this chat room?"
+        modalTitle={t("delete_chat")}
+        text={t("sure_delete")}
         show={showConfirm}
         isPending={isPending}
         event={deleteRoom}

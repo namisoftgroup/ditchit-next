@@ -7,17 +7,19 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useResetPasswordStore } from "../store";
 import { sendCode } from "../service";
+import { useTranslations } from "next-intl";
 import InputField from "@/components/shared/InputField";
 import Image from "next/image";
 
 const emailSchema = z.object({
-  email: z.string().email("Invalid email address"),
+  email: z.string().email("email_validation"),
 });
 
 type EmailFormValues = z.infer<typeof emailSchema>;
 
 export default function SendCodeForm() {
   const router = useRouter();
+  const t = useTranslations("auth");
   const [isPending, setIsPending] = useState<boolean>(false);
   const setEmail = useResetPasswordStore((state) => state.setEmail);
 
@@ -34,17 +36,17 @@ export default function SendCodeForm() {
     setIsPending(true);
     try {
       const res = await sendCode(values.email);
-      
+
       if (res.code === 200) {
         setEmail(values.email);
         router.push("/reset-password/verify-otp");
-        toast.success(`Code sent successfully to your email: ${values.email}`);
+        toast.success(t("code_sent").replace("{email}", values.email));
       } else {
         toast.error(res.message || "Failed to send code");
       }
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong. Please try again.");
+      toast.error(t("something_went_wrong"));
     } finally {
       setIsPending(false);
     }
@@ -64,16 +66,20 @@ export default function SendCodeForm() {
       />
 
       <InputField
-        label="Email"
+        label={t("email")}
         type="email"
         id="email"
-        placeholder="example@example.com"
+        placeholder={t("email")}
         {...register("email")}
         error={errors.email?.message}
       />
 
-      <button type="submit" className="customBtn w-full rounded-full mt-3" disabled={isPending}>
-        {isPending ? "Sending..." : "Send Code"}
+      <button
+        type="submit"
+        className="customBtn w-full rounded-full mt-3"
+        disabled={isPending}
+      >
+        {isPending ? t("loading") : t("send_code")}
       </button>
     </form>
   );

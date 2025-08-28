@@ -1,14 +1,16 @@
+import { getTranslations } from "next-intl/server";
 import { getSettings } from "@/services/getSettings";
 import PageBanner from "@/components/shared/PageBanner";
 import ContactInfo from "@/features/contact/ContactInfo";
 import ContactForm from "@/features/contact/ContactForm";
 
 export default async function page() {
+  const t = await getTranslations("common");
   const { data } = await getSettings();
 
   return (
     <>
-      <PageBanner links={[{ title: "Home", link: "/" }]} page="Contact Us" />
+      <PageBanner links={[{ title: t("home"), link: "/" }]} page={t("contact")} />
 
       <div className="container py-6">
         <div className="flex flex-wrap -mx-2">

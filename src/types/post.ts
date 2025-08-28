@@ -1,14 +1,14 @@
+import { Category } from "./category";
+import { User } from "./user";
+
 export interface Post {
   id: number;
   type: string;
   condition: "new" | "used";
   category_id: number;
-  category: {
-    id: number;
-    title: string;
-    image: string;
-    is_condition: boolean;
-    options: unknown[];
+  category: Category;
+  user: {
+    user: User;
   };
   title: string;
   description: string;

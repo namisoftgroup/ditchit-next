@@ -2,6 +2,7 @@
 
 import { Category } from "@/types/category";
 import { useFormContext } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import FormFooter from "../FormFooter";
 
@@ -13,6 +14,7 @@ interface CategoryStepProps {
 export default function CategoryStep({ next, categories }: CategoryStepProps) {
   const { watch, setValue, trigger } = useFormContext();
   const selectedCategory = watch("category_id");
+  const t = useTranslations("manage_post");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ export default function CategoryStep({ next, categories }: CategoryStepProps) {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-[16px]">Please select your post category</h2>
+      <h2 className="text-[16px]">{t("select_category")}</h2>
 
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

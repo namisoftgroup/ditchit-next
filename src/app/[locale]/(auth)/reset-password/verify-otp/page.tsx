@@ -1,15 +1,17 @@
+import { getTranslations } from "next-intl/server";
 import PageBanner from "@/components/shared/PageBanner";
 import VerifyOtpForm from "@/features/auth/components/VerifyOtpForm";
 
-export default function page() {
+export default async function page() {
+  const t = await getTranslations("common");
   return (
     <>
       <PageBanner
         links={[
-          { title: "Home", link: "/" },
-          { title: "Reset Password", link: "/reset-password" },
+          { title: t("home"), link: "/" },
+          { title: t("reset_password"), link: "/reset-password" },
         ]}
-        page="Verify OTP"
+        page={t("verify_OTP")}
       />
 
       <section className="container py-8">

@@ -4,12 +4,14 @@ import { Heart, LogOut, Megaphone, UserPen } from "lucide-react";
 import { logOutAction } from "@/features/auth/actions";
 import { useAuthStore } from "@/features/auth/store";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function Sidebar() {
   const { user, logout } = useAuthStore();
   const router = useRouter();
+  const t = useTranslations("header");
 
   const performLogout = async () => {
     const res = await logOutAction();
@@ -38,7 +40,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      <div className="bg-whiteColor rounded-[16px] p-4 border border-[var(--lightBorderColor)] sticky top-[90px] right-0 z-[2] flex flex-wrap flex-row md:flex-col gap-2">
+      <div className="bg-whiteColor rounded-[16px] p-4 border border-[var(--lightBorderColor)] sticky top-[90px] end-0 z-[2] flex flex-wrap flex-row md:flex-col gap-2">
         <Link
           href="/profile"
           className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
@@ -48,7 +50,7 @@ export default function Sidebar() {
             height={20}
             className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
           />
-          My Posts
+          {t("my_posts")}
         </Link>
 
         <Link
@@ -60,7 +62,7 @@ export default function Sidebar() {
             height={20}
             className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
           />
-          Favorites
+          {t("favorites")}
         </Link>
 
         <Link
@@ -72,7 +74,7 @@ export default function Sidebar() {
             height={20}
             className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
           />
-          Edit Profile
+          {t("edit_profile")}
         </Link>
 
         <button
@@ -84,7 +86,7 @@ export default function Sidebar() {
             height={20}
             className="text-[#FF0000] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
           />
-          Logout
+          {t("logout")}
         </button>
       </div>
     </aside>

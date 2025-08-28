@@ -1,13 +1,16 @@
 import { POST_TABS } from "@/utils/constants";
+import { useTranslations } from "next-intl";
 
 export default function WizardTabs({
   activeStepIndex,
 }: {
   activeStepIndex: number;
 }) {
+  const t = useTranslations("manage_post");
+
   return (
     <div className="flex gap-4 isolate relative bg-[#fafafa] rounded-[12px] justify-between md:flex-row flex-col">
-      <div className="absolute bg-gray-300 z-0 h-full w-px top-0 left-[36px] lg:top-1/2 lg:left-0 lg:w-full lg:h-px lg:bg-gray-200" />
+      <div className="absolute bg-gray-300 z-0 h-full w-px top-0 start-[36px] lg:top-1/2 lg:start-0 lg:w-full lg:h-px lg:bg-gray-200" />
 
       {POST_TABS.map((tab, index) => {
         const isActive = index <= activeStepIndex;
@@ -30,7 +33,7 @@ export default function WizardTabs({
                 isActive ? "!text-[var(--mainColor)]" : "text-black"
               }`}
             >
-              {tab}
+              {t(tab)}
             </h6>
           </div>
         );

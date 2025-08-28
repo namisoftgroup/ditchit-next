@@ -16,10 +16,11 @@ import { useState } from "react";
 import { Post } from "@/types/post";
 import { useAuthStore } from "@/features/auth/store";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import BoostYourAd from "../modals/BoostYourAd";
 import ConfirmModal from "../modals/ConfirmModal";
 import useStoreFavorites from "@/features/profile/hooks/useStoreFavorites";
-import { Link } from "@/i18n/navigation";
 import useDeletePost from "@/features/profile/hooks/useDeletePost";
 import useSellActivePost from "@/features/profile/hooks/useSellActivePost";
 
@@ -35,6 +36,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
 
   const { token } = useAuthStore();
   const router = useRouter();
+  const t = useTranslations("post");
 
   const { storeFavorites, isPending: isPendingFav } = useStoreFavorites();
   const { deletePost, isPending } = useDeletePost(setShowConfirm);
@@ -62,20 +64,20 @@ export default function PostActions({ post, showActions }: propsTypes) {
         <button
           onClick={() => handleFav(post?.id)}
           disabled={isPendingFav}
-          className={`absolute top-4 left-4 z-20 w-8 h-8 flex items-center justify-center rounded-full text-[var(--whiteColor)] bg-black/30 backdrop-blur-sm transition-all hover:bg-red-600 ${isLove ? "bg-red-600" : ""}`}
+          className={`absolute top-4 start-4 z-20 w-8 h-8 flex items-center justify-center rounded-full text-[var(--whiteColor)] bg-black/30 backdrop-blur-sm transition-all hover:bg-red-600 ${isLove ? "bg-red-600" : ""}`}
         >
           <Heart width={18} height={18} />
         </button>
       )}
 
       {!showActions && (
-        <span className="absolute top-4 right-4 z-20 flex py-1 px-3 items-center justify-center rounded-full text-[12px] text-white bg-[var(--mainColor)]">
+        <span className="absolute top-4 end-4 z-20 flex py-1 px-3 items-center justify-center rounded-full text-[12px] text-white bg-[var(--mainColor)]">
           {post.type}
         </span>
       )}
 
       {showActions && (
-        <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between">
+        <div className="absolute top-4 start-4 end-4 z-20 flex items-center justify-between">
           <DropdownMenu>
             <DropdownMenuTrigger className="h-9 w-9 rounded-full flex items-center justify-center bg-white border border-[var(--lightBorderColor)] ">
               <EllipsisVertical width={16} height={16} />
@@ -93,7 +95,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
                       height={16}
                       className="text-[var(--mainColor)]"
                     />
-                    Promote
+                    {t("promote")}
                   </button>
                 </DropdownMenuItem>
               )}
@@ -109,7 +111,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
                     height={16}
                     className="text-[var(--mainColor)]"
                   />
-                  {post.is_sold ? "Active" : "Sold"}
+                  {post.is_sold ? t("active") : t("sold")}
                 </button>
               </DropdownMenuItem>
 
@@ -119,7 +121,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
                   className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
                 >
                   <FilePenLine width={16} height={16} />
-                  Edit
+                  {t("edit")}
                 </Link>
               </DropdownMenuItem>
 
@@ -129,14 +131,14 @@ export default function PostActions({ post, showActions }: propsTypes) {
                   onClick={() => setShowConfirm(true)}
                 >
                   <Trash width={16} height={16} className="text-[#FF0000]" />
-                  Delete
+                  {t("delete")}
                 </button>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
           <span className="bg-white rounded-[40px] px-3 py-1 text-[var(--darkColor)] text-[14px] block border border-[var(--lightBorderColor)]">
-            Available
+            {t("available")}
           </span>
         </div>
       )}
@@ -149,8 +151,8 @@ export default function PostActions({ post, showActions }: propsTypes) {
 
       <ConfirmModal
         show={showConfirm}
-        modalTitle="Delete Post"
-        text="Are you sure you want to delete this post?"
+        modalTitle={t("delete_post")}
+        text={t("confirm_delete_post")}
         handleClose={() => setShowConfirm(false)}
         isPending={isPending}
         event={() => deletePost(post?.id)}

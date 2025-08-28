@@ -6,24 +6,26 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import useUrlFilters from "@/hooks/useFilterParams";
 
 export default function PriceFilter() {
   const { getParam, setParam } = useUrlFilters();
   const [priceFrom, setPriceFrom] = useState(getParam("price_from") ?? "");
   const [priceTo, setPriceTo] = useState(getParam("price_to") ?? "");
+  const t = useTranslations("common");
 
   return (
     <AccordionItem value="item-4" className="border-[var(--lightBorderColor)]">
       <AccordionTrigger className="px-5 hover:no-underline data-[state=open]:bg-[var(--mainColor)] data-[state=open]:text-white rounded-none">
-        Price
+        {t("price")}
       </AccordionTrigger>
 
       <AccordionContent className="flex flex-col gap-4 px-5 py-4">
         <div className="flex items-center gap-3 w-full">
           <input
             type="number"
-            placeholder="From"
+            placeholder={t("from")}
             value={priceFrom}
             min={0}
             onChange={(e) => {
@@ -37,7 +39,7 @@ export default function PriceFilter() {
 
           <input
             type="number"
-            placeholder="To"
+            placeholder={t("to")}
             value={priceTo}
             min={0}
             onChange={(e) => {

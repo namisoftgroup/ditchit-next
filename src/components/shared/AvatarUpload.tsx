@@ -85,7 +85,7 @@ export function AvatarUpload({
           )}
         </Avatar>
 
-        <div className="flex gap-2 absolute bottom-2 left-2">
+        <div className="flex gap-2 absolute bottom-2 start-2">
           <Button
             type="button"
             className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--mainColor)] text-white border-[3px] border-white"

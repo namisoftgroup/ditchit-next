@@ -6,6 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 
 type GetAppModalProps = {
   show: boolean;
@@ -22,22 +23,26 @@ export default function BoostAndPublish({
   addAndPromote,
   handleClose,
 }: GetAppModalProps) {
+  const t = useTranslations("post");
+
   return (
     <Dialog open={show} onOpenChange={handleClose}>
       <DialogContent className="max-w-md p-6 bg-white shadow-xl space-y-6 rounded-[24px] gap-2">
         <DialogHeader className="mb-0">
           <DialogTitle className="text-[18px] text-start font-bold capitalize">
-            Boost Your Ad!
+            {t("boost_ad")}
           </DialogTitle>
         </DialogHeader>
 
         <div className="pt-4">
           <p className="text-[14px]">
-            Get more visibility for your listings! Promote your ad for just{" "}
-            <span className="font-bold text-[var(--mainColor)]">1.99$</span> and
-            reach more potential buyers for{" "}
-            <span className="font-bold text-[var(--mainColor)]">5 days</span> .
-            Increase your chances of making a sale today!
+            {t("promote_text_1")}{" "}
+            <span className="font-bold text-[var(--mainColor)]">1.99$</span>{" "}
+            {t("promote_text_2")}{" "}
+            <span className="font-bold text-[var(--mainColor)]">
+              {t("five_days")}
+            </span>{" "}
+            .{t("promote_text_3")}
           </p>
         </div>
 
@@ -47,7 +52,7 @@ export default function BoostAndPublish({
             onClick={addPost}
             disabled={isSaving}
           >
-            {isSaving ? "loading..." : "Skip & Publish"}
+            {isSaving ? t("loading") : t("skip_and_publish")}
           </button>
 
           <button
@@ -55,7 +60,7 @@ export default function BoostAndPublish({
             disabled={isSaving}
             className="bg-[var(--mainColor)] text-white rounded-[12px] w-fit px-12 py-3 m-0 border border-[var(--mainColor)]"
           >
-            {isSaving ? "loading..." : "Promote"}
+            {isSaving ? t("loading") : t("promote")}
           </button>
         </div>
       </DialogContent>

@@ -4,6 +4,7 @@ import { CircleQuestionMark, HandCoins, Send, X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessagePayload } from "../types";
+import { useTranslations } from "next-intl";
 import useSendMessage from "../useSendMessage";
 
 export default function QuestionAndOffers({
@@ -13,6 +14,7 @@ export default function QuestionAndOffers({
   roomId: number;
   questions: { id: number; title: string }[];
 }) {
+  const t = useTranslations("chat");
   const [activeTab, setActiveTab] = useState<"questions" | "offers" | null>(
     null
   );
@@ -45,7 +47,7 @@ export default function QuestionAndOffers({
         className="text-[14px] flex-1 flex items-center justify-center gap-2 p-2"
       >
         <CircleQuestionMark width={18} height={18} />
-        Questions
+        {t("questions")}
       </button>
 
       <span className="block w-px h-full bg-[var(--lightBorderColor)]" />
@@ -55,7 +57,7 @@ export default function QuestionAndOffers({
         className="text-[14px] flex-1 flex items-center justify-center gap-2 p-2"
       >
         <HandCoins width={18} height={18} />
-        Make Offer
+        {t("make_offer")}
       </button>
 
       <AnimatePresence>
@@ -66,11 +68,11 @@ export default function QuestionAndOffers({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="absolute bottom-0 left-0 bg-white z-40 p-4 w-full rounded-[12px] border border-[var(--lightBorderColor)] flex flex-col gap-4"
+            className="absolute bottom-0 start-0 bg-white z-40 p-4 w-full rounded-[12px] border border-[var(--lightBorderColor)] flex flex-col gap-4"
           >
             <div className="flex justify-between items-center">
               <h6 className="text-[18px] text-[var(--mainColor)] font-bold">
-                Questions
+                {t("questions")}
               </h6>
               <button
                 onClick={() => setActiveTab(null)}
@@ -101,11 +103,11 @@ export default function QuestionAndOffers({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="absolute bottom-0 left-0 bg-white z-40 p-4 w-full rounded-[12px] border border-[var(--lightBorderColor)] flex flex-col gap-5"
+            className="absolute bottom-0 start-0 bg-white z-40 p-4 w-full rounded-[12px] border border-[var(--lightBorderColor)] flex flex-col gap-5"
           >
             <div className="flex justify-between items-center">
               <h6 className="text-[18px] text-[var(--mainColor)] font-bold">
-                Make Offer
+                {t("make_offer")}
               </h6>
               <button
                 onClick={() => setActiveTab(null)}
@@ -120,7 +122,7 @@ export default function QuestionAndOffers({
                 className="flex items-center gap-2"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  handleSubmit(`I have an offer for ${message.message} $`);
+                  handleSubmit(t("have_offer").replace("{offer}", message.message || ""))
                 }}
               >
                 <input
@@ -128,7 +130,7 @@ export default function QuestionAndOffers({
                   type="number"
                   id="text-message"
                   name="text-message"
-                  placeholder="add your offer..."
+                  placeholder={t("add_your_offer")}
                   autoComplete="off"
                   value={message.message}
                   onChange={(e) =>

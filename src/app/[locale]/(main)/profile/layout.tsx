@@ -1,10 +1,13 @@
+import { getTranslations } from "next-intl/server";
 import PageBanner from "@/components/shared/PageBanner";
 import Sidebar from "@/features/profile/components/Sidebar";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+   const t = await getTranslations("common");
+
   return (
     <>
-      <PageBanner links={[{ title: "Home", link: "/" }]} page="Profile" />
+      <PageBanner links={[{ title: t("home"), link: "/" }]} page={t("profile")} />
 
       <section className="container py-6 flex gap-8">
         <div className="flex flex-wrap -mx-2 justify-center w-full">

@@ -6,20 +6,20 @@ export default function PostCardSkeleton() {
   return (
     <div className="relative flex flex-col gap-1 h-full rounded-2xl border border-[var(--lightBorderColor)] bg-[var(--whiteColor)]">
       {/* Favorite Button */}
-      <div className="absolute top-4 left-4 z-20 w-8 h-8 rounded-full bg-gray-300 backdrop-blur-sm" />
+      <div className="absolute top-4 start-4 z-20 w-8 h-8 rounded-full bg-gray-300 backdrop-blur-sm" />
 
       {/* Image */}
       <div className="relative overflow-hidden rounded-t-2xl aspect-[3/2] w-full max-h-[300px]">
         <Skeleton className="w-full h-full  bg-gray-200" />
-        <div className="absolute top-0 left-[-80%] w-1/2 h-full z-10 bg-gradient-to-r from-transparent to-white/30 skew-x-[-25deg]" />
+        <div className="absolute top-0 start-[-80%] w-1/2 h-full z-10 bg-gradient-to-r from-transparent to-white/30 skew-x-[-25deg]" />
       </div>
 
       {/* Info Section */}
       <div className="relative flex flex-col gap-2 p-4 flex-1">
         {/* Avatar */}
-        {/* <div className="absolute top-[-28px] right-4 z-30  bg-gray-300 rounded-full">
+        <div className="absolute top-[-28px] end-4 z-30  bg-gray-300 rounded-full">
           <Skeleton className="w-12 h-12 rounded-full border-2 border-[#e7e7e7]  bg-gray-200" />
-        </div> */}
+        </div>
 
         {/* Time */}
         <div className="flex items-center gap-1 text-sm">

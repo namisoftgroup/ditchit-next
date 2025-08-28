@@ -8,6 +8,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Category } from "@/types/category";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import useUrlFilters from "@/hooks/useFilterParams";
 
@@ -18,11 +19,12 @@ export default function Categoryfilter({
 }) {
   const { getParam, setParam } = useUrlFilters();
   const selectedCategory = getParam("category_id") ?? "";
+  const t = useTranslations("common");
 
   return (
     <AccordionItem value="item-3" className="border-[var(--lightBorderColor)]">
       <AccordionTrigger className="px-5 hover:no-underline data-[state=open]:bg-[var(--mainColor)] data-[state=open]:text-white rounded-none">
-        Category
+        {t("category")}
       </AccordionTrigger>
       <AccordionContent className="flex flex-col gap-4 text-balance px-5 py-4">
         <RadioGroup

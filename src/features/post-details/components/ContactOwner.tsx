@@ -4,6 +4,7 @@ import { MessagesSquare, PhoneCall } from "lucide-react";
 import { useAuthStore } from "@/features/auth/store";
 import { User } from "@/types/user";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import useGenerateRoom from "../useGenerateRoom";
 
 export default function ContactOwner({
@@ -15,6 +16,7 @@ export default function ContactOwner({
 }) {
   const { user } = useAuthStore();
   const { generateRoom, isPending } = useGenerateRoom();
+  const t = useTranslations("common");
 
   return (
     <>
@@ -26,11 +28,11 @@ export default function ContactOwner({
             disabled={isPending}
           >
             {isPending ? (
-              "loading..."
+              t("loading")
             ) : (
               <>
                 <MessagesSquare />
-                <span> chat </span>
+                <span> {t("chat")} </span>
               </>
             )}
           </button>
@@ -40,7 +42,7 @@ export default function ContactOwner({
               className="flex-1 px-4 py-3 rounded-[16px] flex items-center justify-center gap-2 bg-[#2562d3] text-[var(--whiteColor)] capitalize text-[16px]"
             >
               <PhoneCall />
-              <span> call </span>
+              <span> {t("call")} </span>
             </Link>
           )}
         </div>

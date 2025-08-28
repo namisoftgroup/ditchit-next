@@ -1,17 +1,18 @@
 import { Setting } from "@/services/getSettings";
 import { MailIcon, MapPinIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 
 export default function ContactInfo({ data }: { data: Setting }) {
+  const t = useTranslations("contact")
 
   return (
     <div className="w-full h-full rounded-2xl p-6 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.102)]">
       <h3 className="text-[20px] font-bold text-[var(--primaryColor)] mb-3">
-        Stay in touch with us
+       {t("stay_in_touch")}
       </h3>
       <p className="text-[14px] text-[#777]">
-        We would love to hear from you. Please fill out the form below and we
-        will get back to you as soon as possible.
+       {t("contact_text")}
       </p>
 
       <ul className="mt-10">
@@ -21,7 +22,7 @@ export default function ContactInfo({ data }: { data: Setting }) {
           </div>
           <div className="flex flex-col">
             <h4 className="mb-1 text-[var(--mainColor)] text-[13px] font-bold">
-              Address :
+              {t("address")} :
             </h4>
             <a target="_blank" href="#" className="text-[14px] text-[#777]">
               8 THE GRN STE B Dover, DE 19901,USA
@@ -35,7 +36,7 @@ export default function ContactInfo({ data }: { data: Setting }) {
           </div>
           <div className="flex flex-col">
             <h4 className="mb-1 text-[var(--mainColor)] text-[13px] font-bold">
-              Email :
+              {t("email")} :
             </h4>
             <a
               target="_blank"

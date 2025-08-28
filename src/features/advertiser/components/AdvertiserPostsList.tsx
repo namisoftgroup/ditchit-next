@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import PostCard from "@/components/cards/PostCard";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import useGetAdvertiserPosts from "@/features/advertiser/useGetAdvertiserPosts";
 import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
 
-export default function AdvertiserPostsList({ advertiserId }: { advertiserId: string }) {
+export default function AdvertiserPostsList({
+  advertiserId,
+}: {
+  advertiserId: string;
+}) {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("common");
 
   const { posts, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetAdvertiserPosts(advertiserId);
@@ -53,9 +59,9 @@ export default function AdvertiserPostsList({ advertiserId }: { advertiserId: st
       )}
 
       {posts.length === 0 && (
-        <div className="w-full flex flex-col justify-center items-center" >
+        <div className="w-full flex flex-col justify-center items-center">
           <NoDataPlaceHolder />
-          User has no posts to display
+          {t("no_posts_found")}
         </div>
       )}
     </div>

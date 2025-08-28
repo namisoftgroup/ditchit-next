@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { AxiosError } from "axios";
 import { PostDetailsResponse } from "../post-details/types";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { PostFormData, postFormDataSchema } from "./schema";
 import clientAxios from "@/lib/axios/clientAxios";
 
@@ -36,6 +37,7 @@ export default function PostFormProvider({
 }) {
   const [step, setStep] = useState(0);
   const router = useRouter();
+  const t = useTranslations("manage_post");
 
   const methods = useForm<PostFormData>({
     resolver: zodResolver(postFormDataSchema),
@@ -123,7 +125,7 @@ export default function PostFormProvider({
         if (data.data.data.link) {
           window.location.href = data.data.data.link;
         } else {
-          toast.success("Post saved successfully");
+          toast.success(t("post_saved"));
           router.push("/profile");
         }
       } else {
@@ -133,7 +135,7 @@ export default function PostFormProvider({
 
     onError: (error) => {
       const err = error as AxiosError<{ message?: string }>;
-      const message = err.response?.data?.message || "Something went wrong";
+      const message = err.response?.data?.message || t("something_went_wrong");
       toast.error(message);
     },
 

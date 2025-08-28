@@ -5,6 +5,7 @@ import { listingResponse } from "@/features/listing/types";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getProfile } from "@/features/auth/actions";
 import { cookies } from "next/headers";
+import { getTranslations } from "next-intl/server";
 import PageBanner from "@/components/shared/PageBanner";
 import FilterSideBar from "@/features/listing/components/FilterSideBar";
 import PostsList from "@/features/listing/components/PostsList";
@@ -21,6 +22,7 @@ export default async function Page({
 }) {
   const queryClient = getQueryClient();
   const cookieStore = await cookies();
+   const t = await getTranslations("common");
 
   const { data: categories } = await getCategories();
   const { user } = await getProfile();
@@ -56,7 +58,7 @@ export default async function Page({
 
   return (
     <>
-      <PageBanner links={[{ title: "Home", link: "/" }]} page="All Posts" />
+      <PageBanner links={[{ title: t("home"), link: "/" }]} page={t("all_posts")} />
 
       <div className="container py-4">
         <div className="flex flex-wrap -mx-2">

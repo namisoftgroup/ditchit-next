@@ -5,8 +5,9 @@ import { Clock, Heart, MapPin, Share2 } from "lucide-react";
 import { PostDetailsResponse } from "../types";
 import { useAuthStore } from "@/features/auth/store";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 import useStoreFavorites from "@/features/profile/hooks/useStoreFavorites";
 
 export default function PostInfo({ post }: { post: PostDetailsResponse }) {
@@ -14,6 +15,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
 
   const [isLove, setIsLove] = useState(post.is_love);
   const { storeFavorites, isPending: isPendingFav } = useStoreFavorites();
+  const t = useTranslations("manage_post");
 
   const { token } = useAuthStore();
   const router = useRouter();
@@ -127,7 +129,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
             {post.address}
           </a>
           <div className="flex items-center gap-1 text-[13px] text-[var(--grayColor)]">
-            <Clock height={16} width={16} />1 week ago
+            <Clock height={16} width={16} />{post.publishing_duration}
           </div>
         </div>
 
@@ -144,7 +146,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
           </span>
           {post.firm_price && (
             <span className="flex justify-center items-center gap-1 bg-[var(--mainColor)] text-[var(--whiteColor)] text-[14px] px-4 py-2 rounded-full">
-              Firm price
+              {t("firm_price")}
             </span>
           )}
         </div>
@@ -153,7 +155,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
       {optionsToMap.length > 0 && (
         <div className="p-6 border border-[var(--lightBorderColor)] rounded-2xl bg-[var(--whiteColor)]">
           <h4 className="font-bold text-[18px] mb-4 pb-4 border-b border-b-[var(--lightBorderColor)]">
-            Key Features
+            {t("key_features")}
           </h4>
           <ul>
             {optionsToMap.map((option, index) => (
@@ -174,7 +176,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
       {post.features.length > 0 && (
         <div className="p-6 border border-[var(--lightBorderColor)] rounded-2xl bg-[var(--whiteColor)]">
           <h4 className="font-bold text-lg mb-4 pb-4 border-b border-[var(--lightBorderColor)]">
-            Extra Features
+            {t("extra_features")}
           </h4>
 
           <div className="flex flex-wrap gap-2">

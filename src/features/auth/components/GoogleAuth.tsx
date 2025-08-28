@@ -4,6 +4,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useRouter } from "next/navigation";
 import { authAction } from "../actions";
 import { useAuthStore } from "../store";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import axios from "axios";
 import Image from "next/image";
@@ -11,6 +12,7 @@ import Image from "next/image";
 export default function GoogleAuth() {
   const router = useRouter();
   const { setUser, setToken } = useAuthStore((state) => state);
+  const t = useTranslations("auth");
 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -37,13 +39,13 @@ export default function GoogleAuth() {
           setUser(res.data.user);
           setToken(res.data.auth.token);
           router.push("/");
-          toast.success("Login successful");
+          toast.success(t("login_success"));
         } else {
           toast.error(res.message);
         }
       } catch (error) {
         console.log(error);
-        toast.error("Something went wrong");
+        toast.error(t("something_went_wrong"));
       }
     },
     onError: () => {
@@ -57,7 +59,9 @@ export default function GoogleAuth() {
       onClick={() => login()}
     >
       <Image src="/icons/google.svg" alt="google" width={24} height={24} />
-      <span className="flex-1 text-center text-sm">Continue with Google</span>
+      <span className="flex-1 text-center text-sm">
+        {t("continue_with_google")}
+      </span>
     </div>
   );
 }

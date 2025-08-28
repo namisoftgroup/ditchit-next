@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import TextField from "@/components/shared/TextField";
 import InputField from "@/components/shared/InputField";
 import MediaUpload from "@/lib/media/MediaUpload";
@@ -18,6 +19,8 @@ export default function MainDetailsStep({ next, back }: propTypes) {
     trigger,
     formState: { errors },
   } = useFormContext();
+
+  const t = useTranslations("manage_post");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,10 +42,14 @@ export default function MainDetailsStep({ next, back }: propTypes) {
   return (
     <form className="flex flex-col gap-[16px]" onSubmit={handleSubmit}>
       <div className="flex gap-4 md:flex-row flex-col">
-        <MediaUpload name="image" label="Cover Image" className="min-w-[236px]" />
+        <MediaUpload
+          name="image"
+          label={t("cover_image")}
+          className="min-w-[236px]"
+        />
         <MediaUpload
           name="images"
-          label="Post Images"
+          label={t("post_images")}
           multiple
           maxFiles={4}
           className="w-full"
@@ -50,35 +57,49 @@ export default function MainDetailsStep({ next, back }: propTypes) {
       </div>
 
       <InputField
-        label="Title"
+        label={t("title")}
         id="title"
-        placeholder="Enter title"
+        placeholder={t("enter_title")}
         {...register("title")}
-        error={errors.title?.message as string}
+        error={
+          errors.title?.message ? t(errors.title?.message as string) : undefined
+        }
       />
 
       <TextField
-        label="Description"
+        label={t("description")}
         id="description"
         placeholder="Enter Description"
         {...register("description")}
-        error={errors.description?.message as string}
+        error={
+          errors.description?.message
+            ? t(errors.description?.message as string)
+            : undefined
+        }
       />
 
       <InputField
-        label="Zip Code"
+        label={t("zip_code")}
         id="zip_code"
-        placeholder="Enter ZIP Code"
+        placeholder={t("enter_zip")}
         {...register("zip_code")}
-        error={errors.zip_code?.message as string}
+        error={
+          errors.zip_code?.message
+            ? t(errors.zip_code?.message as string)
+            : undefined
+        }
       />
 
       <InputField
         id="address"
         readOnly
-        placeholder="Address"
+        placeholder={t("address")}
         {...register("address")}
-        error={errors.address?.message as string}
+        error={
+          errors.address?.message
+            ? t(errors.address?.message as string)
+            : undefined
+        }
       />
 
       <input type="hidden" {...register("latitude")} />

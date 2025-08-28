@@ -9,6 +9,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { authAction } from "../actions";
 import { useAuthStore } from "../store";
+import { useTranslations } from "next-intl";
 import InputField from "@/components/shared/InputField";
 import SocialAuth from "./SocialAuth";
 import ZipMapSearch from "../../../components/shared/ZipMapSearch";
@@ -18,6 +19,7 @@ export default function RegisterForm() {
   const [isPending, setIsPending] = useState<boolean>(false);
   const { setUser, setToken } = useAuthStore((state) => state);
   const router = useRouter();
+  const t = useTranslations("auth");
 
   const methods = useForm<registerFormValues>({
     mode: "onChange",
@@ -51,14 +53,14 @@ export default function RegisterForm() {
       if (res?.code === 200) {
         setUser(res.data.user);
         setToken(res.data.auth.token);
-        toast.success("Register successful");
+        toast.success(t("register_success"));
         router.push("/");
       } else {
-        toast.error(res?.message || "Registration failed");
+        toast.error(res?.message || t("registeration_failed"));
       }
     } catch (error) {
       console.error("Submit error:", error);
-      toast.error("Something went wrong");
+      toast.error(t("something_went_wrong"));
     } finally {
       setIsPending(false);
     }
@@ -73,53 +75,59 @@ export default function RegisterForm() {
         <AvatarUpload onImageChange={(file) => setValue("image", file)} />
 
         <InputField
-          label="User Name"
+          label={t("user_name")}
           id="username"
-          placeholder="User Name"
+          placeholder={t("user_name")}
           {...register("name")}
-          error={errors.name?.message}
+          error={errors.name?.message ? t(errors.name?.message) : undefined}
         />
 
         <InputField
-          label="Phone Number"
+          label={t("phone_number")}
           id="phone"
           placeholder="(123) 456-7890"
           {...register("phone")}
-          error={errors.phone?.message}
+          error={errors.phone?.message ? t(errors.phone?.message) : undefined}
         />
 
         <InputField
-          label="Email"
+          label={t("email")}
           type="email"
           id="email"
-          placeholder="Email"
+          placeholder={t("email")}
           {...register("email")}
-          error={errors.email?.message}
+          error={errors.email?.message ? t(errors.email?.message) : undefined}
         />
 
         <InputField
-          label="Password"
+          label={t("password")}
           type="password"
           id="password"
-          placeholder="Password"
+          placeholder={t("password")}
           {...register("password")}
-          error={errors.password?.message}
+          error={
+            errors.password?.message ? t(errors.password?.message) : undefined
+          }
         />
 
         <InputField
-          label="Zip Code"
+          label={t("zip_code")}
           id="zip_code"
-          placeholder="Enter ZIP Code"
+          placeholder={t("enter_zip")}
           {...register("zip_code")}
-          error={errors.zip_code?.message}
+          error={
+            errors.zip_code?.message ? t(errors.zip_code?.message) : undefined
+          }
         />
 
         <InputField
           id="address"
           readOnly
-          placeholder="Address"
+          placeholder={t("address")}
           {...register("address")}
-          error={errors.address?.message}
+          error={
+            errors.address?.message ? t(errors.address?.message) : undefined
+          }
         />
 
         <input type="hidden" {...register("latitude")} />
@@ -132,12 +140,12 @@ export default function RegisterForm() {
           className="customBtn w-full rounded-full"
           disabled={isPending}
         >
-          {isPending ? "Registering..." : "Register"}
+          {isPending ? t("loading") : t("register")}
         </button>
 
         <FormFooterLink
-          question="Already have an account?"
-          linkText="Login"
+          question={t("already_have_account")}
+          linkText={t("login")}
           href="/login"
         />
 
