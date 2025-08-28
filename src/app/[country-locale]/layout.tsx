@@ -1,11 +1,15 @@
+import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { getProfile } from "@/features/auth/actions";
 import { getAllRoomsForSocket } from "@/features/chat/actions";
 import { cookies } from "next/headers";
 import { FilterState } from "@/features/listing/store";
+import { hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 import { RTL_LANGUAGES } from "@/utils/constants";
-import type { Metadata } from "next";
+
 import GoogleOneTapAuth from "@/features/auth/components/GoogleOneTapAuth";
 import NextTopLoader from "nextjs-toploader";
 import HydrateHomeFilter from "@/providers/HydrateHomeFilter";
@@ -60,13 +64,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
-  children,
-  params,
-}: {
+type Props = {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+  params: Promise<{ "country-locale": string }>;
+};
+
+export default async function RootLayout({ children, params }: Props) {
   const cookieStore = await cookies();
 
   const initialFilter: FilterState = {
@@ -77,19 +80,23 @@ export default async function RootLayout({
     delivery_method: cookieStore.get("delivery_method")?.value || "both",
     kilometers: Number(cookieStore.get("kilometers")?.value ?? 0),
   };
-
+  
   const data = await getProfile();
   const { data: rooms } = await getAllRoomsForSocket();
+  
+  const { "country-locale": fullLocale } = await params;
+  const localeParts = fullLocale.split("-");
+  const lang = localeParts.length > 2 ? `${localeParts[0]}-${localeParts[1]}` : localeParts[0];
 
-  const locale = (await params).locale;
-
-  if (locale) {
-    setRequestLocale(locale);
+  if (!hasLocale(routing.locales, fullLocale)) {
+    notFound();
   }
-  const messages = await getMessages({ locale: locale });
+      
+  setRequestLocale(fullLocale);
+  const messages = await getMessages({ locale: lang });
 
   return (
-    <html lang={locale} dir={RTL_LANGUAGES.includes(locale) ? "rtl" : "ltr"}>
+    <html lang={lang} dir={RTL_LANGUAGES?.includes(lang) ? "rtl" : "ltr"}>
       <body>
         <NextTopLoader showSpinner={false} color="#00a650" />
         <HydrateHomeFilter initialFilter={initialFilter} />
@@ -99,15 +106,14 @@ export default async function RootLayout({
           theme="light"
           position="bottom-right"
         />
-
         <ProvidersContainer
           rooms={rooms}
-          locale={locale}
+          locale={fullLocale}
           messages={messages}
           data={data}
         >
           {!data.token && <GoogleOneTapAuth />}
-          <Header locale={locale} />
+          <Header locale={lang} />
           <main className="min-h-[calc(100vh-316px)]">{children}</main>
           <Footer />
         </ProvidersContainer>

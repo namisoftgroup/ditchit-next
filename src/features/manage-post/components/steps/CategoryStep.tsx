@@ -33,7 +33,7 @@ export default function CategoryStep({ next, categories }: CategoryStepProps) {
           {categories.map((category) => (
             <label
               key={category.id}
-              className={`flex items-center cursor-pointer w-full px-6 py-4 border rounded-xl transition-colors ${
+              className={`flex items-center cursor-pointer gap-3 w-full px-6 py-4 border rounded-xl transition-colors ${
                 selectedCategory === category.id
                   ? "bg-[var(--mainColor)] text-white"
                   : "border-gray-200"
@@ -48,19 +48,18 @@ export default function CategoryStep({ next, categories }: CategoryStepProps) {
                 className="hidden"
                 required
               />
-              <div className="mr-3">
-                <Image
-                  src={category.image}
-                  alt={category.title}
-                  width={36}
-                  height={36}
-                  className={`transition-all ${
-                    selectedCategory === category.id
-                      ? "filter brightness-0 invert"
-                      : ""
-                  }`}
-                />
-              </div>
+
+              <Image
+                src={category.image}
+                alt={category.title}
+                width={36}
+                height={36}
+                className={`transition-all ${
+                  selectedCategory === category.id
+                    ? "filter brightness-0 invert"
+                    : ""
+                }`}
+              />
               <span className="text-sm">{category.title}</span>
             </label>
           ))}

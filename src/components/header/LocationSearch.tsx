@@ -13,7 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
   const { filter } = useHomeFilter();
@@ -22,11 +22,22 @@ export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
 
   const router = useRouter();
   const pathname = usePathname();
+  const locale = useLocale();
 
   const t = useTranslations("header");
 
-  function handleLanguageChange(lang: string) {
-    router.replace(pathname, { locale: lang });
+  function handleLanguageChange(newLang: string) {
+    if (!locale) return;
+    const parts = locale.split("-");
+    
+    let updatedLocale: string;
+    if (parts.length > 1) {
+      updatedLocale = `${newLang}-${parts[parts.length - 1]}`;
+    } else {
+      updatedLocale = newLang;
+    }
+
+    router.replace(pathname, { locale: updatedLocale });
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

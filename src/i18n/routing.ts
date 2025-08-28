@@ -1,6 +1,7 @@
 import { defineRouting } from "next-intl/routing";
 
-const DEFAULT_LOCALE = "en";
+const ISO_CODES = ["us", "ca", "inr"];
+
 const LOCALES = [
   "af",
   "am",
@@ -63,8 +64,16 @@ const LOCALES = [
   "zh-TW",
 ];
 
+const FULL_LOCALES: string[] = [];
+
+LOCALES.forEach((locale) => {
+  ISO_CODES.forEach((code) => {
+    FULL_LOCALES.push(`${locale}-${code}`);
+  });
+});
+
 export const routing = defineRouting({
-  locales: LOCALES,
-  defaultLocale: DEFAULT_LOCALE,
+  locales: FULL_LOCALES,
+  defaultLocale: "en-us",
   localePrefix: "always",
 });

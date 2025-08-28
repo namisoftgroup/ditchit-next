@@ -99,7 +99,7 @@ export default function ZipSearch({
         <div className="flex items-center gap-2">
           <button
             onClick={handleBack}
-            className="px-4 py-2 rounded-full bg-[var(--darkColor)] text-white"
+            className="px-4 py-2 rounded-full bg-[var(--darkColor)] text-white whitespace-nowrap"
           >
             {t("back")}
           </button>

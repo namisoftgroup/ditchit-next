@@ -48,7 +48,7 @@ export default function Sidebar() {
           <Megaphone
             width={20}
             height={20}
-            className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
+            className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
           />
           {t("my_posts")}
         </Link>
@@ -60,7 +60,7 @@ export default function Sidebar() {
           <Heart
             width={20}
             height={20}
-            className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
+            className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
           />
           {t("favorites")}
         </Link>
@@ -72,7 +72,7 @@ export default function Sidebar() {
           <UserPen
             width={20}
             height={20}
-            className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
+            className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
           />
           {t("edit_profile")}
         </Link>
@@ -84,7 +84,7 @@ export default function Sidebar() {
           <LogOut
             width={20}
             height={20}
-            className="text-[#FF0000] group-hover:text-[var(--whiteColor)] transition-colors duration-300"
+            className="text-[#FF0000] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
           />
           {t("logout")}
         </button>

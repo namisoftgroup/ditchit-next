@@ -23,7 +23,6 @@ export default function ResponsiveMenu({
   const [open, setOpen] = useState(false);
 
   const t = useTranslations("common");
-
   const isRTL = RTL_LANGUAGES.includes(locale);
 
   return (
