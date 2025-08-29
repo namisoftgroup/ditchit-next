@@ -83,7 +83,8 @@
     "five_days": "5 nap",
     "boost_now": "Most emeld ki",
     "no_favs": "Még nincsenek kedvenceid",
-    "post_deleted": "Hirdetés sikeresen törölve"
+    "post_deleted": "Hirdetés sikeresen törölve",
+    "no_posts": "Még nincs bejegyzés itt. Hozd létre az elsőt most!"
   },
   "header": {
     "add_post": "Új hirdetés",

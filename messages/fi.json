@@ -83,7 +83,8 @@
     "five_days": "5 päivää",
     "boost_now": "Tehosta nyt",
     "no_favs": "Sinulla ei ole vielä suosikkeja",
-    "post_deleted": "Ilmoitus poistettu onnistuneesti"
+    "post_deleted": "Ilmoitus poistettu onnistuneesti",
+    "no_posts": "Täällä ei ole vielä julkaisuja. Luo ensimmäinen nyt!"
   },
   "header": {
     "add_post": "Lisää ilmoitus",

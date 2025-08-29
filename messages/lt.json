@@ -83,7 +83,8 @@
     "five_days": "5 dienas",
     "boost_now": "Reklamuoti dabar",
     "no_favs": "Dar neturite mėgstamiausių",
-    "post_deleted": "Įrašas sėkmingai ištrintas"
+    "post_deleted": "Įrašas sėkmingai ištrintas",
+    "no_posts": "Čia dar nėra įrašų. Sukurkite pirmąjį dabar!"
   },
   "header": {
     "add_post": "Pridėti įrašą",

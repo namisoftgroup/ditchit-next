@@ -65,7 +65,7 @@ export default function SearchByModal({
             className="flex flex-col gap-3"
           >
             {SHIPPING_METHODS.map((item) => (
-              <div className="flex items-center gap-3" key={item.value}>
+              <div className="flex items-center gap-3 rtl:flex-row-reverse" key={item.value}>
                 <RadioGroupItem
                   value={item.value}
                   id={item.value}

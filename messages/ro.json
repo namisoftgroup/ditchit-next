@@ -83,7 +83,8 @@
     "five_days": "5 zile",
     "boost_now": "Îmbunătățește acum",
     "no_favs": "Nu ai încă favorite",
-    "post_deleted": "Anunț șters cu succes"
+    "post_deleted": "Anunț șters cu succes",
+    "no_posts": "Încă nu există postări aici. Creează prima ta acum!"
   },
   "header": {
     "add_post": "Adaugă anunț",

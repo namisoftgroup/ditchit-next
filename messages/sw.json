@@ -83,7 +83,8 @@
     "five_days": "Siku 5",
     "boost_now": "Boosta Sasa",
     "no_favs": "Huna pendwa bado",
-    "post_deleted": "Chapisho limefutwa kwa ufanisi"
+    "post_deleted": "Chapisho limefutwa kwa ufanisi",
+    "no_posts": "Hakuna machapisho hapa bado. Unda ya kwanza sasa!"
   },
   "header": {
     "add_post": "Ongeza Chapisho",

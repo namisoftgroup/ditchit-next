@@ -83,7 +83,8 @@
     "five_days": "5 dagar",
     "boost_now": "Boosta nu",
     "no_favs": "Du har inga favoriter än",
-    "post_deleted": "Annonsen har tagits bort"
+    "post_deleted": "Annonsen har tagits bort",
+    "no_posts": "Inga inlägg här än. Skapa ditt första nu!"
   },
   "header": {
     "add_post": "Lägg till annons",

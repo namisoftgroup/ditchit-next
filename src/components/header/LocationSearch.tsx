@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Search, MapPin, Globe } from "lucide-react";
 import { useHomeFilter } from "@/features/listing/store";
 import { LANGUAGES } from "@/utils/constants";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import SearchByModal from "../modals/SearchByModal";
 import ZipSearch from "../modals/ZipSearch";
@@ -13,7 +14,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useLocale, useTranslations } from "next-intl";
 
 export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
   const { filter } = useHomeFilter();

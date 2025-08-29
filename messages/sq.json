@@ -83,7 +83,8 @@
     "five_days": "5 ditë",
     "boost_now": "Promovo tani",
     "no_favs": "Ende nuk keni të preferuar",
-    "post_deleted": "Postimi u fshi me sukses"
+    "post_deleted": "Postimi u fshi me sukses",
+    "no_posts": "Ende nuk ka postime këtu. Krijo tënden të parin tani!"
   },
   "header": {
     "add_post": "Shto postim",

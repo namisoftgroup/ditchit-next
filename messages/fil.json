@@ -83,7 +83,8 @@
     "five_days": "5 araw",
     "boost_now": "I-boost Ngayon",
     "no_favs": "Wala ka pang paborito",
-    "post_deleted": "Matagumpay na nabura ang post"
+    "post_deleted": "Matagumpay na nabura ang post",
+    "no_posts": "Wala pang posts dito. Gumawa na ng una mo ngayon!"
   },
   "header": {
     "add_post": "Magdagdag ng Post",

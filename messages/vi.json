@@ -83,7 +83,8 @@
     "five_days": "5 ngày",
     "boost_now": "Tăng cường ngay",
     "no_favs": "Bạn chưa có mục yêu thích nào",
-    "post_deleted": "Bài viết đã xóa thành công"
+    "post_deleted": "Bài viết đã xóa thành công",
+    "no_posts": "Chưa có bài viết nào ở đây. Tạo bài viết đầu tiên ngay bây giờ!"
   },
   "header": {
     "add_post": "Thêm bài viết",

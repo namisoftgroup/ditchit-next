@@ -83,7 +83,8 @@
     "five_days": "5 gün",
     "boost_now": "İndi Gücləndir",
     "no_favs": "Seçilmiş elanlarınız yoxdur",
-    "post_deleted": "Elan uğurla silindi"
+    "post_deleted": "Elan uğurla silindi",
+    "no_posts": "Hələ burda heç bir yazı yoxdur. İlk yazını indi yarat!"
   },
   "header": {
     "add_post": "Elan əlavə et",

@@ -83,7 +83,8 @@
     "five_days": "5 dagen",
     "boost_now": "Nu Boosten",
     "no_favs": "Je hebt nog geen favorieten",
-    "post_deleted": "Advertentie succesvol verwijderd"
+    "post_deleted": "Advertentie succesvol verwijderd",
+    "no_posts": "Nog geen berichten hier. Maak nu je eerste aan!"
   },
   "header": {
     "add_post": "Plaats Advertentie",

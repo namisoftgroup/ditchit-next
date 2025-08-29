@@ -83,7 +83,8 @@
     "five_days": "5 kun",
     "boost_now": "Hozir kuchaytirish",
     "no_favs": "Sizda hali sevimlilar yoʻq",
-    "post_deleted": "Eʼlon muvaffaqiyatli oʻchirildi"
+    "post_deleted": "Eʼlon muvaffaqiyatli oʻchirildi",
+    "no_posts": "Bu yerda hozircha postlar yo‘q. Endi birinchisini yarating!"
   },
   "header": {
     "add_post": "Eʼlon qoʻshish",

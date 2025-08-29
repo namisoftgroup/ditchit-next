@@ -83,7 +83,8 @@
     "five_days": "5 días",
     "boost_now": "Impulsar ahora",
     "no_favs": "Aún no tienes favoritos",
-    "post_deleted": "Publicación eliminada exitosamente"
+    "post_deleted": "Publicación eliminada exitosamente",
+    "no_posts": "No hay publicaciones aún. ¡Crea la tuya ahora!"
   },
   "header": {
     "add_post": "Agregar publicación",

@@ -83,7 +83,8 @@
     "five_days": "5 hari",
     "boost_now": "Tingkatkan Sekarang",
     "no_favs": "Anda belum memiliki favorit",
-    "post_deleted": "Postingan berhasil dihapus"
+    "post_deleted": "Postingan berhasil dihapus",
+    "no_posts": "Belum ada posting di sini. Buat posting pertamamu sekarang!"
   },
   "header": {
     "add_post": "Tambah Postingan",

@@ -83,7 +83,8 @@
     "five_days": "5 gün",
     "boost_now": "Şimdi Tanıt",
     "no_favs": "Henüz favori listeniz yok",
-    "post_deleted": "Gönderi başarıyla silindi"
+    "post_deleted": "Gönderi başarıyla silindi",
+    "no_posts": "Burada henüz gönderi yok. Hemen ilkini oluştur!"
   },
   "header": {
     "add_post": "Gönderi Ekle",

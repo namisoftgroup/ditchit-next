@@ -83,7 +83,8 @@
     "five_days": "5 Tage",
     "boost_now": "Jetzt hervorheben",
     "no_favs": "Du hast noch keine Favoriten",
-    "post_deleted": "Beitrag erfolgreich gelöscht"
+    "post_deleted": "Beitrag erfolgreich gelöscht",
+    "no_posts": "Hier sind noch keine Beiträge. Erstelle jetzt deinen ersten!"
   },
   "header": {
     "add_post": "Beitrag hinzufügen",

@@ -83,7 +83,8 @@
     "five_days": "5 päeva",
     "boost_now": "Tõsta kohe",
     "no_favs": "Sul pole veel lemmikuid",
-    "post_deleted": "Postitus edukalt kustutatud"
+    "post_deleted": "Postitus edukalt kustutatud",
+    "no_posts": "Siin pole veel postitusi. Loo oma esimene kohe!"
   },
   "header": {
     "add_post": "Lisa postitus",

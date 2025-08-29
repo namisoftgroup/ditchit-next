@@ -83,7 +83,8 @@
     "five_days": "5 hari",
     "boost_now": "Tingkatkan Sekarang",
     "no_favs": "Anda belum ada kegemaran",
-    "post_deleted": "Siaran berjaya dipadam"
+    "post_deleted": "Siaran berjaya dipadam",
+    "no_posts": "Belum ada pos di sini. Cipta pos pertama anda sekarang!"
   },
   "header": {
     "add_post": "Tambah Siaran",

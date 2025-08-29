@@ -54,7 +54,7 @@ export default function ResponsiveMenu({
             animate={{ x: 0 }}
             exit={{ x: isRTL ? "100%" : "-100%" }}
             transition={{ type: "spring", stiffness: 200, damping: 22 }}
-            className={`fixed top-0 start-0 w-[65vw] h-[100vh] bg-white flex flex-col gap-[8px] p-2 py-4 z-50 shadow-lg`}
+            className={`fixed top-0 start-0 h-[100vh] bg-white flex flex-col gap-[8px] p-2 py-4 z-50 shadow-lg`}
           >
             {/* Main Links */}
             <div className="w-full flex items-center gap-2 mb-1">

@@ -43,7 +43,7 @@ export default function Sidebar() {
       <div className="bg-whiteColor rounded-[16px] p-4 border border-[var(--lightBorderColor)] sticky top-[90px] end-0 z-[2] flex flex-wrap flex-row md:flex-col gap-2">
         <Link
           href="/profile"
-          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)] whitespace-nowrap"
         >
           <Megaphone
             width={20}
@@ -55,7 +55,7 @@ export default function Sidebar() {
 
         <Link
           href="/profile/my-favorites"
-          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)] whitespace-nowrap"
         >
           <Heart
             width={20}
@@ -67,7 +67,7 @@ export default function Sidebar() {
 
         <Link
           href="/profile/edit-profile"
-          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)] whitespace-nowrap"
         >
           <UserPen
             width={20}
@@ -78,7 +78,7 @@ export default function Sidebar() {
         </Link>
 
         <button
-          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)]"
+          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)] whitespace-nowrap"
           onClick={performLogout}
         >
           <LogOut

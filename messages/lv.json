@@ -83,7 +83,8 @@
     "five_days": "5 dienas",
     "boost_now": "Paaugstināt tagad",
     "no_favs": "Jums vēl nav izlases",
-    "post_deleted": "Ieraksts veiksmīgi dzēsts"
+    "post_deleted": "Ieraksts veiksmīgi dzēsts",
+    "no_posts": "Šeit vēl nav ierakstu. Izveido savu pirmo tagad!"
   },
   "header": {
     "add_post": "Pievienot ierakstu",

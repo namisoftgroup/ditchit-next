@@ -83,7 +83,8 @@
     "five_days": "5 dni",
     "boost_now": "Wzmocnij teraz",
     "no_favs": "Nie masz jeszcze ulubionych",
-    "post_deleted": "Post został pomyślnie usunięty"
+    "post_deleted": "Post został pomyślnie usunięty",
+    "no_posts": "Na razie nie ma tu żadnych postów. Stwórz swój pierwszy już teraz!"
   },
   "header": {
     "add_post": "Dodaj post",

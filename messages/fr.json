@@ -83,7 +83,8 @@
     "five_days": "5 jours",
     "boost_now": "Booster maintenant",
     "no_favs": "Vous n’avez pas encore de favoris",
-    "post_deleted": "Annonce supprimée avec succès"
+    "post_deleted": "Annonce supprimée avec succès",
+    "no_posts": "Pas encore de publications ici. Créez la vôtre dès maintenant !"
   },
   "header": {
     "add_post": "Ajouter une annonce",

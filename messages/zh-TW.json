@@ -83,7 +83,8 @@
     "five_days": "5 天",
     "boost_now": "立即提升",
     "no_favs": "您尚未有收藏",
-    "post_deleted": "貼文已成功刪除"
+    "post_deleted": "貼文已成功刪除",
+    "no_posts": "這裡還沒有帖子。馬上建立你的第一篇吧！"
   },
   "header": {
     "add_post": "新增貼文",

@@ -83,7 +83,8 @@
     "five_days": "5 dies",
     "boost_now": "Impulsa ara",
     "no_favs": "Encara no tens preferits",
-    "post_deleted": "Publicació eliminada amb èxit"
+    "post_deleted": "Publicació eliminada amb èxit",
+    "no_posts": "Encara no hi ha publicacions. Crea la teva primera ara!"
   },
   "header": {
     "add_post": "Afegeix publicació",

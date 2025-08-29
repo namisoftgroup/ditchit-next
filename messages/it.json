@@ -83,7 +83,8 @@
     "five_days": "5 giorni",
     "boost_now": "Promuovi Ora",
     "no_favs": "Non hai ancora preferiti",
-    "post_deleted": "Post eliminato con successo"
+    "post_deleted": "Post eliminato con successo",
+    "no_posts": "Ancora nessun post qui. Crea il tuo primo ora!"
   },
   "header": {
     "add_post": "Aggiungi Post",

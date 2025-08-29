@@ -83,7 +83,8 @@
     "five_days": "5 dní",
     "boost_now": "Posílit nyní",
     "no_favs": "Zatím nemáte žádné oblíbené",
-    "post_deleted": "Příspěvek byl úspěšně smazán"
+    "post_deleted": "Příspěvek byl úspěšně smazán",
+    "no_posts": "Zatím zde nejsou žádné příspěvky. Vytvořte svůj první hned!"
   },
   "header": {
     "add_post": "Přidat příspěvek",

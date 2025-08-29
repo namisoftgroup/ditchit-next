@@ -83,7 +83,8 @@
     "five_days": "5 dní",
     "boost_now": "Propagovať teraz",
     "no_favs": "Ešte nemáte žiadne obľúbené",
-    "post_deleted": "Príspevok bol úspešne vymazaný"
+    "post_deleted": "Príspevok bol úspešne vymazaný",
+    "no_posts": "Tukaj še ni objav. Ustvari svojo prvo zdaj!"
   },
   "header": {
     "add_post": "Pridať príspevok",

@@ -83,7 +83,8 @@
     "five_days": "5 dana",
     "boost_now": "Promoviši sada",
     "no_favs": "Još nemate omiljene oglase",
-    "post_deleted": "Oglas je uspešno obrisan"
+    "post_deleted": "Oglas je uspešno obrisan",
+    "no_posts": "Još nema objava ovde. Kreiraj svoju prvu sada!"
   },
   "header": {
     "add_post": "Dodaj oglas",

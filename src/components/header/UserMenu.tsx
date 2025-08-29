@@ -36,7 +36,7 @@ export default function UserMenu() {
         <DropdownMenuItem asChild>
           <Link
             href="/profile"
-            className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+            className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm rtl:flex-row-reverse"
           >
             <Megaphone width={20} height={20} />
             {t("my_posts")}
@@ -46,7 +46,7 @@ export default function UserMenu() {
         <DropdownMenuItem asChild>
           <Link
             href="/profile/my-favorites"
-            className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+            className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm rtl:flex-row-reverse"
           >
             <Heart width={20} height={20} />
             {t("favorites")}
@@ -56,7 +56,7 @@ export default function UserMenu() {
         <DropdownMenuItem asChild>
           <Link
             href="/profile/edit-profile"
-            className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+            className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm rtl:flex-row-reverse"
           >
             <UserPen width={20} height={20} />
             {t("edit_profile")}
@@ -65,7 +65,7 @@ export default function UserMenu() {
 
         <DropdownMenuItem asChild>
           <button
-            className="flex items-center w-full gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+            className="flex items-center w-full gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm rtl:flex-row-reverse"
             onClick={performLogout}
           >
             <LogOut width={20} height={20} />
