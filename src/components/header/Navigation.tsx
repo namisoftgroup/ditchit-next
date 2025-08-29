@@ -11,13 +11,13 @@ export default function Navigation() {
   const t = useTranslations("common");
 
   return (
-    <nav className="p-[6px] text-center md:block hidden">
+    <nav className="p-[6px] px-0 text-center md:block hidden">
       <ul className="flex-1">
         <div className="w-full flex items-center gap-2">
           <Link
             href="/"
             prefetch={true}
-            className="flex flex-col items-center gap-2 text-[14px] text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
+            className="flex flex-col items-center gap-2 text-[14px] text-[var(--darkColor)] font-bold capitalize p-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
           >
             {t("home")}
           </Link>
@@ -25,7 +25,7 @@ export default function Navigation() {
           <Link
             href="/posts"
             prefetch={true}
-            className="flex flex-col items-center gap-2 text-[14px] text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
+            className="flex flex-col items-center gap-2 text-[14px] text-[var(--darkColor)] font-bold capitalize p-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
           >
             {t("listing")}
           </Link>
@@ -33,7 +33,7 @@ export default function Navigation() {
           {token && (
             <Link
               href="/chats"
-              className="flex flex-col text-[14px] items-center gap-2 text-[var(--darkColor)] font-bold capitalize px-4 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
+              className="flex flex-col text-[14px] items-center gap-2 text-[var(--darkColor)] font-bold capitalize p-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)] [&.active]:text-[var(--mainColor)]"
             >
               {t("chats")}
               {count > 0 && (
