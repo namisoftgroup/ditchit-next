@@ -69,7 +69,7 @@ export const SOCKET_EVENTS = {
   RECEIVE_MESSAGE: "ditch_it_one_room_receive_data",
 };
 
-export const RTL_LANGUAGES = ["ar", "he", "fa", "ur", "ps", "ku", "dv"];
+export const RTL_LANGUAGES = ["ar", "fa"];
 
 export const LANGUAGES = {
   af: "Afrikaans",
