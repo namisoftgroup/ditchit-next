@@ -52,7 +52,6 @@
     "sort": "Trier",
     "drag_drop": "Cliquez ou faites glisser les images ici",
     "remove_file": "Supprimer le fichier",
-    "cover_image": "Image de couverture",
     "chat": "Discussion",
     "browse_by": "Parcourir les articles par"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Prix & Livraison",
     "something_went_wrong": "Une erreur est survenue. Veuillez réessayer.",
     "post_saved": "Annonce enregistrée avec succès et en cours de révision",
-    "key_features": "Caractéristiques clés"
+    "key_features": "Caractéristiques clés",
+    "cover_image": "Image de couverture"
   },
   "ditchNote": {
     "title": "Découvrez Ditchit - Le marché local ultime !",

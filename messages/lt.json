@@ -52,7 +52,6 @@
     "sort": "Rūšiuoti",
     "drag_drop": "Paspauskite arba nuvilkite paveikslėlius čia",
     "remove_file": "Pašalinti failą",
-    "cover_image": "Viršelio nuotrauka",
     "chat": "Pokalbis",
     "browse_by": "Naršyti pagal"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Kaina ir pristatymas",
     "something_went_wrong": "Kažkas negerai. Bandykite dar kartą.",
     "post_saved": "Įrašas sėkmingai išsaugotas ir yra peržiūrimas",
-    "key_features": "Pagrindinės savybės"
+    "key_features": "Pagrindinės savybės",
+    "cover_image": "Viršelio nuotrauka"
   },
   "ditchNote": {
     "title": "Pristatome Ditchit - galutinę vietinę prekyvietę!",

@@ -52,7 +52,6 @@
     "sort": "Sortuj",
     "drag_drop": "Kliknij lub przeciągnij zdjęcia tutaj",
     "remove_file": "Usuń plik",
-    "cover_image": "Zdjęcie główne",
     "chat": "Czat",
     "browse_by": "Przeglądaj przedmioty według"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Cena i dostawa",
     "something_went_wrong": "Coś poszło nie tak. Spróbuj ponownie.",
     "post_saved": "Post został pomyślnie zapisany i oczekuje na weryfikację",
-    "key_features": "Kluczowe funkcje"
+    "key_features": "Kluczowe funkcje",
+     "cover_image": "Zdjęcie główne"
   },
   "ditchNote": {
     "title": "Przedstawiamy Ditchit - Najlepszy lokalny marketplace!",

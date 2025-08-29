@@ -131,7 +131,8 @@ export default function PriceDetailsStep({
 
       <BoostAndPublish
         show={show}
-        isSaving={isSaving}
+        isPromoting={watch("is_promote") ? isSaving : false}
+        isSaving={!watch("is_promote") ? isSaving : false}
         handleClose={() => setShow(false)}
         addPost={handleSubmit(onSubmit)}
         addAndPromote={handleSubmit(onSubmitWithPromote)}

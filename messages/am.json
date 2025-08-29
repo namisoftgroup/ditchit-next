@@ -52,7 +52,6 @@
     "sort": "ደርድር",
     "drag_drop": "ምስሎችን እዚህ ጠቅ ያድርጉ ወይም ይጎትቷቸው",
     "remove_file": "ፋይል አስወግድ",
-    "cover_image": "የሽፋን ምስል",
     "chat": "ውይይት",
     "browse_by": "ንጥሎችን በ ያስሱ"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "ዋጋ እና መላኪያ",
     "something_went_wrong": "የሆነ ችግር ተከስቷል። እባክዎ እንደገና ይሞክሩ።",
     "post_saved": "ልጥፉ በተሳካ ሁኔታ ተቀምጧል እና በግምገማ ላይ ነው",
-    "key_features": "ዋና ባህሪያት"
+    "key_features": "ዋና ባህሪያት",
+    "cover_image": "የሽፋን ምስል"
   },
   "ditchNote": {
     "title": "Ditchitን ያስተዋውቁ - የመጨረሻው አካባቢያዊ ገበያ!",

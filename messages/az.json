@@ -52,7 +52,6 @@
     "sort": "Sırala",
     "drag_drop": "Şəkilləri buraya klikləyin və ya sürükləyin",
     "remove_file": "Faylı sil",
-    "cover_image": "Əsas Şəkil",
     "chat": "Çat",
     "browse_by": "Əşyaları bu üzrə bax"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Qiymət & Çatdırılma",
     "something_went_wrong": "Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.",
     "post_saved": "Elan uğurla yadda saxlanıldı və nəzərdən keçirilir",
-    "key_features": "Əsas Xüsusiyyətlər"
+    "key_features": "Əsas Xüsusiyyətlər",
+    "cover_image": "Əsas Şəkil"
   },
   "ditchNote": {
     "title": "Ditchit ilə Tanış Olun - Ən Yaxşı Yerli Bazar!",

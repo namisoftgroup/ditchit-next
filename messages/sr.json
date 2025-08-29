@@ -52,7 +52,6 @@
     "sort": "Sortiraj",
     "drag_drop": "Kliknite ili prevucite slike ovde",
     "remove_file": "Ukloni fajl",
-    "cover_image": "Naslovna slika",
     "chat": "Razgovor",
     "browse_by": "Pregledajte po"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Cena & Dostava",
     "something_went_wrong": "Nešto je pošlo po zlu. Pokušajte ponovo.",
     "post_saved": "Oglas je uspešno sačuvan i na čekanju za pregled",
-    "key_features": "Ključne karakteristike"
+    "key_features": "Ključne karakteristike",
+    "cover_image": "Naslovna slika"
   },
   "ditchNote": {
     "title": "Predstavljamo Ditchit - Ultimativno lokalno tržište!",

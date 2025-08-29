@@ -52,7 +52,6 @@
     "sort": "Rendit",
     "drag_drop": "Kliko ose tërhiqni imazhet këtu",
     "remove_file": "Hiq skedarin",
-    "cover_image": "Imazhi kryesor",
     "chat": "Bisedo",
     "browse_by": "Shfleto sipas"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Çmimi & Transporti",
     "something_went_wrong": "Diçka shkoi keq. Provoni përsëri.",
     "post_saved": "Postimi u ruajt me sukses dhe është nën rishikim",
-    "key_features": "Veçoritë kryesore"
+    "key_features": "Veçoritë kryesore",
+    "cover_image": "Imazhi kryesor"
   },
   "ditchNote": {
     "title": "Prezantimi i Ditchit - Tregu Lokal më i Mirë!",

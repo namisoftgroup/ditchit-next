@@ -52,7 +52,6 @@
     "sort": "Ayusin",
     "drag_drop": "I-click o i-drag ang mga larawan dito",
     "remove_file": "Tanggalin ang file",
-    "cover_image": "Cover Image",
     "chat": "Chat",
     "browse_by": "Mag-browse ng items ayon sa"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Presyo & Padala",
     "something_went_wrong": "May nangyaring mali. Subukan muli.",
     "post_saved": "Matagumpay na na-save ang post at kasalukuyang nire-review",
-    "key_features": "Pangunahing Tampok"
+    "key_features": "Pangunahing Tampok",
+    "cover_image": "Cover Image"
   },
   "ditchNote": {
     "title": "Ipinapakilala ang Ditchit - Ang Ultimate Lokal na Marketplace!",

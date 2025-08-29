@@ -20,6 +20,10 @@ export const initSocket = () => {
     socket.on("connect_error", (err) => {
       console.error("[SOCKET] ⚠️ Connection Error:", err.message);
     });
+
+    socket.onAny((event, ...args) => {
+      console.log("[SOCKET] 📩 Incoming event:", event, args);
+    });
   }
   return socket;
 };

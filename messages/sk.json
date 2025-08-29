@@ -52,7 +52,6 @@
     "sort": "Zoradiť",
     "drag_drop": "Kliknite alebo presuňte obrázky sem",
     "remove_file": "Odstrániť súbor",
-    "cover_image": "Hlavný obrázok",
     "chat": "Chat",
     "browse_by": "Prehliadať podľa"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Cena a doručenie",
     "something_went_wrong": "Niečo sa pokazilo. Skúste to znova.",
     "post_saved": "Príspevok bol úspešne uložený a je na kontrole",
-    "key_features": "Kľúčové vlastnosti"
+    "key_features": "Kľúčové vlastnosti",
+    "cover_image": "Hlavný obrázok"
   },
   "ditchNote": {
     "title": "Predstavujeme Ditchit - Najlepší lokálny trh!",

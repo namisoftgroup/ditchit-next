@@ -52,7 +52,6 @@
     "sort": "排序",
     "drag_drop": "点击或拖动图片到此处",
     "remove_file": "删除文件",
-    "cover_image": "封面图片",
     "chat": "聊天",
     "browse_by": "按以下方式浏览物品"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "价格与运费",
     "something_went_wrong": "出错了，请再试一次。",
     "post_saved": "帖子已成功保存并正在审核中",
-    "key_features": "主要特性"
+    "key_features": "主要特性",
+    "cover_image": "封面图片"
   },
   "ditchNote": {
     "title": "介绍 Ditchit - 终极本地市场！",

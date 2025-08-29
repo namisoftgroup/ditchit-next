@@ -52,7 +52,6 @@
     "sort": "Lajittele",
     "drag_drop": "Klikkaa tai raahaa kuvat tähän",
     "remove_file": "Poista tiedosto",
-    "cover_image": "Kansikuva",
     "chat": "Chat",
     "browse_by": "Selaa kohteita"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Hinta & Toimitus",
     "something_went_wrong": "Jotain meni pieleen. Yritä uudelleen.",
     "post_saved": "Ilmoitus tallennettu onnistuneesti ja on tarkistuksessa",
-    "key_features": "Tärkeimmät ominaisuudet"
+    "key_features": "Tärkeimmät ominaisuudet",
+    "cover_image": "Kansikuva"
   },
   "ditchNote": {
     "title": "Esittelyssä Ditchit - Paras paikallinen markkinapaikka!",

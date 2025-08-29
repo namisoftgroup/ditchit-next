@@ -4,19 +4,26 @@ import { useAuthStore } from "@/features/auth/store";
 import { logOutAction } from "@/features/auth/actions";
 import { UserPen, Heart, UserRound, LogOut, Megaphone } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import { User } from "@/types/user";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-export default function UserMenu() {
+export default function UserMenu({
+  isAuthed,
+  user,
+}: {
+  isAuthed: boolean;
+  user: User | null;
+}) {
   const router = useRouter();
-  const { user ,isAuthenticated, logout } = useAuthStore((state) => state);
+  const { logout } = useAuthStore((state) => state);
   const t = useTranslations("header");
 
   const performLogout = async () => {
@@ -27,10 +34,16 @@ export default function UserMenu() {
     }
   };
 
-  return isAuthenticated ? (
+  return isAuthed ? (
     <DropdownMenu>
       <DropdownMenuTrigger className="w-[40px] h-[40px] rounded-full overflow-hidden border border-[var(--lightBorderColor)]">
-        <Image src={user?.image || "" } alt={user?.name || "user image"} width={40} height={40} className="object-cover rounded-full w-[40px] h-[40px]" />
+        <Image
+          src={user?.image || ""}
+          alt={user?.name || "user image"}
+          width={40}
+          height={40}
+          className="object-cover rounded-full w-[40px] h-[40px]"
+        />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-[var(--whiteColor)] shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[99999] min-w-[200px] flex-col rounded border border-[var(--lightBorderColor)] max-h-[400px] overflow-y-auto">
         <DropdownMenuItem asChild>

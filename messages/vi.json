@@ -52,7 +52,6 @@
     "sort": "Sắp xếp",
     "drag_drop": "Nhấp hoặc kéo hình ảnh vào đây",
     "remove_file": "Xóa tệp",
-    "cover_image": "Ảnh bìa",
     "chat": "Trò chuyện",
     "browse_by": "Duyệt theo"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Giá & Giao hàng",
     "something_went_wrong": "Có gì đó sai. Vui lòng thử lại.",
     "post_saved": "Bài viết đã được lưu thành công và đang chờ xét duyệt",
-    "key_features": "Đặc điểm chính"
+    "key_features": "Đặc điểm chính",
+    "cover_image": "Ảnh bìa"
   },
   "ditchNote": {
     "title": "Giới thiệu Ditchit - Thị trường địa phương tốt nhất!",

@@ -52,7 +52,6 @@
     "sort": "Sırala",
     "drag_drop": "Buraya tıklayın veya sürükleyip bırakın",
     "remove_file": "Dosyayı Kaldır",
-    "cover_image": "Kapak Resmi",
     "chat": "Sohbet",
     "browse_by": "Öğelere göre göz at"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Fiyat & Kargo",
     "something_went_wrong": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin.",
     "post_saved": "Gönderi başarıyla kaydedildi ve inceleme altında",
-    "key_features": "Ana Özellikler"
+    "key_features": "Ana Özellikler",
+    "cover_image": "Kapak Resmi"
   },
   "ditchNote": {
     "title": "Ditchit'i Tanıtıyoruz - En İyi Yerel Pazar!",

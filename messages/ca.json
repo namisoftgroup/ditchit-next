@@ -52,7 +52,6 @@
     "sort": "Ordena",
     "drag_drop": "Fes clic o arrossega imatges aquí",
     "remove_file": "Elimina fitxer",
-    "cover_image": "Imatge de portada",
     "chat": "Xat",
     "browse_by": "Explora articles per"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Preu i enviament",
     "something_went_wrong": "Alguna cosa ha anat malament. Torna-ho a intentar.",
     "post_saved": "Publicació desada correctament i pendent de revisió",
-    "key_features": "Característiques clau"
+    "key_features": "Característiques clau",
+    "cover_image": "Imatge de portada"
   },
   "ditchNote": {
     "title": "Presentem Ditchit - El mercat local definitiu!",

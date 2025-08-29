@@ -52,7 +52,6 @@
     "sort": "Sortera",
     "drag_drop": "Klicka eller dra bilder här",
     "remove_file": "Ta bort fil",
-    "cover_image": "Omslagsbild",
     "chat": "Chatt",
     "browse_by": "Bläddra efter"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Pris & Frakt",
     "something_went_wrong": "Något gick fel. Försök igen.",
     "post_saved": "Annonsen sparades och väntar på granskning",
-    "key_features": "Nyckelfunktioner"
+    "key_features": "Nyckelfunktioner",
+    "cover_image": "Omslagsbild"
   },
   "ditchNote": {
     "title": "Introducerar Ditchit - Den ultimata lokala marknadsplatsen!",

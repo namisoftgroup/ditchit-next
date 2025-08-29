@@ -52,7 +52,6 @@
     "sort": "Saralash",
     "drag_drop": "Rasmlarni shu yerga bosib yoki tortib qoʻying",
     "remove_file": "Faylni oʻchirish",
-    "cover_image": "Muqova rasmi",
     "chat": "Chat",
     "browse_by": "Elementlarni koʻrish"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Narx & Yetkazib berish",
     "something_went_wrong": "Nimadir notoʻgʻri ketdi. Iltimos, qayta urinib koʻring.",
     "post_saved": "Eʼlon muvaffaqiyatli saqlandi va tekshirish ostida",
-    "key_features": "Asosiy xususiyatlar"
+    "key_features": "Asosiy xususiyatlar",
+    "cover_image": "Muqova rasmi"
   },
   "ditchNote": {
     "title": "Ditchit bilan tanishing - Eng zoʻr mahalliy bozor!",

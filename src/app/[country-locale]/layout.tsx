@@ -80,18 +80,21 @@ export default async function RootLayout({ children, params }: Props) {
     delivery_method: cookieStore.get("delivery_method")?.value || "both",
     kilometers: Number(cookieStore.get("kilometers")?.value ?? 0),
   };
-  
+
   const data = await getProfile();
   const { data: rooms } = await getAllRoomsForSocket();
-  
+
   const { "country-locale": fullLocale } = await params;
   const localeParts = fullLocale.split("-");
-  const lang = localeParts.length > 2 ? `${localeParts[0]}-${localeParts[1]}` : localeParts[0];
+  const lang =
+    localeParts.length > 2
+      ? `${localeParts[0]}-${localeParts[1]}`
+      : localeParts[0];
 
   if (!hasLocale(routing.locales, fullLocale)) {
     notFound();
   }
-      
+
   setRequestLocale(fullLocale);
   const messages = await getMessages({ locale: lang });
 
@@ -113,7 +116,7 @@ export default async function RootLayout({ children, params }: Props) {
           data={data}
         >
           {!data.token && <GoogleOneTapAuth />}
-          <Header locale={lang} />
+          <Header locale={lang} data={data} />
           <main className="min-h-[calc(100vh-316px)]">{children}</main>
           <Footer />
         </ProvidersContainer>

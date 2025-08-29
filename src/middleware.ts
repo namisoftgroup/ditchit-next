@@ -8,6 +8,12 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const pathname = request.nextUrl.pathname;
 
+  const pathSegments = pathname.split("/");
+  const locale = pathSegments[1];
+  const normalizedPath = routing.locales.includes(locale)
+    ? "/" + pathSegments.slice(2).join("/")
+    : pathname;
+
   const PROTECTED_ROUTES = [
     "/profile",
     "/profile/my-favorites",
@@ -26,16 +32,17 @@ export function middleware(request: NextRequest) {
   ];
 
   const isProtectedRoute =
-    PROTECTED_ROUTES.includes(pathname) || pathname.startsWith("/chats/");
+    PROTECTED_ROUTES.includes(normalizedPath) ||
+    normalizedPath.startsWith("/chats/");
 
-  const isAuthRoute = AUTH_ROUTES.includes(pathname);
+  const isAuthRoute = AUTH_ROUTES.includes(normalizedPath);
 
   if (isProtectedRoute && !token) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
   }
 
   if (isAuthRoute && token) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL(`/${locale}`, request.url));
   }
 
   return intlMiddleware(request);

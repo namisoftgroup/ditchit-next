@@ -9,7 +9,8 @@ import { Room, SocketMessage } from "./../features/chat/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
-import { Link } from "@/i18n/navigation";
+import { useLocale } from "next-intl";
+import NextLink from "next/link";
 import Image from "next/image";
 
 type ProviderProps = {
@@ -24,7 +25,8 @@ export default function WebSocketProvider({
   const { setRooms, addRoom, addMessage } = useChatStore();
   const { user } = useAuthStore();
   const params = useParams();
-  const currentRoomId = params?.roomId;
+  const locale = useLocale();
+  const currentRoomId = params?.roomId ? String(params.roomId) : null;
 
   const queryClient = useQueryClient();
 
@@ -46,29 +48,37 @@ export default function WebSocketProvider({
       socket.emit(SOCKET_EVENTS.JOIN_ROOMS, JSON.stringify(roomIds));
     }
 
+    socket.off(SOCKET_EVENTS.RECEIVE_FIRST_MESSAGE);
+    socket.off(SOCKET_EVENTS.RECEIVE_MESSAGE);
+
     socket.on(SOCKET_EVENTS.RECEIVE_FIRST_MESSAGE, (data: SocketMessage) => {
-      console.log("[SOCKET] 📥 User-level data:", data);
+      console.log("[SOCKET] 📥 First message:", data);
       queryClient.invalidateQueries({ queryKey: ["unread-count"] });
 
       addRoom(data.room);
       socket.emit(SOCKET_EVENTS.JOIN_ROOMS, JSON.stringify([data.room.id]));
-
       addMessage(data.room.id, data.messages[0]);
-      toast(
-        <Link href={`/chats/${data.room.id}`} className="flex gap-4 p-1 w-full">
-          <Image
-            src={data.room.another_user.user.image}
-            alt={data.room.another_user.user.name}
-            className="w-[42px] h-42px] rounded-full object-cover"
-            width={42}
-            height={42}
-          />
-          <div>
-            <h6>{data.room.another_user.user.name}</h6>
-            <p>{data.messages[0].message}</p>
-          </div>
-        </Link>
-      );
+
+      if (currentRoomId !== String(data.room.id)) {
+        toast(
+          <NextLink
+            href={`/${locale}/chats/${data.room.id}`}
+            className="flex gap-4 p-1 w-full"
+          >
+            <Image
+              src={data.room.another_user.user.image}
+              alt={data.room.another_user.user.name}
+              className="w-[42px] h-[42px] rounded-full object-cover"
+              width={42}
+              height={42}
+            />
+            <div>
+              <h6>{data.room.another_user.user.name}</h6>
+              <p>{data.messages[0].message}</p>
+            </div>
+          </NextLink>
+        );
+      }
     });
 
     socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, (data: SocketMessage) => {
@@ -97,8 +107,8 @@ export default function WebSocketProvider({
 
       if (currentRoomId !== String(data.room.id)) {
         toast(
-          <Link
-            href={`/chats/${data.room.id}`}
+          <NextLink
+            href={`/${locale}/chats/${data.room.id}`}
             className="flex gap-3 p-1 w-full"
           >
             <Image
@@ -112,7 +122,7 @@ export default function WebSocketProvider({
               <h6>{data.room.another_user.user.name}</h6>
               <p>{data.messages[0].message}</p>
             </div>
-          </Link>
+          </NextLink>
         );
       }
     });
@@ -129,7 +139,16 @@ export default function WebSocketProvider({
       );
       socket.disconnect();
     };
-  }, [user, rooms, setRooms, addMessage, addRoom, queryClient, currentRoomId]);
+  }, [
+    rooms,
+    setRooms,
+    addMessage,
+    addRoom,
+    user,
+    locale,
+    queryClient,
+    currentRoomId,
+  ]);
 
   return <>{children}</>;
 }

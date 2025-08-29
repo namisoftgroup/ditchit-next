@@ -52,7 +52,6 @@
     "sort": "Sortează",
     "drag_drop": "Faceți clic sau trageți imaginile aici",
     "remove_file": "Șterge fișier",
-    "cover_image": "Imagine de copertă",
     "chat": "Chat",
     "browse_by": "Caută articole după"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Preț și livrare",
     "something_went_wrong": "Ceva nu a mers bine. Vă rugăm să încercați din nou.",
     "post_saved": "Anunț salvat cu succes și este în curs de revizuire",
-    "key_features": "Caracteristici cheie"
+    "key_features": "Caracteristici cheie",
+    "cover_image": "Imagine de copertă"
   },
   "ditchNote": {
     "title": "Prezentăm Ditchit - Marketplace-ul local suprem!",

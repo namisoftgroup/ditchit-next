@@ -52,7 +52,6 @@
     "sort": "Ordenar",
     "drag_drop": "Clique ou arraste imagens aqui",
     "remove_file": "Remover ficheiro",
-    "cover_image": "Imagem de capa",
     "chat": "Chat",
     "browse_by": "Pesquisar itens por"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Preço e entrega",
     "something_went_wrong": "Algo correu mal. Por favor, tente novamente.",
     "post_saved": "Anúncio guardado com sucesso e está em revisão",
-    "key_features": "Principais características"
+    "key_features": "Principais características",
+    "cover_image": "Imagem de capa"
   },
   "ditchNote": {
     "title": "Apresentamos o Ditchit - O Marketplace Local Definitivo!",

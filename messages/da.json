@@ -52,7 +52,6 @@
     "sort": "Sorter",
     "drag_drop": "Klik eller træk billeder hertil",
     "remove_file": "Fjern fil",
-    "cover_image": "Forsidebillede",
     "chat": "Chat",
     "browse_by": "Gennemse varer efter"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Pris & Forsendelse",
     "something_went_wrong": "Noget gik galt. Prøv venligst igen.",
     "post_saved": "Opslag gemt med succes og er under gennemgang",
-    "key_features": "Nøglefunktioner"
+    "key_features": "Nøglefunktioner",
+    "cover_image": "Forsidebillede"
   },
   "ditchNote": {
     "title": "Præsenterer Ditchit - Det ultimative lokale marked!",

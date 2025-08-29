@@ -52,7 +52,6 @@
     "sort": "Panga",
     "drag_drop": "Bonyeza au buruta picha hapa",
     "remove_file": "Ondoa faili",
-    "cover_image": "Picha Kuu",
     "chat": "Chati",
     "browse_by": "Vinjari bidhaa kwa"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Bei & Usafirishaji",
     "something_went_wrong": "Kitu kimeenda vibaya. Tafadhali jaribu tena.",
     "post_saved": "Chapisho limehifadhiwa na lipo chini ya ukaguzi",
-    "key_features": "Vipengele Muhimu"
+    "key_features": "Vipengele Muhimu",
+    "cover_image": "Picha Kuu"
   },
   "ditchNote": {
     "title": "Tukuletee Ditchit - Soko la Mwisho la Kij local!",

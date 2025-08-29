@@ -52,7 +52,6 @@
     "sort": "정렬",
     "drag_drop": "클릭하거나 이미지를 여기로 드래그하세요",
     "remove_file": "파일 삭제",
-    "cover_image": "대표 이미지",
     "chat": "채팅",
     "browse_by": "항목을 분류하여 보기"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "가격 및 배송",
     "something_went_wrong": "오류가 발생했습니다. 다시 시도해주세요.",
     "post_saved": "게시물이 성공적으로 저장되었으며 검토 중입니다",
-    "key_features": "주요 특징"
+    "key_features": "주요 특징",
+    "cover_image": "대표 이미지"
   },
   "ditchNote": {
     "title": "Ditchit 소개 - 최고의 로컬 마켓플레이스!",

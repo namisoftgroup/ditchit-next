@@ -52,7 +52,6 @@
     "sort": "Urutkan",
     "drag_drop": "Klik atau seret gambar di sini",
     "remove_file": "Hapus file",
-    "cover_image": "Gambar Sampul",
     "chat": "Obrolan",
     "browse_by": "Telusuri barang berdasarkan"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Harga & Pengiriman",
     "something_went_wrong": "Terjadi kesalahan. Silakan coba lagi.",
     "post_saved": "Postingan berhasil disimpan dan sedang ditinjau",
-    "key_features": "Fitur Utama"
+    "key_features": "Fitur Utama",
+    "cover_image": "Gambar Sampul"
   },
   "ditchNote": {
     "title": "Perkenalkan Ditchit - Marketplace Lokal Terbaik!",

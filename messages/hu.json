@@ -52,7 +52,6 @@
     "sort": "Rendezés",
     "drag_drop": "Kattints vagy húzd ide a képeket",
     "remove_file": "Fájl eltávolítása",
-    "cover_image": "Borítókép",
     "chat": "Csevegés",
     "browse_by": "Böngéssz tételek szerint"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Ár és szállítás",
     "something_went_wrong": "Hiba történt. Kérjük, próbáld újra.",
     "post_saved": "Hirdetés sikeresen mentve és ellenőrzés alatt",
-    "key_features": "Fő jellemzők"
+    "key_features": "Fő jellemzők",
+    "cover_image": "Borítókép"
   },
   "ditchNote": {
     "title": "Bemutatkozik a Ditchit - A végső helyi piactér!",

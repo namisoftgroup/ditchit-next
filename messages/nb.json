@@ -52,7 +52,6 @@
     "sort": "Sorter",
     "drag_drop": "Klikk eller dra bilder hit",
     "remove_file": "Fjern fil",
-    "cover_image": "Forsidebilde",
     "chat": "Chat",
     "browse_by": "Bla gjennom varer etter"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Pris og frakt",
     "something_went_wrong": "Noe gikk galt. Vennligst prøv igjen.",
     "post_saved": "Innlegg lagret og under vurdering",
-    "key_features": "Nøkkelfunksjoner"
+    "key_features": "Nøkkelfunksjoner",
+    "cover_image": "Forsidebilde"
   },
   "ditchNote": {
     "title": "Vi introduserer Ditchit - Den ultimate lokale markedsplassen!",

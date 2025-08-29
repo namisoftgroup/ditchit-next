@@ -52,7 +52,6 @@
     "sort": "Kārtot",
     "drag_drop": "Noklikšķiniet vai ievelciet attēlus šeit",
     "remove_file": "Noņemt failu",
-    "cover_image": "Vāka attēls",
     "chat": "Čats",
     "browse_by": "Pārlūkot vienumus pēc"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Cena un piegāde",
     "something_went_wrong": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.",
     "post_saved": "Ieraksts veiksmīgi saglabāts un tiek pārskatīts",
-    "key_features": "Galvenās īpašības"
+    "key_features": "Galvenās īpašības",
+    "cover_image": "Vāka attēls"
   },
   "ditchNote": {
     "title": "Iepazīstinām ar Ditchit - galveno vietējo tirgu!",

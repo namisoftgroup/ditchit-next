@@ -52,7 +52,6 @@
     "sort": "Sorteer",
     "drag_drop": "Klik of sleep beelde hierheen",
     "remove_file": "Verwyder lêer",
-    "cover_image": "Voorbladbeeld",
     "chat": "Gesels",
     "browse_by": "Blaai items volgens"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Prys & Gestuur",
     "something_went_wrong": "Iets het verkeerd geloop. Probeer asseblief weer.",
     "post_saved": "Plasing suksesvol gestoor en is onder hersiening",
-    "key_features": "Sleutelkenmerke"
+    "key_features": "Sleutelkenmerke",
+    "cover_image": "Voorbladbeeld"
   },
   "ditchNote": {
     "title": "Stel Ditchit bekend - Die Ultieme Plaaslike Markplek!",

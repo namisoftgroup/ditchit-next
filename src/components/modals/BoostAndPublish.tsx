@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 
 type GetAppModalProps = {
   show: boolean;
+  isPromoting: boolean,
   isSaving: boolean;
   addPost: () => void;
   handleClose: () => void;
@@ -19,6 +20,7 @@ type GetAppModalProps = {
 export default function BoostAndPublish({
   show,
   isSaving,
+  isPromoting,
   addPost,
   addAndPromote,
   handleClose,
@@ -57,10 +59,10 @@ export default function BoostAndPublish({
 
           <button
             onClick={addAndPromote}
-            disabled={isSaving}
+            disabled={isPromoting}
             className="bg-[var(--mainColor)] text-white rounded-[12px] w-fit px-12 py-3 m-0 border border-[var(--mainColor)]"
           >
-            {isSaving ? t("loading") : t("promote")}
+            {isPromoting ? t("loading") : t("promote")}
           </button>
         </div>
       </DialogContent>

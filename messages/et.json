@@ -52,7 +52,6 @@
     "sort": "Sorteeri",
     "drag_drop": "Klõpsa või lohista pildid siia",
     "remove_file": "Eemalda fail",
-    "cover_image": "Kaanepilt",
     "chat": "Vestlus",
     "browse_by": "Sirvi tooteid järgi"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Hind & Saatmine",
     "something_went_wrong": "Midagi läks valesti. Palun proovi uuesti.",
     "post_saved": "Postitus edukalt salvestatud ja on ülevaatamisel",
-    "key_features": "Põhiomadused"
+    "key_features": "Põhiomadused",
+    "cover_image": "Kaanepilt"
   },
   "ditchNote": {
     "title": "Tutvustame Ditchit – Lõplik kohalik turg!",

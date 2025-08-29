@@ -1,4 +1,5 @@
 import { getCategories } from "@/services/getCategories";
+import { User } from "@/types/user";
 import GetApp from "./GetApp";
 import LogoBrand from "./LogoBrand";
 import Navigation from "./Navigation";
@@ -8,7 +9,14 @@ import LocationSearch from "./LocationSearch";
 import HeaderCategories from "./HeaderCategories";
 import ResponsiveMenu from "./ResponsiveMenu";
 
-export default async function Header({ locale }: { locale: string }) {
+type HeaderProps = {
+  locale: string;
+  data: {
+    token: string | null;
+    user: User | null;
+  };
+};
+export default async function Header({ locale, data }: HeaderProps) {
   const { data: categories } = await getCategories();
 
   return (
@@ -17,13 +25,17 @@ export default async function Header({ locale }: { locale: string }) {
         <section className="container gap-1 flex justify-between items-center py-2">
           <LogoBrand />
           <LocationSearch hideSm={true} />
-          <Navigation />
+          <Navigation isAuthed={data.token ? true : false} />
 
           <div className="p-[5px] flex justify-end gap-2 items-center">
             <GetApp />
             <AddPostMenu />
-            <UserMenu />
-            <ResponsiveMenu categories={categories} locale={locale} />
+            <UserMenu user={data.user} isAuthed={data.token ? true : false} />
+            <ResponsiveMenu
+              categories={categories}
+              locale={locale}
+              isAuthed={data.token ? true : false}
+            />
           </div>
         </section>
 

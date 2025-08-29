@@ -52,7 +52,6 @@
     "sort": "並べ替え",
     "drag_drop": "ここをクリックまたは画像をドラッグ",
     "remove_file": "ファイルを削除",
-    "cover_image": "カバー画像",
     "chat": "チャット",
     "browse_by": "アイテムを閲覧する方法"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "価格 & 配送",
     "something_went_wrong": "問題が発生しました。もう一度お試しください。",
     "post_saved": "投稿は正常に保存され、審査中です",
-    "key_features": "主な機能"
+    "key_features": "主な機能",
+    "cover_image": "カバー画像"
   },
   "ditchNote": {
     "title": "Ditchit 登場 - 究極のローカルマーケットプレイス！",

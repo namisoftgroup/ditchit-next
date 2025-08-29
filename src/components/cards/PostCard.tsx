@@ -56,7 +56,7 @@ export default function PostCard({
               alt={post.user.user.name}
               width={48}
               height={48}
-              className="w-[48px] h-[48px] border border-white rounded-full object-fit"
+              className="w-[48px] h-[48px] border border-white rounded-full object-cover"
             />
           </Link>
         </div>

@@ -52,7 +52,6 @@
     "sort": "Sort",
     "drag_drop": "Click or drag images here",
     "remove_file": "Remove file",
-    "cover_image": "Cover Image",
     "chat": "Chat",
     "browse_by": "Browse items by"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Price & Shipping",
     "something_went_wrong": "Something went wrong. Please try again.",
     "post_saved": "Post saved successfully and is under review",
-    "key_features": "Key Features"
+    "key_features": "Key Features",
+    "cover_image": "Εικόνα Εξωφύλλου"
   },
   "ditchNote": {
     "title": "Introducing Ditchit - The Ultimate Local Marketplace!",

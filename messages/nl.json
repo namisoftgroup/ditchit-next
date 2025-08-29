@@ -52,7 +52,6 @@
     "sort": "Sorteren",
     "drag_drop": "Klik of sleep afbeeldingen hierheen",
     "remove_file": "Bestand verwijderen",
-    "cover_image": "Omslagafbeelding",
     "chat": "Chat",
     "browse_by": "Blader door items op"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Prijs & Verzending",
     "something_went_wrong": "Er is iets misgegaan. Probeer het opnieuw.",
     "post_saved": "Advertentie succesvol opgeslagen en wordt beoordeeld",
-    "key_features": "Belangrijkste Kenmerken"
+    "key_features": "Belangrijkste Kenmerken",
+    "cover_image": "Omslagafbeelding"
   },
   "ditchNote": {
     "title": "Maak kennis met Ditchit - De Ultieme Lokale Marktplaats!",

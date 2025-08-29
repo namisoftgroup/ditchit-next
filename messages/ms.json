@@ -52,7 +52,6 @@
     "sort": "Isih",
     "drag_drop": "Klik atau seret imej di sini",
     "remove_file": "Buang fail",
-    "cover_image": "Imej Utama",
     "chat": "Sembang",
     "browse_by": "Lihat item mengikut"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Harga & Penghantaran",
     "something_went_wrong": "Ada yang tidak kena. Sila cuba lagi.",
     "post_saved": "Siaran berjaya disimpan dan sedang disemak",
-    "key_features": "Ciri Utama"
+    "key_features": "Ciri Utama",
+    "cover_image": "Imej Utama"
   },
   "ditchNote": {
     "title": "Memperkenalkan Ditchit - Pasar Tempatan Terbaik!",

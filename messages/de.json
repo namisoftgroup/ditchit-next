@@ -52,7 +52,6 @@
     "sort": "Sortieren",
     "drag_drop": "Klicken oder Bilder hierher ziehen",
     "remove_file": "Datei entfernen",
-    "cover_image": "Titelbild",
     "chat": "Chat",
     "browse_by": "Artikel durchsuchen nach"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Preis & Versand",
     "something_went_wrong": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
     "post_saved": "Beitrag erfolgreich gespeichert und wird überprüft",
-    "key_features": "Hauptmerkmale"
+    "key_features": "Hauptmerkmale",
+     "cover_image": "Titelbild"
   },
   "ditchNote": {
     "title": "Einführung von Ditchit - Der ultimative lokale Marktplatz!",

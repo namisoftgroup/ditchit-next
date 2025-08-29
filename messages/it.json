@@ -52,7 +52,6 @@
     "sort": "Ordina",
     "drag_drop": "Clicca o trascina le immagini qui",
     "remove_file": "Rimuovi file",
-    "cover_image": "Immagine di Copertina",
     "chat": "Chat",
     "browse_by": "Sfoglia articoli per"
   },
@@ -208,7 +207,8 @@
     "Price & Shipping": "Prezzo & Spedizione",
     "something_went_wrong": "Qualcosa è andato storto. Per favore riprova.",
     "post_saved": "Post salvato con successo ed è in fase di revisione",
-    "key_features": "Caratteristiche Chiave"
+    "key_features": "Caratteristiche Chiave",
+    "cover_image": "Immagine di Copertina"
   },
   "ditchNote": {
     "title": "Presentazione di Ditchit - Il Mercato Locale Definitivo!",

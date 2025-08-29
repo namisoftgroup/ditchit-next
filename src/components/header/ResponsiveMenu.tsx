@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAuthStore } from "@/features/auth/store";
 import { Category } from "@/types/category";
 import { House, List, Menu, MessageSquare } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -13,12 +12,13 @@ import Image from "next/image";
 
 export default function ResponsiveMenu({
   categories,
-  locale
+  locale,
+  isAuthed
 }: {
   categories: Category[];
   locale: string;
+  isAuthed: boolean
 }) {
-  const { token } = useAuthStore();
   const { data: count } = useGetUnreadCount();
   const [open, setOpen] = useState(false);
 
@@ -78,7 +78,7 @@ export default function ResponsiveMenu({
                 {t("listing")}
               </Link>
 
-              {token && (
+              {isAuthed && (
                 <Link
                   href="/chats"
                   className="flex flex-col text-[12px] items-center gap-2 text-[var(--darkColor)] font-bold capitalize px-3 py-2 relative whitespace-nowrap w-fit hover:text-[var(--mainColor)]"
