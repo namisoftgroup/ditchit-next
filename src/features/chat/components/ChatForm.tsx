@@ -19,7 +19,7 @@ export default function ChatForm({
   const [show, setShow] = useState(false);
   const [sound, setSound] = useState<File | null>(null);
   const [soundUrl, setSoundUrl] = useState<string | null>(null);
-  const t = useTranslations("auth");
+  const t = useTranslations("chat");
 
   const [message, setMessage] = useState<MessagePayload>({
     type: "text",

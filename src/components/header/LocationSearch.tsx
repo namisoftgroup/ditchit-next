@@ -1,19 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Search, MapPin, Globe } from "lucide-react";
+import { Search, MapPin } from "lucide-react";
 import { useHomeFilter } from "@/features/listing/store";
-import { LANGUAGES } from "@/utils/constants";
-import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import SearchByModal from "../modals/SearchByModal";
 import ZipSearch from "../modals/ZipSearch";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+import LanguageMenu from "./LanguageMenu";
 
 export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
   const { filter } = useHomeFilter();
@@ -21,24 +15,7 @@ export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
   const [showZipCodeSearch, setZipCodeSearch] = useState(false);
 
   const router = useRouter();
-  const pathname = usePathname();
-  const locale = useLocale();
-
   const t = useTranslations("header");
-
-  function handleLanguageChange(newLang: string) {
-    if (!locale) return;
-    const parts = locale.split("-");
-    
-    let updatedLocale: string;
-    if (parts.length > 1) {
-      updatedLocale = `${newLang}-${parts[parts.length - 1]}`;
-    } else {
-      updatedLocale = newLang;
-    }
-
-    router.replace(pathname, { locale: updatedLocale });
-  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -77,23 +54,7 @@ export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
           </button>
         </form>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger className="w-[40px] h-[40px] flex items-center justify-center rounded-full border border-[var(--lightBorderColor)]">
-            <Globe className="w-5 h-5 text-[var(--mainColor)]" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-[var(--whiteColor)] shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[99999] min-w-[200px] flex-col rounded border border-[var(--lightBorderColor)] max-h-[400px] overflow-y-auto">
-            {Object.entries(LANGUAGES).map(([code, name]) => (
-              <DropdownMenuItem key={code} className="p-0">
-                <button
-                  onClick={() => handleLanguageChange(code)}
-                  className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm w-full rounded-[8px]"
-                >
-                  {name}
-                </button>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <LanguageMenu/>
       </div>
 
       <div
