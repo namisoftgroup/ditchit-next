@@ -58,7 +58,7 @@ export default function ProvidersContainer({
       now={new Date()}
       messages={messages}
     >
-      <GoogleOAuthProvider clientId={process.env.NEXT_GOOGLE_CLIENT_ID!}>
+      <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
         <AuthProvider user={data?.user ?? null} token={data?.token ?? null}>
           <ReactQueryProvider>
             <WebSocketProvider rooms={rooms}>{children}</WebSocketProvider>
