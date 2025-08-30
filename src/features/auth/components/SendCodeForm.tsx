@@ -40,7 +40,7 @@ export default function SendCodeForm() {
       if (res.code === 200) {
         setEmail(values.email);
         router.push("/reset-password/verify-otp");
-        toast.success(t("code_sent").replace("{email}", values.email));
+        toast.success(t("code_sent", { email: values.email }));
       } else {
         toast.error(res.message || "Failed to send code");
       }

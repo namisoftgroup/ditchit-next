@@ -122,7 +122,9 @@ export default function QuestionAndOffers({
                 className="flex items-center gap-2"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  handleSubmit(t("have_offer").replace("{offer}", message.message || ""))
+                  handleSubmit(
+                    t("have_offer", { offer: message.message || "" })
+                  );
                 }}
               >
                 <input
