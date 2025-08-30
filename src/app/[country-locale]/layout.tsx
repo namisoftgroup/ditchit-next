@@ -118,6 +118,7 @@ export default async function RootLayout({ children, params }: Props) {
           {!data.token && <GoogleOneTapAuth />}
           <Header locale={lang} data={data} />
           <main className="min-h-[calc(100vh-316px)]">{children}</main>
+          <audio id="notify-sound" src="/sounds/notify.mp3" preload="auto" />
           <Footer />
         </ProvidersContainer>
       </body>

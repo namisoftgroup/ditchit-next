@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
 import { useLocale } from "next-intl";
+import { playNotification } from "@/utils/notificationSound";
 import NextLink from "next/link";
 import Image from "next/image";
 
@@ -60,6 +61,8 @@ export default function WebSocketProvider({
       addMessage(data.room.id, data.messages[0]);
 
       if (currentRoomId !== String(data.room.id)) {
+        playNotification();
+
         toast(
           <NextLink
             href={`/${locale}/chats/${data.room.id}`}
@@ -106,6 +109,8 @@ export default function WebSocketProvider({
       addMessage(data.room.id, data.messages[0]);
 
       if (currentRoomId !== String(data.room.id)) {
+        playNotification();
+
         toast(
           <NextLink
             href={`/${locale}/chats/${data.room.id}`}

@@ -1,8 +1,10 @@
+"use client";
+
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
 import { Room } from "@/features/chat/types";
 import { User } from "@/types/user";
-import React from "react";
+import React, { useEffect } from "react";
 import AuthProvider from "./AuthProvider";
 import ReactQueryProvider from "./ReactQueryProvider";
 import WebSocketProvider from "./WebSocketProvider";
@@ -25,6 +27,30 @@ export default function ProvidersContainer({
   rooms,
   data,
 }: ProvidersProps) {
+  useEffect(() => {
+    const audio = document.getElementById("notify-audio") as HTMLAudioElement;
+
+    const unlock = () => {
+      if (!audio) return;
+      audio.muted = true;
+      audio.play().then(() => {
+        audio.pause();
+        audio.muted = false;
+        audio.currentTime = 0;
+        document.removeEventListener("click", unlock);
+        document.removeEventListener("keydown", unlock);
+      });
+    };
+
+    document.addEventListener("click", unlock);
+    document.addEventListener("keydown", unlock);
+
+    return () => {
+      document.removeEventListener("click", unlock);
+      document.removeEventListener("keydown", unlock);
+    };
+  }, []);
+
   return (
     <NextIntlClientProvider
       locale={locale}
