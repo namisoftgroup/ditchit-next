@@ -1,4 +1,5 @@
 import { getCategories } from "@/services/getCategories";
+import { getCountries } from "@/services/getCountries";
 import { User } from "@/types/user";
 import GetApp from "./GetApp";
 import LogoBrand from "./LogoBrand";
@@ -16,25 +17,30 @@ type HeaderProps = {
     user: User | null;
   };
 };
+
 export default async function Header({ locale, data }: HeaderProps) {
-  const { data: categories } = await getCategories();
+  const categoriesRes = await getCategories();
+  const countriesRes = await getCountries();
+
+  const categories = categoriesRes.data; 
+  const countries = countriesRes.data.data;
 
   return (
     <>
       <header className="sticky overflow-x-hidden top-0 z-[50] w-full flex flex-col gap-1 transition-[all] duration-200 ease-in-out bg-[var(--whiteColor)] border-b border-[var(--lightBorderColor)]">
         <section className="container gap-1 flex justify-between items-center py-2">
           <LogoBrand />
-          <LocationSearch hideSm={true} />
-          <Navigation isAuthed={data.token ? true : false} />
+          <LocationSearch hideSm={true} countries={countries} />
+          <Navigation isAuthed={!!data.token} />
 
           <div className="p-[5px] flex justify-end gap-2 items-center">
             <GetApp />
             <AddPostMenu />
-            <UserMenu user={data.user} isAuthed={data.token ? true : false} />
+            <UserMenu user={data.user} isAuthed={!!data.token} />
             <ResponsiveMenu
               categories={categories}
               locale={locale}
-              isAuthed={data.token ? true : false}
+              isAuthed={!!data.token}
             />
           </div>
         </section>
@@ -43,7 +49,7 @@ export default async function Header({ locale, data }: HeaderProps) {
       </header>
 
       <div className="md:hidden block p-3 bg-[var(--mainColor10)]">
-        <LocationSearch hideSm={false} />
+        <LocationSearch hideSm={false} countries={countries} />
       </div>
     </>
   );

@@ -85,11 +85,7 @@ export default async function RootLayout({ children, params }: Props) {
   const { data: rooms } = await getAllRoomsForSocket();
 
   const { "country-locale": fullLocale } = await params;
-  const localeParts = fullLocale.split("-");
-  const lang =
-    localeParts.length > 2
-      ? `${localeParts[0]}-${localeParts[1]}`
-      : localeParts[0];
+  const lang = fullLocale.split("-")[0];
 
   if (!hasLocale(routing.locales, fullLocale)) {
     notFound();

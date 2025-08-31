@@ -1,6 +1,6 @@
 import { defineRouting } from "next-intl/routing";
 
-const ISO_CODES = ["us", "ca", "inr"];
+const ISO_CODES = ["US", "CA", "IN"];
 
 const LOCALES = [
   "af",
@@ -42,8 +42,7 @@ const LOCALES = [
   "nl",
   "pa",
   "pl",
-  "pt-BR",
-  "pt-PT",
+  "pt",
   "ro",
   "ru",
   "sk",
@@ -59,9 +58,7 @@ const LOCALES = [
   "uk",
   "uz",
   "vi",
-  "zh-CN",
-  "zh-HK",
-  "zh-TW",
+  "zh",
 ];
 
 const FULL_LOCALES: string[] = [];

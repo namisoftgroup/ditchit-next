@@ -111,8 +111,7 @@ export const LANGUAGES = {
   nl: "Nederlands",
   pa: "ਪੰਜਾਬੀ",
   pl: "Polski",
-  "pt-BR": "Português (Brasil)",
-  "pt-PT": "Português (Portugal)",
+  pt: "Português",
   ro: "Română",
   ru: "Русский",
   sk: "Slovenčina",
@@ -128,7 +127,5 @@ export const LANGUAGES = {
   uk: "Українська",
   uz: "O‘zbek",
   vi: "Tiếng Việt",
-  "zh-CN": "简体中文",
-  "zh-HK": "繁體中文（香港）",
-  "zh-TW": "繁體中文（台灣）",
+  zh: "简体中文",
 };

@@ -128,7 +128,7 @@ export default function RoomLink({ room }: { room: Room }) {
           <DropdownMenuContent className="bg-[var(--whiteColor)] shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[99999] min-w-[100px] flex-col rounded border border-[var(--lightBorderColor)] max-h-[400px] overflow-y-auto">
             <DropdownMenuItem asChild>
               <button
-                className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+                className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-4 py-2 text-sm"
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowConfirm(true);

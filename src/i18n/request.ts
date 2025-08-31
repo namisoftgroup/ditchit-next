@@ -1,37 +1,18 @@
 import { getRequestConfig } from "next-intl/server";
+import { hasLocale } from "next-intl";
 import { routing } from "./routing";
 
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
 
-  let fullLocale = requested;
-  if (!fullLocale || !routing.locales.includes(fullLocale)) {
-    const matching = routing.locales.find((l) =>
-      l.toLowerCase().startsWith(requested?.toLowerCase() ?? "")
-    );
-    fullLocale = matching ?? routing.defaultLocale;
-  }
+  const locale = hasLocale(routing.locales, requested)
+    ? requested
+    : routing.defaultLocale;
 
-  const parts = fullLocale.split("-");
-  let fileName: string | null = null;
+  const lang = locale.split("-")[0];
 
-  try {
-    fileName = parts.slice(0, -1).join("-");
-    const messages = (await import(`../../messages/${fileName}.json`)).default;
-    return { locale: fullLocale, messages };
-  } catch {}
-
-  if (parts.length > 2) {
-    try {
-      fileName = parts.slice(0, -2).join("-");
-      const messages = (await import(`../../messages/${fileName}.json`))
-        .default;
-      return { locale: fullLocale, messages };
-    } catch {}
-  }
-
-  const messages = (
-    await import(`../../messages/${routing.defaultLocale}.json`)
-  ).default;
-  return { locale: fullLocale, messages };
+  return {
+    locale,
+    messages: (await import(`../../messages/${lang}.json`)).default,
+  };
 });

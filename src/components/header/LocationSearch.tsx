@@ -5,11 +5,18 @@ import { Search, MapPin } from "lucide-react";
 import { useHomeFilter } from "@/features/listing/store";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { Country } from "@/types/country";
 import SearchByModal from "../modals/SearchByModal";
 import ZipSearch from "../modals/ZipSearch";
-import LanguageMenu from "./LanguageMenu";
+import LanguagesAndCountries from "./LanguagesAndCountries";
 
-export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
+export default function LocationSearch({
+  hideSm,
+  countries,
+}: {
+  hideSm: boolean;
+  countries: Country[];
+}) {
   const { filter } = useHomeFilter();
   const [show, setShow] = useState(false);
   const [showZipCodeSearch, setZipCodeSearch] = useState(false);
@@ -34,6 +41,8 @@ export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
       }`}
     >
       <div className="flex items-center gap-2 w-full">
+        <LanguagesAndCountries countries={countries} />
+
         <form
           className="flex-1 m-0 mb-0 min-w-[300px] relative md:bg-[#f3f3f3] bg-[#fff] border border-[#e6e6e6] rounded-full w-[min(100%_-_16px,_1440px)]"
           onSubmit={handleSubmit}
@@ -53,8 +62,6 @@ export default function LocationSearch({ hideSm }: { hideSm: boolean }) {
             <Search height={20} width={20} />
           </button>
         </form>
-
-        <LanguageMenu/>
       </div>
 
       <div

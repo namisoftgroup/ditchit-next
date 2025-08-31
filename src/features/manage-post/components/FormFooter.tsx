@@ -26,7 +26,7 @@ export default function FormFooter({
             alt="prev"
             width={14}
             height={14}
-            className="brightness-0 invert"
+            className="brightness-0 invert rtl:scale-x-[-1]"
           />
           {t("previous")}
         </button>
@@ -39,7 +39,7 @@ export default function FormFooter({
           alt="Next"
           width={14}
           height={14}
-          className="brightness-0 invert scale-x-[-1]"
+          className="brightness-0 invert ltr:scale-x-[-1]"
         />
       </button>
     </div>

@@ -1,9 +1,9 @@
-export const getCoordinates = async (zip: string) => {
+export const getCoordinates = async (zip: string, country = "US") => {
   try {
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
         zip
-      )}&components=country:US&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
+      )}&components=country:${country}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
     );
     const data = await response.json();
 

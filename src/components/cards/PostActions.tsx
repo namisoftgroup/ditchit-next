@@ -87,7 +87,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
               {!post.is_promoted && !post.is_sold && (
                 <DropdownMenuItem asChild>
                   <button
-                    className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+                    className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-4 py-2 text-sm"
                     onClick={() => setShowBoost(true)}
                   >
                     <Megaphone
@@ -102,7 +102,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
 
               <DropdownMenuItem asChild>
                 <button
-                  className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+                  className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-4 py-2 text-sm"
                   disabled={isPendingSell}
                   onClick={() => sellActivePost(post?.id)}
                 >
@@ -118,7 +118,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
               <DropdownMenuItem asChild>
                 <Link
                   href={`/edit-post/${post.id}`}
-                  className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+                  className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-4 py-2 text-sm"
                 >
                   <FilePenLine width={16} height={16} />
                   {t("edit")}
@@ -127,7 +127,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
 
               <DropdownMenuItem asChild>
                 <button
-                  className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[var(--lightBorderColor)] px-4 py-2 text-sm"
+                  className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-4 py-2 text-sm"
                   onClick={() => setShowConfirm(true)}
                 >
                   <Trash width={16} height={16} className="text-[#FF0000]" />

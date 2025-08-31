@@ -332,5 +332,14 @@
         margin-right: 0 !important;
       }
     }
+
+    .swiperControl .swiperBtns {
+      .swiper-button-next::after {
+          transform: scaleX(1);
+        }
+      .swiper-button-prev::after {
+          transform: scaleX(-1);
+        }
+    }
   }
 }

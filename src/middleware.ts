@@ -9,9 +9,10 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   const pathSegments = pathname.split("/");
-  const locale = pathSegments[1];
+
+  const [, locale] = pathSegments;
   const normalizedPath = routing.locales.includes(locale)
-    ? "/" + pathSegments.slice(2).join("/")
+    ? `/${pathSegments.slice(2).join("/")}`
     : pathname;
 
   const PROTECTED_ROUTES = [

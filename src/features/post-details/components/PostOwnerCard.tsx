@@ -21,7 +21,7 @@ export default function PostOwnerCard({
           alt="user"
           width={120}
           height={120}
-          className="rounded-full max-w-[120px] max-h-[120px] object-cover"
+          className="rounded-full max-w-[120px] max-h-[120px] object-cover border border-[var(--mainColor)]"
         />
         <h3 className="font-bold transition-all capitalize text-[20px]">
           {owner.name}
