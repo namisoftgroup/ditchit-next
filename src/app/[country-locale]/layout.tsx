@@ -79,7 +79,7 @@ export default async function RootLayout({ children, params }: Props) {
     address: cookieStore.get("address")?.value || "United States",
     delivery_method: cookieStore.get("delivery_method")?.value || "both",
     kilometers: Number(cookieStore.get("kilometers")?.value ?? 0),
-    country_id: Number(cookieStore.get("country_id")?.value ?? 1)
+    country_id: Number(cookieStore.get("country_id")?.value ?? 1),
   };
 
   const data = await getProfile();
@@ -93,7 +93,7 @@ export default async function RootLayout({ children, params }: Props) {
   }
 
   setRequestLocale(fullLocale);
-  const messages = await getMessages({ locale: lang });
+  const messages = await getMessages({ locale: fullLocale });
 
   return (
     <html lang={lang} dir={RTL_LANGUAGES?.includes(lang) ? "rtl" : "ltr"}>

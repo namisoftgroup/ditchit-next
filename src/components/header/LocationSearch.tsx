@@ -40,7 +40,7 @@ export default function LocationSearch({
         hideSm ? "md:flex hidden" : "flex md:flex-row flex-col items-start"
       }`}
     >
-      <div className="flex items-center gap-2 w-full">
+      <div className="flex items-center gap-2 w-full md:flex-row flex-row-reverse">
         <LanguagesAndCountries countries={countries} />
         
         <form

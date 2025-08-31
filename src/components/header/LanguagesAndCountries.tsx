@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { LANGUAGES } from "@/utils/constants";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import { Country } from "@/types/country";
@@ -24,6 +24,7 @@ export default function LanguagesAndCountries({
   const locale = useLocale();
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
+  const t = useTranslations("common");
 
   const [langCode, countryCode] = locale.split("-");
 
@@ -64,7 +65,7 @@ export default function LanguagesAndCountries({
       <DropdownMenuContent className="bg-[var(--whiteColor)] shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[99999] min-w-[200px] flex gap-2 border border-[var(--lightBorderColor)]">
         <div>
           <h6 className="px-[16px] py-[8px] text-[var(--mainColor)]">
-            Language
+            {t("language")}
           </h6>
 
           <div className="max-h-[360px] overflow-y-auto flex-col">
@@ -85,7 +86,7 @@ export default function LanguagesAndCountries({
 
         <div>
           <h6 className="px-[16px] py-[8px] text-[var(--mainColor)]">
-            country
+            {t("country")}
           </h6>
 
           <div className="max-h-[360px] overflow-y-auto flex-col">

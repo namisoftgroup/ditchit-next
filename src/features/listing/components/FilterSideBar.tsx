@@ -50,7 +50,7 @@ export default function FilterSideBar({
         className="ms-auto flex md:hidden items-center gap-2 text-[14px]"
         onClick={() => setOpenFilter(true)}
       >
-        <ListFilter width={16} height={16} /> Sort By
+        <ListFilter width={16} height={16} /> {t("sort_by")}
       </button>
 
       <AnimatePresence>

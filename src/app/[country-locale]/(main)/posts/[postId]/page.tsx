@@ -49,7 +49,7 @@ export default async function PostDetails({ params }: PageProps) {
       <PageBanner
         links={[
           { title: t("home"), link: "/" },
-          { title: t("all_posts"), link: "/all-posts" },
+          { title: t("all_posts"), link: "/posts" },
         ]}
         page={post.title}
       />
