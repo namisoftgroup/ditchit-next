@@ -11,6 +11,7 @@ import { useLocale } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import { Country } from "@/types/country";
+import { saveLocationFilters } from "@/features/listing/action";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -24,22 +25,40 @@ export default function LanguagesAndCountries({
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
 
+  const [langCode, countryCode] = locale.split("-");
+
   function changeLang(newLang: string) {
     if (!locale) return pathname;
-    const countryCode = locale.split("-")[1];
     return `/${newLang}-${countryCode}${pathname}${queryString ? `?${queryString}` : ""}`;
   }
 
   function changeCountry(countryCode: string) {
     if (!locale) return pathname;
-    const lang = locale.split("-")[0];
-    return `/${lang}-${countryCode}${pathname}${queryString ? `?${queryString}` : ""}`;
+    return `/${langCode}-${countryCode}${pathname}${queryString ? `?${queryString}` : ""}`;
   }
+
+  const HandleSaveCountryCookie = (countryCode: string) => {
+    const country = countries.find((c) => c.code === countryCode);
+    saveLocationFilters({
+      country_id: country?.id ?? 1,
+    });
+  };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center whitespace-nowrap">
-        EN | USA
+      <DropdownMenuTrigger className="flex items-center gap-2 whitespace-nowrap">
+        <Image
+          src={
+            countries.find((c) => c.code === countryCode)?.flag ??
+            "/placeholder-flag.png"
+          }
+          width={28}
+          height={16}
+          alt="current country"
+          className="w-[28px] h-[22px] object-cover rounded"
+        />
+        <span>|</span>
+        {langCode.toUpperCase()}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="bg-[var(--whiteColor)] shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[99999] min-w-[200px] flex gap-2 border border-[var(--lightBorderColor)]">
@@ -75,13 +94,14 @@ export default function LanguagesAndCountries({
                 <Link
                   href={changeCountry(country.code)}
                   className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-3 py-2 text-[14px] w-full rounded-[8px]"
+                  onClick={() => HandleSaveCountryCookie(country.code)}
                 >
                   <Image
                     src={country.flag}
                     width={28}
                     height={16}
                     alt={country.title}
-                    className="w-32px rounded"
+                    className="w-[28px] h-[22px] object-cover rounded"
                   />
                   {country.title}
                 </Link>

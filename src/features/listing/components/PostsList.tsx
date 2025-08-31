@@ -11,39 +11,41 @@ type PostListProps = {
   latitude: string | null;
   kilometers: string | null;
   delivery_method: string | null;
+  country_id: string | null;
 };
 
 export default function PostsList(props: PostListProps) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
   const { posts, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetPostsList(
       props.userId,
       props.longitude,
       props.latitude,
       props.kilometers,
-      props.delivery_method
+      props.delivery_method,
+      props.country_id
     );
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const { bottom } = sectionRef.current.getBoundingClientRect();
-      if (
-        bottom <= window.innerHeight + 200 &&
-        hasNextPage &&
-        !isFetchingNextPage
-      ) {
-        fetchNextPage();
-      }
-    };
+  const observerRef = useRef<HTMLDivElement | null>(null);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+  useEffect(() => {
+    if (!observerRef.current || !hasNextPage) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { rootMargin: "1200px" }
+    );
+
+    observer.observe(observerRef.current);
+
+    return () => observer.disconnect();
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
-    <div ref={sectionRef} className="flex flex-wrap -mx-2">
+    <div className="flex flex-wrap -mx-2">
       {posts.map((post) => (
         <div key={post.id} className="w-full lg:w-4/12 p-2">
           <PostCard post={post} showActions={false} />
@@ -56,6 +58,8 @@ export default function PostsList(props: PostListProps) {
             <PostCardSkeleton />
           </div>
         ))}
+
+      <div ref={observerRef} />
     </div>
   );
 }

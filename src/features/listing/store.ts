@@ -7,6 +7,7 @@ export type FilterState = {
   address: string;
   delivery_method: string;
   kilometers: number;
+  country_id: number;
 };
 
 type HomeFilterStore = {
@@ -21,6 +22,7 @@ const DEFAULT_FILTER: FilterState = {
   address: "United States",
   delivery_method: "both",
   kilometers: 0,
+  country_id: 1,
 };
 
 export const useHomeFilter = create<HomeFilterStore>((set) => ({

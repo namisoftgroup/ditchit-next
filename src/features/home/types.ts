@@ -21,5 +21,6 @@ export interface HomeFilterInterface {
   latitude: string | null;
   kilometers: string | null;
   delivery_method: string | null;
-  user_id: number | null
+  user_id: number | null,
+  country_id: string | null
 }

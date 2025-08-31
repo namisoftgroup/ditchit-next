@@ -9,6 +9,7 @@ export async function saveLocationFilters(data: {
   kilometers?: string;
   address?: string;
   delivery_method?: string;
+  country_id?: number
 }) {
   const store = await cookies();
 
@@ -21,6 +22,8 @@ export async function saveLocationFilters(data: {
     store.set("zip_code", String(data.zip_code), { path: "/" });
   if (data.delivery_method)
     store.set("delivery_method", data.delivery_method, { path: "/" });
+  if (data.country_id)
+    store.set("country_id", String(data.country_id), { path: "/" });
 
   return { success: true };
 }
