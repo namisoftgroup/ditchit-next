@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef } from "react";
 import { useChatStore } from "../store";
 import { Message } from "../types";
 import { useQueryClient } from "@tanstack/react-query";
+import { SOCKET_EVENTS } from "@/utils/constants";
+import { initSocket } from "@/lib/socket/socket";
 import MessageUI from "./MessageUI";
 
 export default function MessagesContainer({
@@ -16,7 +18,6 @@ export default function MessagesContainer({
   roomId: number;
 }) {
   const { messagesByRoom, setMessages, rooms, updateRoom } = useChatStore();
-
   const queryClient = useQueryClient();
 
   const messages = useMemo(
@@ -36,10 +37,22 @@ export default function MessagesContainer({
 
     if (room.count_not_read > 0) {
       queryClient.invalidateQueries({ queryKey: ["unread-count"] });
-
-      updateRoom(room.id ,{ ...room, count_not_read: 0 });
+      updateRoom(room.id, { ...room, count_not_read: 0 });
     }
   }, [rooms, roomId, updateRoom, queryClient]);
+
+  useEffect(() => {
+    if (!roomId) return;
+
+    const socket = initSocket();
+    if (!socket.connected) socket.connect();
+
+    socket.emit(SOCKET_EVENTS.JOIN_ROOMS, JSON.stringify([roomId]));
+
+    return () => {
+      socket.emit(SOCKET_EVENTS.LEAVE_ROOMS, JSON.stringify([roomId]));
+    };
+  }, [roomId]);
 
   useEffect(() => {
     if (chatContainerRef.current) {

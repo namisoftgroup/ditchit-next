@@ -57,7 +57,6 @@ export default function WebSocketProvider({
       queryClient.invalidateQueries({ queryKey: ["unread-count"] });
 
       addRoom(data.room);
-      socket.emit(SOCKET_EVENTS.JOIN_ROOMS, JSON.stringify([data.room.id]));
       addMessage(data.room.id, data.messages[0]);
 
       if (currentRoomId !== String(data.room.id)) {
