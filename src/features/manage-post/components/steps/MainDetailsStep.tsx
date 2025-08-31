@@ -69,7 +69,7 @@ export default function MainDetailsStep({ next, back }: propTypes) {
       <TextField
         label={t("description")}
         id="description"
-        placeholder="Enter Description"
+        placeholder={t("enter_description")}
         {...register("description")}
         error={
           errors.description?.message

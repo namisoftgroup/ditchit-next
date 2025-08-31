@@ -19,8 +19,8 @@ type HeaderProps = {
 };
 
 export default async function Header({ locale, data }: HeaderProps) {
-  const categoriesRes = await getCategories();
-  const countriesRes = await getCountries();
+  const categoriesRes = await getCategories(locale);
+  const countriesRes = await getCountries(locale);
 
   const categories = categoriesRes.data; 
   const countries = countriesRes.data.data;

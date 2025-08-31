@@ -17,14 +17,19 @@ function normalize(param: string | string[] | undefined): string | null {
 
 export default async function Page({
   searchParams,
+  params,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: Promise<{ "country-locale": string }>;
 }) {
   const queryClient = getQueryClient();
   const cookieStore = await cookies();
   const t = await getTranslations("common");
 
-  const { data: categories } = await getCategories();
+  const { "country-locale": fullLocale } = await params;
+  const lang = fullLocale.split("-")[0];
+
+  const { data: categories } = await getCategories(lang);
   const { user } = await getProfile();
 
   const filterParams = {

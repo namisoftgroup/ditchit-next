@@ -1,7 +1,14 @@
 import { getSettings } from "@/services/getSettings";
 
-export default async function About() {
-  const { data } = await getSettings();
+export default async function About({
+  params,
+}: {
+  params: Promise<{ "country-locale": string }>;
+}) {
+  const { "country-locale": fullLocale } = await params;
+  const lang = fullLocale.split("-")[0];
+
+  const { data } = await getSettings(lang);
 
   return (
     <div

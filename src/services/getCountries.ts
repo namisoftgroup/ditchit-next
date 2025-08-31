@@ -1,9 +1,12 @@
 import { CountriesResponse } from "@/types/country";
 import { API_URL } from "@/utils/constants";
 
-export async function getCountries(): Promise<CountriesResponse> {
+export async function getCountries(lang:string): Promise<CountriesResponse> {
   const response = await fetch(`${API_URL}/main/countries`, {
     method: "GET",
+    headers: {
+      lang: lang,
+    },
     next: { revalidate: 0 },
   });
 

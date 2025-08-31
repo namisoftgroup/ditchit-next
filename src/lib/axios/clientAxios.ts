@@ -21,7 +21,7 @@ const getLocaleFromCookie = (): string => {
   );
 
   if (localeCookie) {
-    return localeCookie.split("=")[1]?.trim() || "en";
+    return localeCookie.split("=")[1]?.trim().split("-")[0] || "en";
   }
 
   return "en";

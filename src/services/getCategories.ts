@@ -1,9 +1,14 @@
 import { API_URL } from "@/utils/constants";
 import { Category } from "@/types/category";
 
-export async function getCategories(): Promise<{ data: Category[] }> {
+export async function getCategories(
+  lang: string
+): Promise<{ data: Category[] }> {
   const response = await fetch(`${API_URL}/main/categories`, {
     method: "GET",
+    headers: {
+      lang: lang,
+    },
     next: { revalidate: 0 },
   });
 

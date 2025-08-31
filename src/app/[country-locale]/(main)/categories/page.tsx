@@ -2,8 +2,15 @@ import { getCategories } from "@/services/getCategories";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
-export default async function Page() {
-  const { data: categories } = await getCategories();
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ "country-locale": string }>;
+}) {
+  const { "country-locale": fullLocale } = await params;
+  const lang = fullLocale.split("-")[0];
+  
+  const { data: categories } = await getCategories(lang);
 
   return (
     <div className="container py-5">

@@ -4,13 +4,23 @@ import PageBanner from "@/components/shared/PageBanner";
 import ContactInfo from "@/features/contact/ContactInfo";
 import ContactForm from "@/features/contact/ContactForm";
 
-export default async function page() {
+export default async function page({
+  params,
+}: {
+  params: Promise<{ "country-locale": string }>;
+}) {
+  const { "country-locale": fullLocale } = await params;
+  const lang = fullLocale.split("-")[0];
+
   const t = await getTranslations("common");
-  const { data } = await getSettings();
+  const { data } = await getSettings(lang);
 
   return (
     <>
-      <PageBanner links={[{ title: t("home"), link: "/" }]} page={t("contact")} />
+      <PageBanner
+        links={[{ title: t("home"), link: "/" }]}
+        page={t("contact")}
+      />
 
       <div className="container py-6">
         <div className="flex flex-wrap -mx-2">

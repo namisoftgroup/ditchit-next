@@ -10,9 +10,12 @@ export type Setting = {
   twitter: string;
 };
 
-export async function getSettings(): Promise<{ data: Setting }> {
+export async function getSettings(lang: string): Promise<{ data: Setting }> {
   const response = await fetch(`${API_URL}/main/setting`, {
     method: "GET",
+    headers: {
+      lang: lang,
+    },
     next: { revalidate: 0 },
   });
 

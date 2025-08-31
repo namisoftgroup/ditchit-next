@@ -15,8 +15,9 @@ const serverAxios: AxiosInstance = axios.create({
 serverAxios.interceptors.request.use(async (config) => {
   const token = (await cookies()).get("token")?.value;
   const locale = (await cookies()).get("NEXT_LOCALE")?.value;
+  const lang = locale?.split("-")[0] ?? "en"
   
-  config.headers["lang"] = locale;
+  config.headers["lang"] = lang;
   config.headers.Authorization = token;
 
   return config;

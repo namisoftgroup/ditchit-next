@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, Heart, MapPin, Share2 } from "lucide-react";
+import { Clock, Flag, Heart, MapPin, Share2 } from "lucide-react";
 import { PostDetailsResponse } from "../types";
 import { useAuthStore } from "@/features/auth/store";
 import { useRouter } from "next/navigation";
@@ -9,10 +9,12 @@ import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import useStoreFavorites from "@/features/profile/hooks/useStoreFavorites";
+import ReportPost from "@/components/modals/ReportPost";
 
 export default function PostInfo({ post }: { post: PostDetailsResponse }) {
   const optionsToMap = post.options.filter((option) => option.value);
 
+  const [show, setShow] = useState<boolean>(false);
   const [isLove, setIsLove] = useState(post.is_love);
   const { storeFavorites, isPending: isPendingFav } = useStoreFavorites();
   const t = useTranslations("manage_post");
@@ -75,6 +77,13 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
 
         <div className="flex items-center flex-wrap gap-4">
           <button
+            onClick={() => setShow(true)}
+            className={`min-w-[42px] h-[42px] flex items-center justify-center rounded-full border border-[var(--darkColor)] transition-all`}
+          >
+            <Flag width={20} height={20} />
+          </button>
+
+          <button
             onClick={handleShare}
             className={`min-w-[42px] h-[42px] flex items-center justify-center rounded-full border border-[var(--darkColor)] transition-all`}
           >
@@ -129,7 +138,8 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
             {post.address}
           </a>
           <div className="flex items-center gap-1 text-[13px] text-[var(--grayColor)]">
-            <Clock height={16} width={16} />{post.publishing_duration}
+            <Clock height={16} width={16} />
+            {post.publishing_duration}
           </div>
         </div>
 
@@ -191,6 +201,12 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
           </div>
         </div>
       )}
+
+      <ReportPost
+        show={show}
+        handleClose={() => setShow(false)}
+        postId={post.id}
+      />
     </>
   );
 }

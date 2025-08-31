@@ -6,11 +6,16 @@ import WizardForm from "./WizardForm";
 export default async function PostFormWrapper({
   post,
   type,
+  params
 }: {
   post?: PostDetailsResponse;
   type?: string;
+  params: Promise<{ "country-locale": string }>;
 }) {
-  const { data: categories } = await getCategories();
+  const { "country-locale": fullLocale } = await params;
+  const lang = fullLocale.split("-")[0];
+
+  const { data: categories } = await getCategories(lang);
 
   return (
     <PostFormProvider post={post} type={type}>

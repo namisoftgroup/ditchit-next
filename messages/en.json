@@ -53,7 +53,13 @@
     "drag_drop": "Click or drag images here",
     "remove_file": "Remove file",
     "chat": "Chat",
-    "browse_by": "Browse items by"
+    "browse_by": "Browse items by",
+    "language": "Language",
+    "country": "Country",
+    "sort_by": "Sort By",
+    "report_post": "Report Post",
+    "write_here": "write here...",
+    "report_saved": "Report submitted successfully"
   },
   "error": {
     "somthing_went_wrong": "Oops! Something went wrong",
@@ -208,7 +214,8 @@
     "something_went_wrong": "Something went wrong. Please try again.",
     "post_saved": "Post saved successfully and is under review",
     "key_features": "Key Features",
-    "cover_image": "Cover Image"
+    "cover_image": "Cover Image",
+    "enter_description": "Enter Description"
   },
   "ditchNote": {
     "title": "Introducing Ditchit - The Ultimate Local Marketplace!",

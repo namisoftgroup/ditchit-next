@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DitchIt - Local Marketplace Platform
 
-## Getting Started
+🌐 **Live Demo:** [https://ditchit-next.vercel.app/](https://ditchit-next.vercel.app/)
 
-First, run the development server:
+DitchIt is a modern, multilingual marketplace platform that connects local buyers and sellers. Built with Next.js 15 and featuring real-time chat, geolocation-based listings, and comprehensive internationalization support.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🛒 **Marketplace Core**
+- **Buy & Sell**: Create listings for items you want to sell or post requests for items you're looking to buy
+- **Location-Based Search**: Find items near you using ZIP code or current location
+- **Advanced Filtering**: Filter by category, condition, price range, and delivery methods
+- **Promoted Listings**: Boost your ads for increased visibility
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 💬 **Real-Time Communication**
+- **Live Chat**: Real-time messaging between buyers and sellers
+- **Media Sharing**: Send photos, videos, and audio messages
+- **Location Sharing**: Share your location for meetups
+- **Quick Offers**: Make instant offers on listings
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🌍 **Internationalization**
+- **57+ Languages**: Full support for multiple languages and locales
+- **Country-Specific Routing**: Localized URLs and content
+- **RTL Support**: Right-to-left language support for Arabic, Hebrew, etc.
 
-## Learn More
+### 🔐 **Authentication & Security**
+- **Multiple Login Options**: Google OAuth, Apple Sign-In, and email/password
+- **OTP Verification**: Secure phone number verification
+- **Profile Management**: Complete user profile system
 
-To learn more about Next.js, take a look at the following resources:
+### 📱 **Modern UI/UX**
+- **Responsive Design**: Optimized for desktop, tablet, and mobile
+- **Dark/Light Mode**: Theme switching support
+- **Interactive Components**: Smooth animations with Framer Motion
+- **Image Gallery**: Advanced image viewing with Swiper
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **Frontend**
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI primitives
+- **State Management**: TanStack Query (React Query)
+- **Forms**: React Hook Form with Zod validation
+- **Animations**: Framer Motion
+- **Internationalization**: next-intl
 
-## Deploy on Vercel
+### **Backend Integration**
+- **API**: RESTful API integration
+- **Real-time**: Socket.io for live chat
+- **Authentication**: JWT with multiple OAuth providers
+- **File Upload**: React Dropzone with AWS S3
+- **Maps**: Google Maps API integration
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **Development Tools**
+- **Build Tool**: Turbopack (Next.js)
+- **Linting**: ESLint
+- **Package Manager**: npm
+- **Deployment**: Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <https://github.com/Ahmedelsayed265/ditchit-next.git>
+   cd ditchit-next
+   ```

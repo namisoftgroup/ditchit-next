@@ -28,3 +28,21 @@ export async function generate(postId: number) {
     console.error("Error generating room for post: " + postId, error);
   }
 }
+
+export async function reportPost({
+  postId,
+  reason,
+}: {
+  postId: number;
+  reason: string;
+}) {
+  try {
+    const res = await clientAxios.post("posts/reportPost", {
+      post_id: postId,
+      reason,
+    });
+    return res;
+  } catch (error) {
+    console.error("Error reporting post:", postId, error);
+  }
+}
