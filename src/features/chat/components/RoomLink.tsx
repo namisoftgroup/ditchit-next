@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useChatStore } from "../store";
 import { Room } from "../types";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { deleteRoomAction } from "../actions";
@@ -34,6 +34,7 @@ export default function RoomLink({ room }: { room: Room }) {
   const router = useRouter();
   const currentRoomId = params?.roomId;
   const active = currentRoomId === String(room.id);
+  const queryClient = useQueryClient();
   const { removeRoom } = useChatStore();
   const t = useTranslations("chat");
 
@@ -46,6 +47,7 @@ export default function RoomLink({ room }: { room: Room }) {
       if (currentRoomId === String(room.id)) {
         router.push("/chats");
       }
+      queryClient.invalidateQueries({ queryKey: ["unread-count"] });
       removeRoom(room.id);
       toast.success(t("deleted_success"));
       setShowConfirm(false);
