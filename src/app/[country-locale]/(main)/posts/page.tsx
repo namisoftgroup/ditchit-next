@@ -44,7 +44,6 @@ export default async function Page({
     latitude: cookieStore.get("latitude")?.value ?? null,
     kilometers: cookieStore.get("kilometers")?.value ?? null,
     delivery_method: cookieStore.get("delivery_method")?.value ?? null,
-    country_id: cookieStore.get("country_id")?.value ?? "1",
   };
 
   await queryClient.prefetchInfiniteQuery({
@@ -83,7 +82,6 @@ export default async function Page({
                 latitude={filterParams.latitude ?? null}
                 kilometers={filterParams.kilometers ?? null}
                 delivery_method={filterParams.delivery_method ?? null}
-                country_id={filterParams.country_id ?? "1"}
               />
             </HydrationBoundary>
           </div>

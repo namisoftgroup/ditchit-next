@@ -59,7 +59,16 @@
     "sort_by": "Ordenar per",
     "report_post": "Informar publicació",
     "write_here": "escriu aquí...",
-    "report_saved": "Informe enviat amb èxit"
+    "report_saved": "Informe enviat amb èxit",
+    "subscribe_success": "Heu subscrit amb èxit!",
+    "subscribe_error": "La subscripció ha fallat. Torneu -ho a provar.",
+    "select_country": "Seleccioneu un país",
+    "first_name": "Nom",
+    "last_name": "Nom",
+    "country_required": "El país és necessari",
+    "phone_validation": "Introduïu un número de telèfon vàlid (per exemple, 123-456-7890).",
+    "first_name_validation": "El primer nom ha de tenir almenys 2 caràcters.",
+    "last_name_validation": "El cognom ha de tenir almenys 2 caràcters."
   },
   "error": {
     "somthing_went_wrong": "Ostres! Alguna cosa ha anat malament",
@@ -176,7 +185,17 @@
     "send": "Enviar",
     "stay_in_touch": "Mantingueu-vos en contacte amb nosaltres",
     "address": "Adreça",
-    "contact_text": "Ens agradaria saber de tu. Si us plau, omple el formulari a continuació i et respondrem tan aviat com sigui possible."
+    "contact_text": "Ens agradaria saber de tu. Si us plau, omple el formulari a continuació i et respondrem tan aviat com sigui possible.",
+    "message_placeholder": "Escriviu el vostre missatge aquí ...",
+    "sending": "Enviant ...",
+    "phone": "Telèfon",
+    "success_message": "El vostre missatge s'ha enviat amb èxit.",
+    "error_message": "Alguna cosa va passar malament. Torneu -ho a provar.",
+    "email_validation": "Introduïu una adreça de correu electrònic vàlida.",
+    "phone_validation": "Introduïu un número de telèfon vàlid (per exemple, 123-456-7890).",
+    "name_validation": "El nom ha de tenir almenys 3 caràcters.",
+    "subject_validation": "El subjecte ha de tenir almenys 3 caràcters.",
+    "message_validation": "El missatge ha de tenir almenys 10 caràcters."
   },
   "manage_post": {
     "select_category": "Si us plau, selecciona la teva categoria de publicació",

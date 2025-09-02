@@ -59,7 +59,16 @@
     "sort_by": "Sırala üzrə",
     "report_post": "Məqaləni Hesabat Ver",
     "write_here": "buraya yaz...",
-    "report_saved": "Hesabat müvəffəqiyyətlə təqdim edildi."
+    "report_saved": "Hesabat müvəffəqiyyətlə təqdim edildi.",
+    "subscribe_success": "Uğurla abunə olmusunuz!",
+    "subscribe_error": "Abunə uğursuz oldu. Xahiş edirəm yenidən cəhd edin.",
+    "select_country": "Bir ölkə seçin",
+    "first_name": "Ad",
+    "last_name": "Səyyah",
+    "country_required": "Ölkə tələb olunur",
+    "phone_validation": "Zəhmət olmasa etibarlı bir telefon nömrəsini daxil edin (məsələn, 123-456-7890).",
+    "first_name_validation": "Ad adı ən azı 2 simvol olmalıdır.",
+    "last_name_validation": "Soyad ən azı 2 simvol olmalıdır."
   },
   "error": {
     "somthing_went_wrong": "Aha! Bir şey səhv getdi.",
@@ -176,7 +185,17 @@
     "send": "Göndər",
     "stay_in_touch": "Bizimlə əlaqədə qalın",
     "address": "Ünvan",
-    "contact_text": "Sizdən eşitməkdən məmnun olarıq. Zəhmət olmasa, aşağıdakı formu doldurun və mümkün qədər tez sizinlə əlaqə saxlayacağıq."
+    "contact_text": "Sizdən eşitməkdən məmnun olarıq. Zəhmət olmasa, aşağıdakı formu doldurun və mümkün qədər tez sizinlə əlaqə saxlayacağıq.",
+    "message_placeholder": "Mesajınızı buraya yazın ...",
+    "sending": "Göndərmə ...",
+    "phone": "Telefon",
+    "success_message": "Mesajınız uğurla göndərildi!",
+    "error_message": "Bir şey səhv oldu. Xahiş edirəm yenidən cəhd edin.",
+    "email_validation": "Zəhmət olmasa etibarlı bir e-poçt adresinizi daxil edin.",
+    "phone_validation": "Zəhmət olmasa etibarlı bir telefon nömrəsini daxil edin (məsələn, 123-456-7890).",
+    "name_validation": "Adı ən azı 3 simvoldan ibarət olmalıdır.",
+    "subject_validation": "Mövzu ən azı 3 simvoldan ibarət olmalıdır.",
+    "message_validation": "Mesaj ən azı 10 simvoldan ibarət olmalıdır."
   },
   "manage_post": {
     "select_category": "Zəhmət olmasa, yazı kateqoriyanızı seçin",

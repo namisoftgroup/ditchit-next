@@ -12,7 +12,6 @@ export default function useGetPostsList(
   latitude: string | null,
   kilometers: string | null,
   delivery_method: string | null,
-  country_id: string | null
 ) {
   const { getParam } = useUrlFilters();
 
@@ -24,7 +23,6 @@ export default function useGetPostsList(
       category_id: getParam("category_id"),
       price_from: getParam("price_from"),
       price_to: getParam("price_to"),
-      country_id,
       user_id: userId,
       longitude,
       latitude,
@@ -33,7 +31,6 @@ export default function useGetPostsList(
     }),
     [
       getParam,
-      country_id,
       userId,
       longitude,
       latitude,

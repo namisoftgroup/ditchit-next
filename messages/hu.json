@@ -59,7 +59,16 @@
     "sort_by": "Rendezés szerint",
     "report_post": "Bejegyzés jelentése",
     "write_here": "Kérlek, írd ide...",
-    "report_saved": "Jelentés benyújtva."
+    "report_saved": "Jelentés benyújtva.",
+    "subscribe_success": "Sikeresen feliratkozott!",
+    "subscribe_error": "Az előfizetés sikertelen. Kérjük, próbálkozzon újra.",
+    "select_country": "Válasszon egy országot",
+    "first_name": "Keresztnév",
+    "last_name": "Vezetéknév",
+    "country_required": "Ország szükséges",
+    "phone_validation": "Kérjük, írjon be egy érvényes telefonszámot (például 123-456-7890).",
+    "first_name_validation": "A keresztnévnek legalább 2 karakternek kell lennie.",
+    "last_name_validation": "A vezetéknévnek legalább 2 karakternek kell lennie."
   },
   "error": {
     "somthing_went_wrong": "Hoppá! Valami hiba történt.",
@@ -176,7 +185,17 @@
     "send": "Küldés",
     "stay_in_touch": "Tartsd a kapcsolatot velünk",
     "address": "Cím",
-    "contact_text": "Szeretnénk hallani Önről. Kérjük, töltse ki az alábbi űrlapot, és a lehető leghamarabb kapcsolatba lépünk Önnel."
+    "contact_text": "Szeretnénk hallani Önről. Kérjük, töltse ki az alábbi űrlapot, és a lehető leghamarabb kapcsolatba lépünk Önnel.",
+    "message_placeholder": "Írja ide az üzenetét ...",
+    "sending": "Küldés ...",
+    "phone": "Telefon",
+    "success_message": "Üzenetét sikeresen elküldtük!",
+    "error_message": "Valami rosszul ment. Kérjük, próbálkozzon újra.",
+    "email_validation": "Kérjük, írjon be egy érvényes e -mail címet.",
+    "phone_validation": "Kérjük, írjon be egy érvényes telefonszámot (például 123-456-7890).",
+    "name_validation": "A névnek legalább 3 karakter hosszúnak kell lennie.",
+    "subject_validation": "A tantárgynak legalább 3 karakter hosszúnak kell lennie.",
+    "message_validation": "Az üzenetnek legalább 10 karakter hosszúnak kell lennie."
   },
   "manage_post": {
     "select_category": "Kérjük, válassza ki a bejegyzés kategóriáját",

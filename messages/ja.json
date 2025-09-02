@@ -59,7 +59,16 @@
     "sort_by": "並べ替え",
     "report_post": "投稿を報告",
     "write_here": "ここに書いてください...",
-    "report_saved": "レポートが正常に提出されました。"
+    "report_saved": "レポートが正常に提出されました。",
+    "subscribe_success": "あなたは正常に購読しました！",
+    "subscribe_error": "サブスクリプションに失敗しました。もう一度やり直してください。",
+    "select_country": "国を選択します",
+    "first_name": "ファーストネーム",
+    "last_name": "苗字",
+    "country_required": "国が必要です",
+    "phone_validation": "有効な電話番号（123-456-7890など）を入力してください。",
+    "first_name_validation": "名は少なくとも2文字でなければなりません。",
+    "last_name_validation": "姓は少なくとも2文字でなければなりません。"
   },
   "error": {
     "somthing_went_wrong": "おっと！何かがうまくいきませんでした。",
@@ -176,7 +185,17 @@
     "send": "送信",
     "stay_in_touch": "私たちと連絡を取り続けてください",
     "address": "住所",
-    "contact_text": "あなたからのお便りをお待ちしています。以下のフォームにご記入いただければ、できるだけ早くお返事いたします。"
+    "contact_text": "あなたからのお便りをお待ちしています。以下のフォームにご記入いただければ、できるだけ早くお返事いたします。",
+    "message_placeholder": "ここにあなたのメッセージを書く...",
+    "sending": "送信...",
+    "phone": "電話",
+    "success_message": "あなたのメッセージは正常に送信されました！",
+    "error_message": "何かがうまくいかなかった。もう一度やり直してください。",
+    "email_validation": "有効なメールアドレスを入力してください。",
+    "phone_validation": "有効な電話番号（123-456-7890など）を入力してください。",
+    "name_validation": "名前は少なくとも3文字の長さでなければなりません。",
+    "subject_validation": "被験者は少なくとも3文字の長さでなければなりません。",
+    "message_validation": "メッセージは少なくとも10文字の長さでなければなりません。"
   },
   "manage_post": {
     "select_category": "投稿カテゴリーを選択してください。",

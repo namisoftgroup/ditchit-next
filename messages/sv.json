@@ -59,7 +59,16 @@
     "sort_by": "Sortera efter",
     "report_post": "Rapportera inlägg",
     "write_here": "skriv här...",
-    "report_saved": "Rapport inskickat framgångsrikt"
+    "report_saved": "Rapport inskickat framgångsrikt",
+    "subscribe_success": "Du har framgångsrikt prenumererat!",
+    "subscribe_error": "Prenumeration misslyckades. Försök igen.",
+    "select_country": "Välj ett land",
+    "first_name": "Förnamn",
+    "last_name": "Efternamn",
+    "country_required": "Land krävs",
+    "phone_validation": "Ange ett giltigt telefonnummer (t.ex. 123-456-7890).",
+    "first_name_validation": "Förnamn måste vara minst 2 tecken.",
+    "last_name_validation": "Efternamnet måste vara minst 2 tecken."
   },
   "error": {
     "somthing_went_wrong": "Hoppsan! Något gick fel",
@@ -176,7 +185,17 @@
     "send": "Skicka",
     "stay_in_touch": "Håll kontakten med oss",
     "address": "Adress",
-    "contact_text": "Vi skulle älska att höra från dig. Vänligen fyll i formuläret nedan så återkommer vi till dig så snart som möjligt."
+    "contact_text": "Vi skulle älska att höra från dig. Vänligen fyll i formuläret nedan så återkommer vi till dig så snart som möjligt.",
+    "message_placeholder": "Skriv ditt meddelande här ...",
+    "sending": "Sändning...",
+    "phone": "Telefon",
+    "success_message": "Ditt meddelande har skickats framgångsrikt!",
+    "error_message": "Något gick fel. Försök igen.",
+    "email_validation": "Ange en giltig e -postadress.",
+    "phone_validation": "Ange ett giltigt telefonnummer (t.ex. 123-456-7890).",
+    "name_validation": "Namnet måste vara minst 3 tecken långt.",
+    "subject_validation": "Ämnet måste vara minst 3 tecken långt.",
+    "message_validation": "Meddelandet måste vara minst 10 tecken långt."
   },
   "manage_post": {
     "select_category": "Vänligen välj din inläggskategori",

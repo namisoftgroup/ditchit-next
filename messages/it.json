@@ -59,7 +59,16 @@
     "sort_by": "Classificar Por",
     "report_post": "Informe de publicación",
     "write_here": "Please provide the text you would like to have translated.",
-    "report_saved": "Informe enviado con éxito"
+    "report_saved": "Informe enviado con éxito",
+    "subscribe_success": "Ti sei iscritto con successo!",
+    "subscribe_error": "Abbonamento non riuscito. Per favore riprova.",
+    "select_country": "Seleziona un paese",
+    "first_name": "Nome di battesimo",
+    "last_name": "Cognome",
+    "country_required": "È richiesto il paese",
+    "phone_validation": "Immettere un numero di telefono valido (ad es. 123-456-7890).",
+    "first_name_validation": "Il nome deve essere almeno 2 caratteri.",
+    "last_name_validation": "Il cognome deve essere almeno 2 caratteri."
   },
   "error": {
     "somthing_went_wrong": "¡Ups! Algo salió mal.",
@@ -176,7 +185,17 @@
     "send": "Enviar",
     "stay_in_touch": "Restez en contact avec nous",
     "address": "Dirección",
-    "contact_text": "Nos encantaría saber de ti. Por favor, completa el formulario a continuación y te responderemos lo antes posible."
+    "contact_text": "Nos encantaría saber de ti. Por favor, completa el formulario a continuación y te responderemos lo antes posible.",
+    "message_placeholder": "Scrivi il tuo messaggio qui ...",
+    "sending": "Invio ...",
+    "phone": "Telefono",
+    "success_message": "Il tuo messaggio è stato inviato con successo!",
+    "error_message": "Qualcosa è andato storto. Per favore riprova.",
+    "email_validation": "Si prega di inserire un indirizzo email valido.",
+    "phone_validation": "Immettere un numero di telefono valido (ad es. 123-456-7890).",
+    "name_validation": "Il nome deve essere lungo almeno 3 caratteri.",
+    "subject_validation": "Il soggetto deve essere lungo almeno 3 caratteri.",
+    "message_validation": "Il messaggio deve essere lungo almeno 10 caratteri."
   },
   "manage_post": {
     "select_category": "Por favor, seleccione la categoría de su publicación.",

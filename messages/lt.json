@@ -59,7 +59,16 @@
     "sort_by": "Rūšiuoti pagal",
     "report_post": "Pranešti pranešimą",
     "write_here": "rašykite čia...",
-    "report_saved": "Ataskaita sėkmingai pateikta"
+    "report_saved": "Ataskaita sėkmingai pateikta",
+    "subscribe_success": "Jūs sėkmingai užsiprenumeravote!",
+    "subscribe_error": "Prenumerata nepavyko. Prašau bandyti dar kartą.",
+    "select_country": "Pasirinkite šalį",
+    "first_name": "Vardas",
+    "last_name": "Pavardė",
+    "country_required": "Būtina šalis",
+    "phone_validation": "Įveskite galiojantį telefono numerį (pvz., 123-456-7890).",
+    "first_name_validation": "Vardas turi būti bent 2 simboliai.",
+    "last_name_validation": "Pavardė turi būti bent 2 simboliai."
   },
   "error": {
     "somthing_went_wrong": "Oho! Kažkas negerai.",
@@ -176,7 +185,17 @@
     "send": "Siųsti",
     "stay_in_touch": "Būkite su mumis.",
     "address": "Adresas",
-    "contact_text": "Norėtume išgirsti iš jūsų. Prašome užpildyti žemiau pateiktą formą, ir mes su jumis susisieksime kuo greičiau."
+    "contact_text": "Norėtume išgirsti iš jūsų. Prašome užpildyti žemiau pateiktą formą, ir mes su jumis susisieksime kuo greičiau.",
+    "message_placeholder": "Parašykite savo pranešimą čia ...",
+    "sending": "Siunčiant ...",
+    "phone": "Telefonas",
+    "success_message": "Jūsų pranešimas sėkmingai išsiųstas!",
+    "error_message": "Kažkas nutiko ne taip. Prašau bandyti dar kartą.",
+    "email_validation": "Įveskite galiojantį el. Pašto adresą.",
+    "phone_validation": "Įveskite galiojantį telefono numerį (pvz., 123-456-7890).",
+    "name_validation": "Vardas turi būti bent 3 simbolių ilgio.",
+    "subject_validation": "Tema turi būti bent 3 simboliai.",
+    "message_validation": "Pranešimas turi būti bent 10 simbolių."
   },
   "manage_post": {
     "select_category": "Prašome pasirinkti savo įrašų kategoriją",

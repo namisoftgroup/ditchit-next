@@ -59,7 +59,16 @@
     "sort_by": "排序方式",
     "report_post": "举报帖子",
     "write_here": "写在这里...",
-    "report_saved": "报告提交成功"
+    "report_saved": "报告提交成功",
+    "subscribe_success": "您已经成功订阅了！",
+    "subscribe_error": "订阅失败。请重试。",
+    "select_country": "选择一个国家",
+    "first_name": "名",
+    "last_name": "姓",
+    "country_required": "需要国家",
+    "phone_validation": "请输入有效的电话号码（例如123-456-7890）。",
+    "first_name_validation": "名字必须至少为2个字符。",
+    "last_name_validation": "姓氏必须至少为2个字符。"
   },
   "error": {
     "somthing_went_wrong": "哎呀！出了点问题",
@@ -176,7 +185,17 @@
     "send": "发送",
     "stay_in_touch": "与我们保持联系",
     "address": "地址",
-    "contact_text": "我们非常希望听到您的声音。请填写以下表格，我们会尽快与您联系。"
+    "contact_text": "我们非常希望听到您的声音。请填写以下表格，我们会尽快与您联系。",
+    "message_placeholder": "在这里写你的消息...",
+    "sending": "发送...",
+    "phone": "电话",
+    "success_message": "您的消息已成功发送！",
+    "error_message": "出了点问题。请重试。",
+    "email_validation": "请输入有效的电子邮件地址。",
+    "phone_validation": "请输入有效的电话号码（例如123-456-7890）。",
+    "name_validation": "名称必须至少长3个字符。",
+    "subject_validation": "主题必须至少长3个字符。",
+    "message_validation": "消息必须至少长10个字符。"
   },
   "manage_post": {
     "select_category": "请选择您的帖子类别",

@@ -59,7 +59,16 @@
     "sort_by": "Sorteeri حسب",
     "report_post": "Teata postitusest",
     "write_here": "kirjuta siia...",
-    "report_saved": "Aruanne edukalt esitatud"
+    "report_saved": "Aruanne edukalt esitatud",
+    "subscribe_success": "Olete edukalt tellinud!",
+    "subscribe_error": "Tellimus ebaõnnestus. Proovige uuesti.",
+    "select_country": "Valige riik",
+    "first_name": "Eesnimi",
+    "last_name": "Perekonnanimi",
+    "country_required": "Riik on vajalik",
+    "phone_validation": "Sisestage kehtiv telefoninumber (nt 123-456-7890).",
+    "first_name_validation": "Eesnimi peab olema vähemalt 2 tähemärki.",
+    "last_name_validation": "Perekonnanimi peab olema vähemalt 2 tähemärki."
   },
   "error": {
     "somthing_went_wrong": "Uups! Midagi läks valesti",
@@ -176,7 +185,17 @@
     "send": "Saada",
     "stay_in_touch": "Püsi meiega ühenduses",
     "address": "Aadress",
-    "contact_text": "Meileks oleks kuulda teist. Palun täitke allolev vorm ja me võtame teiega peagi ühendust."
+    "contact_text": "Meileks oleks kuulda teist. Palun täitke allolev vorm ja me võtame teiega peagi ühendust.",
+    "message_placeholder": "Kirjutage oma sõnum siia ...",
+    "sending": "Saadav ...",
+    "phone": "Telefon",
+    "success_message": "Teie sõnum on edukalt saadetud!",
+    "error_message": "Midagi läks valesti. Proovige uuesti.",
+    "email_validation": "Sisestage kehtiv e -posti aadress.",
+    "phone_validation": "Sisestage kehtiv telefoninumber (nt 123-456-7890).",
+    "name_validation": "Nimi peab olema vähemalt 3 tähemärki pikk.",
+    "subject_validation": "Teema peab olema vähemalt 3 tähemärki pikk.",
+    "message_validation": "Sõnum peab olema vähemalt 10 tähemärki pikk."
   },
   "manage_post": {
     "select_category": "Palun valige oma postituse kategooria",

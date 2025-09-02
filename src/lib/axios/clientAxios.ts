@@ -1,7 +1,7 @@
 "use client";
 
 import axios, { AxiosInstance } from "axios";
-import { API_URL } from "@/utils/constants";
+import { API_URL, COUNTIRES_DATA } from "@/utils/constants";
 import { useAuthStore } from "@/features/auth/store";
 
 const clientAxios: AxiosInstance = axios.create({
@@ -21,7 +21,7 @@ const getLocaleFromCookie = (): string => {
   );
 
   if (localeCookie) {
-    return localeCookie.split("=")[1]?.trim().split("-")[0] || "en";
+    return localeCookie.split("=")[1]?.trim();
   }
 
   return "en";
@@ -32,11 +32,16 @@ clientAxios.interceptors.request.use(
     const token = useAuthStore.getState().token;
     const locale = getLocaleFromCookie();
 
+    const lang = locale.split("-")[0];
+    const country = locale.split("-")[1];
+
     const normalizedLocale =
-      locale === "zh" ? "zh-CN" : locale === "pt" ? "pt-BR" : locale;
+      lang === "zh" ? "zh-CN" : lang === "pt" ? "pt-BR" : lang;
 
     config.headers.Authorization = token;
     config.headers["lang"] = normalizedLocale;
+    config.headers["country"] =
+      COUNTIRES_DATA.find((c) => c.code === country)?.id || 1;
 
     return config;
   },

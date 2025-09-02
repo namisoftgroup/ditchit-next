@@ -59,7 +59,16 @@
     "sort_by": "Sorter efter",
     "report_post": "Rapporter indlæg",
     "write_here": "Skriv her...",
-    "report_saved": "Rapport indsendt med succes"
+    "report_saved": "Rapport indsendt med succes",
+    "subscribe_success": "Du har tilmeldt dig med succes!",
+    "subscribe_error": "Abonnement mislykkedes. Prøv igen.",
+    "select_country": "Vælg et land",
+    "first_name": "Fornavn",
+    "last_name": "Efternavn",
+    "country_required": "Land er påkrævet",
+    "phone_validation": "Indtast et gyldigt telefonnummer (f.eks. 123-456-7890).",
+    "first_name_validation": "Fornavn skal være mindst 2 tegn.",
+    "last_name_validation": "Efternavn skal være mindst 2 tegn."
   },
   "error": {
     "somthing_went_wrong": "Ups! Noget gik galt.",
@@ -176,7 +185,17 @@
     "send": "Sende",
     "stay_in_touch": "Hold dig i kontakt med os",
     "address": "Adresse",
-    "contact_text": "Vi vil meget gerne høre fra dig. Udfyld venligst formularen nedenfor, så vender vi tilbage til dig så hurtigt som muligt."
+    "contact_text": "Vi vil meget gerne høre fra dig. Udfyld venligst formularen nedenfor, så vender vi tilbage til dig så hurtigt som muligt.",
+    "message_placeholder": "Skriv din besked her ...",
+    "sending": "Sender ...",
+    "phone": "Telefon",
+    "success_message": "Din besked er blevet sendt med succes!",
+    "error_message": "Noget gik galt. Prøv igen.",
+    "email_validation": "Indtast en gyldig e -mail -adresse.",
+    "phone_validation": "Indtast et gyldigt telefonnummer (f.eks. 123-456-7890).",
+    "name_validation": "Navnet skal være mindst 3 tegn langt.",
+    "subject_validation": "Emnet skal være mindst 3 tegn lang.",
+    "message_validation": "Beskeden skal være mindst 10 tegn lang."
   },
   "manage_post": {
     "select_category": "Vælg venligst din indlægskategori",

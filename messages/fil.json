@@ -59,7 +59,16 @@
     "sort_by": "Ihain ayon sa",
     "report_post": "Iulat ang Post",
     "write_here": "isulat dito...",
-    "report_saved": "Ulat naipasa ng matagumpay"
+    "report_saved": "Ulat naipasa ng matagumpay",
+    "subscribe_success": "Matagumpay kang nag -subscribe!",
+    "subscribe_error": "Nabigo ang subscription. Mangyaring subukang muli.",
+    "select_country": "Pumili ng isang bansa",
+    "first_name": "Unang pangalan",
+    "last_name": "Huling Pangalan",
+    "country_required": "Kinakailangan ang bansa",
+    "phone_validation": "Mangyaring magpasok ng isang wastong numero ng telepono (hal., 123-456-7890).",
+    "first_name_validation": "Ang unang pangalan ay dapat na hindi bababa sa 2 mga character.",
+    "last_name_validation": "Ang huling pangalan ay dapat na hindi bababa sa 2 mga character."
   },
   "error": {
     "somthing_went_wrong": "Naku! May nangyaring mali.",
@@ -176,7 +185,17 @@
     "send": "Magpadala",
     "stay_in_touch": "Manatili kang nakikipag-ugnayan sa amin",
     "address": "Tirahan",
-    "contact_text": "Gusto naming marinig mula sa iyo. Pakiusap, punan ang form sa ibaba at makakapag-ugnayan kami sa iyo sa lalong madaling panahon."
+    "contact_text": "Gusto naming marinig mula sa iyo. Pakiusap, punan ang form sa ibaba at makakapag-ugnayan kami sa iyo sa lalong madaling panahon.",
+    "message_placeholder": "Isulat ang iyong mensahe dito ...",
+    "sending": "Pagpapadala ...",
+    "phone": "Telepono",
+    "success_message": "Matagumpay na naipadala ang iyong mensahe!",
+    "error_message": "May mali. Mangyaring subukang muli.",
+    "email_validation": "Mangyaring magpasok ng isang wastong email address.",
+    "phone_validation": "Mangyaring magpasok ng isang wastong numero ng telepono (hal., 123-456-7890).",
+    "name_validation": "Ang pangalan ay dapat na hindi bababa sa 3 character ang haba.",
+    "subject_validation": "Ang paksa ay dapat na hindi bababa sa 3 character ang haba.",
+    "message_validation": "Ang mensahe ay dapat na hindi bababa sa 10 character ang haba."
   },
   "manage_post": {
     "select_category": "Mangyaring piliin ang kategorya ng iyong post.",

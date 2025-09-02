@@ -59,7 +59,16 @@
     "sort_by": "Sortiraj po",
     "report_post": "Prijavi objavu",
     "write_here": "упиши овде...",
-    "report_saved": "Izveštaj uspešno dostavljen"
+    "report_saved": "Izveštaj uspešno dostavljen",
+    "subscribe_success": "Успешно сте се претплатили!",
+    "subscribe_error": "Претплата није успела. Покушајте поново.",
+    "select_country": "Изаберите земљу",
+    "first_name": "Име",
+    "last_name": "Презиме",
+    "country_required": "Земља је обавезна",
+    "phone_validation": "Молимо унесите важећи телефонски број (нпр. 123-456-7890).",
+    "first_name_validation": "Име мора бити најмање 2 знака.",
+    "last_name_validation": "Презиме мора бити најмање 2 знака."
   },
   "error": {
     "somthing_went_wrong": "Ups! Nešto je pošlo po zlu",
@@ -176,7 +185,17 @@
     "send": "Пошаљи",
     "stay_in_touch": "Ostanite u kontaktu sa nama",
     "address": "Адрес",
-    "contact_text": "Voleli bismo da čujemo od vas. Molimo vas da ispunite donji obrazac i javićemo vam se što je pre moguće."
+    "contact_text": "Voleli bismo da čujemo od vas. Molimo vas da ispunite donji obrazac i javićemo vam se što je pre moguće.",
+    "message_placeholder": "Овде напишите своју поруку ...",
+    "sending": "Слање ...",
+    "phone": "Телефон",
+    "success_message": "Ваша порука је успешно послата!",
+    "error_message": "Нешто је пошло по злу. Покушајте поново.",
+    "email_validation": "Молимо унесите важећу адресу е-поште.",
+    "phone_validation": "Молимо унесите важећи телефонски број (нпр. 123-456-7890).",
+    "name_validation": "Име мора бити дугачко најмање 3 знака.",
+    "subject_validation": "Субјект мора бити дугачак најмање 3 знака.",
+    "message_validation": "Порука мора бити дугачка најмање 10 знакова."
   },
   "manage_post": {
     "select_category": "Molimo izaberite kategoriju vašeg posta",

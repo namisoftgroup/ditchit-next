@@ -2,10 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const MESSAGES_DIR = path.join(__dirname, 'messages');
+const MESSAGES_DIR = path.join(__dirname, '..', 'messages');
 const REFERENCE_FILE = 'en.json';
 
-// Helper function to translate text using Google Translate API
 async function translateText(text, targetLang) {
   return new Promise((resolve, reject) => {
     const encodedText = encodeURIComponent(text);
@@ -40,41 +39,33 @@ async function translateText(text, targetLang) {
   });
 }
 
-// Convert language file code to Google Translate language code
 function getGoogleTranslateCode(langCode) {
-  // Most language codes are the same, but some need conversion
   const langCodeMap = {
-    'zh': 'zh-CN', // Chinese (Simplified)
-    'nb': 'no',    // Norwegian
-    'fil': 'tl',   // Filipino/Tagalog
+    'zh': 'zh-CN',
+    'nb': 'no',   
+    'fil': 'tl',
   };
   
   return langCodeMap[langCode] || langCode;
 }
 
-// Recursively process nested objects and translate missing keys
 async function processObject(enObj, targetObj, targetLang) {
   const result = { ...targetObj };
   
   for (const key in enObj) {
     if (typeof enObj[key] === 'object' && enObj[key] !== null) {
-      // Handle nested objects
       if (!result[key] || typeof result[key] !== 'object') {
         result[key] = {};
       }
       result[key] = await processObject(enObj[key], result[key] || {}, targetLang);
     } else {
-      // Handle string values
       if (result[key] === undefined || result[key] === enObj[key]) {
         try {
-          // Only translate if the key is missing or has the same value as English
           console.log(`Translating "${enObj[key]}" to ${targetLang}`);
           result[key] = await translateText(enObj[key], targetLang);
-          // Add a small delay to avoid rate limiting
           await new Promise(resolve => setTimeout(resolve, 300));
         } catch (error) {
           console.error(`Error translating "${enObj[key]}": ${error.message}`);
-          // Fallback to English if translation fails
           result[key] = enObj[key];
         }
       }
@@ -86,15 +77,12 @@ async function processObject(enObj, targetObj, targetLang) {
 
 async function main() {
   try {
-    // Read the reference English file
     const enFilePath = path.join(MESSAGES_DIR, REFERENCE_FILE);
     const enContent = fs.readFileSync(enFilePath, 'utf8');
     const enData = JSON.parse(enContent);
     
-    // Get all language files
     const files = fs.readdirSync(MESSAGES_DIR);
     
-    // Process each language file except English
     for (const file of files) {
       if (file === REFERENCE_FILE) continue;
       
@@ -105,14 +93,11 @@ async function main() {
       console.log(`Processing ${file} (${googleLangCode})...`);
       
       try {
-        // Read the target language file
         const targetContent = fs.readFileSync(filePath, 'utf8');
         const targetData = JSON.parse(targetContent);
         
-        // Process and translate missing keys
         const updatedData = await processObject(enData, targetData, googleLangCode);
         
-        // Write the updated content back to the file
         fs.writeFileSync(
           filePath,
           JSON.stringify(updatedData, null, 2),
@@ -131,5 +116,4 @@ async function main() {
   }
 }
 
-// Run the script
 main();

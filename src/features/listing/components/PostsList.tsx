@@ -11,7 +11,6 @@ type PostListProps = {
   latitude: string | null;
   kilometers: string | null;
   delivery_method: string | null;
-  country_id: string | null;
 };
 
 export default function PostsList(props: PostListProps) {
@@ -22,7 +21,6 @@ export default function PostsList(props: PostListProps) {
       props.latitude,
       props.kilometers,
       props.delivery_method,
-      props.country_id
     );
 
   const observerRef = useRef<HTMLDivElement | null>(null);

@@ -59,7 +59,16 @@
     "sort_by": "Trier par",
     "report_post": "Signaler le post",
     "write_here": "écrivez ici...",
-    "report_saved": "Rapport soumis avec succès"
+    "report_saved": "Rapport soumis avec succès",
+    "subscribe_success": "Vous vous êtes abonné avec succès!",
+    "subscribe_error": "L'abonnement a échoué. Veuillez réessayer.",
+    "select_country": "Sélectionnez un pays",
+    "first_name": "Prénom",
+    "last_name": "Nom de famille",
+    "country_required": "Le pays est requis",
+    "phone_validation": "Veuillez saisir un numéro de téléphone valide (par exemple, 123-456-7890).",
+    "first_name_validation": "Le prénom doit comporter au moins 2 caractères.",
+    "last_name_validation": "Le nom de famille doit comporter au moins 2 caractères."
   },
   "error": {
     "somthing_went_wrong": "Oups ! Quelque chose s'est mal passé.",
@@ -176,7 +185,17 @@
     "send": "Envoyer",
     "stay_in_touch": "Restez en contact avec nous",
     "address": "Adresse",
-    "contact_text": "Nous aimerions avoir de vos nouvelles. Veuillez remplir le formulaire ci-dessous et nous vous répondrons dès que possible."
+    "contact_text": "Nous aimerions avoir de vos nouvelles. Veuillez remplir le formulaire ci-dessous et nous vous répondrons dès que possible.",
+    "message_placeholder": "Écrivez votre message ici ...",
+    "sending": "Envoi...",
+    "phone": "Téléphone",
+    "success_message": "Votre message a été envoyé avec succès!",
+    "error_message": "Quelque chose s'est mal passé. Veuillez réessayer.",
+    "email_validation": "S'il vous plaît, mettez une adresse email valide.",
+    "phone_validation": "Veuillez saisir un numéro de téléphone valide (par exemple, 123-456-7890).",
+    "name_validation": "Le nom doit comporter au moins 3 caractères.",
+    "subject_validation": "Le sujet doit comporter au moins 3 caractères.",
+    "message_validation": "Le message doit comporter au moins 10 caractères."
   },
   "manage_post": {
     "select_category": "Veuillez sélectionner votre catégorie de publication.",

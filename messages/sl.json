@@ -59,7 +59,16 @@
     "sort_by": "Razvrsti po",
     "report_post": "Prijavi objavo",
     "write_here": "piši tukaj...",
-    "report_saved": "Poročilo uspešno oddano"
+    "report_saved": "Poročilo uspešno oddano",
+    "subscribe_success": "Uspešno ste se naročili!",
+    "subscribe_error": "Naročnina ni uspela. Poskusite znova.",
+    "select_country": "Izberite državo",
+    "first_name": "Ime",
+    "last_name": "Priimek",
+    "country_required": "Država je potrebna",
+    "phone_validation": "Vnesite veljavno telefonsko številko (npr. 123-456-7890).",
+    "first_name_validation": "Ime mora biti vsaj 2 znaka.",
+    "last_name_validation": "Priimek mora biti vsaj dva znaka."
   },
   "error": {
     "somthing_went_wrong": "Ups! Nekaj je šlo narobe",
@@ -176,7 +185,17 @@
     "send": "Pošlji",
     "stay_in_touch": "Ostanite v stiku z nami",
     "address": "Naslov",
-    "contact_text": "Z veseljem bomo slišali od vas. Prosimo, izpolnite spodnji obrazec in odgovorili vam bomo čim prej."
+    "contact_text": "Z veseljem bomo slišali od vas. Prosimo, izpolnite spodnji obrazec in odgovorili vam bomo čim prej.",
+    "message_placeholder": "Napišite svoje sporočilo tukaj ...",
+    "sending": "Pošiljanje ...",
+    "phone": "Telefon",
+    "success_message": "Vaše sporočilo je bilo uspešno poslano!",
+    "error_message": "Nekaj ​​je šlo narobe. Poskusite znova.",
+    "email_validation": "Vnesite veljaven e -poštni naslov.",
+    "phone_validation": "Vnesite veljavno telefonsko številko (npr. 123-456-7890).",
+    "name_validation": "Ime mora biti dolgo vsaj 3 znake.",
+    "subject_validation": "Predmet mora biti dolg vsaj 3 znake.",
+    "message_validation": "Sporočilo mora biti dolgo vsaj 10 znakov."
   },
   "manage_post": {
     "select_category": "Prosimo, izberite kategorijo objave",

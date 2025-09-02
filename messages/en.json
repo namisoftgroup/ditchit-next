@@ -59,7 +59,16 @@
     "sort_by": "Sort By",
     "report_post": "Report Post",
     "write_here": "write here...",
-    "report_saved": "Report submitted successfully"
+    "report_saved": "Report submitted successfully",
+    "subscribe_success": "You have successfully subscribed!",
+    "subscribe_error": "Subscription failed. Please try again.",
+    "select_country": "Select a country",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "country_required": "Country is required",
+    "phone_validation": "Please enter a valid phone number (e.g., 123-456-7890).",
+    "first_name_validation": "First name must be at least 2 characters.",
+    "last_name_validation": "Last name must be at least 2 characters."
   },
   "error": {
     "somthing_went_wrong": "Oops! Something went wrong",
@@ -173,10 +182,20 @@
     "email": "Email",
     "subject": "Subject",
     "message": "Message",
+    "message_placeholder": "Write your message here...",
     "send": "Send",
-    "stay_in_touch": " Stay in touch with us",
+    "sending": "Sending...",
+    "phone": "Phone",
+    "stay_in_touch": "Stay in touch with us",
     "address": "Address",
-    "contact_text": " We would love to hear from you. Please fill out the form below and we will get back to you as soon as possible."
+    "contact_text": "We would love to hear from you. Please fill out the form below and we will get back to you as soon as possible.",
+    "success_message": "Your message has been sent successfully!",
+    "error_message": "Something went wrong. Please try again.",
+    "email_validation": "Please enter a valid email address.",
+    "phone_validation": "Please enter a valid phone number (e.g., 123-456-7890).",
+    "name_validation": "Name must be at least 3 characters long.",
+    "subject_validation": "Subject must be at least 3 characters long.",
+    "message_validation": "Message must be at least 10 characters long."
   },
   "manage_post": {
     "select_category": "Please select your post category",

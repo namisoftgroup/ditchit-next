@@ -59,7 +59,16 @@
     "sort_by": "Zoradiť podľa",
     "report_post": "Nahlásiť príspevok",
     "write_here": "napíšte sem...",
-    "report_saved": "Správa bola úspešne odoslaná"
+    "report_saved": "Správa bola úspešne odoslaná",
+    "subscribe_success": "Úspešne ste sa prihlásili na odber!",
+    "subscribe_error": "Predplatné zlyhalo. Skúste to znova.",
+    "select_country": "Vyberte krajinu",
+    "first_name": "Krstné meno",
+    "last_name": "Priezvisko",
+    "country_required": "Vyžaduje sa krajina",
+    "phone_validation": "Zadajte platné telefónne číslo (napr. 123-456-7890).",
+    "first_name_validation": "Meno musí byť najmenej 2 znaky.",
+    "last_name_validation": "Priezvisko musí byť najmenej 2 znaky."
   },
   "error": {
     "somthing_went_wrong": "Ups! Niečo sa pokazilo",
@@ -176,7 +185,17 @@
     "send": "Odoslať",
     "stay_in_touch": "Zostaňte s nami v kontakte",
     "address": "Adresa",
-    "contact_text": "Radi by sme od vás počuli. Prosím, vyplňte nižšie uvedený formulár a my sa vám ozveme čo najskôr."
+    "contact_text": "Radi by sme od vás počuli. Prosím, vyplňte nižšie uvedený formulár a my sa vám ozveme čo najskôr.",
+    "message_placeholder": "Napíšte svoju správu sem ...",
+    "sending": "Posielanie ...",
+    "phone": "Telefonovať",
+    "success_message": "Vaša správa bola úspešne odoslaná!",
+    "error_message": "Niečo sa pokazilo. Skúste to znova.",
+    "email_validation": "Zadajte platnú e -mailovú adresu.",
+    "phone_validation": "Zadajte platné telefónne číslo (napr. 123-456-7890).",
+    "name_validation": "Názov musí mať najmenej 3 znaky dlhé.",
+    "subject_validation": "Predmet musí byť najmenej 3 znaky dlhý.",
+    "message_validation": "Správa musí byť najmenej 10 znakov dlhá."
   },
   "manage_post": {
     "select_category": "Prosím, vyberte kategóriu vašej pozície",

@@ -59,7 +59,16 @@
     "sort_by": "Sorteer op",
     "report_post": "Rapporteer Bericht",
     "write_here": "schrijf hier...",
-    "report_saved": "Rapport succesvol ingediend"
+    "report_saved": "Rapport succesvol ingediend",
+    "subscribe_success": "Je hebt met succes geabonneerd!",
+    "subscribe_error": "Abonnement is mislukt. Probeer het opnieuw.",
+    "select_country": "Selecteer een land",
+    "first_name": "Voornaam",
+    "last_name": "Achternaam",
+    "country_required": "Land is vereist",
+    "phone_validation": "Voer een geldig telefoonnummer in (bijv. 123-456-7890).",
+    "first_name_validation": "Voornaam moet minimaal 2 tekens zijn.",
+    "last_name_validation": "De achternaam moet minimaal 2 tekens zijn."
   },
   "error": {
     "somthing_went_wrong": "Oeps! Er is iets misgegaan.",
@@ -176,7 +185,17 @@
     "send": "Verzenden",
     "stay_in_touch": "Blijf in contact met ons",
     "address": "Adres",
-    "contact_text": "We horen graag van je. Vul alstublieft het onderstaande formulier in en we nemen zo snel mogelijk contact met je op."
+    "contact_text": "We horen graag van je. Vul alstublieft het onderstaande formulier in en we nemen zo snel mogelijk contact met je op.",
+    "message_placeholder": "Schrijf hier uw bericht ...",
+    "sending": "Verzenden ...",
+    "phone": "Telefoon",
+    "success_message": "Uw bericht is succesvol verzonden!",
+    "error_message": "Er ging iets mis. Probeer het opnieuw.",
+    "email_validation": "Voer een geldig e -mailadres in.",
+    "phone_validation": "Voer een geldig telefoonnummer in (bijv. 123-456-7890).",
+    "name_validation": "Naam moet minimaal 3 tekens lang zijn.",
+    "subject_validation": "Onderwerp moet minimaal 3 tekens lang zijn.",
+    "message_validation": "Bericht moet minimaal 10 tekens lang zijn."
   },
   "manage_post": {
     "select_category": "Selecteer uw berichtcategorie",

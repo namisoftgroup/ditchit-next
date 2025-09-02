@@ -59,7 +59,16 @@
     "sort_by": "Sắp xếp theo",
     "report_post": "Báo cáo Bài viết",
     "write_here": "viết ở đây...",
-    "report_saved": "Báo cáo đã được gửi thành công"
+    "report_saved": "Báo cáo đã được gửi thành công",
+    "subscribe_success": "Bạn đã đăng ký thành công!",
+    "subscribe_error": "Đăng ký không thành công. Hãy thử lại.",
+    "select_country": "Chọn một quốc gia",
+    "first_name": "Tên",
+    "last_name": "Họ",
+    "country_required": "Quốc gia là bắt buộc",
+    "phone_validation": "Vui lòng nhập số điện thoại hợp lệ (ví dụ: 123-456-7890).",
+    "first_name_validation": "Tên phải có ít nhất 2 ký tự.",
+    "last_name_validation": "Họ phải có ít nhất 2 ký tự."
   },
   "error": {
     "somthing_went_wrong": "Úi! Có sự cố xảy ra",
@@ -176,7 +185,17 @@
     "send": "Gửi",
     "stay_in_touch": "Giữ liên lạc với chúng tôi",
     "address": "Địa chỉ",
-    "contact_text": "Chúng tôi rất mong nhận được phản hồi từ bạn. Vui lòng điền vào mẫu dưới đây và chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất."
+    "contact_text": "Chúng tôi rất mong nhận được phản hồi từ bạn. Vui lòng điền vào mẫu dưới đây và chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất.",
+    "message_placeholder": "Viết tin nhắn của bạn ở đây ...",
+    "sending": "Gửi ...",
+    "phone": "Điện thoại",
+    "success_message": "Tin nhắn của bạn đã được gửi thành công!",
+    "error_message": "Có gì đó đã sai. Hãy thử lại.",
+    "email_validation": "Vui lòng nhập một địa chỉ email hợp lệ.",
+    "phone_validation": "Vui lòng nhập số điện thoại hợp lệ (ví dụ: 123-456-7890).",
+    "name_validation": "Tên phải dài ít nhất 3 ký tự.",
+    "subject_validation": "Chủ đề phải dài ít nhất 3 ký tự.",
+    "message_validation": "Tin nhắn phải dài ít nhất 10 ký tự."
   },
   "manage_post": {
     "select_category": "Vui lòng chọn danh mục bài đăng của bạn",

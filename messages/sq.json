@@ -59,7 +59,16 @@
     "sort_by": "Rendit sipas",
     "report_post": "Raporto postimin",
     "write_here": "shkruaj këtu...",
-    "report_saved": "Raporti u dorëzua me sukses"
+    "report_saved": "Raporti u dorëzua me sukses",
+    "subscribe_success": "Ju jeni pajtuar me sukses!",
+    "subscribe_error": "Abonimi dështoi. Ju lutem provoni përsëri.",
+    "select_country": "Zgjidhni një vend",
+    "first_name": "Emër",
+    "last_name": "Mbiemri",
+    "country_required": "Kërkohet vendi",
+    "phone_validation": "Ju lutemi shkruani një numër të vlefshëm telefoni (p.sh., 123-456-7890).",
+    "first_name_validation": "Emri duhet të jetë së paku 2 karaktere.",
+    "last_name_validation": "Mbiemri duhet të jetë së paku 2 karaktere."
   },
   "error": {
     "somthing_went_wrong": "Ups! Diçka shkoi gabim",
@@ -176,7 +185,17 @@
     "send": "Dërgo",
     "stay_in_touch": "Qëndro në kontakt me ne",
     "address": "Adresë",
-    "contact_text": "Do të na pëlqente të dëgjonim nga ju. Ju lutemi plotësoni formularin më poshtë dhe ne do t'ju kontaktojmë sa më shpejt të jetë e mundur."
+    "contact_text": "Do të na pëlqente të dëgjonim nga ju. Ju lutemi plotësoni formularin më poshtë dhe ne do t'ju kontaktojmë sa më shpejt të jetë e mundur.",
+    "message_placeholder": "Shkruajeni mesazhin tuaj këtu ...",
+    "sending": "Dërgimi ...",
+    "phone": "Telefon",
+    "success_message": "Mesazhi juaj është dërguar me sukses!",
+    "error_message": "Diçka shkoi keq. Ju lutem provoni përsëri.",
+    "email_validation": "Ju lutemi shkruani një adresë të vlefshme emaili.",
+    "phone_validation": "Ju lutemi shkruani një numër të vlefshëm telefoni (p.sh., 123-456-7890).",
+    "name_validation": "Emri duhet të jetë së paku 3 karaktere i gjatë.",
+    "subject_validation": "Subjekti duhet të jetë së paku 3 karaktere i gjatë.",
+    "message_validation": "Mesazhi duhet të jetë së paku 10 karaktere i gjatë."
   },
   "manage_post": {
     "select_category": "Ju lutem zgjidhni kategorinë e postimit tuaj",

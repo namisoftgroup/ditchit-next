@@ -79,7 +79,6 @@ export default async function RootLayout({ children, params }: Props) {
     address: cookieStore.get("address")?.value || "United States",
     delivery_method: cookieStore.get("delivery_method")?.value || "both",
     kilometers: Number(cookieStore.get("kilometers")?.value ?? 0),
-    country_id: Number(cookieStore.get("country_id")?.value ?? 1),
   };
 
   const data = await getProfile();

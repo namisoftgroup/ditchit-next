@@ -129,3 +129,18 @@ export const LANGUAGES = {
   vi: "Tiếng Việt",
   zh: "简体中文",
 };
+
+export const COUNTIRES_DATA = [
+  {
+    id: 1,
+    code: "US",
+  },
+  {
+    id: 2,
+    code: "CA",
+  },
+  {
+    id: 3,
+    code: "IN",
+  },
+];

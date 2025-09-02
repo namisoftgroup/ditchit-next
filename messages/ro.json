@@ -59,7 +59,16 @@
     "sort_by": "Sortează după",
     "report_post": "Raportează postul",
     "write_here": "scrie aici...",
-    "report_saved": "Raport trimis cu succes"
+    "report_saved": "Raport trimis cu succes",
+    "subscribe_success": "Te -ai abonat cu succes!",
+    "subscribe_error": "Abonamentul a eșuat. Vă rugăm să încercați din nou.",
+    "select_country": "Selectați o țară",
+    "first_name": "Prenume",
+    "last_name": "Nume",
+    "country_required": "Țara este necesară",
+    "phone_validation": "Vă rugăm să introduceți un număr de telefon valid (de exemplu, 123-456-7890).",
+    "first_name_validation": "Prenumele trebuie să fie de cel puțin 2 caractere.",
+    "last_name_validation": "Numele de familie trebuie să fie de cel puțin 2 caractere."
   },
   "error": {
     "somthing_went_wrong": "Oops! Ceva a mers prost",
@@ -176,7 +185,17 @@
     "send": "Trimite",
     "stay_in_touch": "Rămâi în legătură cu noi",
     "address": "Adresă",
-    "contact_text": "Ne-ar plăcea să auzim de la tine. Te rugăm să completezi formularul de mai jos și îți vom răspunde cât mai curând posibil."
+    "contact_text": "Ne-ar plăcea să auzim de la tine. Te rugăm să completezi formularul de mai jos și îți vom răspunde cât mai curând posibil.",
+    "message_placeholder": "Scrie -ți mesajul aici ...",
+    "sending": "Trimiterea ...",
+    "phone": "Telefon",
+    "success_message": "Mesajul dvs. a fost trimis cu succes!",
+    "error_message": "Ceva nu a mers bine. Vă rugăm să încercați din nou.",
+    "email_validation": "Vă rugăm să introduceți o adresă de email validă.",
+    "phone_validation": "Vă rugăm să introduceți un număr de telefon valid (de exemplu, 123-456-7890).",
+    "name_validation": "Numele trebuie să aibă cel puțin 3 caractere.",
+    "subject_validation": "Subiectul trebuie să aibă cel puțin 3 caractere.",
+    "message_validation": "Mesajul trebuie să aibă cel puțin 10 caractere."
   },
   "manage_post": {
     "select_category": "Vă rugăm să selectați categoria postului dvs.",

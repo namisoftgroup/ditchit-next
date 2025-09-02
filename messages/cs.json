@@ -59,7 +59,16 @@
     "sort_by": "Seřadit podle",
     "report_post": "Nahlásit příspěvek",
     "write_here": "napište sem...",
-    "report_saved": "Zpráva byla úspěšně odeslána."
+    "report_saved": "Zpráva byla úspěšně odeslána.",
+    "subscribe_success": "Úspěšně jste se přihlásili!",
+    "subscribe_error": "Předplatné selhalo. Zkuste to prosím znovu.",
+    "select_country": "Vyberte zemi",
+    "first_name": "Křestní jméno",
+    "last_name": "Příjmení",
+    "country_required": "Je nutná země",
+    "phone_validation": "Zadejte platné telefonní číslo (např. 123-456-7890).",
+    "first_name_validation": "Jméno musí být nejméně 2 znaky.",
+    "last_name_validation": "Příjmení musí být alespoň 2 znaky."
   },
   "error": {
     "somthing_went_wrong": "Omlouvám se! Něco se pokazilo.",
@@ -176,7 +185,17 @@
     "send": "Odeslat",
     "stay_in_touch": "Zůstaňte s námi v kontaktu",
     "address": "Adresa",
-    "contact_text": "Rádi od vás uslyšíme. Prosím, vyplňte formulář níže a co nejdříve se vám ozveme."
+    "contact_text": "Rádi od vás uslyšíme. Prosím, vyplňte formulář níže a co nejdříve se vám ozveme.",
+    "message_placeholder": "Napište svou zprávu zde ...",
+    "sending": "Odeslání ...",
+    "phone": "Telefon",
+    "success_message": "Vaše zpráva byla úspěšně odeslána!",
+    "error_message": "Něco se pokazilo. Zkuste to prosím znovu.",
+    "email_validation": "Zadejte platnou e -mailovou adresu.",
+    "phone_validation": "Zadejte platné telefonní číslo (např. 123-456-7890).",
+    "name_validation": "Jméno musí být dlouhé nejméně 3 znaky.",
+    "subject_validation": "Subjekt musí být nejméně 3 znaky dlouhé.",
+    "message_validation": "Zpráva musí být dlouhá nejméně 10 znaků."
   },
   "manage_post": {
     "select_category": "Prosím, vyberte kategorii příspěvku.",

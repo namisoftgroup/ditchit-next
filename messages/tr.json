@@ -59,7 +59,16 @@
     "sort_by": "Sırala",
     "report_post": "Gönderiyi Bildir",
     "write_here": "buraya yazın...",
-    "report_saved": "Rapor başarıyla gönderildi"
+    "report_saved": "Rapor başarıyla gönderildi",
+    "subscribe_success": "Başarıyla abone oldunuz!",
+    "subscribe_error": "Abonelik başarısız oldu. Lütfen tekrar deneyin.",
+    "select_country": "Bir Ülke Seçin",
+    "first_name": "İlk adı",
+    "last_name": "Soy isim",
+    "country_required": "Ülke gereklidir",
+    "phone_validation": "Lütfen geçerli bir telefon numarası girin (ör. 123-456-7890).",
+    "first_name_validation": "Adı en az 2 karakter olmalıdır.",
+    "last_name_validation": "Soyadı en az 2 karakter olmalıdır."
   },
   "error": {
     "somthing_went_wrong": "Tüh! Bir şeyler yanlış gitti",
@@ -176,7 +185,17 @@
     "send": "Gönder",
     "stay_in_touch": "Bizimle iletişimde kalın",
     "address": "Adres",
-    "contact_text": "Sizden haber almak isteriz. Lütfen aşağıdaki formu doldurun, size en kısa sürede geri döneceğiz."
+    "contact_text": "Sizden haber almak isteriz. Lütfen aşağıdaki formu doldurun, size en kısa sürede geri döneceğiz.",
+    "message_placeholder": "Mesajınızı buraya yazın ...",
+    "sending": "Gönderme ...",
+    "phone": "Telefon",
+    "success_message": "Mesajınız başarıyla gönderildi!",
+    "error_message": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "email_validation": "Geçerli bir e.",
+    "phone_validation": "Lütfen geçerli bir telefon numarası girin (ör. 123-456-7890).",
+    "name_validation": "İsim en az 3 karakter uzunluğunda olmalıdır.",
+    "subject_validation": "Konu en az 3 karakter uzunluğunda olmalıdır.",
+    "message_validation": "Mesaj en az 10 karakter uzunluğunda olmalıdır."
   },
   "manage_post": {
     "select_category": "Lütfen gönderi kategorinizi seçin",

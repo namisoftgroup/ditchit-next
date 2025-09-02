@@ -59,7 +59,16 @@
     "sort_by": "Classificar Por",
     "report_post": "Reportar Postagem",
     "write_here": "escreva aqui...",
-    "report_saved": "Relatório submetido com sucesso"
+    "report_saved": "Relatório submetido com sucesso",
+    "subscribe_success": "Você se inscreveu com sucesso!",
+    "subscribe_error": "A assinatura falhou. Por favor, tente novamente.",
+    "select_country": "Selecione um país",
+    "first_name": "Primeiro nome",
+    "last_name": "Sobrenome",
+    "country_required": "O país é necessário",
+    "phone_validation": "Por favor, insira um número de telefone válido (por exemplo, 123-456-7890).",
+    "first_name_validation": "O primeiro nome deve ter pelo menos 2 caracteres.",
+    "last_name_validation": "O sobrenome deve ter pelo menos 2 caracteres."
   },
   "error": {
     "somthing_went_wrong": "Opa! Algo deu errado.",
@@ -176,7 +185,17 @@
     "send": "Enviar",
     "stay_in_touch": "Fique em contato conosco",
     "address": "Endereço",
-    "contact_text": "Adoraríamos ouvir de você. Por favor, preencha o formulário abaixo e retornaremos o mais rápido possível."
+    "contact_text": "Adoraríamos ouvir de você. Por favor, preencha o formulário abaixo e retornaremos o mais rápido possível.",
+    "message_placeholder": "Escreva sua mensagem aqui ...",
+    "sending": "Enviando ...",
+    "phone": "Telefone",
+    "success_message": "Sua mensagem foi enviada com sucesso!",
+    "error_message": "Algo deu errado. Por favor, tente novamente.",
+    "email_validation": "Por favor, insira um endereço de e -mail válido.",
+    "phone_validation": "Por favor, insira um número de telefone válido (por exemplo, 123-456-7890).",
+    "name_validation": "O nome deve ter pelo menos 3 caracteres.",
+    "subject_validation": "O sujeito deve ter pelo menos 3 caracteres.",
+    "message_validation": "A mensagem deve ter pelo menos 10 caracteres."
   },
   "manage_post": {
     "select_category": "Por favor, selecione a categoria da sua postagem.",

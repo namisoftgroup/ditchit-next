@@ -59,7 +59,16 @@
     "sort_by": "정렬 기준",
     "report_post": "게시글 신고",
     "write_here": "여기에 작성하세요...",
-    "report_saved": "보고서가 성공적으로 제출되었습니다."
+    "report_saved": "보고서가 성공적으로 제출되었습니다.",
+    "subscribe_success": "당신은 성공적으로 구독했습니다!",
+    "subscribe_error": "구독이 실패했습니다. 다시 시도하십시오.",
+    "select_country": "국가를 선택하십시오",
+    "first_name": "이름",
+    "last_name": "성",
+    "country_required": "국가가 필요합니다",
+    "phone_validation": "유효한 전화 번호 (예 : 123-456-7890)를 입력하십시오.",
+    "first_name_validation": "이름은 2 자 이상이어야합니다.",
+    "last_name_validation": "성은 2 자 이상이어야합니다."
   },
   "error": {
     "somthing_went_wrong": "앗! 문제가 발생했습니다.",
@@ -176,7 +185,17 @@
     "send": "보내기",
     "stay_in_touch": "우리와 계속 연락하세요.",
     "address": "주소",
-    "contact_text": "귀하의 의견을 듣고 싶습니다. 아래 양식을 작성해 주시면 가능한 한 신속하게 연락드리겠습니다."
+    "contact_text": "귀하의 의견을 듣고 싶습니다. 아래 양식을 작성해 주시면 가능한 한 신속하게 연락드리겠습니다.",
+    "message_placeholder": "여기에 메시지를 작성하십시오 ...",
+    "sending": "배상...",
+    "phone": "핸드폰",
+    "success_message": "귀하의 메시지가 성공적으로 전송되었습니다!",
+    "error_message": "뭔가 잘못되었습니다. 다시 시도하십시오.",
+    "email_validation": "유효한 이메일 주소를 입력하십시오.",
+    "phone_validation": "유효한 전화 번호 (예 : 123-456-7890)를 입력하십시오.",
+    "name_validation": "이름의 길이는 3 자 이상이어야합니다.",
+    "subject_validation": "주제는 3 자 이상이어야합니다.",
+    "message_validation": "메시지의 길이는 10 자 이상이어야합니다."
   },
   "manage_post": {
     "select_category": "게시물 카테고리를 선택하세요.",

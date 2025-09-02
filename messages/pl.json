@@ -59,7 +59,16 @@
     "sort_by": "Sortuj według",
     "report_post": "Zgłoś post",
     "write_here": "napisz tutaj...",
-    "report_saved": "Raport został pomyślnie złożony."
+    "report_saved": "Raport został pomyślnie złożony.",
+    "subscribe_success": "Udało Ci się zasubskrybować!",
+    "subscribe_error": "Subskrypcja nie powiodła się. Spróbuj ponownie.",
+    "select_country": "Wybierz kraj",
+    "first_name": "Imię",
+    "last_name": "Nazwisko",
+    "country_required": "Kraj jest wymagany",
+    "phone_validation": "Wprowadź ważny numer telefonu (np. 123-456-7890).",
+    "first_name_validation": "Imię musi mieć co najmniej 2 znaki.",
+    "last_name_validation": "Nazwisko musi mieć co najmniej 2 znaki."
   },
   "error": {
     "somthing_went_wrong": "Ups! Coś poszło nie tak.",
@@ -176,7 +185,17 @@
     "send": "Wyślij",
     "stay_in_touch": "Pozostań z nami w kontakcie",
     "address": "Adres",
-    "contact_text": "Chętnie usłyszymy od Ciebie. Proszę wypełnij poniższy formularz, a my skontaktujemy się z Tobą tak szybko, jak to możliwe."
+    "contact_text": "Chętnie usłyszymy od Ciebie. Proszę wypełnij poniższy formularz, a my skontaktujemy się z Tobą tak szybko, jak to możliwe.",
+    "message_placeholder": "Napisz swoją wiadomość tutaj ...",
+    "sending": "Przesyłka...",
+    "phone": "Telefon",
+    "success_message": "Twoja wiadomość została pomyślnie wysłana!",
+    "error_message": "Coś poszło nie tak. Spróbuj ponownie.",
+    "email_validation": "Wprowadź ważny adres e -mail.",
+    "phone_validation": "Wprowadź ważny numer telefonu (np. 123-456-7890).",
+    "name_validation": "Nazwa musi mieć co najmniej 3 znaki.",
+    "subject_validation": "Temat musi mieć co najmniej 3 znaki.",
+    "message_validation": "Wiadomość musi mieć co najmniej 10 znaków."
   },
   "manage_post": {
     "select_category": "Proszę wybrać kategorię posta",

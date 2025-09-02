@@ -59,7 +59,16 @@
     "sort_by": "Kārtot pēc",
     "report_post": "Ziņot par ziņu",
     "write_here": "rakstiet šeit...",
-    "report_saved": "Ziņojums veiksmīgi iesniegts"
+    "report_saved": "Ziņojums veiksmīgi iesniegts",
+    "subscribe_success": "Jūs esat veiksmīgi abonējis!",
+    "subscribe_error": "Abonēšana neizdevās. Lūdzu, mēģiniet vēlreiz.",
+    "select_country": "Izvēlieties valsti",
+    "first_name": "Vārds",
+    "last_name": "Uzvārds",
+    "country_required": "Nepieciešama valsts",
+    "phone_validation": "Lūdzu, ievadiet derīgu tālruņa numuru (piemēram, 123-456-7890).",
+    "first_name_validation": "Vārdam jābūt vismaz 2 rakstzīmēm.",
+    "last_name_validation": "Uzvārdam jābūt vismaz 2 rakstzīmēm."
   },
   "error": {
     "somthing_went_wrong": "Ups! Kaut kas nogāja greizi.",
@@ -176,7 +185,17 @@
     "send": "Sūtīt",
     "stay_in_touch": "Sazinieties ar mums",
     "address": "Adrese",
-    "contact_text": "Mēs labprāt dzirdētu no jums. Lūdzu, aizpildiet zemāk esošo veidlapu, un mēs ar jums sazināsimies tiklīdz iespējams."
+    "contact_text": "Mēs labprāt dzirdētu no jums. Lūdzu, aizpildiet zemāk esošo veidlapu, un mēs ar jums sazināsimies tiklīdz iespējams.",
+    "message_placeholder": "Uzrakstiet savu ziņojumu šeit ...",
+    "sending": "Sūtīšana ...",
+    "phone": "Telefons",
+    "success_message": "Jūsu ziņojums ir veiksmīgi nosūtīts!",
+    "error_message": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.",
+    "email_validation": "Lūdzu, ievadiet derīgu e -pasta adresi.",
+    "phone_validation": "Lūdzu, ievadiet derīgu tālruņa numuru (piemēram, 123-456-7890).",
+    "name_validation": "Vārdam jābūt vismaz 3 rakstzīmēm garam.",
+    "subject_validation": "Priekšmetam jābūt vismaz 3 rakstzīmēm garam.",
+    "message_validation": "Ziņojumam jābūt vismaz 10 rakstzīmēm."
   },
   "manage_post": {
     "select_category": "Lūdzu, izvēlieties savu ziņu kategoriju.",

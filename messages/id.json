@@ -59,7 +59,16 @@
     "sort_by": "Urutkan Berdasarkan",
     "report_post": "Laporkan Postingan",
     "write_here": "tuliskan di sini...",
-    "report_saved": "Laporan berhasil dikirim"
+    "report_saved": "Laporan berhasil dikirim",
+    "subscribe_success": "Anda telah berhasil berlangganan!",
+    "subscribe_error": "Langganan gagal. Tolong coba lagi.",
+    "select_country": "Pilih negara",
+    "first_name": "Nama depan",
+    "last_name": "Nama Belakang",
+    "country_required": "Negara diperlukan",
+    "phone_validation": "Harap masukkan nomor telepon yang valid (mis., 123-456-7890).",
+    "first_name_validation": "Nama depan harus setidaknya 2 karakter.",
+    "last_name_validation": "Nama belakang harus setidaknya 2 karakter."
   },
   "error": {
     "somthing_went_wrong": "Ups! Ada yang salah.",
@@ -176,7 +185,17 @@
     "send": "Kirim",
     "stay_in_touch": "Tetap terhubung dengan kami",
     "address": "Alamat",
-    "contact_text": "Kami sangat ingin mendengar dari Anda. Silakan isi formulir di bawah ini dan kami akan menghubungi Anda secepatnya."
+    "contact_text": "Kami sangat ingin mendengar dari Anda. Silakan isi formulir di bawah ini dan kami akan menghubungi Anda secepatnya.",
+    "message_placeholder": "Tulis pesan Anda di sini ...",
+    "sending": "Mengirim ...",
+    "phone": "Telepon",
+    "success_message": "Pesan Anda telah berhasil dikirim!",
+    "error_message": "Ada yang salah. Tolong coba lagi.",
+    "email_validation": "Harap masukkan alamat email yang valid.",
+    "phone_validation": "Harap masukkan nomor telepon yang valid (mis., 123-456-7890).",
+    "name_validation": "Nama harus setidaknya 3 karakter.",
+    "subject_validation": "Subjek harus setidaknya 3 karakter.",
+    "message_validation": "Pesan harus setidaknya 10 karakter."
   },
   "manage_post": {
     "select_category": "Silakan pilih kategori pos Anda",

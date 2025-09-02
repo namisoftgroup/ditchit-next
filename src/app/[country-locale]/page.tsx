@@ -17,7 +17,6 @@ export default async function Home() {
     kilometers: cookieStore.get("kilometers")?.value ?? null,
     delivery_method: cookieStore.get("delivery_method")?.value ?? null,
     user_id: user?.id ?? null,
-    country_id: cookieStore.get("country_id")?.value ?? "1",
   };
 
   await queryClient.prefetchInfiniteQuery({
@@ -37,7 +36,7 @@ export default async function Home() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <CategoriesList filterParams={filterParams}/>
+      <CategoriesList filterParams={filterParams} />
     </HydrationBoundary>
   );
 }

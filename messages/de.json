@@ -59,7 +59,16 @@
     "sort_by": "Sortieren nach",
     "report_post": "Beitrag melden",
     "write_here": "schreibe hier...",
-    "report_saved": "Bericht erfolgreich eingereicht"
+    "report_saved": "Bericht erfolgreich eingereicht",
+    "subscribe_success": "Sie haben erfolgreich abonniert!",
+    "subscribe_error": "Abonnement fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "select_country": "Wählen Sie ein Land",
+    "first_name": "Vorname",
+    "last_name": "Nachname",
+    "country_required": "Land ist erforderlich",
+    "phone_validation": "Bitte geben Sie eine gültige Telefonnummer ein (z. B. 123-456-7890).",
+    "first_name_validation": "Der Vorname muss mindestens 2 Zeichen betragen.",
+    "last_name_validation": "Nachname muss mindestens 2 Zeichen sein."
   },
   "error": {
     "somthing_went_wrong": "Hoppla! Etwas ist schiefgegangen.",
@@ -176,7 +185,17 @@
     "send": "Senden",
     "stay_in_touch": "Bleib mit uns in Kontakt",
     "address": "Adresse",
-    "contact_text": "Wir würden uns freuen, von Ihnen zu hören. Bitte füllen Sie das folgende Formular aus und wir werden uns so schnell wie möglich bei Ihnen melden."
+    "contact_text": "Wir würden uns freuen, von Ihnen zu hören. Bitte füllen Sie das folgende Formular aus und wir werden uns so schnell wie möglich bei Ihnen melden.",
+    "message_placeholder": "Schreiben Sie Ihre Nachricht hier ...",
+    "sending": "Senden ...",
+    "phone": "Telefon",
+    "success_message": "Ihre Nachricht wurde erfolgreich gesendet!",
+    "error_message": "Etwas lief schief. Bitte versuchen Sie es erneut.",
+    "email_validation": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+    "phone_validation": "Bitte geben Sie eine gültige Telefonnummer ein (z. B. 123-456-7890).",
+    "name_validation": "Der Name muss mindestens 3 Zeichen lang sein.",
+    "subject_validation": "Das Thema muss mindestens 3 Zeichen lang sein.",
+    "message_validation": "Die Nachricht muss mindestens 10 Zeichen lang sein."
   },
   "manage_post": {
     "select_category": "Bitte wählen Sie Ihre Beitragskategorie aus.",

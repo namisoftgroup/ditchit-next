@@ -59,7 +59,16 @@
     "sort_by": "Ordenar por",
     "report_post": "Reportar publicación",
     "write_here": "escribe aquí...",
-    "report_saved": "Informe enviado con éxito"
+    "report_saved": "Informe enviado con éxito",
+    "subscribe_success": "¡Te has suscrito con éxito!",
+    "subscribe_error": "La suscripción falló. Por favor intente de nuevo.",
+    "select_country": "Seleccione un país",
+    "first_name": "Nombre de pila",
+    "last_name": "Apellido",
+    "country_required": "Se requiere país",
+    "phone_validation": "Ingrese un número de teléfono válido (por ejemplo, 123-456-7890).",
+    "first_name_validation": "El primer nombre debe ser al menos 2 caracteres.",
+    "last_name_validation": "El apellido debe ser al menos 2 caracteres."
   },
   "error": {
     "somthing_went_wrong": "¡Vaya! Algo salió mal.",
@@ -176,7 +185,17 @@
     "send": "Enviar",
     "stay_in_touch": "Mantente en contacto con nosotros",
     "address": "Dirección",
-    "contact_text": "Nos encantaría saber de ti. Por favor, completa el formulario a continuación y nos pondremos en contacto contigo lo antes posible."
+    "contact_text": "Nos encantaría saber de ti. Por favor, completa el formulario a continuación y nos pondremos en contacto contigo lo antes posible.",
+    "message_placeholder": "Escribe tu mensaje aquí ...",
+    "sending": "Envío...",
+    "phone": "Teléfono",
+    "success_message": "¡Su mensaje ha sido enviado con éxito!",
+    "error_message": "Algo salió mal. Por favor intente de nuevo.",
+    "email_validation": "Por favor, introduce una dirección de correo electrónico válida.",
+    "phone_validation": "Ingrese un número de teléfono válido (por ejemplo, 123-456-7890).",
+    "name_validation": "El nombre debe tener al menos 3 caracteres.",
+    "subject_validation": "El sujeto debe tener al menos 3 caracteres.",
+    "message_validation": "El mensaje debe tener al menos 10 caracteres."
   },
   "manage_post": {
     "select_category": "Por favor, selecciona la categoría de tu publicación.",

@@ -59,7 +59,16 @@
     "sort_by": "Saralash boʻyicha",
     "report_post": "Xabarni bildirish",
     "write_here": "bu yerni yozing...",
-    "report_saved": "Hisobot muvaffaqiyatli topshirildi"
+    "report_saved": "Hisobot muvaffaqiyatli topshirildi",
+    "subscribe_success": "Siz muvaffaqiyatli obuna bo'ldingiz!",
+    "subscribe_error": "Obuna bo'lmadi. Qayta urinib ko'ring.",
+    "select_country": "Mamlakatni tanlang",
+    "first_name": "Ism",
+    "last_name": "Familiya",
+    "country_required": "Mamlakat talab qilinadi",
+    "phone_validation": "Iltimos, haqiqiy telefon raqamini kiriting (E.G., 123-456-7890).",
+    "first_name_validation": "Ism kamida 2 ta belgidan iborat bo'lishi kerak.",
+    "last_name_validation": "Familiya kamida 2 ta belgidan iborat bo'lishi kerak."
   },
   "error": {
     "somthing_went_wrong": "Afsus! Xato yuz berdi",
@@ -176,7 +185,17 @@
     "send": "Yuborish",
     "stay_in_touch": "Biz bilan aloqada bo'ling",
     "address": "Manzil",
-    "contact_text": "Sizdan xabar olishni istaymiz. Iltimos, quyidagi shaklni to'ldiring va biz imkon qadar tezroq siz bilan bog'lanamiz."
+    "contact_text": "Sizdan xabar olishni istaymiz. Iltimos, quyidagi shaklni to'ldiring va biz imkon qadar tezroq siz bilan bog'lanamiz.",
+    "message_placeholder": "Bu erda xabaringizni yozing ...",
+    "sending": "Yuborish ...",
+    "phone": "Telefon",
+    "success_message": "Sizning xabaringiz muvaffaqiyatli yuborildi!",
+    "error_message": "Nimadir noto'g'ri ketdi. Qayta urinib ko'ring.",
+    "email_validation": "Iltimos, to'g'ri e-pochta manzilini kiriting.",
+    "phone_validation": "Iltimos, haqiqiy telefon raqamini kiriting (E.G., 123-456-7890).",
+    "name_validation": "Ism kamida 3 ta belgi bo'lishi kerak.",
+    "subject_validation": "Mavzu kamida 3 ta belgidan iborat bo'lishi kerak.",
+    "message_validation": "Xabar kamida 10 ta belgidan iborat bo'lishi kerak."
   },
   "manage_post": {
     "select_category": "Iltimos, post turini tanlang",

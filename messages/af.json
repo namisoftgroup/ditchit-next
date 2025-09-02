@@ -59,7 +59,16 @@
     "sort_by": "Sorteer Volgens",
     "report_post": "Verslag Pos",
     "write_here": "skryf hier...",
-    "report_saved": "Verslag suksesvol ingediens"
+    "report_saved": "Verslag suksesvol ingediens",
+    "subscribe_success": "U het suksesvol ingeteken!",
+    "subscribe_error": "Inskrywing het misluk. Probeer asseblief weer.",
+    "select_country": "Kies 'n land",
+    "first_name": "Voornaam",
+    "last_name": "Van",
+    "country_required": "Land is nodig",
+    "phone_validation": "Voer 'n geldige telefoonnommer in (bv. 123-456-7890).",
+    "first_name_validation": "Voornaam moet ten minste 2 karakters wees.",
+    "last_name_validation": "Van moet ten minste 2 karakters wees."
   },
   "error": {
     "somthing_went_wrong": "Oeps! Iets het verkeerd gegaan",
@@ -176,7 +185,17 @@
     "send": "Stuur",
     "stay_in_touch": "Bly in kontak met ons",
     "address": "Adres",
-    "contact_text": "Ons sal graag van u wil hoor. Vul asseblief die onderstaande vorm in en ons sal so gou moontlik terugkom na u."
+    "contact_text": "Ons sal graag van u wil hoor. Vul asseblief die onderstaande vorm in en ons sal so gou moontlik terugkom na u.",
+    "message_placeholder": "Skryf u boodskap hier ...",
+    "sending": "Stuur ...",
+    "phone": "Telefoon",
+    "success_message": "U boodskap is suksesvol gestuur!",
+    "error_message": "Iets het verkeerd geloop. Probeer asseblief weer.",
+    "email_validation": "Voer asseblief 'n geldige e -posadres in.",
+    "phone_validation": "Voer 'n geldige telefoonnommer in (bv. 123-456-7890).",
+    "name_validation": "Die naam moet minstens 3 karakters lank wees.",
+    "subject_validation": "Onderwerp moet minstens 3 karakters lank wees.",
+    "message_validation": "Die boodskap moet minstens 10 karakters lank wees."
   },
   "manage_post": {
     "select_category": "Asseblief, kies jou poskategorie",

@@ -59,7 +59,16 @@
     "sort_by": "Panga Kwa",
     "report_post": "Ripoti Chapisho",
     "write_here": "andika hapa...",
-    "report_saved": "Ripoti imetumwa kwa mafanikio"
+    "report_saved": "Ripoti imetumwa kwa mafanikio",
+    "subscribe_success": "Umesajili kwa mafanikio!",
+    "subscribe_error": "Usajili umeshindwa. Tafadhali jaribu tena.",
+    "select_country": "Chagua nchi",
+    "first_name": "Jina la kwanza",
+    "last_name": "Jina la mwisho",
+    "country_required": "Nchi inahitajika",
+    "phone_validation": "Tafadhali ingiza nambari halali ya simu (k.m., 123-456-7890).",
+    "first_name_validation": "Jina la kwanza lazima liwe angalau herufi 2.",
+    "last_name_validation": "Jina la mwisho lazima liwe angalau herufi 2."
   },
   "error": {
     "somthing_went_wrong": "Ups! Kitu fulani kilikwenda mrama",
@@ -176,7 +185,17 @@
     "send": "Tuma",
     "stay_in_touch": "Weka mawasiliano nasi",
     "address": "Anuani",
-    "contact_text": "Tunapenda kusikia kutoka kwako. Tafadhali jaza fomu iliyo hapa chini na tutakujibu haraka iwezekanavyo."
+    "contact_text": "Tunapenda kusikia kutoka kwako. Tafadhali jaza fomu iliyo hapa chini na tutakujibu haraka iwezekanavyo.",
+    "message_placeholder": "Andika ujumbe wako hapa ...",
+    "sending": "Kutuma ...",
+    "phone": "Simu",
+    "success_message": "Ujumbe wako umetumwa kwa mafanikio!",
+    "error_message": "Kitu kilienda vibaya. Tafadhali jaribu tena.",
+    "email_validation": "Tafadhali ingiza anwani halali ya barua pepe.",
+    "phone_validation": "Tafadhali ingiza nambari halali ya simu (k.m., 123-456-7890).",
+    "name_validation": "Jina lazima liwe na herufi 3 kwa muda mrefu.",
+    "subject_validation": "Mada lazima iwe angalau herufi 3 kwa muda mrefu.",
+    "message_validation": "Ujumbe lazima uwe na urefu wa herufi 10."
   },
   "manage_post": {
     "select_category": "Tafadhali chagua aina ya chapisho lako",

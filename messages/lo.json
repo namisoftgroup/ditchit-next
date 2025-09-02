@@ -59,7 +59,16 @@
     "sort_by": "ຄັດໂດຍ",
     "report_post": "Ripoti Posi",
     "write_here": "Sorry, I can’t assist with that.",
-    "report_saved": "報告成功提交"
+    "report_saved": "報告成功提交",
+    "subscribe_success": "ທ່ານໄດ້ສະຫມັກແລ້ວ!",
+    "subscribe_error": "ການສະຫມັກໃຊ້ໄດ້ລົ້ມເຫລວ. ກະລຸນາລອງໃຫມ່ອີກຄັ້ງ.",
+    "select_country": "ເລືອກປະເທດ",
+    "first_name": "ຊື່ທໍາອິດ",
+    "last_name": "ນາມສະກຸນ",
+    "country_required": "ປະເທດແມ່ນຕ້ອງການ",
+    "phone_validation": "ກະລຸນາໃສ່ເບີໂທລະສັບທີ່ຖືກຕ້ອງ (E.G. , 123-456-7890).",
+    "first_name_validation": "ຊື່ທໍາອິດຕ້ອງມີຢ່າງຫນ້ອຍ 2 ຕົວອັກສອນ.",
+    "last_name_validation": "ນາມສະກຸນຕ້ອງມີຢ່າງຫນ້ອຍ 2 ຕົວອັກສອນ."
   },
   "error": {
     "somthing_went_wrong": "Oops! Kukuzi kang somi!",
@@ -176,7 +185,17 @@
     "send": "Tsendê",
     "stay_in_touch": "Mochi ku te tê.",
     "address": "Dawood",
-    "contact_text": "Ngam nyam nyam nyen li. Tsa njek nyeng nyi tonh mo na nyam jaan keh nho ni njeng."
+    "contact_text": "Ngam nyam nyam nyen li. Tsa njek nyeng nyi tonh mo na nyam jaan keh nho ni njeng.",
+    "message_placeholder": "ຂຽນຂໍ້ຄວາມຂອງທ່ານທີ່ນີ້ ...",
+    "sending": "ການສົ່ງ ...",
+    "phone": "ໂທລະສັບ",
+    "success_message": "ຂໍ້ຄວາມຂອງທ່ານໄດ້ຖືກສົ່ງໄປແລ້ວຢ່າງສໍາເລັດຜົນ!",
+    "error_message": "ມີບາງສິ່ງບາງຢ່າງຜິດພາດ. ກະລຸນາລອງໃຫມ່ອີກຄັ້ງ.",
+    "email_validation": "ກະລຸນາໃສ່ທີ່ຢູ່ອີເມວທີ່ຖືກຕ້ອງ.",
+    "phone_validation": "ກະລຸນາໃສ່ເບີໂທລະສັບທີ່ຖືກຕ້ອງ (E.G. , 123-456-7890).",
+    "name_validation": "ຊື່ຕ້ອງມີຢ່າງຫນ້ອຍ 3 ຕົວອັກສອນຍາວ.",
+    "subject_validation": "ຫົວຂໍ້ຕ້ອງມີຢ່າງຫນ້ອຍ 3 ຕົວອັກສອນ.",
+    "message_validation": "ຂໍ້ຄວາມຕ້ອງມີຢ່າງຫນ້ອຍ 10 ຕົວອັກສອນຍາວ."
   },
   "manage_post": {
     "select_category": "กรุณาเลือกหมวดหมู่โพสต์ของคุณ",

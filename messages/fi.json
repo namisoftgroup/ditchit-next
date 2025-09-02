@@ -59,7 +59,16 @@
     "sort_by": "Lajittele mukaan",
     "report_post": "Ilmoita viesti",
     "write_here": "Kirjoita tänne...",
-    "report_saved": "Raportti lähetetty onnistuneesti"
+    "report_saved": "Raportti lähetetty onnistuneesti",
+    "subscribe_success": "Olet onnistuneesti tilannut!",
+    "subscribe_error": "Tilaus epäonnistui. Yritä uudelleen.",
+    "select_country": "Valitse maa",
+    "first_name": "Etunimi",
+    "last_name": "Sukunimi",
+    "country_required": "Maa vaaditaan",
+    "phone_validation": "Anna kelvollinen puhelinnumero (esim. 123-456-7890).",
+    "first_name_validation": "Etunimen on oltava vähintään 2 merkkiä.",
+    "last_name_validation": "Sukunimen on oltava vähintään 2 merkkiä."
   },
   "error": {
     "somthing_went_wrong": "Oi! Jotain meni pieleen.",
@@ -176,7 +185,17 @@
     "send": "Lähetä",
     "stay_in_touch": "Pidä yhteyttä meihin",
     "address": "Osoite",
-    "contact_text": "Haluaisimme kuulla sinusta. Täytäthän alla oleva lomake, ja palaamme sinuun mahdollisimman pian."
+    "contact_text": "Haluaisimme kuulla sinusta. Täytäthän alla oleva lomake, ja palaamme sinuun mahdollisimman pian.",
+    "message_placeholder": "Kirjoita viestisi tähän ...",
+    "sending": "Lähetetään ...",
+    "phone": "Puhelin",
+    "success_message": "Viestisi on lähetetty onnistuneesti!",
+    "error_message": "Jotain meni pieleen. Yritä uudelleen.",
+    "email_validation": "Anna kelvollinen sähköpostiosoite.",
+    "phone_validation": "Anna kelvollinen puhelinnumero (esim. 123-456-7890).",
+    "name_validation": "Nimen on oltava vähintään 3 merkkiä pitkä.",
+    "subject_validation": "Kohteen on oltava vähintään 3 merkkiä pitkä.",
+    "message_validation": "Viestin on oltava vähintään 10 merkkiä pitkä."
   },
   "manage_post": {
     "select_category": "Valitse postikategoriasi",
