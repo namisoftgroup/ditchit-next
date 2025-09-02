@@ -68,7 +68,14 @@
     "country_required": "ሀገር ያስፈልጋል",
     "phone_validation": "እባክዎ ትክክለኛ የስልክ ቁጥር ያስገቡ (ኢ.ግ., 123-456-7890).",
     "first_name_validation": "የመጀመሪያ ስም ቢያንስ 2 ቁምፊዎች መሆን አለበት.",
-    "last_name_validation": "የአያት ስም ቢያንስ 2 ቁምፊዎች መሆን አለበት."
+    "last_name_validation": "የአያት ስም ቢያንስ 2 ቁምፊዎች መሆን አለበት.",
+    "best": "ምርጥ",
+    "latest": "የቅርብ ጊዜ",
+    "lowest": "ዝቅተኛ ዋጋ",
+    "highest": "ከፍተኛ ዋጋ",
+    "near": "በአጠገብ",
+    "new": "አዲስ",
+    "used": "ያገለገለው"
   },
   "error": {
     "somthing_went_wrong": "ውይ! ነገር ተሳስቷል",

@@ -68,7 +68,14 @@
     "country_required": "Kinakailangan ang bansa",
     "phone_validation": "Mangyaring magpasok ng isang wastong numero ng telepono (hal., 123-456-7890).",
     "first_name_validation": "Ang unang pangalan ay dapat na hindi bababa sa 2 mga character.",
-    "last_name_validation": "Ang huling pangalan ay dapat na hindi bababa sa 2 mga character."
+    "last_name_validation": "Ang huling pangalan ay dapat na hindi bababa sa 2 mga character.",
+    "best": "Pinakamahusay",
+    "latest": "Pinakabagong",
+    "lowest": "Pinakamababang presyo",
+    "highest": "Pinakamataas na presyo",
+    "near": "Malapit sa pamamagitan ng",
+    "new": "Bago",
+    "used": "Ginamit"
   },
   "error": {
     "somthing_went_wrong": "Naku! May nangyaring mali.",

@@ -68,7 +68,14 @@
     "country_required": "Būtina šalis",
     "phone_validation": "Įveskite galiojantį telefono numerį (pvz., 123-456-7890).",
     "first_name_validation": "Vardas turi būti bent 2 simboliai.",
-    "last_name_validation": "Pavardė turi būti bent 2 simboliai."
+    "last_name_validation": "Pavardė turi būti bent 2 simboliai.",
+    "best": "Geriausia",
+    "latest": "Naujausias",
+    "lowest": "Mažiausia kaina",
+    "highest": "Aukščiausia kaina",
+    "near": "Šalia",
+    "new": "Nauja",
+    "used": "Naudojamas"
   },
   "error": {
     "somthing_went_wrong": "Oho! Kažkas negerai.",

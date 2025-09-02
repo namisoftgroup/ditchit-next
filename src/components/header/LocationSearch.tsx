@@ -44,7 +44,7 @@ export default function LocationSearch({
         <LanguagesAndCountries countries={countries} />
         
         <form
-          className="flex-1 m-0 mb-0 min-w-[300px] relative md:bg-[#f3f3f3] bg-[#fff] border border-[#e6e6e6] rounded-full w-[min(100%_-_16px,_1440px)]"
+          className="flex-1 m-0 mb-0 min-w-[250px] relative md:bg-[#f3f3f3] bg-[#fff] border border-[#e6e6e6] rounded-full"
           onSubmit={handleSubmit}
         >
           <input
@@ -65,7 +65,7 @@ export default function LocationSearch({
       </div>
 
       <div
-        className="flex gap-2 min-w-[250px] items-center cursor-pointer rounded-full"
+        className="flex gap-2 min-w-[200px] items-center cursor-pointer rounded-full"
         onClick={() => setShow(!show)}
       >
         <div className="min-w-[40px] aspect-square flex items-center justify-center bg-[var(--mainColor)] text-[var(--whiteColor)] rounded-full text-[20px]">

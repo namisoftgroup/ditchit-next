@@ -68,7 +68,14 @@
     "country_required": "Mamlakat talab qilinadi",
     "phone_validation": "Iltimos, haqiqiy telefon raqamini kiriting (E.G., 123-456-7890).",
     "first_name_validation": "Ism kamida 2 ta belgidan iborat bo'lishi kerak.",
-    "last_name_validation": "Familiya kamida 2 ta belgidan iborat bo'lishi kerak."
+    "last_name_validation": "Familiya kamida 2 ta belgidan iborat bo'lishi kerak.",
+    "best": "Eng yaxshi",
+    "latest": "Eng so'nggi",
+    "lowest": "Eng past narx",
+    "highest": "Eng yuqori narx",
+    "near": "Yaqinida",
+    "new": "Yangi",
+    "used": "Ishlatilgan"
   },
   "error": {
     "somthing_went_wrong": "Afsus! Xato yuz berdi",

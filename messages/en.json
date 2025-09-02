@@ -68,7 +68,14 @@
     "country_required": "Country is required",
     "phone_validation": "Please enter a valid phone number (e.g., 123-456-7890).",
     "first_name_validation": "First name must be at least 2 characters.",
-    "last_name_validation": "Last name must be at least 2 characters."
+    "last_name_validation": "Last name must be at least 2 characters.",
+    "best": "Best",
+    "latest": "Latest",
+    "lowest": "Lowest Price",
+    "highest": "Highest Price",
+    "near": "Near By",
+    "new": "New",
+    "used": "Used"
   },
   "error": {
     "somthing_went_wrong": "Oops! Something went wrong",

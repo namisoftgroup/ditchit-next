@@ -68,7 +68,14 @@
     "country_required": "Kraj jest wymagany",
     "phone_validation": "Wprowadź ważny numer telefonu (np. 123-456-7890).",
     "first_name_validation": "Imię musi mieć co najmniej 2 znaki.",
-    "last_name_validation": "Nazwisko musi mieć co najmniej 2 znaki."
+    "last_name_validation": "Nazwisko musi mieć co najmniej 2 znaki.",
+    "best": "To, co najlepsze",
+    "latest": "Najnowszy",
+    "lowest": "Najniższa cena",
+    "highest": "Najwyższa cena",
+    "near": "W pobliżu",
+    "new": "Nowy",
+    "used": "Używany"
   },
   "error": {
     "somthing_went_wrong": "Ups! Coś poszło nie tak.",

@@ -68,7 +68,14 @@
     "country_required": "需要国家",
     "phone_validation": "请输入有效的电话号码（例如123-456-7890）。",
     "first_name_validation": "名字必须至少为2个字符。",
-    "last_name_validation": "姓氏必须至少为2个字符。"
+    "last_name_validation": "姓氏必须至少为2个字符。",
+    "best": "最好的",
+    "latest": "最新的",
+    "lowest": "最低价格",
+    "highest": "最高价格",
+    "near": "附近",
+    "new": "新的",
+    "used": "用过的"
   },
   "error": {
     "somthing_went_wrong": "哎呀！出了点问题",

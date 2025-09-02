@@ -68,7 +68,14 @@
     "country_required": "Maa vaaditaan",
     "phone_validation": "Anna kelvollinen puhelinnumero (esim. 123-456-7890).",
     "first_name_validation": "Etunimen on oltava vähintään 2 merkkiä.",
-    "last_name_validation": "Sukunimen on oltava vähintään 2 merkkiä."
+    "last_name_validation": "Sukunimen on oltava vähintään 2 merkkiä.",
+    "best": "Parhaat",
+    "latest": "Viimeisin",
+    "lowest": "Alhaisin hinta",
+    "highest": "Korkein hinta",
+    "near": "Lähellä",
+    "new": "Uusi",
+    "used": "Käytetty"
   },
   "error": {
     "somthing_went_wrong": "Oi! Jotain meni pieleen.",

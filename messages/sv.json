@@ -68,7 +68,14 @@
     "country_required": "Land krävs",
     "phone_validation": "Ange ett giltigt telefonnummer (t.ex. 123-456-7890).",
     "first_name_validation": "Förnamn måste vara minst 2 tecken.",
-    "last_name_validation": "Efternamnet måste vara minst 2 tecken."
+    "last_name_validation": "Efternamnet måste vara minst 2 tecken.",
+    "best": "Bäst",
+    "latest": "Senast",
+    "lowest": "Lägsta pris",
+    "highest": "Högsta pris",
+    "near": "Nära",
+    "new": "Ny",
+    "used": "Begagnad"
   },
   "error": {
     "somthing_went_wrong": "Hoppsan! Något gick fel",

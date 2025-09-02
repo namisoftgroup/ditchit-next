@@ -68,7 +68,14 @@
     "country_required": "Riik on vajalik",
     "phone_validation": "Sisestage kehtiv telefoninumber (nt 123-456-7890).",
     "first_name_validation": "Eesnimi peab olema vähemalt 2 tähemärki.",
-    "last_name_validation": "Perekonnanimi peab olema vähemalt 2 tähemärki."
+    "last_name_validation": "Perekonnanimi peab olema vähemalt 2 tähemärki.",
+    "best": "Parim",
+    "latest": "Uusim",
+    "lowest": "Madalaim hind",
+    "highest": "Kõrgeim hind",
+    "near": "Lähedal",
+    "new": "Uus",
+    "used": "Kasutatud"
   },
   "error": {
     "somthing_went_wrong": "Uups! Midagi läks valesti",

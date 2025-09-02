@@ -68,7 +68,14 @@
     "country_required": "Nepieciešama valsts",
     "phone_validation": "Lūdzu, ievadiet derīgu tālruņa numuru (piemēram, 123-456-7890).",
     "first_name_validation": "Vārdam jābūt vismaz 2 rakstzīmēm.",
-    "last_name_validation": "Uzvārdam jābūt vismaz 2 rakstzīmēm."
+    "last_name_validation": "Uzvārdam jābūt vismaz 2 rakstzīmēm.",
+    "best": "Labākais",
+    "latest": "Jaunākais",
+    "lowest": "Zemākā cena",
+    "highest": "Augstākā cena",
+    "near": "Tuvu",
+    "new": "Jauns",
+    "used": "Lietots"
   },
   "error": {
     "somthing_went_wrong": "Ups! Kaut kas nogāja greizi.",

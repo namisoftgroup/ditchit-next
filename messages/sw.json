@@ -68,7 +68,14 @@
     "country_required": "Nchi inahitajika",
     "phone_validation": "Tafadhali ingiza nambari halali ya simu (k.m., 123-456-7890).",
     "first_name_validation": "Jina la kwanza lazima liwe angalau herufi 2.",
-    "last_name_validation": "Jina la mwisho lazima liwe angalau herufi 2."
+    "last_name_validation": "Jina la mwisho lazima liwe angalau herufi 2.",
+    "best": "Bora",
+    "latest": "Hivi karibuni",
+    "lowest": "Bei ya chini",
+    "highest": "Bei ya juu",
+    "near": "Karibu na",
+    "new": "Mpya",
+    "used": "Kutumika"
   },
   "error": {
     "somthing_went_wrong": "Ups! Kitu fulani kilikwenda mrama",

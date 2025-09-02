@@ -68,7 +68,14 @@
     "country_required": "国が必要です",
     "phone_validation": "有効な電話番号（123-456-7890など）を入力してください。",
     "first_name_validation": "名は少なくとも2文字でなければなりません。",
-    "last_name_validation": "姓は少なくとも2文字でなければなりません。"
+    "last_name_validation": "姓は少なくとも2文字でなければなりません。",
+    "best": "最高",
+    "latest": "最新",
+    "lowest": "最低価格",
+    "highest": "最高価格",
+    "near": "近く",
+    "new": "新しい",
+    "used": "使用済み"
   },
   "error": {
     "somthing_went_wrong": "おっと！何かがうまくいきませんでした。",

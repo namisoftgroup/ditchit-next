@@ -68,7 +68,14 @@
     "country_required": "Država je potrebna",
     "phone_validation": "Vnesite veljavno telefonsko številko (npr. 123-456-7890).",
     "first_name_validation": "Ime mora biti vsaj 2 znaka.",
-    "last_name_validation": "Priimek mora biti vsaj dva znaka."
+    "last_name_validation": "Priimek mora biti vsaj dva znaka.",
+    "best": "Najboljše",
+    "latest": "Najnovejše",
+    "lowest": "Najnižja cena",
+    "highest": "Najvišja cena",
+    "near": "V bližini",
+    "new": "Novo",
+    "used": "Uporabljen"
   },
   "error": {
     "somthing_went_wrong": "Ups! Nekaj je šlo narobe",

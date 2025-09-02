@@ -68,7 +68,14 @@
     "country_required": "Ország szükséges",
     "phone_validation": "Kérjük, írjon be egy érvényes telefonszámot (például 123-456-7890).",
     "first_name_validation": "A keresztnévnek legalább 2 karakternek kell lennie.",
-    "last_name_validation": "A vezetéknévnek legalább 2 karakternek kell lennie."
+    "last_name_validation": "A vezetéknévnek legalább 2 karakternek kell lennie.",
+    "best": "Legjobb",
+    "latest": "Legújabb",
+    "lowest": "Legalacsonyabb ár",
+    "highest": "Legmagasabb ár",
+    "near": "Közel",
+    "new": "Új",
+    "used": "Használt"
   },
   "error": {
     "somthing_went_wrong": "Hoppá! Valami hiba történt.",

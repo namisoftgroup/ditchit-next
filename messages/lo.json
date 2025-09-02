@@ -68,7 +68,14 @@
     "country_required": "ປະເທດແມ່ນຕ້ອງການ",
     "phone_validation": "ກະລຸນາໃສ່ເບີໂທລະສັບທີ່ຖືກຕ້ອງ (E.G. , 123-456-7890).",
     "first_name_validation": "ຊື່ທໍາອິດຕ້ອງມີຢ່າງຫນ້ອຍ 2 ຕົວອັກສອນ.",
-    "last_name_validation": "ນາມສະກຸນຕ້ອງມີຢ່າງຫນ້ອຍ 2 ຕົວອັກສອນ."
+    "last_name_validation": "ນາມສະກຸນຕ້ອງມີຢ່າງຫນ້ອຍ 2 ຕົວອັກສອນ.",
+    "best": "ດີທີ່ສຸດ",
+    "latest": "ທີ່ລ້າສຸດ",
+    "lowest": "ລາຄາຕໍ່າສຸດ",
+    "highest": "ລາຄາສູງສຸດ",
+    "near": "ຢູ່ໃກ້",
+    "new": "ໃຫມ່",
+    "used": "ເຄີຍໃຊ້"
   },
   "error": {
     "somthing_went_wrong": "Oops! Kukuzi kang somi!",

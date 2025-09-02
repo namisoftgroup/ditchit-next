@@ -68,7 +68,14 @@
     "country_required": "Ülke gereklidir",
     "phone_validation": "Lütfen geçerli bir telefon numarası girin (ör. 123-456-7890).",
     "first_name_validation": "Adı en az 2 karakter olmalıdır.",
-    "last_name_validation": "Soyadı en az 2 karakter olmalıdır."
+    "last_name_validation": "Soyadı en az 2 karakter olmalıdır.",
+    "best": "En iyi",
+    "latest": "En sonuncu",
+    "lowest": "En düşük fiyat",
+    "highest": "En yüksek fiyat",
+    "near": "Yakında",
+    "new": "Yeni",
+    "used": "Kullanılmış"
   },
   "error": {
     "somthing_went_wrong": "Tüh! Bir şeyler yanlış gitti",

@@ -68,7 +68,14 @@
     "country_required": "국가가 필요합니다",
     "phone_validation": "유효한 전화 번호 (예 : 123-456-7890)를 입력하십시오.",
     "first_name_validation": "이름은 2 자 이상이어야합니다.",
-    "last_name_validation": "성은 2 자 이상이어야합니다."
+    "last_name_validation": "성은 2 자 이상이어야합니다.",
+    "best": "최상의",
+    "latest": "최신",
+    "lowest": "최저 가격",
+    "highest": "최고 가격",
+    "near": "가까운",
+    "new": "새로운",
+    "used": "사용된"
   },
   "error": {
     "somthing_went_wrong": "앗! 문제가 발생했습니다.",

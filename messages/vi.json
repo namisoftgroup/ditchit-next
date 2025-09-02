@@ -68,7 +68,14 @@
     "country_required": "Quốc gia là bắt buộc",
     "phone_validation": "Vui lòng nhập số điện thoại hợp lệ (ví dụ: 123-456-7890).",
     "first_name_validation": "Tên phải có ít nhất 2 ký tự.",
-    "last_name_validation": "Họ phải có ít nhất 2 ký tự."
+    "last_name_validation": "Họ phải có ít nhất 2 ký tự.",
+    "best": "Tốt nhất",
+    "latest": "Mới nhất",
+    "lowest": "Giá thấp nhất",
+    "highest": "Giá cao nhất",
+    "near": "Gần đó",
+    "new": "Mới",
+    "used": "Đã sử dụng"
   },
   "error": {
     "somthing_went_wrong": "Úi! Có sự cố xảy ra",

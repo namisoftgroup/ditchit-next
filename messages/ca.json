@@ -68,7 +68,14 @@
     "country_required": "El país és necessari",
     "phone_validation": "Introduïu un número de telèfon vàlid (per exemple, 123-456-7890).",
     "first_name_validation": "El primer nom ha de tenir almenys 2 caràcters.",
-    "last_name_validation": "El cognom ha de tenir almenys 2 caràcters."
+    "last_name_validation": "El cognom ha de tenir almenys 2 caràcters.",
+    "best": "La millor",
+    "latest": "Últim",
+    "lowest": "Preu més baix",
+    "highest": "Preu més alt",
+    "near": "A prop de",
+    "new": "Nou",
+    "used": "Usada"
   },
   "error": {
     "somthing_went_wrong": "Ostres! Alguna cosa ha anat malament",

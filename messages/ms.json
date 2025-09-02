@@ -68,7 +68,14 @@
     "country_required": "Negara diperlukan",
     "phone_validation": "Sila masukkan nombor telefon yang sah (mis., 123-456-7890).",
     "first_name_validation": "Nama pertama mestilah sekurang -kurangnya 2 aksara.",
-    "last_name_validation": "Nama belakang mestilah sekurang -kurangnya 2 aksara."
+    "last_name_validation": "Nama belakang mestilah sekurang -kurangnya 2 aksara.",
+    "best": "Terbaik",
+    "latest": "Terkini",
+    "lowest": "Harga terendah",
+    "highest": "Harga tertinggi",
+    "near": "Dekat oleh",
+    "new": "Baru",
+    "used": "Digunakan"
   },
   "error": {
     "somthing_went_wrong": "Oops! Sesuatu telah berlaku kesalahan",

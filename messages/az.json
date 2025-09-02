@@ -68,7 +68,14 @@
     "country_required": "Ölkə tələb olunur",
     "phone_validation": "Zəhmət olmasa etibarlı bir telefon nömrəsini daxil edin (məsələn, 123-456-7890).",
     "first_name_validation": "Ad adı ən azı 2 simvol olmalıdır.",
-    "last_name_validation": "Soyad ən azı 2 simvol olmalıdır."
+    "last_name_validation": "Soyad ən azı 2 simvol olmalıdır.",
+    "best": "Ən yaxşı",
+    "latest": "Son",
+    "lowest": "Ən aşağı qiymət",
+    "highest": "Ən yüksək qiymət",
+    "near": "Yaxın",
+    "new": "Yeni",
+    "used": "İstifadə olunan"
   },
   "error": {
     "somthing_went_wrong": "Aha! Bir şey səhv getdi.",

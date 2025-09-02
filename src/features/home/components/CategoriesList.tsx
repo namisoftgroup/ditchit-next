@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { Category, HomeFilterInterface } from "../types";
 import CategorySlider from "./CategorySlider";
 import CategorySliderSkeleton from "./CategorySliderSkeleton";
@@ -40,11 +40,11 @@ export default function CategoriesList({
   return (
     <div className="space-y-12">
       {categories.map((category: Category) => (
-        <CategorySlider
-          key={category.value}
-          category={category}
-          filterParams={filterParams}
-        />
+        <Fragment key={category.value}>
+          {category.posts.length !== 0 && (
+            <CategorySlider category={category} filterParams={filterParams} />
+          )}
+        </Fragment>
       ))}
 
       {isFetchingNextPage && <CategorySliderSkeleton />}

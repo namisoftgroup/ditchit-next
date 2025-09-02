@@ -68,7 +68,14 @@
     "country_required": "È richiesto il paese",
     "phone_validation": "Immettere un numero di telefono valido (ad es. 123-456-7890).",
     "first_name_validation": "Il nome deve essere almeno 2 caratteri.",
-    "last_name_validation": "Il cognome deve essere almeno 2 caratteri."
+    "last_name_validation": "Il cognome deve essere almeno 2 caratteri.",
+    "best": "Migliore",
+    "latest": "Ultimo",
+    "lowest": "Prezzo più basso",
+    "highest": "Prezzo più alto",
+    "near": "Nelle vicinanze",
+    "new": "Nuovo",
+    "used": "Usato"
   },
   "error": {
     "somthing_went_wrong": "¡Ups! Algo salió mal.",

@@ -68,7 +68,14 @@
     "country_required": "Land is nodig",
     "phone_validation": "Voer 'n geldige telefoonnommer in (bv. 123-456-7890).",
     "first_name_validation": "Voornaam moet ten minste 2 karakters wees.",
-    "last_name_validation": "Van moet ten minste 2 karakters wees."
+    "last_name_validation": "Van moet ten minste 2 karakters wees.",
+    "best": "Beste",
+    "latest": "Jongste",
+    "lowest": "Laagste prys",
+    "highest": "Hoogste prys",
+    "near": "Naby",
+    "new": "Nuut",
+    "used": "Gebruik"
   },
   "error": {
     "somthing_went_wrong": "Oeps! Iets het verkeerd gegaan",

@@ -68,7 +68,14 @@
     "country_required": "Kërkohet vendi",
     "phone_validation": "Ju lutemi shkruani një numër të vlefshëm telefoni (p.sh., 123-456-7890).",
     "first_name_validation": "Emri duhet të jetë së paku 2 karaktere.",
-    "last_name_validation": "Mbiemri duhet të jetë së paku 2 karaktere."
+    "last_name_validation": "Mbiemri duhet të jetë së paku 2 karaktere.",
+    "best": "Më i mirë",
+    "latest": "Më i fundit",
+    "lowest": "Çmimi më i ulët",
+    "highest": "Çmimi më i lartë",
+    "near": "Afër",
+    "new": "I ri",
+    "used": "I përdorur"
   },
   "error": {
     "somthing_went_wrong": "Ups! Diçka shkoi gabim",

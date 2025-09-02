@@ -30,7 +30,7 @@ export default function Condition() {
               className="flex items-center justify-between gap-3"
               key={item.value}
             >
-              <Label htmlFor={item.value}>{item.name}</Label>
+              <Label htmlFor={item.value}>{t(item.value)}</Label>
               <RadioGroupItem
                 value={item.value}
                 id={item.value}

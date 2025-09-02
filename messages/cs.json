@@ -68,7 +68,14 @@
     "country_required": "Je nutná země",
     "phone_validation": "Zadejte platné telefonní číslo (např. 123-456-7890).",
     "first_name_validation": "Jméno musí být nejméně 2 znaky.",
-    "last_name_validation": "Příjmení musí být alespoň 2 znaky."
+    "last_name_validation": "Příjmení musí být alespoň 2 znaky.",
+    "best": "Nejlepší",
+    "latest": "Nejnovější",
+    "lowest": "Nejnižší cena",
+    "highest": "Nejvyšší cena",
+    "near": "Poblíž",
+    "new": "Nový",
+    "used": "Použitý"
   },
   "error": {
     "somthing_went_wrong": "Omlouvám se! Něco se pokazilo.",

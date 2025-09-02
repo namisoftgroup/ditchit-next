@@ -68,7 +68,14 @@
     "country_required": "Negara diperlukan",
     "phone_validation": "Harap masukkan nomor telepon yang valid (mis., 123-456-7890).",
     "first_name_validation": "Nama depan harus setidaknya 2 karakter.",
-    "last_name_validation": "Nama belakang harus setidaknya 2 karakter."
+    "last_name_validation": "Nama belakang harus setidaknya 2 karakter.",
+    "best": "Terbaik",
+    "latest": "Terbaru",
+    "lowest": "Harga terendah",
+    "highest": "Harga tertinggi",
+    "near": "Di dekat sini",
+    "new": "Baru",
+    "used": "Digunakan"
   },
   "error": {
     "somthing_went_wrong": "Ups! Ada yang salah.",

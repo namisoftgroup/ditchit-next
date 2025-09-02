@@ -68,7 +68,14 @@
     "country_required": "Land is vereist",
     "phone_validation": "Voer een geldig telefoonnummer in (bijv. 123-456-7890).",
     "first_name_validation": "Voornaam moet minimaal 2 tekens zijn.",
-    "last_name_validation": "De achternaam moet minimaal 2 tekens zijn."
+    "last_name_validation": "De achternaam moet minimaal 2 tekens zijn.",
+    "best": "Best",
+    "latest": "Nieuwste",
+    "lowest": "Laagste prijs",
+    "highest": "Hoogste prijs",
+    "near": "Dichtbij",
+    "new": "Nieuw",
+    "used": "Gebruikt"
   },
   "error": {
     "somthing_went_wrong": "Oeps! Er is iets misgegaan.",

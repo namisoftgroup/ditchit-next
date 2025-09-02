@@ -68,7 +68,14 @@
     "country_required": "ਦੇਸ਼ ਦੀ ਲੋੜ ਹੈ",
     "phone_validation": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਵੈਧ ਫੋਨ ਨੰਬਰ (E.g., 123-456-78990) ਦਾਖਲ ਕਰੋ.",
     "first_name_validation": "ਪਹਿਲਾ ਨਾਮ ਘੱਟੋ ਘੱਟ 2 ਅੱਖਰ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ.",
-    "last_name_validation": "ਆਖਰੀ ਨਾਮ ਘੱਟੋ ਘੱਟ 2 ਅੱਖਰ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ."
+    "last_name_validation": "ਆਖਰੀ ਨਾਮ ਘੱਟੋ ਘੱਟ 2 ਅੱਖਰ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ.",
+    "best": "ਵਧੀਆ",
+    "latest": "ਤਾਜ਼ਾ",
+    "lowest": "ਘੱਟ ਕੀਮਤ",
+    "highest": "ਸਭ ਤੋਂ ਵੱਧ ਕੀਮਤ",
+    "near": "ਦੇ ਨੇੜੇ",
+    "new": "ਨਵਾਂ",
+    "used": "ਵਰਤਿਆ"
   },
   "error": {
     "somthing_went_wrong": "اوپس! کچھ غلط ہوگیا",

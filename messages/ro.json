@@ -68,7 +68,14 @@
     "country_required": "Țara este necesară",
     "phone_validation": "Vă rugăm să introduceți un număr de telefon valid (de exemplu, 123-456-7890).",
     "first_name_validation": "Prenumele trebuie să fie de cel puțin 2 caractere.",
-    "last_name_validation": "Numele de familie trebuie să fie de cel puțin 2 caractere."
+    "last_name_validation": "Numele de familie trebuie să fie de cel puțin 2 caractere.",
+    "best": "Cel mai bun",
+    "latest": "Ultima",
+    "lowest": "Cel mai mic preț",
+    "highest": "Cel mai mare preț",
+    "near": "Aproape de",
+    "new": "Nou",
+    "used": "Folosit"
   },
   "error": {
     "somthing_went_wrong": "Oops! Ceva a mers prost",

@@ -68,7 +68,14 @@
     "country_required": "Land er påkrævet",
     "phone_validation": "Indtast et gyldigt telefonnummer (f.eks. 123-456-7890).",
     "first_name_validation": "Fornavn skal være mindst 2 tegn.",
-    "last_name_validation": "Efternavn skal være mindst 2 tegn."
+    "last_name_validation": "Efternavn skal være mindst 2 tegn.",
+    "best": "Bedst",
+    "latest": "Seneste",
+    "lowest": "Laveste pris",
+    "highest": "Højeste pris",
+    "near": "I nærheden af",
+    "new": "Ny",
+    "used": "Brugt"
   },
   "error": {
     "somthing_went_wrong": "Ups! Noget gik galt.",

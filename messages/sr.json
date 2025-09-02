@@ -68,7 +68,14 @@
     "country_required": "Земља је обавезна",
     "phone_validation": "Молимо унесите важећи телефонски број (нпр. 123-456-7890).",
     "first_name_validation": "Име мора бити најмање 2 знака.",
-    "last_name_validation": "Презиме мора бити најмање 2 знака."
+    "last_name_validation": "Презиме мора бити најмање 2 знака.",
+    "best": "Најбољи",
+    "latest": "Најновији",
+    "lowest": "Најнижа цена",
+    "highest": "Највиша цена",
+    "near": "Близу",
+    "new": "Нов",
+    "used": "Коришћен"
   },
   "error": {
     "somthing_went_wrong": "Ups! Nešto je pošlo po zlu",
