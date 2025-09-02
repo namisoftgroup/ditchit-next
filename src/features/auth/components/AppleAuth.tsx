@@ -23,7 +23,7 @@ export default function AppleAuth() {
     <AppleSignin
       uiType="dark"
       authOptions={{
-        clientId: "com.ditchit.webapp",
+        clientId: "com.ditchit.webapp.next",
         scope: "name email",
         redirectURI: "https://ditchit-next.vercel.app/auth/apple/callback",
         usePopup: true,
