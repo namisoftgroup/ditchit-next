@@ -2,7 +2,7 @@
 
 import axios, { AxiosInstance } from "axios";
 import { cookies } from "next/headers";
-import { API_URL } from "@/utils/constants";
+import { API_URL, COUNTIRES_DATA } from "@/utils/constants";
 
 const serverAxios: AxiosInstance = axios.create({
   baseURL: API_URL,
@@ -22,14 +22,8 @@ serverAxios.interceptors.request.use(async (config) => {
   const normalizedLocale =
     baseLocale === "zh" ? "zh-CN" : baseLocale === "pt" ? "pt-BR" : baseLocale;
 
-  if (normalizedLocale) {
-    config.headers["lang"] = normalizedLocale;
-  }
-
-  if (country) {
-    config.headers["country"] = country;
-  }
-
+  config.headers["lang"] = normalizedLocale;
+  config.headers["country"] = COUNTIRES_DATA.find((c) => c.code === country)?.id || 1;
   config.headers.Authorization = token;
 
   return config;

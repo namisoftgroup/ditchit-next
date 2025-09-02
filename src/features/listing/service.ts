@@ -7,6 +7,7 @@ export async function getFilteredPosts(
 ): Promise<listingResponse> {
   try {
     const res = await serverAxios.post("/home/posts", request);
+        
     return res.data;
   } catch (error) {
     console.error("Error fetching posts:", error);
