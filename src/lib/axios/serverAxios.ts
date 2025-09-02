@@ -15,9 +15,17 @@ const serverAxios: AxiosInstance = axios.create({
 serverAxios.interceptors.request.use(async (config) => {
   const token = (await cookies()).get("token")?.value;
   const locale = (await cookies()).get("NEXT_LOCALE")?.value;
-  const lang = locale?.split("-")[0] ?? "en"
   
-  config.headers["lang"] = lang;
+  const baseLocale = locale?.split("-")[0];
+  
+  const normalizedLocale = 
+    baseLocale === "zh" ? "zh-CN" : 
+    baseLocale === "pt" ? "pt-BR" : 
+    baseLocale;
+
+  if (normalizedLocale) {
+    config.headers["lang"] = normalizedLocale;
+  }
   config.headers.Authorization = token;
 
   return config;

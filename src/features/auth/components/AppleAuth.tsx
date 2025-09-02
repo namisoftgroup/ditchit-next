@@ -23,9 +23,9 @@ export default function AppleAuth() {
     <AppleSignin
       uiType="dark"
       authOptions={{
-        clientId: "com.ditchit.webapp.next",
-        scope: "name email",
-        redirectURI: "https://ditchit-next.vercel.app/auth/apple/callback",
+        scope: process.env.NEXT_PUBLIC_APPLE_SCOPE!,
+        clientId: process.env.NEXT_PUBLIC_APPLE_CLIENT_ID!,
+        redirectURI: process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI!,
         usePopup: true,
       }}
       onSuccess={handleSuccess}

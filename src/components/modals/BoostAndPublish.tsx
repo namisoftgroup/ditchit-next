@@ -8,13 +8,13 @@ import {
 } from "@/components/ui/dialog";
 import { useTranslations } from "next-intl";
 
-type GetAppModalProps = {
+type BoostAndPublishProps = {
   show: boolean;
-  isPromoting: boolean,
+  isPromoting: boolean;
   isSaving: boolean;
   addPost: () => void;
-  handleClose: () => void;
   addAndPromote: () => void;
+  handleClose: () => void;
 };
 
 export default function BoostAndPublish({
@@ -24,7 +24,7 @@ export default function BoostAndPublish({
   addPost,
   addAndPromote,
   handleClose,
-}: GetAppModalProps) {
+}: BoostAndPublishProps) {
   const t = useTranslations("post");
 
   return (

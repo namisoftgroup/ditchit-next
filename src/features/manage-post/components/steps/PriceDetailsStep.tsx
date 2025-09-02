@@ -27,7 +27,8 @@ export default function PriceDetailsStep({
   } = useFormContext<PostFormData>();
 
   const [show, setShow] = useState(false);
-  const { savePost, isSaving } = usePostForm();
+  const { savePost, savePromote, isSavingNormal, isSavingPromote } =
+    usePostForm();
   const selectedDelivery = watch("delivery_method");
   const t = useTranslations("manage_post");
 
@@ -47,18 +48,13 @@ export default function PriceDetailsStep({
   useEffect(() => {
     const handleCloseModal = () => setShow(false);
     window.addEventListener("close-post-modal", handleCloseModal);
-
     return () =>
       window.removeEventListener("close-post-modal", handleCloseModal);
   }, []);
 
-  const onSubmit: SubmitHandler<PostFormData> = (data) => {
-    savePost(data);
-  };
-
-  const onSubmitWithPromote: SubmitHandler<PostFormData> = (data) => {
-    savePost({ ...data, is_promote: 1 });
-  };
+  const onSubmit: SubmitHandler<PostFormData> = (data) => savePost(data);
+  const onSubmitWithPromote: SubmitHandler<PostFormData> = (data) =>
+    savePromote(data);
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleNextClick}>
@@ -67,9 +63,7 @@ export default function PriceDetailsStep({
         id="price"
         placeholder="$0.00"
         {...register("price")}
-        error={
-          errors.price?.message ? t(errors.price?.message as string) : undefined
-        }
+        error={errors.price?.message ? t(errors.price?.message) : undefined}
         className="w-full"
       />
 
@@ -131,8 +125,8 @@ export default function PriceDetailsStep({
 
       <BoostAndPublish
         show={show}
-        isPromoting={watch("is_promote") ? isSaving : false}
-        isSaving={!watch("is_promote") ? isSaving : false}
+        isPromoting={isSavingPromote}
+        isSaving={isSavingNormal}
         handleClose={() => setShow(false)}
         addPost={handleSubmit(onSubmit)}
         addAndPromote={handleSubmit(onSubmitWithPromote)}

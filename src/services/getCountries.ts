@@ -5,7 +5,7 @@ export async function getCountries(lang:string): Promise<CountriesResponse> {
   const response = await fetch(`${API_URL}/main/countries`, {
     method: "GET",
     headers: {
-      lang: lang,
+      lang: lang === "zh" ? "zh-CN" : lang === "pt" ? "pt-BR": lang,
     },
     next: { revalidate: 0 },
   });

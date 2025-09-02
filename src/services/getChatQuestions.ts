@@ -6,7 +6,7 @@ export async function getQuestions(lang: string): Promise<{
   const response = await fetch(`${API_URL}/main/questions`, {
     method: "GET",
     headers: {
-      lang: lang,
+      lang: lang === "zh" ? "zh-CN" : lang === "pt" ? "pt-BR": lang,
     },
     next: { revalidate: 0 },
   });

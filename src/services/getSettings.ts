@@ -14,7 +14,7 @@ export async function getSettings(lang: string): Promise<{ data: Setting }> {
   const response = await fetch(`${API_URL}/main/setting`, {
     method: "GET",
     headers: {
-      lang: lang,
+      lang: lang === "zh" ? "zh-CN" : lang === "pt" ? "pt-BR": lang,
     },
     next: { revalidate: 0 },
   });

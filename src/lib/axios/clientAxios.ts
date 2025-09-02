@@ -15,7 +15,7 @@ const clientAxios: AxiosInstance = axios.create({
 const getLocaleFromCookie = (): string => {
   if (typeof window === "undefined") return "en";
 
-  const cookies = document.cookie.split(";")
+  const cookies = document.cookie.split(";");
   const localeCookie = cookies.find((cookie) =>
     cookie.trim().startsWith("NEXT_LOCALE=")
   );
@@ -32,8 +32,11 @@ clientAxios.interceptors.request.use(
     const token = useAuthStore.getState().token;
     const locale = getLocaleFromCookie();
 
+    const normalizedLocale =
+      locale === "zh" ? "zh-CN" : locale === "pt" ? "pt-BR" : locale;
+
     config.headers.Authorization = token;
-    config.headers["lang"] = locale;
+    config.headers["lang"] = normalizedLocale;
 
     return config;
   },

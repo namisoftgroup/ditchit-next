@@ -17,7 +17,9 @@ const PostFormContext = createContext<{
   next: () => void;
   back: () => void;
   savePost: (data: PostFormData) => void;
-  isSaving: boolean;
+  savePromote: (data: PostFormData) => void;
+  isSavingNormal: boolean;
+  isSavingPromote: boolean;
 } | null>(null);
 
 export const usePostForm = () => {
@@ -63,7 +65,7 @@ export default function PostFormProvider({
           value: opt.value,
         })) || [],
 
-      price: post?.price.toString() || "",
+      price: post?.price?.toString() || "",
       is_promote: post?.is_promoted === true ? 1 : 0,
       firm_price: post?.firm_price === true ? 1 : 0,
       virtual_tour: post?.virtual_tour === true ? 1 : 0,
@@ -75,81 +77,106 @@ export default function PostFormProvider({
     },
   });
 
-  const { mutate: savePostMutation, isPending: isSaving } = useMutation({
-    mutationFn: async (data: PostFormData) => {
-      const endpoint = post?.id ? `/posts/${post.id}` : "/posts";
-      const formData = new FormData();
+  // Shared save logic
+  const handleSaveRequest = async (data: PostFormData) => {
+    const endpoint = post?.id ? `/posts/${post.id}` : "/posts";
+    const formData = new FormData();
 
-      Object.entries(data).forEach(([key, value]) => {
-        if (key === "image" || key === "images") return;
+    Object.entries(data).forEach(([key, value]) => {
+      if (key === "image" || key === "images") return;
 
-        if (Array.isArray(value)) {
-          value.forEach((item, index) => {
-            if (typeof item === "object" && item !== null) {
-              Object.entries(item).forEach(([k, v]) => {
-                formData.append(`${key}[${index}][${k}]`, v);
-              });
-            } else {
-              formData.append(`${key}[]`, item);
-            }
-          });
-        } else {
-          formData.append(key, value as string);
-        }
-      });
-
-      if (data.image instanceof File) {
-        formData.append("image", data.image);
-      }
-
-      if (Array.isArray(data.images)) {
-        const fileImages = data.images.filter((img) => img instanceof File);
-        fileImages.forEach((img) => {
-          formData.append("images[]", img);
+      if (Array.isArray(value)) {
+        value.forEach((item, index) => {
+          if (typeof item === "object" && item !== null) {
+            Object.entries(item).forEach(([k, v]) => {
+              formData.append(`${key}[${index}][${k}]`, v);
+            });
+          } else {
+            formData.append(`${key}[]`, item);
+          }
         });
-      }
-
-      if (post?.id) {
-        formData.append("_method", "PUT");
-      }
-
-      return await clientAxios.post(endpoint, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    },
-
-    onSuccess: (data) => {
-      if (data.data.code == 200) {
-        if (data.data.data.link) {
-          window.location.href = data.data.data.link;
-        } else {
-          toast.success(t("post_saved"));
-          router.push("/profile");
-        }
       } else {
-        toast.error(data.data.message);
+        formData.append(key, value as string);
       }
-    },
+    });
 
-    onError: (error) => {
-      const err = error as AxiosError<{ message?: string }>;
-      const message = err.response?.data?.message || t("something_went_wrong");
-      toast.error(message);
-    },
+    if (data.image instanceof File) {
+      formData.append("image", data.image);
+    }
 
-    onSettled: () => {
-      if (typeof window !== "undefined") {
-        const event = new CustomEvent("close-post-modal");
-        window.dispatchEvent(event);
+    if (Array.isArray(data.images)) {
+      const fileImages = data.images.filter((img) => img instanceof File);
+      fileImages.forEach((img) => {
+        formData.append("images[]", img);
+      });
+    }
+
+    if (post?.id) {
+      formData.append("_method", "PUT");
+    }
+
+    return await clientAxios.post(endpoint, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  };
+
+  const onSuccess = (res: {
+    data: { code: number; data?: { link?: string }; message?: string };
+  }) => {
+    if (res.data.code === 200) {
+      if (res.data.data?.link) {
+        const width = 500;
+        const height = 600;
+        const left = (window.screen.width - width) / 2;
+        const top = (window.screen.height - height) / 2;
+
+        window.open(
+          res.data.data.link,
+          "PaymentPopup",
+          `width=${width},height=${height},left=${left},top=${top}`
+        );
+
+        window.addEventListener("message", (event) => {
+          if (event.data.status === "success") {
+            toast.success(t("post_published_promoted"));
+          } else if (event.data.status === "failed") {
+            toast.error(t("promote_error"));
+          }
+        });
+      } else {
+        toast.success(t("post_saved"));
       }
-    },
+      router.push("/profile");
+    } else {
+      toast.error(res.data.message);
+    }
+  };
+
+  const onError = (error: AxiosError<{ message?: string }>) => {
+    const message = error.response?.data?.message || t("something_went_wrong");
+    toast.error(message);
+  };
+
+  const onSettled = () => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("close-post-modal"));
+    }
+  };
+
+  const { mutate: saveNormal, isPending: isSavingNormal } = useMutation({
+    mutationFn: handleSaveRequest,
+    onSuccess,
+    onError,
+    onSettled,
   });
 
-  const savePost = (data: PostFormData) => {
-    savePostMutation(data);
-  };
+  const { mutate: savePromote, isPending: isSavingPromote } = useMutation({
+    mutationFn: (data: PostFormData) =>
+      handleSaveRequest({ ...data, is_promote: 1 }),
+    onSuccess,
+    onError,
+    onSettled,
+  });
 
   const next = () => setStep((s) => s + 1);
   const back = () => setStep((s) => s - 1);
@@ -159,11 +186,12 @@ export default function PostFormProvider({
       step,
       next,
       back,
-      savePost,
-      isSaving,
+      savePost: saveNormal,
+      savePromote,
+      isSavingNormal,
+      isSavingPromote,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [step, isSaving]
+    [step, saveNormal, savePromote, isSavingNormal, isSavingPromote]
   );
 
   return (

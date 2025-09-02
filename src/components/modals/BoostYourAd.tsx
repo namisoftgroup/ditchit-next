@@ -6,7 +6,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Link } from "@/i18n/navigation";
+import { toast } from "sonner";
+import { API_URL } from "@/utils/constants";
 import { useTranslations } from "next-intl";
 
 type GetAppModalProps = {
@@ -21,6 +22,28 @@ export default function BoostYourAd({
   handleClose,
 }: GetAppModalProps) {
   const t = useTranslations("post");
+
+  function openPaymentPopup() {
+    const width = 500;
+    const height = 600;
+    const left = (window.screen.width - width) / 2;
+    const top = (window.screen.height - height) / 2;
+
+    window.open(
+      `${API_URL}/promote-payment/${postId}`,
+      "PaymentPopup",
+      `width=${width},height=${height},left=${left},top=${top}`
+    );
+
+    window.addEventListener("message", (event) => {
+      if (event.data.status === "success") {
+        toast.success(t("post_promoted"));
+      } else if (event.data.status === "failed") {
+        toast.error(t("promote_error"));
+      }
+      handleClose();
+    });
+  }
 
   return (
     <Dialog open={show} onOpenChange={handleClose}>
@@ -44,12 +67,12 @@ export default function BoostYourAd({
         </div>
 
         <div className="flex items-center justify-between border-t border-[var(--lightBorderColor)] mb-0 pt-4">
-          <Link
+          <button
+            onClick={openPaymentPopup}
             className="customBtn rounded-full w-fit px-12 ms-auto me-0 mb-0"
-            href={`https://ditchit.com/api/promote-payment/${postId}`}
           >
             {t("boost_now")}
-          </Link>
+          </button>
         </div>
       </DialogContent>
     </Dialog>

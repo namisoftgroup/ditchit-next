@@ -89,7 +89,9 @@
     "boost_now": "Boost Now",
     "no_favs": "You have no favorites yet",
     "post_deleted": "Post deleted successfully",
-    "no_posts": "No posts here yet. Create your first one now!"
+    "no_posts": "No posts here yet. Create your first one now!",
+    "post_promoted": "Post promoted successfully",
+    "promote_error": "something went wrong during promte"
   },
   "header": {
     "add_post": "Add Post",
@@ -215,7 +217,9 @@
     "post_saved": "Post saved successfully and is under review",
     "key_features": "Key Features",
     "cover_image": "Cover Image",
-    "enter_description": "Enter Description"
+    "enter_description": "Enter Description",
+    "post_published_promoted": "Post published and promoted successfully",
+    "promote_error": "something went wrong during promte"
   },
   "ditchNote": {
     "title": "Introducing Ditchit - The Ultimate Local Marketplace!",
