@@ -120,11 +120,11 @@ export default function ChatForm({
                 if (formData.files) sendMessageMutation(formData);
               }}
             />
-            <Paperclip />
+            <Paperclip className="w-5 h-5" />
           </label>
 
           <span className="p-1 cursor-pointer" onClick={() => setShow(true)}>
-            <MapPinPlus />
+            <MapPinPlus className="w-5 h-5" />
           </span>
 
           <Recorder
@@ -135,7 +135,7 @@ export default function ChatForm({
         </div>
 
         <button
-          className="p-4 rounded-[12px] bg-[var(--mainColor)] text-white relative"
+          className="md:p-4 p-3 rounded-[12px] bg-[var(--mainColor)] text-white relative"
           type="submit"
           disabled={isPending}
         >

@@ -23,7 +23,7 @@ export default async function page({
       />
 
       <div className="container py-6">
-        <div className="flex flex-wrap -mx-2">
+        <div className="flex flex-wrap ">
           <div className="w-full lg:w-4/12 px-2 pb-2 pt-4">
             <ContactInfo data={data} />
           </div>

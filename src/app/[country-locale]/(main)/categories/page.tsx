@@ -14,7 +14,7 @@ export default async function Page({
 
   return (
     <div className="container py-5">
-      <div className="flex flex-wrap -mx-2">
+      <div className="flex flex-wrap ">
         {categories.map((category) => (
           <div key={category.id} className="w-full md:w-1/2 lg:w-1/4 p-2">
             <Link

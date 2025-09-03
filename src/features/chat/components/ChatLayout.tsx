@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { Room } from "../types";
 import { useChatStore } from "../store";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
 import ChatsSidebar from "./ChatsSidebar";
 
@@ -16,6 +17,7 @@ export default function ChatLayout({
 }) {
   const { rooms: storeRooms } = useChatStore();
   const t = useTranslations("chat");
+  const roomId = useParams().roomId;
 
   const allRooms = useMemo(
     () => [
@@ -28,12 +30,14 @@ export default function ChatLayout({
   return (
     <section className="container py-6 flex gap-8">
       {allRooms.length > 0 ? (
-        <div className="flex flex-wrap -mx-2 justify-center w-full">
-          <div className="p-2 w-full md:w-5/12 lg:w-4/12 xl:w-3/12">
+        <div className="flex flex-wrap  justify-center w-full">
+          <div
+            className={`md:p-2 w-full md:w-5/12 lg:w-4/12 xl:w-3/12 ${roomId ? "md:flex hidden" : ""}`}
+          >
             <ChatsSidebar />
           </div>
 
-          <div className="p-2 w-full md:w-7/12 lg:w-8/12 xl:w-9/12">
+          <div className="md:p-2 w-full md:w-7/12 lg:w-8/12 xl:w-9/12">
             {children}
           </div>
         </div>

@@ -45,7 +45,7 @@ export default function CategorySlider({
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 mb-4">
           <div className="px-2">
-            <span className="block text-[14px] font-semibold tracking-[2.8px] uppercase text-[var(--mainColor)]">
+            <span className="block text-[14px] font-semibold uppercase text-[var(--mainColor)]">
               {category.title}
             </span>
             <Link href={`/posts?category_id=${category.value}`}>

@@ -1,12 +1,20 @@
 import { Room } from "../types";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { ChevronLeft } from "lucide-react";
 
 export default function RoomHeader({ room }: { room: Room }) {
   return (
     <>
-      <div className="rounded-t-[14px] flex p-[14px] items-center justify-between gap-4 bg-[#fafafa]">
-        <Link href={`/advertiser/${room.another_user_id}`} className="flex items-center gap-2">
+      <div className="rounded-t-[14px] flex p-[14px] items-center gap-2 bg-[#fafafa]">
+        <Link href="/chats" className="md:hidden block">
+          <ChevronLeft />
+        </Link>
+
+        <Link
+          href={`/advertiser/${room.another_user_id}`}
+          className="flex items-center gap-2"
+        >
           <Image
             src={room.another_user.user.image}
             alt={room.another_user.user.name}

@@ -55,7 +55,7 @@ export default async function PostDetails({ params }: PageProps) {
       />
 
       <div className="container py-6">
-        <div className="flex flex-wrap -mx-2">
+        <div className="flex flex-wrap ">
           <div className="w-full lg:w-8/12 px-2 py-2 flex flex-col gap-6">
             <PostSlider images={images} />
             <PostInfo post={post} />

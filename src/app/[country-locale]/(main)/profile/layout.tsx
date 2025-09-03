@@ -10,7 +10,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
       <PageBanner links={[{ title: t("home"), link: "/" }]} page={t("profile")} />
 
       <section className="container py-6 flex gap-8">
-        <div className="flex flex-wrap -mx-2 justify-center w-full">
+        <div className="flex flex-wrap  justify-center w-full">
           <div className="p-2 w-full md:w-5/12 lg:w-4/12 xl:w-3/12">
             <Sidebar />
           </div>

@@ -15,7 +15,7 @@ export default function ChatPlaceHolder() {
   const { View } = useLottie(defaultOptions);
 
   return (
-    <div className="w-full bg-[#fafafa] flex flex-col items-center justify-center gap-3 rounded-[14px] h-full">
+    <div className="w-full bg-[#fafafa] hidden md:flex flex-col items-center justify-center gap-3 rounded-[14px] h-full">
       <div className="w-[350px]">{View}</div>
       <h6 className="text-[16px] font-bold">{t("start_conversation")}</h6>
     </div>

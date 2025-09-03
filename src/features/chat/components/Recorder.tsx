@@ -96,11 +96,11 @@ export default function Recorder({
     >
       {isRecording ? (
         <>
-          <CirclePause  className="text-red-500" />
+          <CirclePause  className="text-red-500 w-5 h-5" />
           <span>{formatRecordingTime(recordingTime)}</span>
         </>
       ) : (
-        <Mic />
+        <Mic className="w-5 h-5" />
       )}
     </span>
   );

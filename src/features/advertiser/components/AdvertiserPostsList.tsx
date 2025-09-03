@@ -41,7 +41,7 @@ export default function AdvertiserPostsList({
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <div ref={sectionRef} className="flex flex-wrap -mx-2">
+    <div ref={sectionRef} className="flex flex-wrap ">
       {posts.map((post, index) => (
         <div key={index} className="w-full lg:w-4/12 p-2">
           <PostCard post={post} showActions={false} />
