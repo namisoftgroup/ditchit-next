@@ -141,7 +141,7 @@ export default function QuestionAndOffers({
                 />
 
                 <button
-                  className="p-4 rounded-[12px] bg-[var(--mainColor)] text-white relative"
+                  className="md:p-4 p-3 rounded-[12px] bg-[var(--mainColor)] text-white relative"
                   type="submit"
                   disabled={isPending}
                 >
