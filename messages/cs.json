@@ -75,7 +75,9 @@
     "highest": "Nejvyšší cena",
     "near": "Poblíž",
     "new": "Nový",
-    "used": "Použitý"
+    "used": "Použitý",
+    "no_available": "Zde se dosud neposkytují žádné příspěvky.",
+    "no_available_text": "Vraťte se brzy a objevte nový a vzrušující obsah!"
   },
   "error": {
     "somthing_went_wrong": "Omlouvám se! Něco se pokazilo.",

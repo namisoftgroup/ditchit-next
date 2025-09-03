@@ -75,7 +75,9 @@
     "highest": "Çmimi më i lartë",
     "near": "Afër",
     "new": "I ri",
-    "used": "I përdorur"
+    "used": "I përdorur",
+    "no_available": "Asnjë postim nuk është i dobishëm këtu.",
+    "no_available_text": "Kthehuni së shpejti për të zbuluar përmbajtje të re dhe emocionuese!"
   },
   "error": {
     "somthing_went_wrong": "Ups! Diçka shkoi gabim",

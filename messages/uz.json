@@ -75,7 +75,9 @@
     "highest": "Eng yuqori narx",
     "near": "Yaqinida",
     "new": "Yangi",
-    "used": "Ishlatilgan"
+    "used": "Ishlatilgan",
+    "no_available": "Bu erda hech qanday xabar yo'q.",
+    "no_available_text": "Yaqinda yangi va qiziqarli tarkibni kashf etish uchun qaytib keling!"
   },
   "error": {
     "somthing_went_wrong": "Afsus! Xato yuz berdi",

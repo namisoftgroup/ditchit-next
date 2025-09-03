@@ -75,7 +75,9 @@
     "highest": "Hoogste prijs",
     "near": "Dichtbij",
     "new": "Nieuw",
-    "used": "Gebruikt"
+    "used": "Gebruikt",
+    "no_available": "Er zijn hier nog geen berichten beschikbaar.",
+    "no_available_text": "Kom snel terug om nieuwe en opwindende inhoud te ontdekken!"
   },
   "error": {
     "somthing_went_wrong": "Oeps! Er is iets misgegaan.",

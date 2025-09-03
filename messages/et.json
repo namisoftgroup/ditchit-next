@@ -75,7 +75,9 @@
     "highest": "Kõrgeim hind",
     "near": "Lähedal",
     "new": "Uus",
-    "used": "Kasutatud"
+    "used": "Kasutatud",
+    "no_available": "Siin pole veel ühtegi postitust saadaval.",
+    "no_available_text": "Tulge varsti tagasi, et avastada uut ja põnevat sisu!"
   },
   "error": {
     "somthing_went_wrong": "Uups! Midagi läks valesti",

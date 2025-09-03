@@ -75,7 +75,9 @@
     "highest": "Högsta pris",
     "near": "Nära",
     "new": "Ny",
-    "used": "Begagnad"
+    "used": "Begagnad",
+    "no_available": "Inga inlägg finns tillgängliga här än.",
+    "no_available_text": "Kom tillbaka snart för att upptäcka nytt och spännande innehåll!"
   },
   "error": {
     "somthing_went_wrong": "Hoppsan! Något gick fel",

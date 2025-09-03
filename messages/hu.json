@@ -75,7 +75,9 @@
     "highest": "Legmagasabb ár",
     "near": "Közel",
     "new": "Új",
-    "used": "Használt"
+    "used": "Használt",
+    "no_available": "Még nincs itt bejegyzés.",
+    "no_available_text": "Gyere vissza hamarosan, hogy felfedezzék az új és izgalmas tartalmat!"
   },
   "error": {
     "somthing_went_wrong": "Hoppá! Valami hiba történt.",

@@ -75,7 +75,9 @@
     "highest": "Aukščiausia kaina",
     "near": "Šalia",
     "new": "Nauja",
-    "used": "Naudojamas"
+    "used": "Naudojamas",
+    "no_available": "Čia dar nėra pranešimų.",
+    "no_available_text": "Netrukus sugrįžkite sužinoti naujo ir įdomaus turinio!"
   },
   "error": {
     "somthing_went_wrong": "Oho! Kažkas negerai.",

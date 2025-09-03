@@ -75,7 +75,9 @@
     "highest": "Ən yüksək qiymət",
     "near": "Yaxın",
     "new": "Yeni",
-    "used": "İstifadə olunan"
+    "used": "İstifadə olunan",
+    "no_available": "Hələ ismarıc yoxdur.",
+    "no_available_text": "Tezliklə yeni və maraqlı məzmun kəşf etmək üçün geri qayıdın!"
   },
   "error": {
     "somthing_went_wrong": "Aha! Bir şey səhv getdi.",

@@ -75,7 +75,9 @@
     "highest": "Bei ya juu",
     "near": "Karibu na",
     "new": "Mpya",
-    "used": "Kutumika"
+    "used": "Kutumika",
+    "no_available": "Hakuna machapisho yanayopatikana hapa bado.",
+    "no_available_text": "Rudi hivi karibuni kugundua yaliyomo mpya na ya kufurahisha!"
   },
   "error": {
     "somthing_went_wrong": "Ups! Kitu fulani kilikwenda mrama",

@@ -75,7 +75,9 @@
     "highest": "Høyeste pris",
     "near": "I nærheten",
     "new": "Ny",
-    "used": "Brukt"
+    "used": "Brukt",
+    "no_available": "Ingen innlegg tilgjengelige her ennå.",
+    "no_available_text": "Kom snart tilbake for å oppdage nytt og spennende innhold!"
   },
   "error": {
     "somthing_went_wrong": "Oops! Noe gikk galt",

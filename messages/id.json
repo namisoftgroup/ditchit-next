@@ -75,7 +75,9 @@
     "highest": "Harga tertinggi",
     "near": "Di dekat sini",
     "new": "Baru",
-    "used": "Digunakan"
+    "used": "Digunakan",
+    "no_available": "Belum ada pos yang tersedia di sini.",
+    "no_available_text": "Segera kembali untuk menemukan konten baru dan menarik!"
   },
   "error": {
     "somthing_went_wrong": "Ups! Ada yang salah.",

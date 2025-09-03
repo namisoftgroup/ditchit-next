@@ -75,7 +75,9 @@
     "highest": "最高価格",
     "near": "近く",
     "new": "新しい",
-    "used": "使用済み"
+    "used": "使用済み",
+    "no_available": "ここにはまだ投稿がありません。",
+    "no_available_text": "すぐに戻って、新しいエキサイティングなコンテンツを発見してください！"
   },
   "error": {
     "somthing_went_wrong": "おっと！何かがうまくいきませんでした。",

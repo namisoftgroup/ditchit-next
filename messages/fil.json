@@ -75,7 +75,9 @@
     "highest": "Pinakamataas na presyo",
     "near": "Malapit sa pamamagitan ng",
     "new": "Bago",
-    "used": "Ginamit"
+    "used": "Ginamit",
+    "no_available": "Wala pang mga post dito.",
+    "no_available_text": "Bumalik kaagad upang matuklasan ang bago at kapana -panabik na nilalaman!"
   },
   "error": {
     "somthing_went_wrong": "Naku! May nangyaring mali.",

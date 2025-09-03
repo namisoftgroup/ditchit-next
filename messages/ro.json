@@ -75,7 +75,9 @@
     "highest": "Cel mai mare preț",
     "near": "Aproape de",
     "new": "Nou",
-    "used": "Folosit"
+    "used": "Folosit",
+    "no_available": "Nu există încă postări aici.",
+    "no_available_text": "Reveniți în curând pentru a descoperi conținut nou și interesant!"
   },
   "error": {
     "somthing_went_wrong": "Oops! Ceva a mers prost",

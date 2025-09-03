@@ -75,7 +75,9 @@
     "highest": "Harga tertinggi",
     "near": "Dekat oleh",
     "new": "Baru",
-    "used": "Digunakan"
+    "used": "Digunakan",
+    "no_available": "Belum ada jawatan di sini.",
+    "no_available_text": "Kembali tidak lama lagi untuk menemui kandungan baru dan menarik!"
   },
   "error": {
     "somthing_went_wrong": "Oops! Sesuatu telah berlaku kesalahan",

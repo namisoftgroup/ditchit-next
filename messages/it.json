@@ -75,7 +75,9 @@
     "highest": "Prezzo più alto",
     "near": "Nelle vicinanze",
     "new": "Nuovo",
-    "used": "Usato"
+    "used": "Usato",
+    "no_available": "Nessun post è ancora disponibile qui.",
+    "no_available_text": "Torna presto per scoprire nuovi ed eccitanti contenuti!"
   },
   "error": {
     "somthing_went_wrong": "¡Ups! Algo salió mal.",

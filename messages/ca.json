@@ -75,7 +75,9 @@
     "highest": "Preu més alt",
     "near": "A prop de",
     "new": "Nou",
-    "used": "Usada"
+    "used": "Usada",
+    "no_available": "Encara no hi ha publicacions disponibles aquí.",
+    "no_available_text": "Torneu aviat per descobrir contingut nou i emocionant."
   },
   "error": {
     "somthing_went_wrong": "Ostres! Alguna cosa ha anat malament",

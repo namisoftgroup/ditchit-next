@@ -75,7 +75,9 @@
     "highest": "Augstākā cena",
     "near": "Tuvu",
     "new": "Jauns",
-    "used": "Lietots"
+    "used": "Lietots",
+    "no_available": "Šeit vēl nav pieejamu ziņu.",
+    "no_available_text": "Drīz atgriezieties, lai atklātu jaunu un aizraujošu saturu!"
   },
   "error": {
     "somthing_went_wrong": "Ups! Kaut kas nogāja greizi.",

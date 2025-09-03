@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import PostCard from "@/components/cards/PostCard";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import useGetPostsList from "@/features/listing/useGetPostsList";
+import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
 
 type PostListProps = {
   userId: number | null;
@@ -20,7 +21,7 @@ export default function PostsList(props: PostListProps) {
       props.longitude,
       props.latitude,
       props.kilometers,
-      props.delivery_method,
+      props.delivery_method
     );
 
   const observerRef = useRef<HTMLDivElement | null>(null);
@@ -49,6 +50,18 @@ export default function PostsList(props: PostListProps) {
           <PostCard post={post} showActions={false} />
         </div>
       ))}
+
+      {posts.length === 0 && (
+        <div className="w-full flex flex-col justify-center items-center py-4">
+          <NoDataPlaceHolder />
+          <h4 className="font-bold text-[#000] text-[18px] mb-2">
+            No posts availble here yet.
+          </h4>
+          <p className="text-sm text-gray-600">
+            Come back soon to discover new and exciting content!
+          </p>
+        </div>
+      )}
 
       {(isFetchingNextPage || isLoading) &&
         Array.from({ length: 3 }).map((_, i) => (

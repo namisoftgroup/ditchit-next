@@ -75,7 +75,9 @@
     "highest": "Preço mais alto",
     "near": "Próximo",
     "new": "Novo",
-    "used": "Usado"
+    "used": "Usado",
+    "no_available": "Nenhuma postagem disponível aqui ainda.",
+    "no_available_text": "Volte em breve para descobrir conteúdo novo e emocionante!"
   },
   "error": {
     "somthing_went_wrong": "Opa! Algo deu errado.",

@@ -75,7 +75,9 @@
     "highest": "ከፍተኛ ዋጋ",
     "near": "በአጠገብ",
     "new": "አዲስ",
-    "used": "ያገለገለው"
+    "used": "ያገለገለው",
+    "no_available": "ገና እዚህ አይገኝም.",
+    "no_available_text": "አዲስ እና አስደሳች ይዘት ለማግኘት በቅርቡ ተመልሰው ይምጡ!"
   },
   "error": {
     "somthing_went_wrong": "ውይ! ነገር ተሳስቷል",

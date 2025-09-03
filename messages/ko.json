@@ -75,7 +75,9 @@
     "highest": "최고 가격",
     "near": "가까운",
     "new": "새로운",
-    "used": "사용된"
+    "used": "사용된",
+    "no_available": "아직 여기에 게시물이 없습니다.",
+    "no_available_text": "새롭고 흥미로운 콘텐츠를 발견하기 위해 곧 돌아와!"
   },
   "error": {
     "somthing_went_wrong": "앗! 문제가 발생했습니다.",

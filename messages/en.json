@@ -75,7 +75,9 @@
     "highest": "Highest Price",
     "near": "Near By",
     "new": "New",
-    "used": "Used"
+    "used": "Used",
+    "no_available": "No posts availble here yet.",
+    "no_available_text": "Come back soon to discover new and exciting content!"
   },
   "error": {
     "somthing_went_wrong": "Oops! Something went wrong",

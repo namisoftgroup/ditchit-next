@@ -75,7 +75,9 @@
     "highest": "Giá cao nhất",
     "near": "Gần đó",
     "new": "Mới",
-    "used": "Đã sử dụng"
+    "used": "Đã sử dụng",
+    "no_available": "Không có bài viết có sẵn ở đây.",
+    "no_available_text": "Hãy quay lại sớm để khám phá nội dung mới và thú vị!"
   },
   "error": {
     "somthing_went_wrong": "Úi! Có sự cố xảy ra",

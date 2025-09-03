@@ -75,7 +75,9 @@
     "highest": "Hoogste prys",
     "near": "Naby",
     "new": "Nuut",
-    "used": "Gebruik"
+    "used": "Gebruik",
+    "no_available": "Geen plasings beskikbaar hier nie.",
+    "no_available_text": "Kom binnekort terug om nuwe en opwindende inhoud te ontdek!"
   },
   "error": {
     "somthing_went_wrong": "Oeps! Iets het verkeerd gegaan",

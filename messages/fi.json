@@ -75,7 +75,9 @@
     "highest": "Korkein hinta",
     "near": "Lähellä",
     "new": "Uusi",
-    "used": "Käytetty"
+    "used": "Käytetty",
+    "no_available": "Viestejä ei vielä ole täällä.",
+    "no_available_text": "Tule pian takaisin löytämään uutta ja jännittävää sisältöä!"
   },
   "error": {
     "somthing_went_wrong": "Oi! Jotain meni pieleen.",

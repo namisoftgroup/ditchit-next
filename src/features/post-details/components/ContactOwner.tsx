@@ -5,8 +5,8 @@ import { useAuthStore } from "@/features/auth/store";
 import { User } from "@/types/user";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import useGenerateRoom from "../useGenerateRoom";
 import { useRouter } from "next/navigation";
+import useGenerateRoom from "../useGenerateRoom";
 
 export default function ContactOwner({
   owner,
@@ -23,8 +23,9 @@ export default function ContactOwner({
   const startChat = async (postId: number) => {
     if (!user?.id) {
       router.push("/login");
+    } else {
+      generateRoom(postId);
     }
-    generateRoom(postId);
   };
 
   return (

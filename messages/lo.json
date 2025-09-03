@@ -75,7 +75,9 @@
     "highest": "ລາຄາສູງສຸດ",
     "near": "ຢູ່ໃກ້",
     "new": "ໃຫມ່",
-    "used": "ເຄີຍໃຊ້"
+    "used": "ເຄີຍໃຊ້",
+    "no_available": "ບໍ່ມີຂໍ້ຄວາມໃດທີ່ໃຊ້ໄດ້ຢູ່ທີ່ນີ້.",
+    "no_available_text": "ກັບມາໄວໆນີ້ເພື່ອຄົ້ນພົບເນື້ອຫາໃຫມ່ແລະຫນ້າຕື່ນເຕັ້ນ!"
   },
   "error": {
     "somthing_went_wrong": "Oops! Kukuzi kang somi!",

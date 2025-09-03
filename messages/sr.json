@@ -75,7 +75,9 @@
     "highest": "Највиша цена",
     "near": "Близу",
     "new": "Нов",
-    "used": "Коришћен"
+    "used": "Коришћен",
+    "no_available": "Још увек није овде доступно.",
+    "no_available_text": "Врати се ускоро да откријете нови и узбудљиви садржај!"
   },
   "error": {
     "somthing_went_wrong": "Ups! Nešto je pošlo po zlu",
