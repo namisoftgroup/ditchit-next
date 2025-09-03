@@ -29,7 +29,7 @@ export default async function Home() {
       lastPageParam: number
     ) => {
       const posts = lastPage?.data?.posts ?? [];
-      if (posts.length === 0) return undefined;
+      if (posts.length < 5) return undefined;
       return lastPageParam + 1;
     },
   });

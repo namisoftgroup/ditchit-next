@@ -11,58 +11,48 @@ export default function CategoriesList({
 }: {
   filterParams: HomeFilterInterface;
 }) {
-  const {
-    categories,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    lastPageSize,
-  } = useGetCategoriesWithPosts(filterParams);
+  const { categories, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useGetCategoriesWithPosts(filterParams);
 
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!containerRef.current || !hasNextPage) return;
+    if (!bottomRef.current || !hasNextPage) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const entry = entries[0];
-
-        if (
-          entry.isIntersecting &&
-          !isFetchingNextPage &&
-          lastPageSize === 8
-        ) {
+        if (entries[0].isIntersecting && !isFetchingNextPage) {
           fetchNextPage();
         }
       },
       {
         root: null,
+        rootMargin: "300px",
         threshold: 1.0,
       }
     );
 
-    observer.observe(containerRef.current);
+    observer.observe(bottomRef.current);
 
-    return () => {
-      observer.disconnect();
-    };
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage, lastPageSize]);
+    return () => observer.disconnect();
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
-    <div className="space-y-12" ref={containerRef}>
+    <div className="space-y-12">
       {categories.map(
         (category: Category) =>
           category.posts.length !== 0 && (
             <CategorySlider
+              key={category.value}
               category={category}
               filterParams={filterParams}
-              key={category.value}
             />
           )
       )}
 
       {isFetchingNextPage && <CategorySliderSkeleton />}
+
+      <div ref={bottomRef} />
     </div>
   );
 }
