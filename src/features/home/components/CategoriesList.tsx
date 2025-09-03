@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Category, HomeFilterInterface } from "../types";
 import CategorySlider from "./CategorySlider";
 import CategorySliderSkeleton from "./CategorySliderSkeleton";
@@ -11,45 +11,58 @@ export default function CategoriesList({
 }: {
   filterParams: HomeFilterInterface;
 }) {
-  const { categories, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetCategoriesWithPosts(filterParams);
+  const {
+    categories,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    lastPageSize,
+  } = useGetCategoriesWithPosts(filterParams);
 
-  const observerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!observerRef.current || !hasNextPage) return;
+    if (!containerRef.current || !hasNextPage) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !isFetchingNextPage) {
+        const entry = entries[0];
+
+        if (
+          entry.isIntersecting &&
+          !isFetchingNextPage &&
+          lastPageSize === 8
+        ) {
           fetchNextPage();
         }
       },
       {
-        rootMargin: "1200px",
+        root: null,
+        threshold: 1.0,
       }
     );
 
-    observer.observe(observerRef.current);
+    observer.observe(containerRef.current);
 
     return () => {
       observer.disconnect();
     };
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage, lastPageSize]);
 
   return (
-    <div className="space-y-12">
-      {categories.map((category: Category) => (
-        <Fragment key={category.value}>
-          {category.posts.length !== 0 && (
-            <CategorySlider category={category} filterParams={filterParams} />
-          )}
-        </Fragment>
-      ))}
+    <div className="space-y-12" ref={containerRef}>
+      {categories.map(
+        (category: Category) =>
+          category.posts.length !== 0 && (
+            <CategorySlider
+              category={category}
+              filterParams={filterParams}
+              key={category.value}
+            />
+          )
+      )}
 
       {isFetchingNextPage && <CategorySliderSkeleton />}
-
-      <div ref={observerRef} />
     </div>
   );
 }

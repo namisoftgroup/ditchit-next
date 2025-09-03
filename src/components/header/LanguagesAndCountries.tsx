@@ -13,6 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { Country } from "@/types/country";
 import Link from "next/link";
 import Image from "next/image";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function LanguagesAndCountries({
   countries,
@@ -23,6 +24,7 @@ export default function LanguagesAndCountries({
   const locale = useLocale();
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
+  const queryClient = useQueryClient();
   const t = useTranslations("common");
 
   const [langCode, countryCode] = locale.split("-");
@@ -35,6 +37,10 @@ export default function LanguagesAndCountries({
   function changeCountry(countryCode: string) {
     if (!locale) return pathname;
     return `/${langCode}-${countryCode}${pathname}${queryString ? `?${queryString}` : ""}`;
+  }
+
+  function revalidateQueries() {
+    queryClient.clear();
   }
 
   return (
@@ -65,6 +71,7 @@ export default function LanguagesAndCountries({
               <DropdownMenuItem key={country.id} className="p-0">
                 <Link
                   href={changeCountry(country.code)}
+                  onClick={revalidateQueries}
                   className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-3 py-2 text-[14px] w-full rounded-[8px]"
                 >
                   <Image
@@ -93,6 +100,7 @@ export default function LanguagesAndCountries({
               <DropdownMenuItem key={code} className="p-0">
                 <Link
                   href={changeLang(code)}
+                  onClick={revalidateQueries}
                   className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-3 py-2 text-[14px] w-full rounded-[8px]"
                 >
                   {name}

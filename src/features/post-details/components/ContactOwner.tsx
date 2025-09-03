@@ -6,6 +6,7 @@ import { User } from "@/types/user";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import useGenerateRoom from "../useGenerateRoom";
+import { useRouter } from "next/navigation";
 
 export default function ContactOwner({
   owner,
@@ -16,7 +17,15 @@ export default function ContactOwner({
 }) {
   const { user } = useAuthStore();
   const { generateRoom, isPending } = useGenerateRoom();
+  const router = useRouter();
   const t = useTranslations("common");
+
+  const startChat = async (postId: number) => {
+    if (!user?.id) {
+      router.push("/login");
+    }
+    generateRoom(postId);
+  };
 
   return (
     <>
@@ -24,7 +33,7 @@ export default function ContactOwner({
         <div className="flex items-center gap-2 p-2">
           <button
             className="flex-1 px-4 py-3 rounded-[16px] flex items-center justify-center gap-2 bg-[var(--mainColor)] text-[var(--whiteColor)] capitalize text-[16px]"
-            onClick={() => generateRoom(postId)}
+            onClick={() => startChat(postId)}
             disabled={isPending}
           >
             {isPending ? (

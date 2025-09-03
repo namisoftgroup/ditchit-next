@@ -20,10 +20,17 @@ export default function useGetCategoriesWithPosts(filter: HomeFilterInterface) {
       },
     });
 
+  const categories =
+    data?.pages.flatMap((page) => page.data?.posts ?? []) ?? [];
+
+  const lastPageSize =
+    data?.pages[data.pages.length - 1]?.data?.posts?.length ?? 0;
+
   return {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    categories: data?.pages.flatMap((page) => page.data?.posts ?? []) ?? [],
+    categories,
+    lastPageSize,
   };
 }
