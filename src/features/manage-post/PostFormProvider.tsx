@@ -56,6 +56,7 @@ export default function PostFormProvider({
       address: post?.description || "",
       latitude: post?.latitude || 0,
       longitude: post?.longitude || 0,
+      country_id: post?.country?.id?.toString() || "",
 
       condition: post?.condition || undefined,
       features: post?.features?.map((f) => f.value) || [],

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AvatarUpload } from "@/components/shared/AvatarUpload";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { useAuthStore } from "@/features/auth/store";
@@ -11,8 +11,14 @@ import { editProfileFormValues, editProfileSchema } from "../schema";
 import InputField from "@/components/shared/InputField";
 import clientAxios from "@/lib/axios/clientAxios";
 import ZipMapSearch from "@/components/shared/ZipMapSearch";
+import { Country } from "@/types/country";
+import SelectField from "@/components/shared/SelectField";
 
-export default function EditProfileForm() {
+export default function EditProfileForm({
+  countries,
+}: {
+  countries: Country[];
+}) {
   const { user, setUser } = useAuthStore();
   const [isPending, setIsPending] = useState(false);
   const t = useTranslations("auth");
@@ -39,7 +45,9 @@ export default function EditProfileForm() {
         address: user.address,
         latitude: user.latitude,
         longitude: user.longitude,
+        country_id: user.country_id?.toString(),
       });
+      
     }
   }, [reset, user]);
 
@@ -76,6 +84,7 @@ export default function EditProfileForm() {
       setIsPending(false);
     }
   };
+  console.log("edit profile +==", countries, user);
 
   return (
     <FormProvider {...methods}>
@@ -114,6 +123,40 @@ export default function EditProfileForm() {
           error={
             errors.password?.message ? t(errors.password?.message) : undefined
           }
+        />
+        <Controller
+          name="country_id"
+          control={methods.control}
+          render={({ field }) => {
+            // نحضر جميع الدول كخيارات
+            const countryOptions =
+              countries?.map((country) => ({
+                label: country.title,
+                value: country.id.toString(),
+              })) || [];
+
+            // نتأكد أن الدولة الحالية للمستخدم موجودة في القائمة
+            const selectedCountry =
+              field.value?.toString() || user?.country_id?.toString() || "";
+
+            return (
+              <SelectField
+                label={t("country")}
+                id="country_id"
+                value={selectedCountry}
+                onChange={(selectedValue) => {
+                  field.onChange(selectedValue); // يرسل ID الدولة
+                }}
+                options={countryOptions}
+                placeholder={t("select_country")}
+                error={
+                  errors.country_id?.message
+                    ? t(errors.country_id?.message)
+                    : undefined
+                }
+              />
+            );
+          }}
         />
 
         <InputField

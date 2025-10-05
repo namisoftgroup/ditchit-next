@@ -26,6 +26,7 @@ export const postFormDataSchema = z.object({
       value: z.union([z.string(), z.number()]),
     })
   ),
+  country_id: z.string().min(1, "country_validation"),
 });
 
 export type PostFormData = z.infer<typeof postFormDataSchema>;

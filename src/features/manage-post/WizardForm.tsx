@@ -8,13 +8,16 @@ import MainDetailsStep from "./components/steps/MainDetailsStep";
 import MoreDetailsStep from "./components/steps/MoreDetailsStep";
 import PriceDetailsStep from "./components/steps/PriceDetailsStep";
 import WizardTabs from "./components/WizardTabs";
+import { Country } from "@/types/country";
 
 export default function WizardForm({
   categories,
   postId,
+  countries,
 }: {
   categories: Category[];
   postId?: number;
+  countries: Country[];
 }) {
   const { watch } = useFormContext();
   const { next, back, step } = usePostForm() as {
@@ -29,7 +32,7 @@ export default function WizardForm({
 
       {step === 0 && <CategoryStep next={next} categories={categories} />}
 
-      {step === 1 && <MainDetailsStep next={next} back={back} />}
+      {step === 1 && <MainDetailsStep next={next} back={back} countries= {countries} />}
 
       {step === 2 && (
         <MoreDetailsStep

@@ -184,7 +184,9 @@
     "address_validation": "Address must be at least 3 characters",
     "pass_confirm_length": "Password confirmation must be at least 6 characters",
     "register_success": "Register successful",
-    "update": "Update"
+    "update": "Update",
+    "select_country": "Select Country",
+    "country": "Country"
   },
   "contact": {
     "full_name": "Full Name",
@@ -247,7 +249,9 @@
     "cover_image": "Cover Image",
     "enter_description": "Enter Description",
     "post_published_promoted": "Post published and promoted successfully",
-    "promote_error": "something went wrong during promte"
+    "promote_error": "something went wrong during promte",
+    "select_country": "Select Country",
+    "country": "Country"
   },
   "ditchNote": {
     "title": "Introducing Ditchit - The Ultimate Local Marketplace!",
