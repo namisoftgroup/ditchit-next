@@ -9,5 +9,6 @@ export interface User {
   zip_code: number;
   latitude: number;
   longitude: number;
-  created_from: string
+  created_from: string;
+  country_id: string | null;
 }

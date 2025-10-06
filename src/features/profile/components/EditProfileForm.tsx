@@ -47,7 +47,6 @@ export default function EditProfileForm({
         longitude: user.longitude,
         country_id: user.country_id?.toString(),
       });
-      
     }
   }, [reset, user]);
 
@@ -128,14 +127,12 @@ export default function EditProfileForm({
           name="country_id"
           control={methods.control}
           render={({ field }) => {
-            // نحضر جميع الدول كخيارات
             const countryOptions =
               countries?.map((country) => ({
                 label: country.title,
                 value: country.id.toString(),
               })) || [];
 
-            // نتأكد أن الدولة الحالية للمستخدم موجودة في القائمة
             const selectedCountry =
               field.value?.toString() || user?.country_id?.toString() || "";
 
@@ -145,7 +142,7 @@ export default function EditProfileForm({
                 id="country_id"
                 value={selectedCountry}
                 onChange={(selectedValue) => {
-                  field.onChange(selectedValue); // يرسل ID الدولة
+                  field.onChange(selectedValue);
                 }}
                 options={countryOptions}
                 placeholder={t("select_country")}
@@ -182,7 +179,7 @@ export default function EditProfileForm({
         <input type="hidden" {...register("latitude")} />
         <input type="hidden" {...register("longitude")} />
 
-        <ZipMapSearch />
+        <ZipMapSearch countryId={methods.watch("country_id")} />
 
         <button
           type="submit"
