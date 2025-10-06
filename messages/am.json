@@ -184,7 +184,11 @@
     "address_validation": "አድራሻ ቢያንስ 3 ቁምፊ አለበት",
     "pass_confirm_length": "የይለፍ ቃል ማረጋገጫ ቢያንስ 6 ቁምፊ አለበት",
     "register_success": "መመዝገብ ተሳክቷል",
-    "update": "አዘምን"
+    "update": "አዘምን",
+    "select_country": "አገር ይምረጡ",
+    "country": "ሀገር",
+    "location_error": "አካባቢዎን መወሰን አልቻልንም. ነባሪ ሥፍራ (አሜሪካ ዩናይትድ ስቴትስ)",
+    "zipcode_error": "በዚህ ዚፕ ኮድ አልተገኘም"
   },
   "contact": {
     "full_name": "ሙሉ ስም",
@@ -247,7 +251,9 @@
     "cover_image": "የመዝገብ ምስል",
     "enter_description": "Նաստանագրություն",
     "post_published_promoted": "ፖስት የታተመ እና በተሳካ ሁኔታ ያበረታታል",
-    "promote_error": "አንድ ነገር በገባው ጊዜ ውስጥ ተሳስቷል"
+    "promote_error": "አንድ ነገር በገባው ጊዜ ውስጥ ተሳስቷል",
+    "select_country": "አገር ይምረጡ",
+    "country": "ሀገር"
   },
   "ditchNote": {
     "title": "እንኳን ወደ Ditchit - ዋነኛው አካባቢ ገበያ እንኳን መጣችሁ!",

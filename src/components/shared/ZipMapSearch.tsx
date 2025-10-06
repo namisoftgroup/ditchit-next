@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { toast } from "sonner";
 import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
+import { useTranslations } from "next-intl";
 
 const containerStyle = {
   borderRadius: "16px",
@@ -13,6 +14,8 @@ const containerStyle = {
 };
 
 export default function ZipMapSearch({ countryId }: { countryId: string }) {
+  const t = useTranslations("auth");
+
   const { watch, setValue } = useFormContext();
   const mapRef = useRef<google.maps.Map | null>(null);
   const zipCode = watch("zip_code");
@@ -41,9 +44,7 @@ export default function ZipMapSearch({ countryId }: { countryId: string }) {
           setValue("longitude", lng);
         },
         () => {
-          toast.error(
-            "لم نتمكن من تحديد موقعك، الموقع الافتراضي (الولايات المتحدة الأمريكية)"
-          );
+          toast.error(t("location_error"));
           const lat = 37.0902;
           const lng = -95.7129;
           setMapCenter({ lat, lng });
@@ -58,7 +59,7 @@ export default function ZipMapSearch({ countryId }: { countryId: string }) {
       setValue("latitude", lat);
       setValue("longitude", lng);
     }
-  }, [setValue, countryId]);
+  }, [setValue, countryId, t]);
 
   useEffect(() => {
     const fetchCoordinates = async () => {
@@ -71,12 +72,12 @@ export default function ZipMapSearch({ countryId }: { countryId: string }) {
           setMapCenter({ lat: result.latitude, lng: result.longitude });
           setLastZip(zipCode);
         } else {
-          toast.error("لم يتم العثور على موقع بهذا الرمز البريدي");
+          toast.error(t("zipcode_error"));
         }
       }
     };
     fetchCoordinates();
-  }, [zipCode, lastZip, setValue]);
+  }, [zipCode, lastZip, setValue, t]);
 
   const handleMapDragEnd = useCallback(() => {
     if (countryId === "1") return;
@@ -89,7 +90,6 @@ export default function ZipMapSearch({ countryId }: { countryId: string }) {
     }
   }, [setValue, countryId]);
 
-  
   const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
     if (countryId === "1") return;
     const lat = e.latLng?.lat();

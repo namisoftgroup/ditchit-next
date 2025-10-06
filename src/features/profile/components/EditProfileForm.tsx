@@ -72,18 +72,17 @@ export default function EditProfileForm({
       });
       if (res?.data.code === 200) {
         setUser(res.data.data.user);
-        toast.success("Profile updated successfully");
+        toast.success(t("update"));
       } else {
         toast.error(res?.data.message || "update profile failed");
       }
     } catch (error) {
       console.error("Submit error:", error);
-      toast.error("Something went wrong");
+      toast.error(t("something_went_wrong"));
     } finally {
       setIsPending(false);
     }
   };
-  console.log("edit profile +==", countries, user);
 
   return (
     <FormProvider {...methods}>

@@ -184,7 +184,11 @@
     "address_validation": "Địa chỉ phải có ít nhất 3 ký tự",
     "pass_confirm_length": "Xác nhận mật khẩu phải có ít nhất 6 ký tự",
     "register_success": "Đăng ký thành công",
-    "update": "Cập nhật"
+    "update": "Cập nhật",
+    "select_country": "Chọn quốc gia",
+    "country": "Quốc gia",
+    "location_error": "Chúng tôi không thể xác định vị trí của bạn. Vị trí mặc định là (Hoa Kỳ)",
+    "zipcode_error": "Không tìm thấy vị trí nào với mã zip này"
   },
   "contact": {
     "full_name": "Họ và tên",
@@ -247,7 +251,9 @@
     "cover_image": "Ảnh bìa",
     "enter_description": "Nhập Mô tả",
     "post_published_promoted": "Bài đăng được xuất bản và quảng bá thành công",
-    "promote_error": "Có gì đó không ổn trong thời gian Promte"
+    "promote_error": "Có gì đó không ổn trong thời gian Promte",
+    "select_country": "Chọn quốc gia",
+    "country": "Quốc gia"
   },
   "ditchNote": {
     "title": "Giới thiệu Ditchit - Thị trường địa phương tuyệt vời nhất!",

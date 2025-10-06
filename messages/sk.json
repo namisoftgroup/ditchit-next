@@ -184,7 +184,11 @@
     "address_validation": "Adresa musí mať aspoň 3 znaky",
     "pass_confirm_length": "Potvrdenie hesla musí mať aspoň 6 znakov",
     "register_success": "Registrácia úspešná",
-    "update": "Aktualizovať"
+    "update": "Aktualizovať",
+    "select_country": "Vyberacia krajina",
+    "country": "Krajina",
+    "location_error": "Nemohli sme určiť vašu polohu. Predvolená poloha je (USA)",
+    "zipcode_error": "S týmto PSČ sa nenašla žiadne miesto"
   },
   "contact": {
     "full_name": "Celé meno",
@@ -247,7 +251,9 @@
     "cover_image": "Obalový obrázok",
     "enter_description": "Zadať popis",
     "post_published_promoted": "Príspevok publikoval a úspešne propagoval",
-    "promote_error": "Niečo sa pokazilo počas Promte"
+    "promote_error": "Niečo sa pokazilo počas Promte",
+    "select_country": "Vyberacia krajina",
+    "country": "Krajina"
   },
   "ditchNote": {
     "title": "Predstavujeme Ditchit - Najlepší miestny trh!",

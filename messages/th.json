@@ -184,7 +184,11 @@
     "address_validation": "ที่อยู่อย่างน้อยต้องมี 3 ตัวอักษร",
     "pass_confirm_length": "การยืนยันรหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
     "register_success": "ลงทะเบียนสำเร็จ",
-    "update": "อัปเดต"
+    "update": "อัปเดต",
+    "select_country": "เลือกประเทศ",
+    "country": "ประเทศ",
+    "location_error": "เราไม่สามารถระบุตำแหน่งของคุณได้ ตำแหน่งเริ่มต้นคือ (สหรัฐอเมริกา)",
+    "zipcode_error": "ไม่พบตำแหน่งที่พบกับรหัสไปรษณีย์นี้"
   },
   "contact": {
     "full_name": "ชื่อเต็ม",
@@ -247,7 +251,9 @@
     "cover_image": "ภาพปก",
     "enter_description": "ป้อนคำอธิบาย",
     "post_published_promoted": "โพสต์ที่เผยแพร่และส่งเสริมให้สำเร็จ",
-    "promote_error": "มีบางอย่างผิดปกติในระหว่าง Promte"
+    "promote_error": "มีบางอย่างผิดปกติในระหว่าง Promte",
+    "select_country": "เลือกประเทศ",
+    "country": "ประเทศ"
   },
   "ditchNote": {
     "title": "ขอแนะนำ Ditchit - ตลาดในท้องถิ่นที่ดีที่สุด!",

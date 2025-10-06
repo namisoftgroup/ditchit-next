@@ -3,11 +3,13 @@ import PageBanner from "@/components/shared/PageBanner";
 import RegisterForm from "@/features/auth/components/RegisterForm";
 import { getCountries } from "@/services/getCountries";
 
-export default async function page() {
+export default async function page({ params }: { params: { "country-locale": string } }) {
   const t = await getTranslations("common");
-  const countriesRes = await getCountries('ar');
+    const lang = params["country-locale"].split("-")[0]; 
+
+  const countriesRes = await getCountries(lang);
   const countries = countriesRes.data.data;
-  
+
   return (
     <>
       <PageBanner

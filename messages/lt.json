@@ -184,7 +184,11 @@
     "address_validation": "Adresas turi būti bent 3 simbolių ilgio.",
     "pass_confirm_length": "Slaptažodžio patvirtinimas turi būti ne trumpesnis kaip 6 simboliai.",
     "register_success": "Registracija sėkminga",
-    "update": "Atnaujinimas"
+    "update": "Atnaujinimas",
+    "select_country": "Pasirinkite Šalis",
+    "country": "Šalis",
+    "location_error": "Negalėjome nustatyti jūsų vietos. Numatytoji vieta yra (JAV)",
+    "zipcode_error": "Nėra vietos su šiuo pašto kodu"
   },
   "contact": {
     "full_name": "Pilnas vardas",
@@ -247,7 +251,9 @@
     "cover_image": "Viršelio nuotrauka",
     "enter_description": "Įveskite aprašymą",
     "post_published_promoted": "„Post“ paskelbta ir sėkmingai reklamuojama",
-    "promote_error": "„Promte“ metu kažkas nutiko"
+    "promote_error": "„Promte“ metu kažkas nutiko",
+    "select_country": "Pasirinkite Šalis",
+    "country": "Šalis"
   },
   "ditchNote": {
     "title": "Pristatau Ditchit - galutinis vietinis turgus!",

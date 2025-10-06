@@ -184,7 +184,11 @@
     "address_validation": "Aadress peab olema vähemalt 3 märki pikk.",
     "pass_confirm_length": "Parooli kinnitamine peab olema vähemalt 6 tähemärki.",
     "register_success": "Registreerimine õnnestus",
-    "update": "Uuendus"
+    "update": "Uuendus",
+    "select_country": "Vali riik",
+    "country": "Riik",
+    "location_error": "Me ei saanud teie asukohta kindlaks teha. Vaikimisi asukoht on (Ameerika Ühendriigid)",
+    "zipcode_error": "Selle postiinoodiga ei leitud asukohta"
   },
   "contact": {
     "full_name": "Täisnimi",
@@ -247,7 +251,9 @@
     "cover_image": "Kaane pilt",
     "enter_description": "Sisestage kirjeldus",
     "post_published_promoted": "Post avaldas ja reklaamiti edukalt",
-    "promote_error": "PromTe ajal läks midagi valesti"
+    "promote_error": "PromTe ajal läks midagi valesti",
+    "select_country": "Vali riik",
+    "country": "Riik"
   },
   "ditchNote": {
     "title": "Tutvustame Ditchit - Parim Kohalik Turg!",

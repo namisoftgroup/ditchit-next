@@ -184,7 +184,11 @@
     "address_validation": "Adres musi mieć co najmniej 3 znaki.",
     "pass_confirm_length": "Potwierdzenie hasła musi mieć co najmniej 6 znaków.",
     "register_success": "Rejestracja zakończona sukcesem",
-    "update": "Aktualizacja"
+    "update": "Aktualizacja",
+    "select_country": "Wybierz kraj",
+    "country": "Kraj",
+    "location_error": "Nie mogliśmy określić Twojej lokalizacji. Domyślna lokalizacja to (Stany Zjednoczone)",
+    "zipcode_error": "Brak lokalizacji z tym kodem pocztowym"
   },
   "contact": {
     "full_name": "Pełne imię i nazwisko",
@@ -247,7 +251,9 @@
     "cover_image": "Obraz okładki",
     "enter_description": "Wprowadź opis",
     "post_published_promoted": "Opublikowane i promowane skutecznie",
-    "promote_error": "coś poszło nie tak podczas ProSte"
+    "promote_error": "coś poszło nie tak podczas ProSte",
+    "select_country": "Wybierz kraj",
+    "country": "Kraj"
   },
   "ditchNote": {
     "title": "Przedstawiamy Ditchit - Ostateczny Lokalny Rynek!",

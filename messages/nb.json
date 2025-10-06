@@ -184,7 +184,11 @@
     "address_validation": "Adressen må være minst 3 tegn",
     "pass_confirm_length": "Passordbekreftelse må være minst 6 tegn.",
     "register_success": "Registreringen var vellykket",
-    "update": "Oppdatering"
+    "update": "Oppdatering",
+    "select_country": "Velg land",
+    "country": "Land",
+    "location_error": "Vi kunne ikke bestemme din beliggenhet. Standardplassering er (USA)",
+    "zipcode_error": "Ingen plassering funnet med dette postnummeret"
   },
   "contact": {
     "full_name": "Fullt navn",
@@ -247,7 +251,9 @@
     "cover_image": "Omslagsbilde",
     "enter_description": "Skriv beskrivelse",
     "post_published_promoted": "Post publisert og forfremmet vellykket",
-    "promote_error": "noe gikk galt under promte"
+    "promote_error": "noe gikk galt under promte",
+    "select_country": "Velg land",
+    "country": "Land"
   },
   "ditchNote": {
     "title": "Presenterer Ditchit - Det ultimate lokale markedet!",

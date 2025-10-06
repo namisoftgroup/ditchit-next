@@ -18,7 +18,8 @@ export const registerSchema = z.object({
     .regex(
       /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
       "phone_validation"
-    ),
+    )
+    .optional(),
   address: z.string().min(3, "address_validation"),
   password: z.string().min(6, "password_validation"),
   zip_code: z.string().regex(/^[0-9]{5}$/, "zipcode_validation"),

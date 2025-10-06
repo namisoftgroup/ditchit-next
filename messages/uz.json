@@ -184,7 +184,11 @@
     "address_validation": "Manzil kamida 3 ta belgidan iborat bo'lishi kerak",
     "pass_confirm_length": "Parolni tasdiqlash kamida 6 ta belgidan iborat bo'lishi kerak",
     "register_success": "Ro‘yxatdan o‘tish muvaffaqiyatli amalga oshirildi",
-    "update": "Yangilash"
+    "update": "Yangilash",
+    "select_country": "Mamlakatni tanlang",
+    "country": "Mamlakat",
+    "location_error": "Sizning joylashuvingizni aniqlay olmadik. Standart joylashgan joy (Amerika Qo'shma Shtatlari)",
+    "zipcode_error": "Ushbu pochta indeksi bilan biron bir joy topilmadi"
   },
   "contact": {
     "full_name": "To'liq ism",
@@ -247,7 +251,9 @@
     "cover_image": "Muqova rasmi",
     "enter_description": "Tavsif kiriting",
     "post_published_promoted": "Post e'lon qilingan va muvaffaqiyatli targ'ib qilingan",
-    "promote_error": "prost paytida nimadir noto'g'ri ketdi"
+    "promote_error": "prost paytida nimadir noto'g'ri ketdi",
+    "select_country": "Mamlakatni tanlang",
+    "country": "Mamlakat"
   },
   "ditchNote": {
     "title": "Ditchitni taqdim etamiz - Eng zo'r Mahalliy Bozor!",

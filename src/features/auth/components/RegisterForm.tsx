@@ -86,13 +86,6 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
           error={errors.name?.message ? t(errors.name?.message) : undefined}
         />
 
-        <InputField
-          label={t("phone_number")}
-          id="phone"
-          placeholder="(123) 456-7890"
-          {...register("phone")}
-          error={errors.phone?.message ? t(errors.phone?.message) : undefined}
-        />
 
         <InputField
           label={t("email")}
@@ -161,6 +154,14 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
         <input type="hidden" {...register("longitude")} />
 
         <ZipMapSearch countryId={methods.watch("country_id")} />
+        
+        <InputField
+          label={t("phone_number")}
+          id="phone"
+          placeholder="(123) 456-7890"
+          {...register("phone")}
+          error={errors.phone?.message ? t(errors.phone?.message) : undefined}
+        />
 
         <button
           type="submit"

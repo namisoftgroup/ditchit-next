@@ -184,7 +184,11 @@
     "address_validation": "Адрес мора имати најмање 3 карактера",
     "pass_confirm_length": "Potvrda lozinke mora imati najmanje 6 karaktera",
     "register_success": "Registracija uspešna",
-    "update": "Ажурирање"
+    "update": "Ажурирање",
+    "select_country": "Изаберите земљу",
+    "country": "Земља",
+    "location_error": "Нисмо могли да утврдимо вашу локацију. Подразумевана локација је (Сједињене Државе)",
+    "zipcode_error": "Није пронађена локација са овим поштанским бројем"
   },
   "contact": {
     "full_name": "Puno ime",
@@ -247,7 +251,9 @@
     "cover_image": "Naslovna slika",
     "enter_description": "Унесите опис",
     "post_published_promoted": "Пост објављен и успешно промовисан",
-    "promote_error": "нешто је пошло по злу током промте-а"
+    "promote_error": "нешто је пошло по злу током промте-а",
+    "select_country": "Изаберите земљу",
+    "country": "Земља"
   },
   "ditchNote": {
     "title": "Predstavljamo Ditchit - ultimativno lokalno tržište!",

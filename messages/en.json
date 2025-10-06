@@ -186,7 +186,9 @@
     "register_success": "Register successful",
     "update": "Update",
     "select_country": "Select Country",
-    "country": "Country"
+    "country": "Country",
+    "location_error": "We could not determine your location. Default location is (United States)",
+    "zipcode_error": "No location found with this zip code"
   },
   "contact": {
     "full_name": "Full Name",

@@ -184,7 +184,11 @@
     "address_validation": "Dapat ay hindi bababa sa 3 karakter ang address",
     "pass_confirm_length": "Ang kumpirmasyon ng password ay dapat na hindi bababa sa 6 na karakter.",
     "register_success": "Matagumpay na rehistro",
-    "update": "Petsa ng pag-update"
+    "update": "Petsa ng pag-update",
+    "select_country": "Piliin ang Bansa",
+    "country": "Bansa",
+    "location_error": "Hindi namin matukoy ang iyong lokasyon. Default na lokasyon ay (Estados Unidos)",
+    "zipcode_error": "Walang lokasyon na natagpuan sa zip code na ito"
   },
   "contact": {
     "full_name": "Buong pangalan",
@@ -247,7 +251,9 @@
     "cover_image": "Pabalat ng Imahe",
     "enter_description": "Ilagay ang Paglalarawan",
     "post_published_promoted": "Ang nai -publish na nai -publish at matagumpay na na -promote",
-    "promote_error": "May mali sa promte"
+    "promote_error": "May mali sa promte",
+    "select_country": "Piliin ang Bansa",
+    "country": "Bansa"
   },
   "ditchNote": {
     "title": "Ipinapakilala ang Ditchit - Ang Pinakamahusay na Lokal na Pamilihan!",

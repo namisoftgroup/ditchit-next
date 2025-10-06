@@ -184,7 +184,11 @@
     "address_validation": "地址必须至少包含3个字符",
     "pass_confirm_length": "密码确认必须至少包含6个字符",
     "register_success": "注册成功",
-    "update": "更新"
+    "update": "更新",
+    "select_country": "选择国家",
+    "country": "国家",
+    "location_error": "我们无法确定您的位置。默认位置是（美国）",
+    "zipcode_error": "该邮政编码找不到位置"
   },
   "contact": {
     "full_name": "全名",
@@ -247,7 +251,9 @@
     "cover_image": "封面图片",
     "enter_description": "输入描述",
     "post_published_promoted": "帖子已成功发布并促进",
-    "promote_error": "提前期间出了问题"
+    "promote_error": "提前期间出了问题",
+    "select_country": "选择国家",
+    "country": "国家"
   },
   "ditchNote": {
     "title": "介绍 Ditchit —— 终极本地市场！",

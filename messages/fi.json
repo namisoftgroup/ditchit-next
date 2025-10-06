@@ -184,7 +184,11 @@
     "address_validation": "Osoitteen on oltava vähintään 3 merkkiä pitkältä.",
     "pass_confirm_length": "Salasanan vahvistuksen on oltava vähintään 6 merkkiä.",
     "register_success": "Rekisteröinti onnistui",
-    "update": "Päivitys"
+    "update": "Päivitys",
+    "select_country": "Maasta",
+    "country": "Maa",
+    "location_error": "Emme voineet määrittää sijaintiasi. Oletuspaikka on (Yhdysvallat)",
+    "zipcode_error": "Tämän postinumeron kanssa ei löydy sijaintia"
   },
   "contact": {
     "full_name": "Koko nimi",
@@ -247,7 +251,9 @@
     "cover_image": "Kansikuva",
     "enter_description": "Syötä kuvaus",
     "post_published_promoted": "Viesti julkaistu ja mainostettiin onnistuneesti",
-    "promote_error": "Jotain meni pieleen promten aikana"
+    "promote_error": "Jotain meni pieleen promten aikana",
+    "select_country": "Maasta",
+    "country": "Maa"
   },
   "ditchNote": {
     "title": "Esittelyssä Ditchit - Huippuluokan paikallinen markkinapaikka!",

@@ -184,7 +184,11 @@
     "address_validation": "Adresa musí být dlouhá alespoň 3 znaky.",
     "pass_confirm_length": "Potvrzení hesla musí mít alespoň 6 znaků.",
     "register_success": "Registrace úspěšná",
-    "update": "Aktualizace"
+    "update": "Aktualizace",
+    "select_country": "Vyberte zemi",
+    "country": "Země",
+    "location_error": "Nemohli jsme určit vaši polohu. Výchozí umístění je (Spojené státy)",
+    "zipcode_error": "S tímto kódem PSČ nebylo nalezeno žádné umístění"
   },
   "contact": {
     "full_name": "Celé jméno",
@@ -247,7 +251,9 @@
     "cover_image": "Obrázek na obálce",
     "enter_description": "Zadejte popis",
     "post_published_promoted": "Příspěvek publikoval a úspěšně propagoval",
-    "promote_error": "Během Promte se něco pokazilo"
+    "promote_error": "Během Promte se něco pokazilo",
+    "select_country": "Vyberte zemi",
+    "country": "Země"
   },
   "ditchNote": {
     "title": "Představujeme Ditchit - Nejlepší místní tržiště!",

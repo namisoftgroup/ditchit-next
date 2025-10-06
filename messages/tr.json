@@ -184,7 +184,11 @@
     "address_validation": "Adres en az 3 karakter olmalıdır",
     "pass_confirm_length": "Parola onayı en az 6 karakter olmalıdır",
     "register_success": "Kayıt başarılı",
-    "update": "Güncelleme"
+    "update": "Güncelleme",
+    "select_country": "Ülke Seçin",
+    "country": "Ülke",
+    "location_error": "Konumunuzu belirleyemedik. Varsayılan konum (Amerika Birleşik Devletleri)",
+    "zipcode_error": "Bu posta kodu ile konum bulunamadı"
   },
   "contact": {
     "full_name": "Tam Adı",
@@ -247,7 +251,9 @@
     "cover_image": "Kapak Görseli",
     "enter_description": "Açıklama Girin",
     "post_published_promoted": "Yayınlanan ve başarılı bir şekilde tanıtılan gönderi",
-    "promote_error": "Promte sırasında bir şeyler ters gitti"
+    "promote_error": "Promte sırasında bir şeyler ters gitti",
+    "select_country": "Ülke Seçin",
+    "country": "Ülke"
   },
   "ditchNote": {
     "title": "Ditchit'i Tanıtıyoruz - En İyi Yerel Pazar Yeri!",

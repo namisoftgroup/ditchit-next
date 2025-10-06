@@ -184,7 +184,11 @@
     "address_validation": "Ünvan ən azı 3 simvoldan ibarət olmalıdır.",
     "pass_confirm_length": "Şifrə təsdiqi ən azı 6 simvol olmalıdır.",
     "register_success": "Qeydiyyat müvəffəqiyyətlə başa çatdı.",
-    "update": "Yeniləmə"
+    "update": "Yeniləmə",
+    "select_country": "Ölkə seçin",
+    "country": "Ölkə",
+    "location_error": "Yerinizi təyin edə bilmədik. Defolt Yer (Amerika Birləşmiş Ştatları)",
+    "zipcode_error": "Bu poçt kodu ilə heç bir yer tapılmadı"
   },
   "contact": {
     "full_name": "Tam adı",
@@ -247,7 +251,9 @@
     "cover_image": "Örtük Şəkil",
     "enter_description": "Təsviri daxil edin",
     "post_published_promoted": "Yazı yayımlanıb və uğurla təbliğ olunur",
-    "promote_error": "Promte zamanı bir şey səhv oldu"
+    "promote_error": "Promte zamanı bir şey səhv oldu",
+    "select_country": "Ölkə seçin",
+    "country": "Ölkə"
   },
   "ditchNote": {
     "title": "Ditchit - Ən Yaxşı Lokal Bazarla Tanış Olun!",

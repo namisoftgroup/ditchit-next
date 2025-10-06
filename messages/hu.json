@@ -184,7 +184,11 @@
     "address_validation": "A címnek legalább 3 karakterből kell állnia.",
     "pass_confirm_length": "A jelszó megerősítése legalább 6 karakterből kell álljon.",
     "register_success": "Regisztráció sikeres",
-    "update": "Frissítés"
+    "update": "Frissítés",
+    "select_country": "Válassza ki az országot",
+    "country": "Ország",
+    "location_error": "Nem tudtuk meghatározni a helyét. Az alapértelmezett hely (Egyesült Államok)",
+    "zipcode_error": "Nem található hely ezzel a irányítószámmal"
   },
   "contact": {
     "full_name": "Teljes név",
@@ -247,7 +251,9 @@
     "cover_image": "Borítókép",
     "enter_description": "Írja be a leírást",
     "post_published_promoted": "A bejegyzés sikeresen közzétett és előléptetett",
-    "promote_error": "Valami rosszul ment a PROPTE alatt"
+    "promote_error": "Valami rosszul ment a PROPTE alatt",
+    "select_country": "Válassza ki az országot",
+    "country": "Ország"
   },
   "ditchNote": {
     "title": "Bemutatjuk a Ditchit - Az Ultimátum Helyi Piacot!",

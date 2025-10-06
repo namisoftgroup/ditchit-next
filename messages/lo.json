@@ -184,7 +184,11 @@
     "address_validation": "Address wa must hai 3 characters se.",
     "pass_confirm_length": "Paswɔd kɔnfɪmeɪʃən mʌst bi æt li:st 6 kærɪktɚz",
     "register_success": "ລົງບັດສໍາເລັດ",
-    "update": "ປັບປຸງ"
+    "update": "ປັບປຸງ",
+    "select_country": "ເລືອກປະເທດ",
+    "country": "ປະເທດ",
+    "location_error": "ພວກເຮົາບໍ່ສາມາດກໍານົດສະຖານທີ່ຂອງທ່ານ. ສະຖານທີ່ເລີ່ມຕົ້ນແມ່ນ (ສະຫະລັດ)",
+    "zipcode_error": "ບໍ່ພົບສະຖານທີ່ທີ່ພົບກັບລະຫັດ ZIP ນີ້"
   },
   "contact": {
     "full_name": "ຊື່ເຕັມ",
@@ -247,7 +251,9 @@
     "cover_image": "ຮູບປົກ",
     "enter_description": "འབྲི་བ།",
     "post_published_promoted": "Post ເຜີຍແຜ່ແລະສົ່ງເສີມຢ່າງສໍາເລັດຜົນ",
-    "promote_error": "ມີບາງສິ່ງບາງຢ່າງຜິດພາດໃນເວລາທີ່ສະຫຼາດ"
+    "promote_error": "ມີບາງສິ່ງບາງຢ່າງຜິດພາດໃນເວລາທີ່ສະຫຼາດ",
+    "select_country": "ເລືອກປະເທດ",
+    "country": "ປະເທດ"
   },
   "ditchNote": {
     "title": "ແນະນໍາ DAWITIT - ຕະຫລາດທ້ອງຖິ່ນສຸດທ້າຍ!",

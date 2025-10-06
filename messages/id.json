@@ -184,7 +184,11 @@
     "address_validation": "Alamat harus terdiri dari setidaknya 3 karakter.",
     "pass_confirm_length": "Konfirmasi kata sandi harus minimal 6 karakter",
     "register_success": "Pendaftaran berhasil",
-    "update": "Perbarui"
+    "update": "Perbarui",
+    "select_country": "Pilih Negara",
+    "country": "Negara",
+    "location_error": "Kami tidak dapat menentukan lokasi Anda. Lokasi default adalah (Amerika Serikat)",
+    "zipcode_error": "Tidak ada lokasi yang ditemukan dengan kode pos ini"
   },
   "contact": {
     "full_name": "Nama Lengkap",
@@ -247,7 +251,9 @@
     "cover_image": "Gambar Sampul",
     "enter_description": "Masukkan Deskripsi",
     "post_published_promoted": "Posting diterbitkan dan dipromosikan dengan sukses",
-    "promote_error": "ada yang salah selama promte"
+    "promote_error": "ada yang salah selama promte",
+    "select_country": "Pilih Negara",
+    "country": "Negara"
   },
   "ditchNote": {
     "title": "Memperkenalkan Ditchit - Pasar Lokal Terbaik!",

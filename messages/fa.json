@@ -184,7 +184,11 @@
     "address_validation": "آدرس باید حداقل ۳ کاراکتر باشد",
     "pass_confirm_length": "تأیید رمز عبور باید حداقل ۶ کاراکتر باشد.",
     "register_success": "ثبت نام موفقیت آمیز بود",
-    "update": "به‌روزرسانی"
+    "update": "به‌روزرسانی",
+    "select_country": "کشور را انتخاب کنید",
+    "country": "کشور",
+    "location_error": "ما نتوانستیم مکان شما را تعیین کنیم. مکان پیش فرض (ایالات متحده) است",
+    "zipcode_error": "هیچ مکانی با این کد پستی یافت نمی شود"
   },
   "contact": {
     "full_name": "نام کامل",
@@ -247,7 +251,9 @@
     "cover_image": "تصویر جلد",
     "enter_description": "توضیحات را وارد کنید.",
     "post_published_promoted": "ارسال با موفقیت منتشر و تبلیغ شد",
-    "promote_error": "چیزی در طول Promte اشتباه پیش آمد"
+    "promote_error": "چیزی در طول Promte اشتباه پیش آمد",
+    "select_country": "کشور را انتخاب کنید",
+    "country": "کشور"
   },
   "ditchNote": {
     "title": "معرفی دیچیت - بازار محلی نهایی!",

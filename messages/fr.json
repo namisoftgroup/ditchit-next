@@ -184,7 +184,11 @@
     "address_validation": "L'adresse doit comporter au moins 3 caractères.",
     "pass_confirm_length": "La confirmation du mot de passe doit comporter au moins 6 caractères.",
     "register_success": "Inscription réussie",
-    "update": "Mise à jour"
+    "update": "Mise à jour",
+    "select_country": "Pays de sélection",
+    "country": "Pays",
+    "location_error": "Nous n'avons pas pu déterminer votre emplacement. L'emplacement par défaut est (États-Unis)",
+    "zipcode_error": "Aucun emplacement trouvé avec ce code postal"
   },
   "contact": {
     "full_name": "Nom complet",
@@ -247,7 +251,9 @@
     "cover_image": "Image de couverture",
     "enter_description": "Entrez la description",
     "post_published_promoted": "Post publié et promu avec succès",
-    "promote_error": "Quelque chose a mal tourné pendant Prom"
+    "promote_error": "Quelque chose a mal tourné pendant Prom",
+    "select_country": "Pays de sélection",
+    "country": "Pays"
   },
   "ditchNote": {
     "title": "Présentation de Ditchit - Le Marché Local Ultime !",

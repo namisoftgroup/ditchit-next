@@ -184,7 +184,11 @@
     "address_validation": "Adres moet minstens 3 tekens zijn",
     "pass_confirm_length": "Wachtwoordbevestiging moet minimaal 6 tekens zijn.",
     "register_success": "Registratie succesvol",
-    "update": "Bijwerken"
+    "update": "Bijwerken",
+    "select_country": "Selecteer land",
+    "country": "Land",
+    "location_error": "We konden uw locatie niet bepalen. Standaardlocatie is (Verenigde Staten)",
+    "zipcode_error": "Geen locatie gevonden met deze postcode"
   },
   "contact": {
     "full_name": "Volledige naam",
@@ -247,7 +251,9 @@
     "cover_image": "Omslagafbeelding",
     "enter_description": "Voer Beschrijving In",
     "post_published_promoted": "Post gepubliceerd en met succes gepromoot",
-    "promote_error": "Er is iets misgegaan tijdens Promte"
+    "promote_error": "Er is iets misgegaan tijdens Promte",
+    "select_country": "Selecteer land",
+    "country": "Land"
   },
   "ditchNote": {
     "title": "Maak kennis met Ditchit - De Ultieme Lokale Marktplaats!",

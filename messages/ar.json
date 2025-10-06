@@ -185,8 +185,10 @@
     "pass_confirm_length": "يجب أن تتكون تأكيد كلمة المرور من 6 أحرف على الأقل",
     "register_success": "تسجيل ناجح",
     "update": "تحديث",
-    "select_country" : "اختر الدولة",
-    "country": "دولة"
+    "select_country": "اختر الدولة",
+    "country": "دولة",
+    "location_error": "لم نتمكن من تحديد موقعك، الموقع الافتراضي (الولايات المتحدة الأمريكية)",
+    "zipcode_error": "لم يتم العثور على موقع بهذا الرمز البريدي"
   },
   "contact": {
     "full_name": "الاسم الكامل",
@@ -250,8 +252,8 @@
     "enter_description": "أدخل الوصف",
     "post_published_promoted": "تم نشر الاعلان والترويج له بنجاح",
     "promote_error": "حدث خطأ ما خلال الترويج",
-    "select_country" : "اختر الدولة",
-    "country" :"دولة"
+    "select_country": "اختر الدولة",
+    "country": "دولة"
   },
   "ditchNote": {
     "title": "أهلاً بكم في Ditchit - السوق المحلي الأمثل!",

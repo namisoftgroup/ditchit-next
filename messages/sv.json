@@ -184,7 +184,11 @@
     "address_validation": "Adressen måste vara minst 3 tecken lång",
     "pass_confirm_length": "Lösenordsbekräftelsen måste vara minst 6 tecken lång",
     "register_success": "Registrering lyckades",
-    "update": "Uppdatera"
+    "update": "Uppdatera",
+    "select_country": "Välj land",
+    "country": "Land",
+    "location_error": "Vi kunde inte bestämma din plats. Standardplats är (USA)",
+    "zipcode_error": "Ingen plats hittades med denna postnummer"
   },
   "contact": {
     "full_name": "Fullständigt namn",
@@ -247,7 +251,9 @@
     "cover_image": "Omslagsbild",
     "enter_description": "Ange beskrivning",
     "post_published_promoted": "Post publicerad och befordrad framgångsrikt",
-    "promote_error": "något gick fel under promte"
+    "promote_error": "något gick fel under promte",
+    "select_country": "Välj land",
+    "country": "Land"
   },
   "ditchNote": {
     "title": "Introducerar Ditchit - Den ultimata lokala marknadsplatsen!",

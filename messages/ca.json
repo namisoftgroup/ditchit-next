@@ -184,7 +184,11 @@
     "address_validation": "L'adreça ha de tenir almenys 3 caràcters.",
     "pass_confirm_length": "La confirmació de la contrasenya ha de tenir almenys 6 caràcters.",
     "register_success": "Registreu amb èxit",
-    "update": "Actualització"
+    "update": "Actualització",
+    "select_country": "Seleccioneu el país",
+    "country": "País",
+    "location_error": "No hem pogut determinar la vostra ubicació. La ubicació per defecte és (Estats Units)",
+    "zipcode_error": "No es troba cap ubicació amb aquest codi postal"
   },
   "contact": {
     "full_name": "Nom complet",
@@ -247,7 +251,9 @@
     "cover_image": "Imatge de portada",
     "enter_description": "Introduïu la descripció",
     "post_published_promoted": "Publicat publicat i promocionat amb èxit",
-    "promote_error": "Alguna cosa va passar malament durant Promte"
+    "promote_error": "Alguna cosa va passar malament durant Promte",
+    "select_country": "Seleccioneu el país",
+    "country": "País"
   },
   "ditchNote": {
     "title": "Presentant Ditchit - El mercat local definitiu!",

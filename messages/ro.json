@@ -184,7 +184,11 @@
     "address_validation": "Adresa trebuie să aibă cel puțin 3 caractere.",
     "pass_confirm_length": "Confirmarea parolei trebuie să aibă cel puțin 6 caractere.",
     "register_success": "Înscriere reușită",
-    "update": "Actualizare"
+    "update": "Actualizare",
+    "select_country": "Selectați țară",
+    "country": "Ţară",
+    "location_error": "Nu am putut determina locația dvs. Locația implicită este (Statele Unite)",
+    "zipcode_error": "Nu se găsește nicio locație cu acest cod poștal"
   },
   "contact": {
     "full_name": "Nume complet",
@@ -247,7 +251,9 @@
     "cover_image": "Imagine de copertă",
     "enter_description": "Introduceți descrierea",
     "post_published_promoted": "Post publicat și promovat cu succes",
-    "promote_error": "Ceva nu a mers prost în timpul promului"
+    "promote_error": "Ceva nu a mers prost în timpul promului",
+    "select_country": "Selectați țară",
+    "country": "Ţară"
   },
   "ditchNote": {
     "title": "Introducerea Ditchit - Piața Locală Ultimativă!",

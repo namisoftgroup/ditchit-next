@@ -184,7 +184,11 @@
     "address_validation": "Adresa mora imati najmanje 3 znakova.",
     "pass_confirm_length": "Potvrda lozinke mora imati najmanje 6 znakova.",
     "register_success": "Registracija uspješna",
-    "update": "Ažuriranje"
+    "update": "Ažuriranje",
+    "select_country": "Odaberite zemlju",
+    "country": "Zemlja",
+    "location_error": "Nismo mogli odrediti vašu lokaciju. Zadana lokacija je (Sjedinjene Države)",
+    "zipcode_error": "Nije pronađena lokacija s ovim poštanskim brojem"
   },
   "contact": {
     "full_name": "Puno ime",
@@ -247,7 +251,9 @@
     "cover_image": "Naslovna slika",
     "enter_description": "Unesite opis",
     "post_published_promoted": "Post objavljen i promoviran uspješno",
-    "promote_error": "Nešto je pošlo po zlu za vrijeme premtea"
+    "promote_error": "Nešto je pošlo po zlu za vrijeme premtea",
+    "select_country": "Odaberite zemlju",
+    "country": "Zemlja"
   },
   "ditchNote": {
     "title": "Upoznajte Ditchit - Ultimativna lokalna tržnica!",

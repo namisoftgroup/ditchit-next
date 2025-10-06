@@ -184,7 +184,11 @@
     "address_validation": "Naslov mora vsebovati vsaj 3 znake",
     "pass_confirm_length": "Potrditev gesla mora biti dolga vsaj 6 znakov",
     "register_success": "Registracija uspešna",
-    "update": "Posodobitev"
+    "update": "Posodobitev",
+    "select_country": "Izberi državo",
+    "country": "Država",
+    "location_error": "Nismo mogli določiti vaše lokacije. Privzeta lokacija je (ZDA)",
+    "zipcode_error": "S to poštno kodo ni mogoče najti lokacije"
   },
   "contact": {
     "full_name": "Polno ime",
@@ -247,7 +251,9 @@
     "cover_image": "Naslovna slika",
     "enter_description": "Vnesite opis",
     "post_published_promoted": "Objava, objavljena in uspešno promovirana",
-    "promote_error": "Med Promteom je šlo nekaj narobe"
+    "promote_error": "Med Promteom je šlo nekaj narobe",
+    "select_country": "Izberi državo",
+    "country": "Država"
   },
   "ditchNote": {
     "title": "Predstavljamo Ditchit - Najboljše lokalno tržnico!",

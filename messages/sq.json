@@ -184,7 +184,11 @@
     "address_validation": "Adresa duhet të ketë të paktën 3 karaktere",
     "pass_confirm_length": "Konfirmimi i fjalëkalimit duhet të jetë të paktën 6 karaktere",
     "register_success": "Regjistrim i suksesshëm",
-    "update": "Përditësim"
+    "update": "Përditësim",
+    "select_country": "Zgjidhni vendin",
+    "country": "Vend",
+    "location_error": "Ne nuk mund të përcaktonim vendndodhjen tuaj. Vendndodhja e paracaktuar është (Shtetet e Bashkuara)",
+    "zipcode_error": "Asnjë vendndodhje nuk është gjetur me këtë kod zip"
   },
   "contact": {
     "full_name": "Emri i plotë",
@@ -247,7 +251,9 @@
     "cover_image": "Imazhi i kopertinës",
     "enter_description": "Fut përshkrimin",
     "post_published_promoted": "Postimi i botuar dhe promovuar me sukses",
-    "promote_error": "Diçka shkoi keq gjatë promte"
+    "promote_error": "Diçka shkoi keq gjatë promte",
+    "select_country": "Zgjidhni vendin",
+    "country": "Vend"
   },
   "ditchNote": {
     "title": "Prezantojmë Ditchit - Tregu Lokal Më i Mirë!",

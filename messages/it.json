@@ -184,7 +184,11 @@
     "address_validation": "L'indirizzo deve contenere almeno 3 caratteri",
     "pass_confirm_length": "La confirmación de la contraseña debe tener al menos 6 caracteres.",
     "register_success": "Registrazione avvenuta con successo",
-    "update": "Actualización"
+    "update": "Actualización",
+    "select_country": "Seleziona il paese",
+    "country": "Paese",
+    "location_error": "Non abbiamo potuto determinare la tua posizione. La posizione predefinita è (Stati Uniti)",
+    "zipcode_error": "Nessuna posizione trovata con questo codice postale"
   },
   "contact": {
     "full_name": "Nombre Completo",
@@ -247,7 +251,9 @@
     "cover_image": "Capa da imagem",
     "enter_description": "Ingresar descripción",
     "post_published_promoted": "Post pubblicato e promosso con successo",
-    "promote_error": "Qualcosa è andato storto durante Promte"
+    "promote_error": "Qualcosa è andato storto durante Promte",
+    "select_country": "Seleziona il paese",
+    "country": "Paese"
   },
   "ditchNote": {
     "title": "Presentamos Ditchit - ¡El Mercado Local Definitivo!",

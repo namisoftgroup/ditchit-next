@@ -184,7 +184,11 @@
     "address_validation": "주소는 최소 3자 이상이어야 합니다.",
     "pass_confirm_length": "비밀번호 확인은 최소 6자 이상이어야 합니다.",
     "register_success": "등록 성공적으로 완료되었습니다",
-    "update": "업데이트"
+    "update": "업데이트",
+    "select_country": "국가 선택",
+    "country": "국가",
+    "location_error": "우리는 귀하의 위치를 ​​결정할 수 없었습니다. 기본 위치는 (미국)",
+    "zipcode_error": "이 우편 번호에는 위치가 없습니다"
   },
   "contact": {
     "full_name": "성명",
@@ -247,7 +251,9 @@
     "cover_image": "표지 이미지",
     "enter_description": "설명을 입력하세요",
     "post_published_promoted": "게시물 게시 및 승진이 성공적으로 발행되었습니다",
-    "promote_error": "Promte 중에 뭔가 잘못되었습니다"
+    "promote_error": "Promte 중에 뭔가 잘못되었습니다",
+    "select_country": "국가 선택",
+    "country": "국가"
   },
   "ditchNote": {
     "title": "디치잇 소개 - 궁극의 지역 시장!",

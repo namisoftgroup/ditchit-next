@@ -184,7 +184,11 @@
     "address_validation": "Die Adresse muss mindestens 3 Zeichen lang sein.",
     "pass_confirm_length": "Die Passwortbestätigung muss mindestens 6 Zeichen lang sein.",
     "register_success": "Registrierung erfolgreich",
-    "update": "Aktualisierung"
+    "update": "Aktualisierung",
+    "select_country": "Wählen Sie Land aus",
+    "country": "Land",
+    "location_error": "Wir konnten Ihren Standort nicht bestimmen. Standardstandort ist (USA)",
+    "zipcode_error": "Kein Ort mit dieser Postleitzahl gefunden"
   },
   "contact": {
     "full_name": "Vollständiger Name",
@@ -247,7 +251,9 @@
     "cover_image": "Titelbild",
     "enter_description": "Beschreibung eingeben",
     "post_published_promoted": "Post veröffentlicht und erfolgreich gefördert",
-    "promote_error": "Während des Promte ging etwas schief"
+    "promote_error": "Während des Promte ging etwas schief",
+    "select_country": "Wählen Sie Land aus",
+    "country": "Land"
   },
   "ditchNote": {
     "title": "Einführung von Ditchit - Der ultimative lokale Marktplatz!",

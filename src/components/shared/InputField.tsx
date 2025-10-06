@@ -24,13 +24,13 @@ export default function InputField({
       <Input
         id={id}
         {...props}
-        className={`px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)] ${id === "phone" ? "ps-10" : ""}`}
+        className={`px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)] ${id === "phone" ? "" : ""}`}
       />
-      {id === "phone" && (
+      {/* {id === "phone" && (
         <span className="font-bold text-[var(--mainColor)] absolute start-4 top-[38px] transform">
           +1
         </span>
-      )}
+      )} */}
       {error && <div className="text-red-500 text-[12px]">{error}</div>}
     </div>
   );

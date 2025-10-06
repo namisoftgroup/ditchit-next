@@ -184,7 +184,11 @@
     "address_validation": "Alamat mesti sekurang-kurangnya 3 aksara",
     "pass_confirm_length": "Pengesahan kata laluan mesti sekurang-kurangnya 6 aksara.",
     "register_success": "Pendaftaran berjaya",
-    "update": "Kemas kini"
+    "update": "Kemas kini",
+    "select_country": "Pilih Negara",
+    "country": "Negara",
+    "location_error": "Kami tidak dapat menentukan lokasi anda. Lokasi lalai adalah (Amerika Syarikat)",
+    "zipcode_error": "Tiada lokasi yang dijumpai dengan kod zip ini"
   },
   "contact": {
     "full_name": "Nama Penuh",
@@ -247,7 +251,9 @@
     "cover_image": "Ime Utama",
     "enter_description": "Masukkan Penerangan",
     "post_published_promoted": "Catatan yang diterbitkan dan dinaikkan pangkat",
-    "promote_error": "ada yang tidak kena semasa promte"
+    "promote_error": "ada yang tidak kena semasa promte",
+    "select_country": "Pilih Negara",
+    "country": "Negara"
   },
   "ditchNote": {
     "title": "Memperkenalkan Ditchit - Pasar Tempatan Terbaik!",

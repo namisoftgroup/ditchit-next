@@ -184,7 +184,11 @@
     "address_validation": "Adresei jābūt vismaz 3 rakstzīmēm gariem.",
     "pass_confirm_length": "Parolei apstiprināšanai jābūt vismaz 6 rakstzīmēm garai.",
     "register_success": "Reģistrācija veiksmīga",
-    "update": "Atjauninājums"
+    "update": "Atjauninājums",
+    "select_country": "Izvēlēties valsti",
+    "country": "Apvidus",
+    "location_error": "Mēs nevarējām noteikt jūsu atrašanās vietu. Noklusējuma atrašanās vieta ir (Amerikas Savienotās Valstis)",
+    "zipcode_error": "Ar šo pasta indeksu nav atrasta vieta"
   },
   "contact": {
     "full_name": "Pilnais vārds",
@@ -247,7 +251,9 @@
     "cover_image": "Vāka attēls",
     "enter_description": "Ievadiet aprakstu",
     "post_published_promoted": "Post publicēts un veiksmīgi reklamēts",
-    "promote_error": "Promes laikā kaut kas nogāja greizi"
+    "promote_error": "Promes laikā kaut kas nogāja greizi",
+    "select_country": "Izvēlēties valsti",
+    "country": "Apvidus"
   },
   "ditchNote": {
     "title": "Iepazīstinām ar Ditchit - Galīgo Vietējo Tirgu!",

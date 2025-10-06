@@ -184,7 +184,11 @@
     "address_validation": "Anwani lazima iwe na herufi angalau 3",
     "pass_confirm_length": "Uthibitisho wa nywila lazima uwe angalau herufi 6",
     "register_success": "Usajili umefanikiwa",
-    "update": "Sasisha"
+    "update": "Sasisha",
+    "select_country": "Chagua nchi",
+    "country": "Nchi",
+    "location_error": "Hatukuweza kuamua eneo lako. Mahali pa msingi ni (Merika)",
+    "zipcode_error": "Hakuna eneo linalopatikana na nambari hii ya zip"
   },
   "contact": {
     "full_name": "Jina Kamili",
@@ -247,7 +251,9 @@
     "cover_image": "Picha ya Jalada",
     "enter_description": "Ingiza Maelezo",
     "post_published_promoted": "Chapisho lililochapishwa na kukuzwa kwa mafanikio",
-    "promote_error": "Kuna kitu kilienda vibaya wakati wa Promte"
+    "promote_error": "Kuna kitu kilienda vibaya wakati wa Promte",
+    "select_country": "Chagua nchi",
+    "country": "Nchi"
   },
   "ditchNote": {
     "title": "Tunukuza Ditchit - Soko Lako la Kijiji Lisilo na Mlinganyo!",

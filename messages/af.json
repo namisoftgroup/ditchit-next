@@ -184,7 +184,11 @@
     "address_validation": "Die adres moet minstens 3 karakters wees.",
     "pass_confirm_length": "Die wagwoordbevestiging moet minstens 6 karakters wees.",
     "register_success": "Registrasie suksesvol",
-    "update": "Opdatering"
+    "update": "Opdatering",
+    "select_country": "Kies land",
+    "country": "Nasie",
+    "location_error": "Ons kon nie u ligging bepaal nie. Standaardligging is (Verenigde State)",
+    "zipcode_error": "Geen ligging gevind met hierdie poskode nie"
   },
   "contact": {
     "full_name": "Volledige Naam",
@@ -248,7 +252,8 @@
     "enter_description": "Voer beskrywing in",
     "post_published_promoted": "Pos gepubliseer en suksesvol bevorder",
     "promote_error": "Iets het verkeerd geloop tydens Promte",
-    "select_country" : "select country"
+    "select_country": "select country",
+    "country": "Nasie"
   },
   "ditchNote": {
     "title": "Bied Ditchit aan - Die Ultieme Plaaslike Markplek!",
