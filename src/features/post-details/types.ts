@@ -34,6 +34,10 @@ export interface PostDetailsResponse {
   date: string;
   time: string;
   publishing_duration: string;
+  country?: {
+    id: number;
+    title?: string;
+  };
 }
 
 export interface Category {
