@@ -112,7 +112,7 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
 
 
       />
-      {countryId !== '1' && (
+      {countryId === '1' && (
         <InputField
         label={t("zip_code")}
         id="zip_code"

@@ -111,6 +111,7 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
           control={methods.control}
           render={({ field }) => (
             <SelectField
+              dir=" "
               label={t("country")}
               id="country_id"
               value={field.value}
@@ -128,7 +129,7 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
             />
           )}
         />
-        {methods.watch("country_id") !== "1" && (
+        {methods.watch("country_id") === "1" && (
           <InputField
             label={t("zip_code")}
             id="zip_code"

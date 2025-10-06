@@ -137,6 +137,7 @@ export default function EditProfileForm({
 
             return (
               <SelectField
+                dir=" "
                 label={t("country")}
                 id="country_id"
                 value={selectedCountry}
