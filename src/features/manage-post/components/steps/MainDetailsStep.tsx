@@ -2,7 +2,6 @@
 
 import { Controller, useFormContext } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import TextField from "@/components/shared/TextField";
 import InputField from "@/components/shared/InputField";
 import MediaUpload from "@/lib/media/MediaUpload";
 import ZipMapSearch from "@/components/shared/ZipMapSearch";
@@ -26,16 +25,9 @@ export default function MainDetailsStep({ next, control, back, countries }: prop
   } = useFormContext();
 
   const t = useTranslations("manage_post");
-  const [countryId, setCountryId] = useState<any>("");
+  const [countryId, setCountryId] = useState("");
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Get all form values
-    const formData = getValues();
-    
-    // Log all form data to console
-    console.log("Form data being sent:", formData);
-    console.log("Country ID:", formData.country_id);
     
     const isValid = await trigger([
       "title",
