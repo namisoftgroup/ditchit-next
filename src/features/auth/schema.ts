@@ -22,6 +22,7 @@ export const registerSchema = z.object({
   address: z.string().min(3, "address_validation"),
   password: z.string().min(6, "password_validation"),
   zip_code: z.string().regex(/^[0-9]{5}$/, "zipcode_validation"),
+  country_id: z.string().min(1, "country_validation"),
 });
 
 export type registerFormValues = z.infer<typeof registerSchema>;

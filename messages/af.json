@@ -247,7 +247,8 @@
     "cover_image": "Omslagbeeld",
     "enter_description": "Voer beskrywing in",
     "post_published_promoted": "Pos gepubliseer en suksesvol bevorder",
-    "promote_error": "Iets het verkeerd geloop tydens Promte"
+    "promote_error": "Iets het verkeerd geloop tydens Promte",
+    "select_country" : "select country"
   },
   "ditchNote": {
     "title": "Bied Ditchit aan - Die Ultieme Plaaslike Markplek!",

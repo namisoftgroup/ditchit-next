@@ -19,6 +19,7 @@ export const editProfileSchema = z.object({
       /^[0-9]{5}$/,
       "zipcode_validation"
     ),
+    country_id: z.string().min(1, "country_validation"),
 });
 
 export type editProfileFormValues = z.infer<typeof editProfileSchema>;

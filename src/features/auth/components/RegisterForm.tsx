@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { AvatarUpload } from "@/components/shared/AvatarUpload";
 import { registerFormValues, registerSchema } from "../schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { authAction } from "../actions";
 import { useAuthStore } from "../store";
@@ -14,8 +14,10 @@ import InputField from "@/components/shared/InputField";
 import SocialAuth from "./SocialAuth";
 import ZipMapSearch from "../../../components/shared/ZipMapSearch";
 import FormFooterLink from "./FormFooterLink";
+import SelectField from "@/components/shared/SelectField";
+import { Country } from "@/types/country";
 
-export default function RegisterForm() {
+export default function RegisterForm({ countries }: { countries: Country[] }) {
   const [isPending, setIsPending] = useState<boolean>(false);
   const { setUser, setToken } = useAuthStore((state) => state);
   const router = useRouter();
@@ -36,6 +38,8 @@ export default function RegisterForm() {
   const onSubmit = async (data: registerFormValues) => {
     setIsPending(true);
     const formData = new FormData();
+
+    // console.log("Form data submitted:", data);
 
     Object.entries(data).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
@@ -109,16 +113,39 @@ export default function RegisterForm() {
             errors.password?.message ? t(errors.password?.message) : undefined
           }
         />
-
-        <InputField
-          label={t("zip_code")}
-          id="zip_code"
-          placeholder={t("enter_zip")}
-          {...register("zip_code")}
-          error={
-            errors.zip_code?.message ? t(errors.zip_code?.message) : undefined
-          }
+        <Controller
+          name="country_id"
+          control={methods.control}
+          render={({ field }) => (
+            <SelectField
+              label={t("country")}
+              id="country_id"
+              value={field.value}
+              onChange={field.onChange}
+              options={countries.map((country) => ({
+                label: (country as { title?: string })?.title ?? "",
+                value: (country as { id?: number }).id?.toString() ?? "",
+              }))}
+              placeholder={t("select_country")}
+              error={
+                errors.country_id?.message
+                  ? t(errors.country_id?.message)
+                  : undefined
+              }
+            />
+          )}
         />
+        {methods.watch("country_id") !== "1" && (
+          <InputField
+            label={t("zip_code")}
+            id="zip_code"
+            placeholder={t("enter_zip")}
+            {...register("zip_code")}
+            error={
+              errors.zip_code?.message ? t(errors.zip_code?.message) : undefined
+            }
+          />
+        )}
 
         <InputField
           id="address"
@@ -133,7 +160,7 @@ export default function RegisterForm() {
         <input type="hidden" {...register("latitude")} />
         <input type="hidden" {...register("longitude")} />
 
-        <ZipMapSearch />
+        <ZipMapSearch countryId={methods.watch("country_id")} />
 
         <button
           type="submit"

@@ -29,7 +29,8 @@ export default function PostsList() {
       observer.disconnect();
     };
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
-
+  console.log("posts " , posts);
+  
   return (
     <section className="flex flex-wrap ">
       {posts.map((post) => (
