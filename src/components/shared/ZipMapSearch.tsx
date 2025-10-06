@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { toast } from "sonner";
@@ -14,16 +14,22 @@ const containerStyle = {
 
 export default function ZipMapSearch({ countryId }: { countryId: string }) {
   const { watch, setValue } = useFormContext();
+  const mapRef = useRef<google.maps.Map | null>(null);
   const zipCode = watch("zip_code");
 
-  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number } | null>(null);
+  const [mapCenter, setMapCenter] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
   const [lastZip, setLastZip] = useState("");
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
   });
 
-  // تحديد الموقع الحالي أو وضع افتراضي
+  const onLoad = useCallback((map: google.maps.Map) => {
+    mapRef.current = map;
+  }, []);
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -35,8 +41,9 @@ export default function ZipMapSearch({ countryId }: { countryId: string }) {
           setValue("longitude", lng);
         },
         () => {
-          // ✨ لو المستخدم رفض إذن الموقع → نستخدم أمريكا كإفتراضي
-          toast.error("لم نتمكن من تحديد موقعك، سيتم استخدام الموقع الافتراضي (الولايات المتحدة الأمريكية)");
+          toast.error(
+            "لم نتمكن من تحديد موقعك، الموقع الافتراضي (الولايات المتحدة الأمريكية)"
+          );
           const lat = 37.0902;
           const lng = -95.7129;
           setMapCenter({ lat, lng });
@@ -45,16 +52,14 @@ export default function ZipMapSearch({ countryId }: { countryId: string }) {
         }
       );
     } else {
-      // ✨ في حال المتصفح لا يدعم geolocation
       const lat = 37.0902;
       const lng = -95.7129;
       setMapCenter({ lat, lng });
       setValue("latitude", lat);
       setValue("longitude", lng);
     }
-  }, [setValue ,countryId]);
+  }, [setValue, countryId]);
 
-  // تحديث الإحداثيات عند تغيير الرمز البريدي
   useEffect(() => {
     const fetchCoordinates = async () => {
       if (zipCode && zipCode !== lastZip) {
@@ -73,23 +78,18 @@ export default function ZipMapSearch({ countryId }: { countryId: string }) {
     fetchCoordinates();
   }, [zipCode, lastZip, setValue]);
 
-  // عند سحب الخريطة
-  const handleMapDragEnd = useCallback(
-    (map: google.maps.Map) => {
-      if (countryId === "1") return;
-      const newCenter = map.getCenter();
-      if (newCenter) {
-        const lat = newCenter.lat();
-        const lng = newCenter.lng();
-        setMapCenter({ lat, lng });
-        setValue("latitude", lat);
-        setValue("longitude", lng);
-      }
-    },
-    [setValue, countryId]
-  );
+  const handleMapDragEnd = useCallback(() => {
+    if (countryId === "1") return;
+    const newCenter = mapRef.current?.getCenter();
+    if (newCenter) {
+      const lat = newCenter.lat();
+      const lng = newCenter.lng();
+      setValue("latitude", lat);
+      setValue("longitude", lng);
+    }
+  }, [setValue, countryId]);
 
-  // عند سحب الماركر
+  
   const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
     if (countryId === "1") return;
     const lat = e.latLng?.lat();
@@ -100,15 +100,16 @@ export default function ZipMapSearch({ countryId }: { countryId: string }) {
       setValue("longitude", lng);
     }
   };
-  
+
   return (
     <>
       {isLoaded && mapCenter && (
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={mapCenter}
-          zoom={5} 
-          onDragEnd={(map) => handleMapDragEnd(map as unknown as google.maps.Map)}
+          zoom={5}
+          onLoad={onLoad}
+          onDragEnd={handleMapDragEnd}
           options={{
             draggable: countryId !== "1",
             streetViewControl: false,

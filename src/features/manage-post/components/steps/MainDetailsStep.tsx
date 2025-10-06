@@ -17,8 +17,9 @@ type propTypes = {
   countries: Country[];
 };
 
-export default function MainDetailsStep({ next, control, back, countries }: propTypes) {
+export default function MainDetailsStep({ next, back, countries }: propTypes) {
   const {
+    control,
     register,
     trigger,
     formState: { errors },
@@ -47,7 +48,6 @@ export default function MainDetailsStep({ next, control, back, countries }: prop
       console.log("Form validation failed");
     }
   };
-console.log(countries);
 
   return (
     <form className="flex flex-col gap-[16px]" onSubmit={handleSubmit}>
