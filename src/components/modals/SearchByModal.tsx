@@ -19,7 +19,7 @@ import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
 import { toast } from "sonner";
 import { Country } from "@/types/country";
 import SelectField from "../shared/SelectField";
-import ZipMapSearch from "../shared/ZipMapSearch";
+// import ZipMapSearch from "../shared/ZipMapSearch";
 
 interface SearchByModalProps {
   show: boolean;
@@ -37,7 +37,7 @@ export default function SearchByModal({
 
   const { filter, setFilter } = useHomeFilter();
   const [isPending, startTransition] = useTransition();
-  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState<string | undefined>();
   const selectedMethod = filter.delivery_method;
 
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
@@ -120,7 +120,7 @@ export default function SearchByModal({
           id="country_id"
           value={selectedCountry ?? undefined}
           onChange={(val) => {
-            setSelectedCountry(val);
+            setSelectedCountry(val);            
           }}
           options={countries.map((country) => ({
             label: (country as { title?: string })?.title ?? "",
