@@ -21,6 +21,8 @@ import { Country } from "@/types/country";
 import SelectField from "../shared/SelectField";
 import ZipMapSearch from "../shared/ZipMapSearch";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import LocationPicker from "./LocationPicker";
+import LocationSearchMap from "./LocationPicker";
 
 interface SearchByModalProps {
   show: boolean;
@@ -40,6 +42,7 @@ export default function SearchByModal({
   const [isPending, startTransition] = useTransition();
   const [selectedCountry, setSelectedCountry] = useState<string | undefined>();
   const selectedMethod = filter.delivery_method;
+  const [selected, setSelected] = useState<any>(null);
   const methods = useForm();
 
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
@@ -68,21 +71,45 @@ export default function SearchByModal({
 
   const handleSeeListings = () => {
     startTransition(() => {
+      let lat, lng, address;
+
+      // 🗺️ الحالة الأولى: لو المستخدم اختار من الخريطة
+      if (selected && selected.lat && selected.lng) {
+        lat = selected.lat;
+        lng = selected.lng;
+        address = selected.address;
+      }
+      // 📮 الحالة الثانية: لو المستخدم اختار بالدولة 1 (ZIP code)
+      else {
+        lat = filter.latitude;
+        lng = filter.longitude;
+        address = filter.address;
+      }
+
+      // حفظ الإحداثيات في الفلتر العام
+      setFilter({
+        latitude: lat,
+        longitude: lng,
+        address: address,
+      });
+
+      // حفظها في السيرفر أو الحالة العامة
       saveLocationFilters({
         zip_code: String(filter.zip_code),
-        latitude: filter.latitude,
-        longitude: filter.longitude,
-        address: filter.address,
+        latitude: lat,
+        longitude: lng,
+        address: address,
       });
     });
 
     handleClose();
   };
+
   console.log("countries=============", countries, selectedCountry);
 
   return (
     <Dialog open={show} onOpenChange={(isOpen) => !isOpen && handleClose()}>
-      <DialogContent className="max-w-md p-6 rounded-lg bg-white shadow-xl space-y-6">
+      <DialogContent className="max-w-md p-6 rounded-lg shadow-xl space-y-6 overflow-y-auto *:h-auto max-h-[95vh]">
         {/* Header */}
         <DialogHeader className="relative">
           <DialogTitle className="text-[28px] font-bold">
@@ -131,7 +158,7 @@ export default function SearchByModal({
           placeholder={t("select_country")}
           error={selectedCountry ? undefined : "error to selected country"}
         />
-        {selectedCountry && selectedCountry === "1" ? (
+        {selectedCountry ? (selectedCountry === "1" ? (
           <div className="flex flex-col gap-6">
             <div className="grid w-full gap-1 relative">
               <Label htmlFor="zip" className="font-bold mb-2">
@@ -156,11 +183,36 @@ export default function SearchByModal({
           </div>
         ) : (
           <>
-            <FormProvider {...methods}>
-              <ZipMapSearch countryId={selectedCountry} />
-            </FormProvider>
+            <div className=" p-4 space-y-4">
+              <h1 className="font-semibold">Select Your Location</h1>
+              <LocationSearchMap
+                defaultCountry={
+                  selectedCountry &&
+                  (
+                    countries.find((el) => el.id === Number(selectedCountry))?.title
+                  ) || undefined
+                }
+                onChange={(pos) => setSelected(pos)}
+              />
+              {/* []
+              {selected && (
+                <div className="text-sm bg-gray-50 p-3 rounded-lg">
+                  <p>
+                    <strong>Lat:</strong> {selected.lat}
+                  </p>
+                  <p>
+                    <strong>Lng:</strong> {selected.lng}
+                  </p>
+                  {selected.address && (
+                    <p>
+                      <strong>Address:</strong> {selected.address}
+                    </p>
+                  )}
+                </div>
+              )} */}
+            </div>
           </>
-        )}
+        )) : null}
 
         {/*zip code delete */}
         {/* <div className="flex flex-col gap-1">

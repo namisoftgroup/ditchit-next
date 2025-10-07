@@ -13,7 +13,11 @@ const containerStyle = {
   height: "250px",
 };
 
-export default function ZipMapSearch({ countryId }: { countryId: string | undefined }) {
+export default function ZipMapSearch({
+  countryId,
+}: {
+  countryId: string | undefined;
+}) {
   const t = useTranslations("auth");
 
   const { watch, setValue } = useFormContext();
@@ -28,6 +32,7 @@ export default function ZipMapSearch({ countryId }: { countryId: string | undefi
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
+    libraries: ["places"],
   });
 
   const onLoad = useCallback((map: google.maps.Map) => {
