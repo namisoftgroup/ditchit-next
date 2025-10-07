@@ -19,7 +19,8 @@ import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
 import { toast } from "sonner";
 import { Country } from "@/types/country";
 import SelectField from "../shared/SelectField";
-// import ZipMapSearch from "../shared/ZipMapSearch";
+import ZipMapSearch from "../shared/ZipMapSearch";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
 
 interface SearchByModalProps {
   show: boolean;
@@ -39,6 +40,7 @@ export default function SearchByModal({
   const [isPending, startTransition] = useTransition();
   const [selectedCountry, setSelectedCountry] = useState<string | undefined>();
   const selectedMethod = filter.delivery_method;
+  const methods = useForm();
 
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
     setFilter({ [key]: value });
@@ -120,14 +122,14 @@ export default function SearchByModal({
           id="country_id"
           value={selectedCountry ?? undefined}
           onChange={(val) => {
-            setSelectedCountry(val);            
+            setSelectedCountry(val);
           }}
           options={countries.map((country) => ({
             label: (country as { title?: string })?.title ?? "",
             value: (country as { id?: number }).id?.toString() ?? "",
           }))}
           placeholder={t("select_country")}
-          error={selectedCountry ? undefined : t("error to selected country")}
+          error={selectedCountry ? undefined : "error to selected country"}
         />
         {selectedCountry && selectedCountry === "1" ? (
           <div className="flex flex-col gap-6">
@@ -154,7 +156,9 @@ export default function SearchByModal({
           </div>
         ) : (
           <>
-           {/* <ZipMapSearch countryId={selectedCountry || undefined} /> */}
+            <FormProvider {...methods}>
+              <ZipMapSearch countryId={selectedCountry} />
+            </FormProvider>
           </>
         )}
 
