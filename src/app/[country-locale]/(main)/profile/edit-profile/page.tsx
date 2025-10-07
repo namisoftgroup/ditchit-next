@@ -1,8 +1,14 @@
 import EditProfileForm from "@/features/profile/components/EditProfileForm";
 import { getCountries } from "@/services/getCountries";
 
-export default async function page({ params }: { params: { "country-locale": string } }) {
-  const lang = params["country-locale"].split("-")[0]; 
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ "country-locale": string }>;
+}) {
+  const { "country-locale": fullLocale } = await params;
+  const lang = fullLocale.split("-")[0];
+  
   const countriesRes = await getCountries(lang);
   const countries = countriesRes.data.data;
   return (
