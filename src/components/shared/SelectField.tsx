@@ -19,7 +19,6 @@ type SelectFieldProps = {
   options: Option[];
   placeholder?: string;
   error?: string;
-  dir?: string;
 };
 
 export default function SelectField({
@@ -30,10 +29,9 @@ export default function SelectField({
   options,
   placeholder,
   error,
-  dir,
 }: SelectFieldProps) {
   return (
-    <div className="space-y-1" dir={dir}>
+    <div className="space-y-1">
       <label htmlFor={id} className="font-bold text-sm mb-2">
         {label}
       </label>

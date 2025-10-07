@@ -111,7 +111,6 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
           control={methods.control}
           render={({ field }) => (
             <SelectField
-              dir=" "
               label={t("country")}
               id="country_id"
               value={field.value}

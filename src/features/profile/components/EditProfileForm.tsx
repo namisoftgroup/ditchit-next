@@ -122,6 +122,7 @@ export default function EditProfileForm({
             errors.password?.message ? t(errors.password?.message) : undefined
           }
         />
+
         <Controller
           name="country_id"
           control={methods.control}
@@ -137,7 +138,6 @@ export default function EditProfileForm({
 
             return (
               <SelectField
-                dir=" "
                 label={t("country")}
                 id="country_id"
                 value={selectedCountry}
