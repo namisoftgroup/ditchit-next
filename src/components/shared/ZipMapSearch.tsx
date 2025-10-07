@@ -13,7 +13,7 @@ const containerStyle = {
   height: "250px",
 };
 
-export default function ZipMapSearch({ countryId }: { countryId: string }) {
+export default function ZipMapSearch({ countryId }: { countryId: string | undefined }) {
   const t = useTranslations("auth");
 
   const { watch, setValue } = useFormContext();
@@ -44,7 +44,7 @@ export default function ZipMapSearch({ countryId }: { countryId: string }) {
           setValue("longitude", lng);
         },
         () => {
-          toast.error(t("location_error"));
+          // toast.error(t("location_error"));
           const lat = 37.0902;
           const lng = -95.7129;
           setMapCenter({ lat, lng });

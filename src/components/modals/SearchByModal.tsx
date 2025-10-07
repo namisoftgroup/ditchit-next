@@ -12,45 +12,80 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useHomeFilter } from "@/features/listing/store";
 import { saveLocationFilters } from "@/features/listing/action";
 import { SHIPPING_METHODS } from "@/utils/constants";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
+import { Input } from "../ui/input";
+import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
+import { toast } from "sonner";
+import { Country } from "@/types/country";
+import SelectField from "../shared/SelectField";
+import ZipMapSearch from "../shared/ZipMapSearch";
 
 interface SearchByModalProps {
   show: boolean;
   handleClose: () => void;
   handleZipSearch: () => void;
+  countries: Country[];
 }
 
 export default function SearchByModal({
   show,
   handleClose,
-  handleZipSearch,
+  countries,
 }: SearchByModalProps) {
+  const t = useTranslations("common");
+
   const { filter, setFilter } = useHomeFilter();
   const [isPending, startTransition] = useTransition();
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const selectedMethod = filter.delivery_method;
-  const t = useTranslations("common");
 
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
     setFilter({ [key]: value });
   };
 
+  const fetchCoordinates = async (zipCode: string) => {
+    if (!zipCode) return;
+
+    const result = await getCoordinates(String(zipCode));
+    if (result) {
+      setFilter({
+        latitude: result.latitude,
+        longitude: result.longitude,
+        address: result.address,
+      });
+    } else {
+      toast.error("Could not fetch coordinates. Please try a valid ZIP.");
+    }
+  };
+
+  const handleGetLocation = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter({ zip_code: String(e.target.value) });
+    fetchCoordinates(e.target.value);
+  };
+
   const handleSeeListings = () => {
     startTransition(() => {
       saveLocationFilters({
-        delivery_method: filter.delivery_method,
-        kilometers: String(filter.kilometers),
+        zip_code: String(filter.zip_code),
+        latitude: filter.latitude,
+        longitude: filter.longitude,
+        address: filter.address,
       });
     });
+
     handleClose();
   };
+  console.log("countries=============", countries, selectedCountry);
 
   return (
     <Dialog open={show} onOpenChange={(isOpen) => !isOpen && handleClose()}>
       <DialogContent className="max-w-md p-6 rounded-lg bg-white shadow-xl space-y-6">
         {/* Header */}
         <DialogHeader className="relative">
-          <DialogTitle className="text-[28px] font-bold">{t("location")}</DialogTitle>
+          <DialogTitle className="text-[28px] font-bold">
+            {t("location")}
+          </DialogTitle>
           <DialogClose className="absolute top-4 end-4 text-gray-400 hover:text-gray-600 focus:outline-none" />
         </DialogHeader>
 
@@ -65,7 +100,10 @@ export default function SearchByModal({
             className="flex flex-col gap-3"
           >
             {SHIPPING_METHODS.map((item) => (
-              <div className="flex items-center gap-3 rtl:flex-row-reverse" key={item.value}>
+              <div
+                className="flex items-center gap-3 rtl:flex-row-reverse"
+                key={item.value}
+              >
                 <RadioGroupItem
                   value={item.value}
                   id={item.value}
@@ -77,7 +115,51 @@ export default function SearchByModal({
           </RadioGroup>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <SelectField
+          label={t("country")}
+          id="country_id"
+          value={selectedCountry ?? undefined}
+          onChange={(val) => {
+            setSelectedCountry(val);
+          }}
+          options={countries.map((country) => ({
+            label: (country as { title?: string })?.title ?? "",
+            value: (country as { id?: number }).id?.toString() ?? "",
+          }))}
+          placeholder={t("select_country")}
+          error={selectedCountry ? undefined : t("error to selected country")}
+        />
+        {selectedCountry && selectedCountry === "1" ? (
+          <div className="flex flex-col gap-6">
+            <div className="grid w-full gap-1 relative">
+              <Label htmlFor="zip" className="font-bold mb-2">
+                {t("enter_zip")}
+              </Label>
+              <Input
+                id="zip"
+                placeholder={t("enter_zip")}
+                value={filter.zip_code}
+                onChange={handleGetLocation}
+                className="px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
+              />
+            </div>
+
+            <Input
+              id="address"
+              readOnly
+              placeholder={t("address")}
+              value={filter.address}
+              className="px-4 h-[48px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
+            />
+          </div>
+        ) : (
+          <>
+           {/* <ZipMapSearch countryId={selectedCountry || undefined} /> */}
+          </>
+        )}
+
+        {/*zip code delete */}
+        {/* <div className="flex flex-col gap-1">
           <label className="font-bold mb-2">{t("zip_code")}</label>
           <div
             className="flex justify-between items-center border-0 cursor-pointer"
@@ -86,7 +168,7 @@ export default function SearchByModal({
             <p className="text-sm text-dark">{filter.address}</p>
             <span className="text-lg font-bold">&gt;</span>
           </div>
-        </div>
+        </div> */}
 
         <div className="flex flex-col gap-2">
           <label htmlFor="distanceRange" className="font-bold">
@@ -122,7 +204,7 @@ export default function SearchByModal({
             className="w-full px-4 py-2 rounded-full bg-[var(--mainColor)] text-white font-medium"
             onClick={handleSeeListings}
           >
-            {isPending ? t("loading") : t("see_listings")}
+            {isPending ? t("loading") : t("change")}
           </button>
         </div>
       </DialogContent>
