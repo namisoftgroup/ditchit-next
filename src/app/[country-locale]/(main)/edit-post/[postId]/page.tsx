@@ -6,7 +6,7 @@ interface PageProps {
     postId: string;
     "country-locale": string;
   }>;
-}
+} 
 
 export default async function page({ params }: PageProps) {
   const id = (await params).postId;
