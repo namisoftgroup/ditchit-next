@@ -40,7 +40,7 @@ export default function ChooseLocationModal({
     lat: 30.0444,
     lng: 31.2357,
   });
-   const { sendMessageMutation, isPending } = useSendMessage(setMessage);
+  const { sendMessageMutation, isPending } = useSendMessage(setMessage);
 
   const [searchInput, setSearchInput] = useState("");
   const searchBox = useRef<google.maps.places.SearchBox | null>(null);
@@ -50,7 +50,7 @@ export default function ChooseLocationModal({
     libraries: ["places"],
   });
 
-    const t = useTranslations("chat");
+  const t = useTranslations("chat");
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -74,6 +74,7 @@ export default function ChooseLocationModal({
     lat: number;
     lng: number;
   }) => {
+    if (!isLoaded || !("google" in window) || !google.maps?.Geocoder) return;
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ location: position }, (results, status) => {
       if (status === "OK" && results && results[0]) {
@@ -111,7 +112,7 @@ export default function ChooseLocationModal({
     sendMessageMutation(formData, {
       onSuccess: () => {
         handleClose();
-      }
+      },
     });
   };
 
@@ -165,7 +166,7 @@ export default function ChooseLocationModal({
             onClick={handleSendLocation}
             disabled={isPending}
           >
-           {isPending ? t("sending") : t("send_location")}
+            {isPending ? t("sending") : t("send_location")}
           </Button>
         </div>
       </DialogContent>

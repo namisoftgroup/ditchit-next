@@ -5,10 +5,10 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 
-type Props = {
-  defaultCountry?: string;
-  onChange?: (pos: { lat: number; lng: number; address?: string }) => void;
-};
+// ✅ خليه ثابت برّا الكومبوننت
+const LIBRARIES: (
+  "places" 
+)[] = ["places"];
 
 const containerStyle = {
   borderRadius: "16px",
@@ -16,18 +16,23 @@ const containerStyle = {
   height: "300px",
 };
 
+type Props = {
+  defaultCountry?: string;
+  onChange?: (pos: { lat: number; lng: number; address?: string }) => void;
+};
+
 export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
-    lat: 30.0444, // القاهرة
-    lng: 31.2357,
+    lat: 40.48648022613869, // united
+    lng: -101.876634775,
   });
-  const [searchQuery, setSearchQuery] = useState(defaultCountry || "");
-  const [address, setAddress] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState("");
   const mapRef = useRef<google.maps.Map | null>(null);
 
+  // ✅ استخدم الـ const الثابت
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
-    libraries: ["places"],
+    libraries: LIBRARIES,
   });
 
   const onLoad = useCallback((map: google.maps.Map) => {
@@ -37,6 +42,7 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
   // 🔍 البحث عن موقع جديد
   const handleSearch = useCallback(() => {
     if (!searchQuery.trim()) return;
+    if (!isLoaded || !("google" in window) || !google.maps?.Geocoder) return;
 
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: searchQuery }, (results, status) => {
@@ -45,29 +51,27 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
         const newCenter = { lat: location.lat(), lng: location.lng() };
         const formattedAddress = results[0].formatted_address;
         setMapCenter(newCenter);
-        setAddress(formattedAddress);
         mapRef.current?.panTo(newCenter);
         onChange?.({ ...newCenter, address: formattedAddress });
       } else {
         console.log("لم يتم العثور على الموقع.");
       }
     });
-  }, [searchQuery, onChange]);
+  }, [searchQuery, onChange, isLoaded]);
 
-  // 📍 عند سحب المؤشر يدويًا
+  // 📍 عند سحب المؤشر
   const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
+    if (!isLoaded || !("google" in window) || !google.maps?.Geocoder) return;
     const lat = e.latLng?.lat();
     const lng = e.latLng?.lng();
     if (lat && lng) {
       const newPos = { lat, lng };
       setMapCenter(newPos);
 
-      // جلب العنوان الجديد من الإحداثيات
       const geocoder = new google.maps.Geocoder();
       geocoder.geocode({ location: newPos }, (results, status) => {
         if (status === "OK" && results && results[0]) {
           const formattedAddress = results[0].formatted_address;
-          setAddress(formattedAddress);
           onChange?.({ ...newPos, address: formattedAddress });
         } else {
           onChange?.(newPos);
@@ -88,7 +92,7 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-          className="pr-10  *:h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
+          className="pr-10 *:h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
         />
         <Search
           className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"

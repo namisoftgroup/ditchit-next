@@ -19,9 +19,6 @@ import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
 import { toast } from "sonner";
 import { Country } from "@/types/country";
 import SelectField from "../shared/SelectField";
-import ZipMapSearch from "../shared/ZipMapSearch";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
-import LocationPicker from "./LocationPicker";
 import LocationSearchMap from "./LocationPicker";
 
 interface SearchByModalProps {
@@ -42,8 +39,11 @@ export default function SearchByModal({
   const [isPending, startTransition] = useTransition();
   const [selectedCountry, setSelectedCountry] = useState<string | undefined>();
   const selectedMethod = filter.delivery_method;
-  const [selected, setSelected] = useState<any>(null);
-  const methods = useForm();
+  const [selected, setSelected] = useState<{
+    lat: number;
+    lng: number;
+    address?: string;
+  } | null>(null);
 
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
     setFilter({ [key]: value });
@@ -88,24 +88,22 @@ export default function SearchByModal({
 
       // حفظ الإحداثيات في الفلتر العام
       setFilter({
-        latitude: lat,
-        longitude: lng,
+        latitude: String(lat),
+        longitude: String(lng),
         address: address,
       });
 
       // حفظها في السيرفر أو الحالة العامة
       saveLocationFilters({
         zip_code: String(filter.zip_code),
-        latitude: lat,
-        longitude: lng,
+        latitude: String(lat),
+        longitude: String(lng),
         address: address,
       });
     });
 
     handleClose();
   };
-
-  console.log("countries=============", countries, selectedCountry);
 
   return (
     <Dialog open={show} onOpenChange={(isOpen) => !isOpen && handleClose()}>
@@ -150,6 +148,36 @@ export default function SearchByModal({
           value={selectedCountry ?? undefined}
           onChange={(val) => {
             setSelectedCountry(val);
+
+            // ✅ لو الدولة المختارة ID = 1 (نظام ZIP)
+            if (val === "1") {
+              // نعمل reset للبيانات الخاصة بالخريطة
+              setSelected(null);
+
+              // ونمسح إحداثيات أي دولة تانية كانت محددة قبل كده
+              setFilter({
+                zip_code: "",
+                latitude: "",
+                longitude: "",
+                address: "",
+              });
+            } else {
+              // ✅ لو اختار أي دولة تانية (خريطة)
+              // نعمل reset لبيانات ZIP code
+              setFilter({
+                zip_code: "",
+                latitude: "",
+                longitude: "",
+                address: "",
+              });
+
+              // كمان نمسح أي بيانات سابقة من ZIP
+              setSelected({
+                lat: 0,
+                lng: 0,
+                address: "",
+              });
+            }
           }}
           options={countries.map((country) => ({
             label: (country as { title?: string })?.title ?? "",
@@ -158,43 +186,45 @@ export default function SearchByModal({
           placeholder={t("select_country")}
           error={selectedCountry ? undefined : "error to selected country"}
         />
-        {selectedCountry ? (selectedCountry === "1" ? (
-          <div className="flex flex-col gap-6">
-            <div className="grid w-full gap-1 relative">
-              <Label htmlFor="zip" className="font-bold mb-2">
-                {t("enter_zip")}
-              </Label>
+
+        {selectedCountry ? (
+          selectedCountry === "1" ? (
+            <div className="flex flex-col gap-6">
+              <div className="grid w-full gap-1 relative">
+                <Label htmlFor="zip" className="font-bold mb-2">
+                  {t("enter_zip")}
+                </Label>
+                <Input
+                  id="zip"
+                  placeholder={t("enter_zip")}
+                  value={filter.zip_code}
+                  onChange={handleGetLocation}
+                  className="px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
+                />
+              </div>
+
               <Input
-                id="zip"
-                placeholder={t("enter_zip")}
-                value={filter.zip_code}
-                onChange={handleGetLocation}
-                className="px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
+                id="address"
+                readOnly
+                placeholder={t("address")}
+                value={filter.address}
+                className="px-4 h-[48px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
               />
             </div>
-
-            <Input
-              id="address"
-              readOnly
-              placeholder={t("address")}
-              value={filter.address}
-              className="px-4 h-[48px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
-            />
-          </div>
-        ) : (
-          <>
-            <div className=" p-4 space-y-4">
-              <h1 className="font-semibold">Select Your Location</h1>
-              <LocationSearchMap
-                defaultCountry={
-                  selectedCountry &&
-                  (
-                    countries.find((el) => el.id === Number(selectedCountry))?.title
-                  ) || undefined
-                }
-                onChange={(pos) => setSelected(pos)}
-              />
-              {/* []
+          ) : (
+            <>
+              <div className=" p-4 space-y-4">
+                <h1 className="font-semibold">Select Your Location</h1>
+                <LocationSearchMap
+                  defaultCountry={
+                    (selectedCountry &&
+                      countries.find((el) => el.id === Number(selectedCountry))
+                        ?.title) ||
+                    undefined
+                  }
+                  onChange={(pos) => setSelected(pos)}
+                />
+                {/* []
               {selected && (
                 <div className="text-sm bg-gray-50 p-3 rounded-lg">
                   <p>
@@ -210,9 +240,10 @@ export default function SearchByModal({
                   )}
                 </div>
               )} */}
-            </div>
-          </>
-        )) : null}
+              </div>
+            </>
+          )
+        ) : null}
 
         {/*zip code delete */}
         {/* <div className="flex flex-col gap-1">
