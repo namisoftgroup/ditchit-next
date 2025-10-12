@@ -218,9 +218,9 @@ console.log("filter" , filter);
             </div>
           ) : (
             <>
-              <div className=" p-4 space-y-4">
+              <div className=" py-2 space-y-4">
                 <h1 className="font-semibold -mt-8 mb-0">
-                  Select Your Location
+                  {t('select_country')}
                 </h1>
                 <LocationSearchMap
                   defaultCountry={
