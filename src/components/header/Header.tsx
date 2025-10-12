@@ -9,6 +9,7 @@ import UserMenu from "./UserMenu";
 import LocationSearch from "./LocationSearch";
 import HeaderCategories from "./HeaderCategories";
 import ResponsiveMenu from "./ResponsiveMenu";
+import { getProfile } from "@/features/auth/actions";
 
 type HeaderProps = {
   locale: string;
@@ -21,17 +22,17 @@ type HeaderProps = {
 export default async function Header({ locale, data }: HeaderProps) {
   const categoriesRes = await getCategories(locale);
   const countriesRes = await getCountries(locale);
-
+  const profileData = await getProfile();
   const categories = categoriesRes.data;
   const countries = countriesRes.data.data;
   // console.log("countriesRes", locale, countriesRes , countries);
-
+ 
   return (
     <>
       <header className="sticky overflow-x-hidden top-0 z-[50] w-full flex flex-col gap-1 transition-[all] duration-200 ease-in-out bg-[var(--whiteColor)] border-b border-[var(--lightBorderColor)]">
         <section className="container gap-1 flex justify-between items-center py-2">
           <LogoBrand />
-          <LocationSearch hideSm={true} countries={countries} />
+          <LocationSearch hideSm={true} countries={countries} profileData = {profileData.user} />
           <Navigation isAuthed={!!data.token} />
 
           <div className="p-[5px] flex justify-end gap-2 items-center">
@@ -50,7 +51,7 @@ export default async function Header({ locale, data }: HeaderProps) {
       </header>
 
       <div className="md:hidden block p-3 bg-[var(--mainColor10)]">
-        <LocationSearch hideSm={false} countries={countries} />
+          <LocationSearch hideSm={true} countries={countries} profileData = {profileData.user} />
       </div>
     </>
   );

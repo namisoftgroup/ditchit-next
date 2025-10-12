@@ -37,12 +37,13 @@ export default function SearchByModal({
 
   const { filter, setFilter } = useHomeFilter();
   const [isPending, startTransition] = useTransition();
-  const [selectedCountry, setSelectedCountry] = useState<string >('1');
+  const [selectedCountry, setSelectedCountry] = useState<string>("1");
   const selectedMethod = filter.delivery_method;
   const [selected, setSelected] = useState<{
     lat: number;
     lng: number;
     address?: string;
+    kilometers: number;
   } | null>(null);
 
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
@@ -99,6 +100,7 @@ export default function SearchByModal({
         latitude: String(lat),
         longitude: String(lng),
         address: address,
+        kilometers: String(filter.kilometers),
       });
     });
 
@@ -161,6 +163,7 @@ console.log("filter" , filter);
                 latitude: "",
                 longitude: "",
                 address: "",
+                kilometers: 60,
               });
             } else {
               // ✅ لو اختار أي دولة تانية (خريطة)
@@ -170,6 +173,7 @@ console.log("filter" , filter);
                 latitude: "",
                 longitude: "",
                 address: "",
+                kilometers: 60,
               });
 
               // كمان نمسح أي بيانات سابقة من ZIP
@@ -177,6 +181,7 @@ console.log("filter" , filter);
                 lat: 0,
                 lng: 0,
                 address: "",
+                kilometers: 60,
               });
             }
           }}
@@ -214,7 +219,9 @@ console.log("filter" , filter);
           ) : (
             <>
               <div className=" p-4 space-y-4">
-                <h1 className="font-semibold -mt-8 mb-0">Select Your Location</h1>
+                <h1 className="font-semibold -mt-8 mb-0">
+                  Select Your Location
+                </h1>
                 <LocationSearchMap
                   defaultCountry={
                     (selectedCountry &&
@@ -222,7 +229,7 @@ console.log("filter" , filter);
                         ?.title) ||
                     undefined
                   }
-                  onChange={(pos) => setSelected(pos)}
+                  onChange={(pos) => setSelected({ ...pos, kilometers: filter.kilometers ?? 60 })}
                 />
                 {/* []
               {selected && (
@@ -269,7 +276,7 @@ console.log("filter" , filter);
               min="0"
               max="100"
               step="1"
-              value={filter.kilometers || 60}
+              value={filter.kilometers}
               onChange={(e) =>
                 onUpdateFilter({ key: "kilometers", value: e.target.value })
               }
@@ -279,7 +286,7 @@ console.log("filter" , filter);
               <span className="font-bold">
                 {filter.kilometers === 100
                   ? t("maximum")
-                  : `${(filter.kilometers || 60)} ${t("miles")}`}
+                  : `${filter.kilometers} ${t("miles")}`}
               </span>
               <div className="absolute w-4 h-4 bg-[var(--mainColor)] rotate-45 start-[-8px] top-1/2 -translate-y-1/2 rounded-sm" />
             </div>

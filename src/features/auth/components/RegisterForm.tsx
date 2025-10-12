@@ -69,6 +69,7 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
       setIsPending(false);
     }
   };
+console.log('errors' , errors);
 
   return (
     <FormProvider {...methods}>
@@ -108,6 +109,7 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
         <Controller
           name="country_id"
           control={methods.control}
+          defaultValue="1"
           render={({ field }) => (
             <SelectField
               label={t("country")}
@@ -151,8 +153,13 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
 
         <input type="hidden" {...register("latitude")} />
         <input type="hidden" {...register("longitude")} />
+        {methods.watch("country_id") !== "1" ? (
 
         <ZipMapSearch countryId={methods.watch("country_id")} />
+        ):<div className="hidden">
+          <ZipMapSearch countryId={methods.watch("country_id")} />
+        </div>}
+
 
         <InputField
           label={t("phone_number")}

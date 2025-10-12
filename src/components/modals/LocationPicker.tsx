@@ -5,6 +5,7 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useHomeFilter } from "@/features/listing/store";
+import { useTranslations } from "next-intl";
 
 // ✅ خليه ثابت برّا الكومبوننت
 const LIBRARIES: "places"[] = ["places"];
@@ -26,8 +27,9 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
     lat:  filter.latitude ? Number(filter.latitude) : 40.48648022613869, // united
     lng: filter.longitude ? Number(filter.longitude) : -101.876634775 , 
   });
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(filter.address);
   const mapRef = useRef<google.maps.Map | null>(null);
+  const t = useTranslations("auth")
 
   // ✅ استخدم الـ const الثابت
   const { isLoaded } = useJsApiLoader({
@@ -60,25 +62,31 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
   }, [searchQuery, onChange, isLoaded]);
 
   // 📍 عند سحب المؤشر
-  const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
-    if (!isLoaded || !("google" in window) || !google.maps?.Geocoder) return;
-    const lat = e.latLng?.lat();
-    const lng = e.latLng?.lng();
-    if (lat && lng) {
-      const newPos = { lat, lng };
-      setMapCenter(newPos);
+const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
+  if (!isLoaded || !("google" in window) || !google.maps?.Geocoder) return;
+  const lat = e.latLng?.lat();
+  const lng = e.latLng?.lng();
+  if (lat && lng) {
+    const newPos = { lat, lng };
+    setMapCenter(newPos);
 
-      const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ location: newPos }, (results, status) => {
-        if (status === "OK" && results && results[0]) {
-          const formattedAddress = results[0].formatted_address;
-          onChange?.({ ...newPos, address: formattedAddress });
-        } else {
-          onChange?.(newPos);
-        }
-      });
-    }
-  };
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ location: newPos }, (results, status) => {
+      if (status === "OK" && results && results[0]) {
+        const formattedAddress = results[0].formatted_address;
+
+        // ✅ Update input field with new address
+        setSearchQuery(formattedAddress);
+
+        // ✅ Pass new position + address to parent
+        onChange?.({ ...newPos, address: formattedAddress });
+      } else {
+        // Still update position without address
+        onChange?.(newPos);
+      }
+    });
+  }
+};
 
   useEffect(() => {
     if (defaultCountry) handleSearch();
@@ -94,7 +102,7 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
     <div className="flex flex-col gap-3">
       <div className="relative w-full">
         <Input
-          placeholder="اكتب اسم الدولة أو العنوان..."
+          placeholder={t("select_country")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}

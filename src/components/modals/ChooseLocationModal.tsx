@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MessagePayload } from "@/features/chat/types";
 import useSendMessage from "@/features/chat/useSendMessage";
@@ -51,6 +51,18 @@ export default function ChooseLocationModal({
   });
 
   const t = useTranslations("chat");
+  const reverseGeocodeMarkerPosition = useCallback(
+    (position: { lat: number; lng: number }) => {
+      if (!isLoaded || !("google" in window) || !google.maps?.Geocoder) return;
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ location: position }, (results, status) => {
+        if (status === "OK" && results && results[0]) {
+          setSearchInput(results[0].formatted_address);
+        }
+      });
+    },
+    [isLoaded]
+  );
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -68,20 +80,7 @@ export default function ChooseLocationModal({
         }
       );
     }
-  }, []);
-
-  const reverseGeocodeMarkerPosition = (position: {
-    lat: number;
-    lng: number;
-  }) => {
-    if (!isLoaded || !("google" in window) || !google.maps?.Geocoder) return;
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ location: position }, (results, status) => {
-      if (status === "OK" && results && results[0]) {
-        setSearchInput(results[0].formatted_address);
-      }
-    });
-  };
+  }, [reverseGeocodeMarkerPosition]);
 
   const handleMarkerDragEnd = (position: { lat: number; lng: number }) => {
     setMarkerPosition(position);

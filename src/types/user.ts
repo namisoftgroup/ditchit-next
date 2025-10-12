@@ -11,4 +11,7 @@ export interface User {
   longitude: number;
   created_from: string;
   country_id: string | null;
+  country:{
+    flag:string
+  }
 }

@@ -14,11 +14,14 @@ import { Country } from "@/types/country";
 import Link from "next/link";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
+import { User } from "@/types/user";
 
 export default function LanguagesAndCountries({
   countries,
+  profileData,
 }: {
   countries: Country[];
+  profileData: User | null;
 }) {
   const pathname = usePathname();
   const locale = useLocale();
@@ -43,11 +46,13 @@ export default function LanguagesAndCountries({
     queryClient.clear();
   }
 
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2 whitespace-nowrap">
         <Image
           src={
+            profileData?.country?.flag ??
             countries.find((c) => c.code === countryCode)?.flag ??
             "/placeholder-flag.png"
           }

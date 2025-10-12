@@ -19,10 +19,12 @@ export const registerSchema = z.object({
       /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
       "phone_validation"
     )
-    .optional(),
+    .optional()
+    .or(z.literal("")),
   address: z.string().min(3, "address_validation"),
   password: z.string().min(6, "password_validation"),
-  zip_code: z.string().regex(/^[0-9]{5}$/, "zipcode_validation"),
+  zip_code: z.string().regex(/^[0-9]{5}$/, "zipcode_validation").optional()
+    .or(z.literal("")),
   country_id: z.string().min(1, "country_validation"),
 });
 
@@ -31,7 +33,6 @@ export type registerFormValues = z.infer<typeof registerSchema>;
 export const resetPassSchema = z
   .object({
     password: z.string().min(6, "password_validation"),
-
     confirm_password: z.string().min(6, "pass_confirm_length"),
   })
   .superRefine((data, ctx) => {
@@ -43,5 +44,6 @@ export const resetPassSchema = z
       });
     }
   });
+console.log( registerSchema  , resetPassSchema);
 
 export type ResetPassFormValues = z.infer<typeof resetPassSchema>;

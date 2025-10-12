@@ -9,13 +9,16 @@ import { Country } from "@/types/country";
 import SearchByModal from "../modals/SearchByModal";
 import ZipSearch from "../modals/ZipSearch";
 import LanguagesAndCountries from "./LanguagesAndCountries";
+import { User } from "@/types/user";
 
 export default function LocationSearch({
   hideSm,
   countries,
+  profileData
 }: {
   hideSm: boolean;
   countries: Country[];
+  profileData: User | null
 }) {
   const { filter } = useHomeFilter();
   const [show, setShow] = useState(false);
@@ -41,7 +44,7 @@ export default function LocationSearch({
       }`}
     >
       <div className="flex items-center gap-2 w-full md:flex-row flex-row-reverse">
-        <LanguagesAndCountries countries={countries} />
+        <LanguagesAndCountries countries={countries} profileData={profileData} />
 
         <form
           className="flex-1 m-0 mb-0 min-w-[250px] relative md:bg-[#f3f3f3] bg-[#fff] border border-[#e6e6e6] rounded-full"
