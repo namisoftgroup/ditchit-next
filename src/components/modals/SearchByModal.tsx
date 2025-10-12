@@ -37,7 +37,7 @@ export default function SearchByModal({
 
   const { filter, setFilter } = useHomeFilter();
   const [isPending, startTransition] = useTransition();
-  const [selectedCountry, setSelectedCountry] = useState<string | undefined>();
+  const [selectedCountry, setSelectedCountry] = useState<string >('1');
   const selectedMethod = filter.delivery_method;
   const [selected, setSelected] = useState<{
     lat: number;
@@ -104,6 +104,7 @@ export default function SearchByModal({
 
     handleClose();
   };
+console.log("filter" , filter);
 
   return (
     <Dialog open={show} onOpenChange={(isOpen) => !isOpen && handleClose()}>
@@ -145,7 +146,7 @@ export default function SearchByModal({
         <SelectField
           label={t("country")}
           id="country_id"
-          value={selectedCountry ?? undefined}
+          value={selectedCountry }
           onChange={(val) => {
             setSelectedCountry(val);
 
@@ -184,7 +185,7 @@ export default function SearchByModal({
             value: (country as { id?: number }).id?.toString() ?? "",
           }))}
           placeholder={t("select_country")}
-          error={selectedCountry ? undefined : "error to selected country"}
+          // error={!selectedCountry ? undefined : "error to selected country"}
         />
 
         {selectedCountry ? (
@@ -203,18 +204,17 @@ export default function SearchByModal({
                 />
               </div>
 
-              <Input
+              <input
                 id="address"
                 readOnly
-                placeholder={t("address")}
                 value={filter.address}
-                className="px-4 h-[48px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
+                className="px-2 text-xs -mt-5 h-[28px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
               />
             </div>
           ) : (
             <>
               <div className=" p-4 space-y-4">
-                <h1 className="font-semibold">Select Your Location</h1>
+                <h1 className="font-semibold -mt-8 mb-0">Select Your Location</h1>
                 <LocationSearchMap
                   defaultCountry={
                     (selectedCountry &&
@@ -269,7 +269,7 @@ export default function SearchByModal({
               min="0"
               max="100"
               step="1"
-              value={filter.kilometers}
+              value={filter.kilometers || 60}
               onChange={(e) =>
                 onUpdateFilter({ key: "kilometers", value: e.target.value })
               }
@@ -279,7 +279,7 @@ export default function SearchByModal({
               <span className="font-bold">
                 {filter.kilometers === 100
                   ? t("maximum")
-                  : `${filter.kilometers} ${t("miles")}`}
+                  : `${(filter.kilometers || 60)} ${t("miles")}`}
               </span>
               <div className="absolute w-4 h-4 bg-[var(--mainColor)] rotate-45 start-[-8px] top-1/2 -translate-y-1/2 rounded-sm" />
             </div>

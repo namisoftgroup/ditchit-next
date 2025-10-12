@@ -86,7 +86,6 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
           error={errors.name?.message ? t(errors.name?.message) : undefined}
         />
 
-
         <InputField
           label={t("email")}
           type="email"
@@ -129,32 +128,32 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
           )}
         />
         {methods.watch("country_id") === "1" && (
-          <InputField
-            label={t("zip_code")}
-            id="zip_code"
-            placeholder={t("enter_zip")}
-            {...register("zip_code")}
-            error={
-              errors.zip_code?.message ? t(errors.zip_code?.message) : undefined
-            }
-          />
+          <>
+            <InputField
+              label={t("zip_code")}
+              id="zip_code"
+              placeholder={t("enter_zip")}
+              {...register("zip_code")}
+              error={
+                errors.zip_code?.message
+                  ? t(errors.zip_code?.message)
+                  : undefined
+              }
+            />
+            <input
+              id="address"
+              readOnly
+              {...register("address")}
+              className="px-2 text-xs -mt-5 h-[28px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
+            />
+          </>
         )}
-
-        <InputField
-          id="address"
-          readOnly
-          placeholder={t("address")}
-          {...register("address")}
-          error={
-            errors.address?.message ? t(errors.address?.message) : undefined
-          }
-        />
 
         <input type="hidden" {...register("latitude")} />
         <input type="hidden" {...register("longitude")} />
 
         <ZipMapSearch countryId={methods.watch("country_id")} />
-        
+
         <InputField
           label={t("phone_number")}
           id="phone"

@@ -4,11 +4,10 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { useHomeFilter } from "@/features/listing/store";
 
 // ✅ خليه ثابت برّا الكومبوننت
-const LIBRARIES: (
-  "places" 
-)[] = ["places"];
+const LIBRARIES: "places"[] = ["places"];
 
 const containerStyle = {
   borderRadius: "16px",
@@ -22,9 +21,10 @@ type Props = {
 };
 
 export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
+  const { filter } = useHomeFilter();
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
-    lat: 40.48648022613869, // united
-    lng: -101.876634775,
+    lat:  filter.latitude ? Number(filter.latitude) : 40.48648022613869, // united
+    lng: filter.longitude ? Number(filter.longitude) : -101.876634775 , 
   });
   const [searchQuery, setSearchQuery] = useState("");
   const mapRef = useRef<google.maps.Map | null>(null);
@@ -83,6 +83,12 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
   useEffect(() => {
     if (defaultCountry) handleSearch();
   }, [defaultCountry, handleSearch]);
+
+  useEffect(() => {
+    if (filter.latitude && filter.longitude) {
+      setMapCenter({ lat: Number(filter.latitude), lng: Number(filter.longitude) });
+    }
+  }, [filter.latitude, filter.longitude]);
 
   return (
     <div className="flex flex-col gap-3">

@@ -20,7 +20,7 @@ const DEFAULT_FILTER: FilterState = {
   zip_code: "20500",
   address: "United States",
   delivery_method: "both",
-  kilometers: 0,
+  kilometers: 60,
 };
 
 export const useHomeFilter = create<HomeFilterStore>((set) => ({
