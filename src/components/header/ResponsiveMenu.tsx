@@ -21,10 +21,9 @@ export default function ResponsiveMenu({
 }) {
   const { data: count } = useGetUnreadCount();
   const [open, setOpen] = useState(false);
-
   const t = useTranslations("common");
   const isRTL = RTL_LANGUAGES.includes(locale);
-
+  
   return (
     <div className="md:hidden block relative">
       {!open && (

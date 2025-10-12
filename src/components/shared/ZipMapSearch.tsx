@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useFormContext } from "react-hook-form";
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import { toast } from "sonner";
 import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
 import { useTranslations } from "next-intl";
@@ -23,17 +23,14 @@ export default function ZipMapSearch({
   const { watch, setValue } = useFormContext();
   const mapRef = useRef<google.maps.Map | null>(null);
   const zipCode = watch("zip_code");
-
   const [mapCenter, setMapCenter] = useState<{
     lat: number;
     lng: number;
   } | null>(null);
   const [lastZip, setLastZip] = useState("");
 
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
-    libraries: ["places"],
-  });
+const isLoaded = typeof window !== "undefined" && !!window.google;
+
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
@@ -107,7 +104,7 @@ export default function ZipMapSearch({
   };
 
   return (
-    <>
+    <div>
       {isLoaded && mapCenter && (
         <GoogleMap
           mapContainerStyle={containerStyle}
@@ -129,6 +126,6 @@ export default function ZipMapSearch({
           />
         </GoogleMap>
       )}
-    </>
+    </div>
   );
 }

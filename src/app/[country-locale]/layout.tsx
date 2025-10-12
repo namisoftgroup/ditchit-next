@@ -19,6 +19,7 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 
 import "./globals.css";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://DitchIt.com/"),
@@ -111,6 +112,11 @@ export default async function RootLayout({ children, params }: Props) {
           messages={messages}
           data={data}
         >
+          <Script
+            src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&language=${lang}&region=${lang.toUpperCase()}`}
+            strategy="beforeInteractive"
+          />
+
           {!data.token && <GoogleOneTapAuth />}
           <Header locale={lang} data={data} />
           <main className="min-h-[calc(100vh-316px)]">{children}</main>
