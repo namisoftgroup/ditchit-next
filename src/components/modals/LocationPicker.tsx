@@ -29,7 +29,7 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
   });
   const [searchQuery, setSearchQuery] = useState(filter.address);
   const mapRef = useRef<google.maps.Map | null>(null);
-  const t = useTranslations("auth")
+  const t = useTranslations("common")
 
   // ✅ استخدم الـ const الثابت
   const { isLoaded } = useJsApiLoader({
@@ -102,7 +102,7 @@ const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
     <div className="flex flex-col gap-3">
       <div className="relative w-full">
         <Input
-          placeholder={t("select_country")}
+          placeholder={t("search")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}

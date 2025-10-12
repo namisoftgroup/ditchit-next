@@ -189,7 +189,7 @@ console.log("filter" , filter);
             label: (country as { title?: string })?.title ?? "",
             value: (country as { id?: number }).id?.toString() ?? "",
           }))}
-          placeholder={t("select_country")}
+          placeholder={t("search")}
           // error={!selectedCountry ? undefined : "error to selected country"}
         />
 
@@ -220,7 +220,7 @@ console.log("filter" , filter);
             <>
               <div className=" py-2 space-y-4">
                 <h1 className="font-semibold -mt-8 mb-0">
-                  {t('select_country')}
+                  {t('search')}
                 </h1>
                 <LocationSearchMap
                   defaultCountry={
