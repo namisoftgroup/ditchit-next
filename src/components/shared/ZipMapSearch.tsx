@@ -43,7 +43,18 @@ export default function ZipMapSearch({
   }));
   const [searchValue, setSearchValue] = useState("");
   const [lastZip, setLastZip] = useState("");
-const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || "");
+  const [selectCountryBounds, setSelectCountryBounds] = useState(
+    country?.code || ""
+  );
+  const [lastValidPosition, setLastValidPosition] = useState<{
+    lat: number;
+    lng: number;
+  }>({
+    lat: country?.center_lat,
+    lng: country?.center_lng,
+  });
+  // ✅ state جديد لحفظ آخر address صالح داخل الدولة
+  const [lastValidAddress, setLastValidAddress] = useState("");
 
   const mapRef = useRef<google.maps.Map | null>(null);
 
@@ -91,20 +102,18 @@ const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || 
         (pos) => {
           const lat = pos.coords.latitude;
           const lng = pos.coords.longitude;
-          setMapCenter({ lat, lng });
-          setValue("latitude", lat);
-          setValue("longitude", lng);
+          // ✅ شغل التحقق قبل التحديث
+          updateAddressFromCoords(lat, lng);
         },
         () => {
           const lat = country?.center_lat ?? 56.58856249999999;
           const lng = country?.center_lng ?? -66.3980625;
-          setMapCenter({ lat, lng });
-          setValue("latitude", lat);
-          setValue("longitude", lng);
+          // ✅ شغل التحقق قبل التحديث
+          updateAddressFromCoords(lat, lng);
         }
       );
     }
-  }, [setValue, country, countryId]);
+  }, [country, countryId]);
 
   // جلب الإحداثيات من ZIP
   useEffect(() => {
@@ -112,10 +121,8 @@ const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || 
       if (zipCode && zipCode !== lastZip) {
         const result = await getCoordinates(zipCode);
         if (result) {
-          setValue("latitude", result.latitude);
-          setValue("longitude", result.longitude);
-          setValue("address", result.address);
-          setMapCenter({ lat: result.latitude, lng: result.longitude });
+          // ✅ شغل التحقق قبل التحديث
+          updateAddressFromCoords(result.latitude, result.longitude, result.address);
           setLastZip(zipCode);
         } else {
           toast.error(t("zipcode_error"));
@@ -123,7 +130,7 @@ const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || 
       }
     };
     fetchCoordinates();
-  }, [zipCode, lastZip, setValue, t]);
+  }, [zipCode, lastZip, t]);
 
   // البحث التفاعلي أثناء الكتابة
   useEffect(() => {
@@ -136,16 +143,16 @@ const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || 
           const loc = results[0].geometry.location;
           const lat = loc.lat();
           const lng = loc.lng();
-          setMapCenter({ lat, lng });
-          setValue("latitude", lat);
-          setValue("longitude", lng);
-          setValue("address", results[0].formatted_address);
+          const address = results[0].formatted_address;
+          // ✅ شغل التحقق قبل التحديث
+          updateAddressFromCoords(lat, lng, address);
         }
       });
     }, 600);
 
     return () => clearTimeout(delayDebounce);
-  }, [searchValue, setValue]);
+  }, [searchValue]);
+
   // 🔒 السماح فقط لو الدولة نفسها
   const canDrag = country?.code === selectCountryBounds;
 
@@ -154,9 +161,6 @@ const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || 
     const lat = e.latLng?.lat();
     const lng = e.latLng?.lng();
     if (lat && lng) {
-      setMapCenter({ lat, lng });
-      setValue("latitude", lat);
-      setValue("longitude", lng);
       updateAddressFromCoords(lat, lng);
     }
   };
@@ -167,18 +171,20 @@ const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || 
     if (newCenter) {
       const lat = newCenter.lat();
       const lng = newCenter.lng();
-      setValue("latitude", lat);
-      setValue("longitude", lng);
       updateAddressFromCoords(lat, lng);
     }
-  }, [setValue]);
+  }, []);
 
   // تحويل الإحداثيات إلى عنوان
-  const updateAddressFromCoords = async (lat: number, lng: number) => {
+  const updateAddressFromCoords = async (lat: number, lng: number, preFetchedAddress?: string) => {
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+      let address = preFetchedAddress; // لو موجود من zip أو search
+      if (!address && status === "OK" && results && results[0]) {
+        address = results[0].formatted_address;
+      }
+
       if (status === "OK" && results && results[0]) {
-        const address = results[0].formatted_address;
         const bounds = results
           .flatMap((res) =>
             res.address_components
@@ -186,16 +192,49 @@ const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || 
               .map((add) => add.short_name)
           )
           .filter(Boolean);
-        setSelectCountryBounds(bounds[0] ?? "");
 
-        setValue("address", address);
-        setSearchValue(address);
-        if (bounds[0] !== country?.code) {
-          toast.error("You are outside the selected country");
+        const detectedCountry = bounds[0] ?? "";
+
+        if (detectedCountry === "" || detectedCountry !== country?.code) {
+          // toast.error(detectedCountry === "" ? "Unable to detect country" : "You are outside the selected country");
+          toast.error( "You are outside the selected country");
+
+          // ✅ رجع للـ lastValidPosition بدون مسح الـ address
+          if (mapRef.current) {
+            mapRef.current.panTo(lastValidPosition);
+          }
+          setMapCenter(lastValidPosition);
+          setValue("latitude", lastValidPosition.lat);
+          setValue("longitude", lastValidPosition.lng);
+          // ✅ احتفظ بالـ lastValidAddress
+          setValue("address", lastValidAddress);
+          setSearchValue(lastValidAddress);
+        } else {
+          // ✅ داخل: حدث كل حاجة
+          setMapCenter({ lat, lng });
+          setValue("latitude", lat);
+          setValue("longitude", lng);
+          setValue("address", address || "");
+          setSearchValue(address || "");
+          setSelectCountryBounds(detectedCountry);
+          setLastValidPosition({ lat, lng });
+          setLastValidAddress(address || ""); // حدث الـ lastValidAddress
         }
+      } else {
+        // ✅ فشل: رجع بدون مسح
+        toast.error("Geocode failed");
+        if (mapRef.current) {
+          mapRef.current.panTo(lastValidPosition);
+        }
+        setMapCenter(lastValidPosition);
+        setValue("latitude", lastValidPosition.lat);
+        setValue("longitude", lastValidPosition.lng);
+        setValue("address", lastValidAddress);
+        setSearchValue(lastValidAddress);
       }
     });
   };
+
   console.log(country, selectCountryBounds, mapCenter);
 
   return (
@@ -216,17 +255,7 @@ const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || 
               center={mapCenter}
               zoom={3}
               onLoad={onLoad}
-              // ✅ هنا الشرط
-              onDragEnd={() => {
-                if (canDrag) {
-                  handleMapDragEnd();
-                } else {
-                  // If dragging is not allowed, snap back to the previous center
-                  if (mapRef.current) {
-                    mapRef.current.panTo(mapCenter);
-                  }
-                }
-              }}
+              // onDragEnd={handleMapDragEnd}
               options={{
                 streetViewControl: false,
                 mapTypeControl: false,
