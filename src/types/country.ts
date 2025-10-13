@@ -4,6 +4,8 @@ export interface Country {
   code: string;
   symbol: string;
   flag: string;
+  center_lat: number;
+  center_lng: number;
 }
 
 export interface CountriesResponse {

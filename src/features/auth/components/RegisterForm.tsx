@@ -71,7 +71,7 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
       setIsPending(false);
     }
   };
-console.log('errors' , errors);
+console.log('countries' , countries);
 
   return (
     <FormProvider {...methods}>
@@ -111,13 +111,20 @@ console.log('errors' , errors);
         <Controller
           name="country_id"
           control={methods.control}
-          defaultValue={countryId}
+          defaultValue={countryId || "1"}
           render={({ field }) => (
             <SelectField
               label={t("country")}
               id="country_id"
               value={field.value}
-              onChange={field.onChange}
+              onChange={(val) => {
+                field.onChange(val);
+
+                const selected = countries.find((c) => c.id?.toString() === val);
+                if (selected) {
+                  setValue("country", selected);
+                }
+              }}
               options={countries.map((country) => ({
                 label: (country as { title?: string })?.title ?? "",
                 value: (country as { id?: number }).id?.toString() ?? "",
@@ -156,11 +163,12 @@ console.log('errors' , errors);
         <input type="hidden" {...register("latitude")} />
         <input type="hidden" {...register("longitude")} />
         {methods.watch("country_id") !== "1" ? (
-
-        <ZipMapSearch countryId={methods.watch("country_id")} />
-        ):<div className="hidden">
-          <ZipMapSearch countryId={methods.watch("country_id")} />
-        </div>}
+          <ZipMapSearch countryId={methods.watch("country_id")} country={methods.watch("country")} />
+        ) : (
+          <div className="hidden">
+            <ZipMapSearch countryId={methods.watch("country_id")} country={methods.watch("country")} />
+          </div>
+        )}
 
 
         <InputField

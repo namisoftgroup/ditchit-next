@@ -44,7 +44,7 @@ export default function LocationSearch({
         hideSm ? "md:flex hidden" : "flex md:flex-row flex-col items-start"
       }`}
     >
-      <div className="flex items-center gap-2 w-full md:flex-row flex-row-reverse">
+      <div className="flex items-center gap-8 w-full md:flex-row flex-row-reverse">
         <LanguagesAndCountries countries={countries} profileData={profileData} />
 
         <form
@@ -69,7 +69,7 @@ export default function LocationSearch({
       </div>
 
       <div
-        className="flex gap-2 min-w-[200px] items-center cursor-pointer rounded-full"
+        className="flex gap-2 min-w-[160px] items-center cursor-pointer rounded-full"
         onClick={() => setShow(!show)}
       >
         <div className="min-w-[40px] aspect-square flex items-center justify-center bg-[var(--mainColor)] text-[var(--whiteColor)] rounded-full text-[20px]">

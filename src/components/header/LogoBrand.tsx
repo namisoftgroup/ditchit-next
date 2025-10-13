@@ -9,7 +9,7 @@ export default function LogoBrand() {
         alt="logo"
         width={160}
         height={50}
-        className="md:w-[160px] w-[120px]"
+        className="md:w-[160px] min-w-[80px]"
         priority
       />
     </Link>

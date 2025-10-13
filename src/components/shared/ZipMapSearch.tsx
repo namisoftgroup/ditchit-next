@@ -6,6 +6,7 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import { toast } from "sonner";
 import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
 import { useTranslations, useLocale } from "next-intl";
+import { Country } from "@/types/country";
 
 const containerStyle = {
   borderRadius: "16px",
@@ -21,8 +22,10 @@ declare global {
 }
 
 export default function ZipMapSearch({
+  country,
   countryId,
 }: {
+  country: Country;
   countryId: string | undefined;
 }) {
   const t = useTranslations("common");
@@ -31,9 +34,16 @@ export default function ZipMapSearch({
   const zipCode = watch("zip_code");
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number } | null>(null);
+  const [mapCenter, setMapCenter] = useState<{
+    lat: number;
+    lng: number;
+  }>(() => ({
+    lat: country?.center_lat,
+    lng: country?.center_lng,
+  }));
   const [searchValue, setSearchValue] = useState("");
   const [lastZip, setLastZip] = useState("");
+const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || "");
 
   const mapRef = useRef<google.maps.Map | null>(null);
 
@@ -86,15 +96,15 @@ export default function ZipMapSearch({
           setValue("longitude", lng);
         },
         () => {
-          const lat = 37.0902;
-          const lng = -95.7129;
+          const lat = country?.center_lat ?? 56.58856249999999;
+          const lng = country?.center_lng ?? -66.3980625;
           setMapCenter({ lat, lng });
           setValue("latitude", lat);
           setValue("longitude", lng);
         }
       );
     }
-  }, [setValue, countryId]);
+  }, [setValue, country, countryId]);
 
   // جلب الإحداثيات من ZIP
   useEffect(() => {
@@ -136,6 +146,8 @@ export default function ZipMapSearch({
 
     return () => clearTimeout(delayDebounce);
   }, [searchValue, setValue]);
+  // 🔒 السماح فقط لو الدولة نفسها
+  const canDrag = country?.code === selectCountryBounds;
 
   // سحب الماركر
   const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
@@ -167,11 +179,24 @@ export default function ZipMapSearch({
     geocoder.geocode({ location: { lat, lng } }, (results, status) => {
       if (status === "OK" && results && results[0]) {
         const address = results[0].formatted_address;
+        const bounds = results
+          .flatMap((res) =>
+            res.address_components
+              .filter((add) => add.types.includes("country"))
+              .map((add) => add.short_name)
+          )
+          .filter(Boolean);
+        setSelectCountryBounds(bounds[0] ?? "");
+
         setValue("address", address);
         setSearchValue(address);
+        if (bounds[0] !== country?.code) {
+          toast.error("You are outside the selected country");
+        }
       }
     });
   };
+  console.log(country, selectCountryBounds, mapCenter);
 
   return (
     <div className="space-y-2">
@@ -182,23 +207,38 @@ export default function ZipMapSearch({
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             placeholder={t("search")}
-            className="form-control w-full rounded-md border border-gray-300 p-2"
+            className="form-control w-full rounded-xl border border-gray-300 p-2 "
           />
 
           {mapCenter && (
             <GoogleMap
               mapContainerStyle={containerStyle}
               center={mapCenter}
-              zoom={12}
+              zoom={3}
               onLoad={onLoad}
-              onDragEnd={handleMapDragEnd}
+              // ✅ هنا الشرط
+              onDragEnd={() => {
+                if (canDrag) {
+                  handleMapDragEnd();
+                } else {
+                  // If dragging is not allowed, snap back to the previous center
+                  if (mapRef.current) {
+                    mapRef.current.panTo(mapCenter);
+                  }
+                }
+              }}
               options={{
                 streetViewControl: false,
                 mapTypeControl: false,
                 fullscreenControl: false,
+                draggable: true,
               }}
             >
-              <Marker position={mapCenter} draggable onDragEnd={handleMarkerDragEnd} />
+              <Marker
+                position={mapCenter}
+                draggable
+                onDragEnd={handleMarkerDragEnd}
+              />
             </GoogleMap>
           )}
         </>

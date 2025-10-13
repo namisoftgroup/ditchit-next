@@ -33,7 +33,7 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
     const isValid = await trigger([
       "title",
       "description",
-      "zip_code",
+      // "zip_code",
       "image",
       "address",
       "latitude",
@@ -48,7 +48,8 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
       console.log("Form validation failed");
     }
   };
-
+  console.log(errors);
+  
   return (
     <form className="flex flex-col gap-[16px]" onSubmit={handleSubmit}>
       <div className="flex gap-4 md:flex-row flex-col">
@@ -73,6 +74,15 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
         {...register("title")}
         error={
          errors.title?.message ? t(errors.title?.message as string) : undefined
+        }
+      />
+      <InputField
+        label={t("description")}
+        id="description"
+        placeholder={t("enter_description")}
+        {...register("description")}
+        error={
+         errors.description?.message ? t(errors.description?.message as string) : undefined
         }
       />
 
@@ -126,7 +136,7 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
       />
       )}
 
-      <InputField
+      {/* <InputField
         id="address"
         readOnly
         placeholder={t("address")}
@@ -136,7 +146,7 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
             ? t(errors.address?.message as string)
             : undefined
         }
-      />
+      /> */}
 
       <input type="hidden" {...register("latitude")} />
       <input type="hidden" {...register("longitude")} />

@@ -8,7 +8,7 @@ export async function getCountries(lang: string): Promise<CountriesResponse> {
       lang: lang === "zh" ? "zh-CN" : lang === "pt" ? "pt-BR" : lang,
     },
     next: { revalidate: false },
-    cache: "force-cache",
+    // cache: "force-cache",
   });
 
   if (!response.ok) {

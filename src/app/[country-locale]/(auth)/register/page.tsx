@@ -15,7 +15,7 @@ export default async function Page({
   
   const countriesRes = await getCountries(lang);
   const countries = countriesRes.data.data;
-  
+    
   return (
     <>
       <PageBanner

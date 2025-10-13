@@ -14,12 +14,19 @@ export const postFormDataSchema = z.object({
   firm_price: z.union([z.literal(0), z.literal(1)]),
   virtual_tour: z.union([z.literal(0), z.literal(1)]),
   delivery_method: z.string(),
-  is_promote: z.union([z.literal(0), z.literal(1)]).optional(),
+  is_promote: z
+    .union([z.literal(0), z.literal(1)])
+    .optional()
+    .or(z.literal("")),
   image: fileOrStringSchema,
-  images: z.array(fileOrStringSchema).optional(),
+  images: z.array(fileOrStringSchema).optional().or(z.literal("")),
   condition: z.string(),
-  zip_code: z.string().regex(/^[0-9]{5}$/, "zipcode_validation"),
-  features: z.array(z.string().min(3)).optional(),
+  zip_code: z
+    .string()
+    .regex(/^[0-9]{5}$/, "zipcode_validation")
+    .optional()
+    .or(z.literal("")),
+  features: z.array(z.string().min(3)).optional().or(z.literal("")),
   options: z.array(
     z.object({
       category_option_id: z.number(),
