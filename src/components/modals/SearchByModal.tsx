@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { Country } from "@/types/country";
 import SelectField from "../shared/SelectField";
 import LocationSearchMap from "./LocationPicker";
+import { getCookie } from "@/lib/utils";
 
 interface SearchByModalProps {
   show: boolean;
@@ -34,10 +35,13 @@ export default function SearchByModal({
   countries,
 }: SearchByModalProps) {
   const t = useTranslations("common");
+  const countryId = getCookie("countryId");
 
   const { filter, setFilter } = useHomeFilter();
   const [isPending, startTransition] = useTransition();
-  const [selectedCountry, setSelectedCountry] = useState<string>("1");
+  const [selectedCountry, setSelectedCountry] = useState<string>(
+    countryId ?? "1"
+  );
   const selectedMethod = filter.delivery_method;
   const [selected, setSelected] = useState<{
     lat: number;
@@ -106,8 +110,7 @@ export default function SearchByModal({
 
     handleClose();
   };
-console.log("filter" , filter);
-
+  
   return (
     <Dialog open={show} onOpenChange={(isOpen) => !isOpen && handleClose()}>
       <DialogContent className="max-w-md p-6 rounded-lg shadow-xl space-y-6 overflow-y-auto *:h-auto max-h-[95vh]">
@@ -148,7 +151,7 @@ console.log("filter" , filter);
         <SelectField
           label={t("country")}
           id="country_id"
-          value={selectedCountry }
+          value={selectedCountry}
           onChange={(val) => {
             setSelectedCountry(val);
 
@@ -219,9 +222,7 @@ console.log("filter" , filter);
           ) : (
             <>
               <div className=" py-2 space-y-4">
-                <h1 className="font-semibold -mt-8 mb-0">
-                  {t('search')}
-                </h1>
+                <h1 className="font-semibold -mt-8 mb-0">{t("search")}</h1>
                 <LocationSearchMap
                   defaultCountry={
                     (selectedCountry &&
@@ -229,7 +230,9 @@ console.log("filter" , filter);
                         ?.title) ||
                     undefined
                   }
-                  onChange={(pos) => setSelected({ ...pos, kilometers: filter.kilometers ?? 60 })}
+                  onChange={(pos) =>
+                    setSelected({ ...pos, kilometers: filter.kilometers ?? 60 })
+                  }
                 />
                 {/* []
               {selected && (

@@ -10,6 +10,7 @@ import SearchByModal from "../modals/SearchByModal";
 import ZipSearch from "../modals/ZipSearch";
 import LanguagesAndCountries from "./LanguagesAndCountries";
 import { User } from "@/types/user";
+import { getCookie } from "@/lib/utils";
 
 export default function LocationSearch({
   hideSm,
@@ -36,7 +37,7 @@ export default function LocationSearch({
       router.push(`/posts?search=${encodeURIComponent(searchQuery)}`);
     }
   };
-
+  
   return (
     <div
       className={`items-center flex-1 gap-2 ${
@@ -80,7 +81,13 @@ export default function LocationSearch({
             {t("current_location")}
           </p>
           <h4 className="text-[var(--darkColor)] capitalize overflow-hidden [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] text-[16px]">
-            {filter.address}
+            {filter.address === "" 
+              ? (() => {
+                  const countryId = getCookie("countryId");
+                  const country = countries.find(c => c.id === Number(countryId));
+                  return country ? country.title : "United States";
+                })()
+              : filter.address}
           </h4>
         </div>
       </div>

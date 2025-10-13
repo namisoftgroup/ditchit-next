@@ -27,7 +27,7 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
     lat: filter.latitude ? Number(filter.latitude) : 40.48648022613869,
     lng: filter.longitude ? Number(filter.longitude) : -101.876634775,
   });
-  const [searchQuery, setSearchQuery] = useState(filter.address || "");
+  const [searchQuery, setSearchQuery] = useState("");
   const mapRef = useRef<google.maps.Map | null>(null);
   const t = useTranslations("common");
   const locale = useLocale(); // 👈 من next-intl (ar, en, fr...)
@@ -41,7 +41,7 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
         if (existingScript) existingScript.remove();
 
         // تنظيف الكائن القديم
-        delete (window as any).google;
+        delete (window as unknown as Record<string, unknown>).google;
 
         const script = document.createElement("script");
         script.id = "google-maps-script";

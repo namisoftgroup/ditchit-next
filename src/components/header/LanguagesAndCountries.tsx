@@ -46,7 +46,6 @@ export default function LanguagesAndCountries({
     queryClient.clear();
   }
 
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2 whitespace-nowrap">
@@ -54,8 +53,10 @@ export default function LanguagesAndCountries({
           src={
             profileData?.country?.flag ??
             countries.find((c) => c.code === countryCode)?.flag ??
+            countries.find((c) => c.code === "US")?.flag ??
             "/placeholder-flag.png"
           }
+          
           width={24}
           height={16}
           alt="current country"
@@ -76,7 +77,10 @@ export default function LanguagesAndCountries({
               <DropdownMenuItem key={country.id} className="p-0">
                 <Link
                   href={changeCountry(country.code)}
-                  onClick={revalidateQueries}
+                  onClick={() => {
+                    document.cookie = `countryId=${country.id}; path=/`;
+                    revalidateQueries();
+                  }}
                   className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-3 py-2 text-[14px] w-full rounded-[8px]"
                 >
                   <Image

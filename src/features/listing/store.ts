@@ -18,7 +18,7 @@ const DEFAULT_FILTER: FilterState = {
   latitude: "39.8283",
   longitude: "-98.5795",
   zip_code: "",
-  address: "United States",
+  address: "",
   delivery_method: "both",
   kilometers: 60,
 };

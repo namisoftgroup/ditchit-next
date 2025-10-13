@@ -16,12 +16,14 @@ import ZipMapSearch from "../../../components/shared/ZipMapSearch";
 import FormFooterLink from "./FormFooterLink";
 import SelectField from "@/components/shared/SelectField";
 import { Country } from "@/types/country";
+import { getCookie } from "@/lib/utils";
 
 export default function RegisterForm({ countries }: { countries: Country[] }) {
   const [isPending, setIsPending] = useState<boolean>(false);
   const { setUser, setToken } = useAuthStore((state) => state);
   const router = useRouter();
   const t = useTranslations("auth");
+  const countryId = getCookie("countryId");
 
   const methods = useForm<registerFormValues>({
     mode: "onChange",
@@ -109,7 +111,7 @@ console.log('errors' , errors);
         <Controller
           name="country_id"
           control={methods.control}
-          defaultValue="1"
+          defaultValue={countryId}
           render={({ field }) => (
             <SelectField
               label={t("country")}

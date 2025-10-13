@@ -15,7 +15,7 @@ const containerStyle = {
 
 declare global {
   interface Window {
-    google: any;
+    google: typeof google;
     initMapScriptLoaded?: boolean;
   }
 }
@@ -46,7 +46,7 @@ export default function ZipMapSearch({
         if (existingScript) existingScript.remove();
 
         // احذف كائن google القديم لتجنب الكاش
-        delete (window as any).google;
+        delete (window as unknown as Record<string, unknown>).google;
         window.initMapScriptLoaded = false;
 
         // أنشئ سكربت جديد

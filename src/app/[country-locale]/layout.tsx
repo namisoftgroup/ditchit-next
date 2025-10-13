@@ -77,7 +77,7 @@ export default async function RootLayout({ children, params }: Props) {
     latitude: cookieStore.get("latitude")?.value || "39.8283",
     longitude: cookieStore.get("longitude")?.value || "-98.5795",
     zip_code: cookieStore.get("zip_code")?.value ?? "",
-    address: cookieStore.get("address")?.value || "United States",
+    address: cookieStore.get("address")?.value || "",
     delivery_method: cookieStore.get("delivery_method")?.value || "both",
     kilometers: Number(cookieStore.get("kilometers")?.value ?? 60),
   };
