@@ -34,35 +34,35 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
 
   // ✅ تحميل Google Maps بلغة الترجمة الحالية
   useEffect(() => {
+    // 1️⃣ إذا كانت مكتبة Google Maps Loaded مسبقًا ➜ لا تعيد التحميل
+    if (typeof window !== "undefined" && (window as { google?: { maps?: unknown } }).google?.maps) {
+      setIsLoaded(true);
+      return;
+    }
+
+    const existingScript = document.getElementById("google-maps-script");
+    if (existingScript) {
+      existingScript.addEventListener("load", () => setIsLoaded(true));
+      return;
+    }
+
     const loadGoogleMaps = () => {
       return new Promise<void>((resolve, reject) => {
-        // حذف أي سكربت سابق
-        const existingScript = document.getElementById("google-maps-script");
-        if (existingScript) existingScript.remove();
-
-        // تنظيف الكائن القديم
-        delete (window as unknown as Record<string, unknown>).google;
-
         const script = document.createElement("script");
         script.id = "google-maps-script";
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${
-          process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-        }&libraries=${LIBRARIES.join(",")}&language=${locale}`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=${LIBRARIES.join(",")}&language=${locale}`;
         script.async = true;
         script.defer = true;
-
-        script.onload = () => {
-          setIsLoaded(true);
-          resolve();
-        };
+        script.onload = () => resolve();
         script.onerror = (err) => reject(err);
-
         document.head.appendChild(script);
       });
     };
 
-    loadGoogleMaps().catch(() => console.error("Failed to load Google Maps"));
-  }, [locale]); // 👈 يعيد التحميل لما اللغة تتغير
+    loadGoogleMaps()
+      .then(() => setIsLoaded(true))
+      .catch(() => console.error("Failed to load Google Maps"));
+  }, [locale]); // 👈 يعيد التحميل لما اللغة تتغير إذا لم يكن محمّل مسبقًا
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;

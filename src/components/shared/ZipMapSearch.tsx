@@ -39,28 +39,27 @@ export default function ZipMapSearch({
 
   // ✅ تحميل سكربت Google Maps بلغة ديناميكية
   useEffect(() => {
+    // 1️⃣ إذا كانت مكتبة Google Maps Loaded مسبقًا ➜ لا تعيد التحميل
+    if (typeof window !== "undefined" && window.google?.maps) {
+      setIsLoaded(true);
+      return;
+    }
+
+    const existingScript = document.getElementById("google-maps-script");
+    if (existingScript) {
+      // إذا كان السكربت قيد التحميل حاليًا انتظر لحين الانتهاء
+      existingScript.addEventListener("load", () => setIsLoaded(true));
+      return;
+    }
+
     const loadGoogleMaps = () => {
       return new Promise<void>((resolve, reject) => {
-        // احذف أي سكربت سابق
-        const existingScript = document.getElementById("google-maps-script");
-        if (existingScript) existingScript.remove();
-
-        // احذف كائن google القديم لتجنب الكاش
-        delete (window as unknown as Record<string, unknown>).google;
-        window.initMapScriptLoaded = false;
-
-        // أنشئ سكربت جديد
         const script = document.createElement("script");
         script.id = "google-maps-script";
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${
-          process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-        }&libraries=places&language=${locale}`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&language=${locale}`;
         script.async = true;
         script.defer = true;
-        script.onload = () => {
-          window.initMapScriptLoaded = true;
-          resolve();
-        };
+        script.onload = () => resolve();
         script.onerror = (err) => reject(err);
         document.head.appendChild(script);
       });
@@ -69,7 +68,7 @@ export default function ZipMapSearch({
     loadGoogleMaps()
       .then(() => setIsLoaded(true))
       .catch(() => toast.error("Failed to load Google Maps"));
-  }, [locale]); // 👈 كلما تتغير اللغة يعاد تحميل السكربت
+  }, [locale]); // 👈 كلما تتغير اللغة يعاد تحميل السكربت إذا لم يكن موجودًا بالفعل
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
@@ -204,7 +203,7 @@ export default function ZipMapSearch({
           )}
         </>
       ) : (
-        <p className="text-gray-500 text-sm">{t("loading_map") || "جاري تحميل الخريطة..."}</p>
+        <p className="text-gray-500 text-sm">{t("loading")}</p>
       )}
     </div>
   );
