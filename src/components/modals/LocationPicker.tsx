@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useHomeFilter } from "@/features/listing/store";
 import { useTranslations, useLocale } from "next-intl";
+import { Country } from "@/types/country";
+import { toast } from "sonner";
 
 const LIBRARIES = ["places"] as const;
 
@@ -18,24 +20,44 @@ const containerStyle = {
 type Props = {
   defaultCountry?: string;
   onChange?: (pos: { lat: number; lng: number; address?: string }) => void;
+  countryData: Country | undefined;
 };
 
-export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
+export default function LocationSearchMap({
+  defaultCountry,
+  onChange,
+  countryData,
+}: Props) {
   const { filter } = useHomeFilter();
   const [isLoaded, setIsLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
-    lat: filter.latitude ? Number(filter.latitude) : 40.48648022613869,
-    lng: filter.longitude ? Number(filter.longitude) : -101.876634775,
+    lat: countryData?.center_lat ?? 0,
+    lng: countryData?.center_lng ?? 0,
   });
   const [searchQuery, setSearchQuery] = useState("");
   const mapRef = useRef<google.maps.Map | null>(null);
+  const markerRef = useRef<google.maps.Marker | null>(null);
   const t = useTranslations("common");
-  const locale = useLocale(); // 👈 من next-intl (ar, en, fr...)
+  const locale = useLocale();
 
-  // ✅ تحميل Google Maps بلغة الترجمة الحالية
+  const [selectCountryBounds, setSelectCountryBounds] = useState(
+    countryData?.code || ""
+  );
+  const [lastValidPosition, setLastValidPosition] = useState<{
+    lat: number;
+    lng: number;
+  }>({
+    lat: countryData?.center_lat ?? 0,
+    lng: countryData?.center_lng ?? 0,
+  });
+  const [lastValidAddress, setLastValidAddress] = useState("");
+
+  // Load Google Maps with current locale
   useEffect(() => {
-    // 1️⃣ إذا كانت مكتبة Google Maps Loaded مسبقًا ➜ لا تعيد التحميل
-    if (typeof window !== "undefined" && (window as { google?: { maps?: unknown } }).google?.maps) {
+    if (
+      typeof window !== "undefined" &&
+      (window as { google?: { maps?: unknown } }).google?.maps
+    ) {
       setIsLoaded(true);
       return;
     }
@@ -61,14 +83,32 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
 
     loadGoogleMaps()
       .then(() => setIsLoaded(true))
-      .catch(() => console.error("Failed to load Google Maps"));
-  }, [locale]); // 👈 يعيد التحميل لما اللغة تتغير إذا لم يكن محمّل مسبقًا
+      .catch(() => toast.error(t("failed_to_load_google_maps")));
+  }, [locale, t]);
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
   }, []);
 
-  // 🔍 البحث
+  // Get current location
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          updateAddressFromCoords(lat, lng);
+        },
+        () => {
+          const lat = countryData?.center_lat ?? 0;
+          const lng = countryData?.center_lng ?? 0;
+          updateAddressFromCoords(lat, lng);
+        }
+      );
+    }
+  }, [countryData]);
+
+  // Search with country validation
   const handleSearch = useCallback(() => {
     if (!searchQuery.trim()) return;
     if (!("google" in window) || !google.maps?.Geocoder) return;
@@ -77,38 +117,108 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
     geocoder.geocode({ address: searchQuery }, (results, status) => {
       if (status === "OK" && results && results[0]) {
         const location = results[0].geometry.location;
-        const newCenter = { lat: location.lat(), lng: location.lng() };
+        const lat = location.lat();
+        const lng = location.lng();
         const formattedAddress = results[0].formatted_address;
-        setMapCenter(newCenter);
-        mapRef.current?.panTo(newCenter);
-        onChange?.({ ...newCenter, address: formattedAddress });
+        updateAddressFromCoords(lat, lng, formattedAddress);
       } else {
-        console.log("لم يتم العثور على الموقع.");
+        toast.error(t("location_not_found"));
+        revertToLastValid();
       }
     });
-  }, [searchQuery, onChange]);
+  }, [searchQuery, t]);
 
-  // 📍 عند سحب الماركر
-  const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
-    if (!("google" in window) || !google.maps?.Geocoder) return;
-    const lat = e.latLng?.lat();
-    const lng = e.latLng?.lng();
-    if (lat && lng) {
-      const newPos = { lat, lng };
-      setMapCenter(newPos);
+  // Revert to last valid position and address
+  const revertToLastValid = useCallback(() => {
+    const pos = { lat: lastValidPosition.lat, lng: lastValidPosition.lng };
+    if (mapRef.current) {
+      mapRef.current.panTo(pos);
+    }
+    if (markerRef.current) {
+      markerRef.current.setPosition(pos);
+    }
+    setMapCenter(pos);
+    setSearchQuery(lastValidAddress);
+    onChange?.({
+      ...pos,
+      address: lastValidAddress,
+    });
+  }, [lastValidPosition, lastValidAddress, onChange]);
+
+  // Convert coordinates to address with country validation
+  const updateAddressFromCoords = useCallback(
+    async (lat: number, lng: number, preFetchedAddress?: string) => {
+      if (!("google" in window) || !google.maps?.Geocoder) {
+        revertToLastValid();
+        return;
+      }
 
       const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ location: newPos }, (results, status) => {
+      geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+        let address = preFetchedAddress;
+        if (!address && status === "OK" && results && results[0]) {
+          address = results[0].formatted_address;
+        }
+
         if (status === "OK" && results && results[0]) {
-          const formattedAddress = results[0].formatted_address;
-          setSearchQuery(formattedAddress);
-          onChange?.({ ...newPos, address: formattedAddress });
+          const bounds = results
+            .flatMap((res) =>
+              res.address_components
+                .filter((add) => add.types.includes("country"))
+                .map((add) => add.short_name)
+            )
+            .filter(Boolean);
+
+          const detectedCountry = bounds[0] ?? "";
+
+          if (
+            detectedCountry === "" ||
+            (countryData?.code && detectedCountry !== countryData.code)
+          ) {
+            toast.error("You are outside the selected country");
+            revertToLastValid();
+          } else {
+            const newPos = { lat, lng };
+            setMapCenter(newPos);
+            setSearchQuery(address || "");
+            setSelectCountryBounds(detectedCountry);
+            setLastValidPosition(newPos);
+            setLastValidAddress(address || "");
+            onChange?.({
+              ...newPos,
+              address: address,
+            });
+          }
         } else {
-          onChange?.(newPos);
+          toast.error("You are outside the selected country");
+          revertToLastValid();
         }
       });
+    },
+    [countryData?.code, lastValidAddress, lastValidPosition, onChange, t]
+  );
+
+  // Handle marker drag end
+  const handleMarkerDragEnd = useCallback(
+    (e: google.maps.MapMouseEvent) => {
+      const lat = e.latLng?.lat();
+      const lng = e.latLng?.lng();
+      if (lat && lng) {
+        updateAddressFromCoords(lat, lng);
+      }
+    },
+    [updateAddressFromCoords]
+  );
+
+  // Handle map drag end
+  const handleMapDragEnd = useCallback(() => {
+    const newCenter = mapRef.current?.getCenter();
+    if (newCenter) {
+      const lat = newCenter.lat();
+      const lng = newCenter.lng();
+      updateAddressFromCoords(lat, lng);
     }
-  };
+  }, [updateAddressFromCoords]);
 
   useEffect(() => {
     if (defaultCountry) handleSearch();
@@ -116,9 +226,14 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
 
   useEffect(() => {
     if (filter.latitude && filter.longitude) {
-      setMapCenter({ lat: Number(filter.latitude), lng: Number(filter.longitude) });
+      const newPos = {
+        lat: Number(filter.latitude),
+        lng: Number(filter.longitude),
+      };
+      setMapCenter(newPos);
+      updateAddressFromCoords(newPos.lat, newPos.lng);
     }
-  }, [filter.latitude, filter.longitude]);
+  }, [filter.latitude, filter.longitude, updateAddressFromCoords]);
 
   return (
     <div className="flex flex-col gap-3">
@@ -140,15 +255,21 @@ export default function LocationSearchMap({ defaultCountry, onChange }: Props) {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={mapCenter}
-          zoom={6}
+          zoom={3} // Recommended for clearer movement; adjust if needed
           onLoad={onLoad}
+          // onDragEnd={handleMapDragEnd} // Uncommented to handle map drags if needed
           options={{
             streetViewControl: false,
             mapTypeControl: false,
             fullscreenControl: false,
           }}
         >
-          <Marker position={mapCenter} draggable onDragEnd={handleMarkerDragEnd} />
+          <Marker
+            onLoad={(marker) => (markerRef.current = marker)}
+            position={mapCenter}
+            draggable
+            onDragEnd={handleMarkerDragEnd}
+          />
         </GoogleMap>
       )}
     </div>

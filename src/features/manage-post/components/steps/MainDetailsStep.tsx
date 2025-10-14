@@ -27,9 +27,11 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
 
   const t = useTranslations("manage_post");
   const [countryId, setCountryId] = useState("");
+  const [countryData, setCountryData] = useState<Country | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const isValid = await trigger([
       "title",
       "description",
@@ -48,8 +50,8 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
       console.log("Form validation failed");
     }
   };
-  console.log(errors);
-  
+  console.log(errors, countryData, countryId);
+
   return (
     <form className="flex flex-col gap-[16px]" onSubmit={handleSubmit}>
       <div className="flex gap-4 md:flex-row flex-col">
@@ -61,7 +63,7 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
         <MediaUpload
           name="images"
           label={t("post_images")}
-        multiple
+          multiple
           maxFiles={4}
           className="w-full"
         />
@@ -73,7 +75,7 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
         placeholder={t("enter_title")}
         {...register("title")}
         error={
-         errors.title?.message ? t(errors.title?.message as string) : undefined
+          errors.title?.message ? t(errors.title?.message as string) : undefined
         }
       />
       <InputField
@@ -82,11 +84,13 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
         placeholder={t("enter_description")}
         {...register("description")}
         error={
-         errors.description?.message ? t(errors.description?.message as string) : undefined
+          errors.description?.message
+            ? t(errors.description?.message as string)
+            : undefined
         }
       />
 
-     <Controller
+      <Controller
         name="country_id"
         control={control}
         render={({ field }) => {
@@ -98,8 +102,12 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
             })) || [];
 
           // Use only the field value (no user fallback)
-          const selectedCountry = field.value?.toString() || "";
-
+          const selectedCountry = field.value?.toString() || countryId ||'1';
+          setCountryData(
+            countries.find(
+              (country) => country.id.toString() === selectedCountry
+            ) || null
+          );
           return (
             <SelectField
               label={t("country")}
@@ -107,7 +115,7 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
               value={selectedCountry}
               onChange={(selectedValue) => {
                 field.onChange(selectedValue); // Sends                 const countryId = field.value;مة في الكونسول
-                  setCountryId(selectedValue)
+                setCountryId(selectedValue);
               }}
               options={countryOptions}
               placeholder={t("select_country")}
@@ -119,23 +127,29 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
             />
           );
         }}
-
-
       />
-      {countryId === '1' && (
+      {(countryId === "1" || '1')&& (<>
         <InputField
-        label={t("zip_code")}
-        id="zip_code"
-        placeholder={t("enter_zip")}
-        {...register("zip_code")}
-        error={
-          errors.zip_code?.message
-            ? t(errors.zip_code?.message as string)
-            : undefined
-        }
+          label={t("zip_code")}
+          id="zip_code"
+          placeholder={t("enter_zip")}
+          {...register("zip_code")}
+          error={
+            errors.zip_code?.message
+              ? t(errors.zip_code?.message as string)
+              : undefined
+          }
+        /> 
+        <input
+        id="address"
+        readOnly
+        {...register("address")}
+        className="px-2 text-xs -mt-5 h-[28px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
       />
+      </>
+      
       )}
-
+     
       {/* <InputField
         id="address"
         readOnly
@@ -150,8 +164,13 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
 
       <input type="hidden" {...register("latitude")} />
       <input type="hidden" {...register("longitude")} />
-      <ZipMapSearch  countryId={countryId} />
-
+      {countryId !== "1" ? (
+        <ZipMapSearch country={countryData!} countryId={countryId} />
+      ) : (
+        <div className="hidden">
+          <ZipMapSearch country={countryData!} countryId={countryId} />
+        </div>
+      )}
       <FormFooter back={back} />
     </form>
   );

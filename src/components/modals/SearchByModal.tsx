@@ -49,6 +49,7 @@ export default function SearchByModal({
     address?: string;
     kilometers: number;
   } | null>(null);
+  const [countryData, setCountryData] = useState<Country | null>(null);
 
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
     setFilter({ [key]: value });
@@ -110,7 +111,7 @@ export default function SearchByModal({
 
     handleClose();
   };
-  
+
   return (
     <Dialog open={show} onOpenChange={(isOpen) => !isOpen && handleClose()}>
       <DialogContent className="max-w-md p-6 rounded-lg shadow-xl space-y-6 overflow-y-auto *:h-auto max-h-[95vh]">
@@ -154,6 +155,10 @@ export default function SearchByModal({
           value={selectedCountry}
           onChange={(val) => {
             setSelectedCountry(val);
+            // ✅ فلترة الدولة المختارة من قائمة الدول
+            const foundCountry =
+              countries.find((el) => el.id === Number(val)) || null;
+            setCountryData(foundCountry);
 
             // ✅ لو الدولة المختارة ID = 1 (نظام ZIP)
             if (val === "1") {
@@ -224,6 +229,7 @@ export default function SearchByModal({
               <div className=" py-2 space-y-4">
                 <h1 className="font-semibold -mt-8 mb-0">{t("search")}</h1>
                 <LocationSearchMap
+                  countryData={countryData ?? undefined}
                   defaultCountry={
                     (selectedCountry &&
                       countries.find((el) => el.id === Number(selectedCountry))

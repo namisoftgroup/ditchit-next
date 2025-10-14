@@ -71,7 +71,6 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
       setIsPending(false);
     }
   };
-console.log('countries' , countries);
 
   return (
     <FormProvider {...methods}>
