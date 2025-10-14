@@ -6,10 +6,10 @@ import InputField from "@/components/shared/InputField";
 import MediaUpload from "@/lib/media/MediaUpload";
 import ZipMapSearch from "@/components/shared/ZipMapSearch";
 import FormFooter from "../FormFooter";
-
 import SelectField from "@/components/shared/SelectField";
 import { Country } from "@/types/country";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getCookie } from "@/lib/utils";
 
 type propTypes = {
   next: () => void;
@@ -22,35 +22,45 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
     control,
     register,
     trigger,
+    watch,
+    setValue,
     formState: { errors },
   } = useFormContext();
 
   const t = useTranslations("manage_post");
-  const [countryId, setCountryId] = useState("");
+  const [countryId, setCountryId] = useState<string>(
+    getCookie("countryId") || ""
+  );
   const [countryData, setCountryData] = useState<Country | null>(null);
+
+  useEffect(() => {
+    if (countryId) {
+      setValue("country_id", countryId, { shouldValidate: true });
+    }
+  }, [countryId, setValue]);
+
+  useEffect(() => {
+    if (countryId) {
+      const selected = countries.find(
+        (country) => country.id.toString() === countryId
+      );
+      setCountryData(selected || null);
+    }
+  }, [countryId, countries]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const isValid = await trigger([
       "title",
       "description",
-      // "zip_code",
       "image",
       "address",
       "latitude",
       "longitude",
       "country_id",
     ]);
-
-    if (isValid) {
-      console.log("Form validation passed, proceeding to next step");
-      next();
-    } else {
-      console.log("Form validation failed");
-    }
+    if (isValid) next();
   };
-  console.log(errors, countryData, countryId);
 
   return (
     <form className="flex flex-col gap-[16px]" onSubmit={handleSubmit}>
@@ -78,6 +88,7 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
           errors.title?.message ? t(errors.title?.message as string) : undefined
         }
       />
+
       <InputField
         label={t("description")}
         id="description"
@@ -90,32 +101,26 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
         }
       />
 
+      {/* 🔽 اختيار الدولة */}
       <Controller
         name="country_id"
         control={control}
         render={({ field }) => {
-          // Get all countries as options
           const countryOptions =
             countries?.map((country) => ({
               label: country.title,
               value: country.id.toString(),
             })) || [];
 
-          // Use only the field value (no user fallback)
-          const selectedCountry = field.value?.toString() || countryId ||'1';
-          setCountryData(
-            countries.find(
-              (country) => country.id.toString() === selectedCountry
-            ) || null
-          );
           return (
             <SelectField
               label={t("country")}
               id="country_id"
-              value={selectedCountry}
-              onChange={(selectedValue) => {
-                field.onChange(selectedValue); // Sends                 const countryId = field.value;مة في الكونسول
-                setCountryId(selectedValue);
+              value={countryId || field.value}
+              onChange={(val) => {
+                field.onChange(val);
+                setCountryId(val);
+                setValue("zip_code", "");
               }}
               options={countryOptions}
               placeholder={t("select_country")}
@@ -128,49 +133,46 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
           );
         }}
       />
-      {(countryId === "1" || '1')&& (<>
-        <InputField
-          label={t("zip_code")}
-          id="zip_code"
-          placeholder={t("enter_zip")}
-          {...register("zip_code")}
-          error={
-            errors.zip_code?.message
-              ? t(errors.zip_code?.message as string)
-              : undefined
-          }
-        /> 
-        <input
-        id="address"
-        readOnly
-        {...register("address")}
-        className="px-2 text-xs -mt-5 h-[28px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
-      />
-      </>
-      
+
+      {/* 🔽 لو الدولة 1 → يظهر zip_code فقط */}
+      {countryId === "1" && (
+        <>
+          <InputField
+            label={t("zip_code")}
+            id="zip_code"
+            placeholder={t("enter_zip")}
+            {...register("zip_code")}
+            error={
+              errors.zip_code?.message
+                ? t(errors.zip_code?.message as string)
+                : undefined
+            }
+          />
+
+          <input
+            id="address"
+            readOnly
+            value={watch("address")}
+            {...register("address")}
+            className="px-2 text-xs -mt-5 h-[28px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
+          />
+        </>
       )}
-     
-      {/* <InputField
-        id="address"
-        readOnly
-        placeholder={t("address")}
-        {...register("address")}
-        error={
-          errors.address?.message
-            ? t(errors.address?.message as string)
-            : undefined
-        }
-      /> */}
+
+      {/* 🔽 لو الدولة ليست 1 → تظهر الخريطة */}
+      {countryId !== "1" && countryData ? (
+        <ZipMapSearch country={countryData} countryId={countryId} />
+      ) : (
+        <div className="hidden">
+          {countryData && (
+            <ZipMapSearch country={countryData} countryId={countryId} />
+          )}
+        </div>
+      )}
 
       <input type="hidden" {...register("latitude")} />
       <input type="hidden" {...register("longitude")} />
-      {countryId !== "1" ? (
-        <ZipMapSearch country={countryData!} countryId={countryId} />
-      ) : (
-        <div className="hidden">
-          <ZipMapSearch country={countryData!} countryId={countryId} />
-        </div>
-      )}
+
       <FormFooter back={back} />
     </form>
   );

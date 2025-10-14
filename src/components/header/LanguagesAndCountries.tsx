@@ -45,15 +45,16 @@ export default function LanguagesAndCountries({
   function revalidateQueries() {
     queryClient.clear();
   }
+console.log(profileData, countries);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2 whitespace-nowrap">
         <Image
           src={
-            profileData?.country?.flag ??
             countries.find((c) => c.code === countryCode)?.flag ??
-            countries.find((c) => c.code === "US")?.flag ??
+            profileData?.country?.flag ??
+            countries.find((c) => c.code  === "US")?.flag ??
             "/placeholder-flag.png"
           }
           

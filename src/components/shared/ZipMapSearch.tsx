@@ -154,7 +154,7 @@ export default function ZipMapSearch({
   }, [searchValue]);
 
   // 🔒 السماح فقط لو الدولة نفسها
-  const canDrag = country?.code === selectCountryBounds;
+  // const canDrag = country?.code === selectCountryBounds;
 
   // سحب الماركر
   const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
@@ -166,14 +166,14 @@ export default function ZipMapSearch({
   };
 
   // سحب الخريطة
-  const handleMapDragEnd = useCallback(() => {
-    const newCenter = mapRef.current?.getCenter();
-    if (newCenter) {
-      const lat = newCenter.lat();
-      const lng = newCenter.lng();
-      updateAddressFromCoords(lat, lng);
-    }
-  }, []);
+  // const handleMapDragEnd = useCallback(() => {
+  //   const newCenter = mapRef.current?.getCenter();
+  //   if (newCenter) {
+  //     const lat = newCenter.lat();
+  //     const lng = newCenter.lng();
+  //     updateAddressFromCoords(lat, lng);
+  //   }
+  // }, []);
 
   // تحويل الإحداثيات إلى عنوان
   const updateAddressFromCoords = async (lat: number, lng: number, preFetchedAddress?: string) => {
