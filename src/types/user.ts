@@ -13,5 +13,6 @@ export interface User {
   country_id: string | null;
   country:{
     flag:string
+    id:number
   }
 }

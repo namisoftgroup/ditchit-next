@@ -29,50 +29,54 @@ export default function ZipMapSearch({
   countryId: string | undefined;
 }) {
   const t = useTranslations("common");
-  const locale = useLocale(); // اللغة الحالية (مثلاً: ar, en, fr)
+  const locale = useLocale();
   const { watch, setValue } = useFormContext();
+  
+  // Form values
   const zipCode = watch("zip_code");
+  const savedLat = watch("latitude");
+  const savedLng = watch("longitude");
+  const savedAddress = watch("address");
 
+  // State
   const [isLoaded, setIsLoaded] = useState(false);
-  const [mapCenter, setMapCenter] = useState<{
-    lat: number;
-    lng: number;
-  }>(() => ({
+  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>(() => ({
     lat: country?.center_lat,
     lng: country?.center_lng,
   }));
   const [searchValue, setSearchValue] = useState("");
   const [lastZip, setLastZip] = useState("");
-  const [selectCountryBounds, setSelectCountryBounds] = useState(
-    country?.code || ""
-  );
-  const [lastValidPosition, setLastValidPosition] = useState<{
-    lat: number;
-    lng: number;
-  }>({
+  const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || "");
+  const [lastValidPosition, setLastValidPosition] = useState<{ lat: number; lng: number }>({
     lat: country?.center_lat,
     lng: country?.center_lng,
   });
-  // ✅ state جديد لحفظ آخر address صالح داخل الدولة
   const [lastValidAddress, setLastValidAddress] = useState("");
 
+  // Refs
   const mapRef = useRef<google.maps.Map | null>(null);
+  const isInitializedRef = useRef(false);
+  const isUpdatingRef = useRef(false);
+  const previousCountryCodeRef = useRef(country?.code);
 
-  // ✅ تحميل سكربت Google Maps بلغة ديناميكية
+  // ============================================
+  // SECTION 1: Google Maps Script Loading
+  // ============================================
   useEffect(() => {
-    // 1️⃣ إذا كانت مكتبة Google Maps Loaded مسبقًا ➜ لا تعيد التحميل
+    // If already loaded, set state and return
     if (typeof window !== "undefined" && window.google?.maps) {
       setIsLoaded(true);
       return;
     }
 
+    // If script exists, wait for it to load
     const existingScript = document.getElementById("google-maps-script");
     if (existingScript) {
-      // إذا كان السكربت قيد التحميل حاليًا انتظر لحين الانتهاء
       existingScript.addEventListener("load", () => setIsLoaded(true));
       return;
     }
 
+    // Load new script
     const loadGoogleMaps = () => {
       return new Promise<void>((resolve, reject) => {
         const script = document.createElement("script");
@@ -89,39 +93,109 @@ export default function ZipMapSearch({
     loadGoogleMaps()
       .then(() => setIsLoaded(true))
       .catch(() => toast.error("Failed to load Google Maps"));
-  }, [locale]); // 👈 كلما تتغير اللغة يعاد تحميل السكربت إذا لم يكن موجودًا بالفعل
+  }, [locale]);
 
-  const onLoad = useCallback((map: google.maps.Map) => {
-    mapRef.current = map;
-  }, []);
-
-  // تحديد الموقع الحالي
+  // ============================================
+  // SECTION 2: Handle Country Change - Reset map to new country center
+  // ============================================
   useEffect(() => {
+    if (!country?.code || !country?.center_lat || !country?.center_lng) return;
+    
+    // Check if country has changed
+    if (previousCountryCodeRef.current !== country.code) {
+      const newCenter = {
+        lat: country.center_lat,
+        lng: country.center_lng,
+      };
+
+      // Reset map to new country center
+      setMapCenter(newCenter);
+      setLastValidPosition(newCenter);
+      setSelectCountryBounds(country.code);
+      
+      // Clear previous location data
+      setSearchValue("");
+      setLastValidAddress("");
+      setValue("latitude", newCenter.lat);
+      setValue("longitude", newCenter.lng);
+      setValue("address", "");
+      setLastZip("");
+      
+      // Reset initialization flag to allow geolocation for new country
+      isInitializedRef.current = false;
+      
+      // Update ref to track current country
+      previousCountryCodeRef.current = country.code;
+
+      // Pan map if it's already loaded
+      if (mapRef.current) {
+        mapRef.current.panTo(newCenter);
+      }
+    }
+  }, [country, setValue]);
+
+  // ============================================
+  // SECTION 3: Show saved address in search field (Edit Profile)
+  // ============================================
+  useEffect(() => {
+    if (savedAddress && !searchValue) {
+      setSearchValue(savedAddress);
+      setLastValidAddress(savedAddress);
+    }
+  }, [savedAddress, searchValue]);
+
+  // ============================================
+  // SECTION 4: Initialize with saved coordinates (Edit Profile)
+  // ============================================
+  useEffect(() => {
+    if (!isLoaded || isInitializedRef.current) return;
+
+    const latNum = Number(savedLat);
+    const lngNum = Number(savedLng);
+    
+    if (!isNaN(latNum) && !isNaN(lngNum) && latNum !== 0 && lngNum !== 0) {
+      const pos = { lat: latNum, lng: lngNum };
+      setMapCenter(pos);
+      setLastValidPosition(pos);
+      // Ensure address is resolved
+      updateAddressFromCoords(latNum, lngNum);
+      isInitializedRef.current = true;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [savedLat, savedLng, isLoaded]);
+
+  // ============================================
+  // SECTION 5: Get current location (Initial Load)
+  // ============================================
+  useEffect(() => {
+    if (!isLoaded || isInitializedRef.current) return;
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           const lat = pos.coords.latitude;
           const lng = pos.coords.longitude;
-          // ✅ شغل التحقق قبل التحديث
           updateAddressFromCoords(lat, lng);
+          isInitializedRef.current = true;
         },
         () => {
           const lat = country?.center_lat ?? 56.58856249999999;
           const lng = country?.center_lng ?? -66.3980625;
-          // ✅ شغل التحقق قبل التحديث
           updateAddressFromCoords(lat, lng);
+          isInitializedRef.current = true;
         }
       );
     }
-  }, [country, countryId]);
+  }, [country, countryId, isLoaded]);
 
-  // جلب الإحداثيات من ZIP
+  // ============================================
+  // SECTION 6: Fetch coordinates from ZIP code
+  // ============================================
   useEffect(() => {
     const fetchCoordinates = async () => {
       if (zipCode && zipCode !== lastZip) {
         const result = await getCoordinates(zipCode);
         if (result) {
-          // ✅ شغل التحقق قبل التحديث
           updateAddressFromCoords(result.latitude, result.longitude, result.address);
           setLastZip(zipCode);
         } else {
@@ -132,7 +206,9 @@ export default function ZipMapSearch({
     fetchCoordinates();
   }, [zipCode, lastZip, t]);
 
-  // البحث التفاعلي أثناء الكتابة
+  // ============================================
+  // SECTION 7: Interactive search while typing (Debounced)
+  // ============================================
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (!searchValue.trim() || !window.google) return;
@@ -144,7 +220,6 @@ export default function ZipMapSearch({
           const lat = loc.lat();
           const lng = loc.lng();
           const address = results[0].formatted_address;
-          // ✅ شغل التحقق قبل التحديث
           updateAddressFromCoords(lat, lng, address);
         }
       });
@@ -153,33 +228,20 @@ export default function ZipMapSearch({
     return () => clearTimeout(delayDebounce);
   }, [searchValue]);
 
-  // 🔒 السماح فقط لو الدولة نفسها
-  // const canDrag = country?.code === selectCountryBounds;
+  // ============================================
+  // CORE FUNCTION: Convert coordinates to address & validate country
+  // ============================================
+  const updateAddressFromCoords = async (
+    lat: number,
+    lng: number,
+    preFetchedAddress?: string
+  ) => {
+    if (isUpdatingRef.current) return;
+    isUpdatingRef.current = true;
 
-  // سحب الماركر
-  const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
-    const lat = e.latLng?.lat();
-    const lng = e.latLng?.lng();
-    if (lat && lng) {
-      updateAddressFromCoords(lat, lng);
-    }
-  };
-
-  // سحب الخريطة
-  // const handleMapDragEnd = useCallback(() => {
-  //   const newCenter = mapRef.current?.getCenter();
-  //   if (newCenter) {
-  //     const lat = newCenter.lat();
-  //     const lng = newCenter.lng();
-  //     updateAddressFromCoords(lat, lng);
-  //   }
-  // }, []);
-
-  // تحويل الإحداثيات إلى عنوان
-  const updateAddressFromCoords = async (lat: number, lng: number, preFetchedAddress?: string) => {
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-      let address = preFetchedAddress; // لو موجود من zip أو search
+      let address = preFetchedAddress;
       if (!address && status === "OK" && results && results[0]) {
         address = results[0].formatted_address;
       }
@@ -196,21 +258,19 @@ export default function ZipMapSearch({
         const detectedCountry = bounds[0] ?? "";
 
         if (detectedCountry === "" || detectedCountry !== country?.code) {
-          // toast.error(detectedCountry === "" ? "Unable to detect country" : "You are outside the selected country");
-          toast.error( "You are outside the selected country");
+          toast.error("You are outside the selected country");
 
-          // ✅ رجع للـ lastValidPosition بدون مسح الـ address
+          // Revert to last valid position without clearing address
           if (mapRef.current) {
             mapRef.current.panTo(lastValidPosition);
           }
           setMapCenter(lastValidPosition);
           setValue("latitude", lastValidPosition.lat);
           setValue("longitude", lastValidPosition.lng);
-          // ✅ احتفظ بالـ lastValidAddress
           setValue("address", lastValidAddress);
           setSearchValue(lastValidAddress);
         } else {
-          // ✅ داخل: حدث كل حاجة
+          // Inside country: update everything
           setMapCenter({ lat, lng });
           setValue("latitude", lat);
           setValue("longitude", lng);
@@ -218,10 +278,10 @@ export default function ZipMapSearch({
           setSearchValue(address || "");
           setSelectCountryBounds(detectedCountry);
           setLastValidPosition({ lat, lng });
-          setLastValidAddress(address || ""); // حدث الـ lastValidAddress
+          setLastValidAddress(address || "");
         }
       } else {
-        // ✅ فشل: رجع بدون مسح
+        // Geocode failed: revert without clearing
         toast.error("Geocode failed");
         if (mapRef.current) {
           mapRef.current.panTo(lastValidPosition);
@@ -232,11 +292,42 @@ export default function ZipMapSearch({
         setValue("address", lastValidAddress);
         setSearchValue(lastValidAddress);
       }
+
+      isUpdatingRef.current = false;
     });
   };
 
-  console.log(country, selectCountryBounds, mapCenter);
+  // ============================================
+  // EVENT HANDLERS
+  // ============================================
+  const onLoad = useCallback((map: google.maps.Map) => {
+    mapRef.current = map;
+  }, []);
 
+  const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
+    const lat = e.latLng?.lat();
+    const lng = e.latLng?.lng();
+    if (lat && lng) {
+      updateAddressFromCoords(lat, lng);
+    }
+  };
+
+  // Note: handleMapDragEnd is commented in original code
+  // const handleMapDragEnd = useCallback(() => {
+  //   const newCenter = mapRef.current?.getCenter();
+  //   if (newCenter) {
+  //     const lat = newCenter.lat();
+  //     const lng = newCenter.lng();
+  //     updateAddressFromCoords(lat, lng);
+  //   }
+  // }, []);
+
+  // Debug logging (from original code)
+  console.log(country, selectCountryBounds, mapCenter, savedLat, savedLng);
+
+  // ============================================
+  // RENDER
+  // ============================================
   return (
     <div className="space-y-2">
       {isLoaded && window.google ? (

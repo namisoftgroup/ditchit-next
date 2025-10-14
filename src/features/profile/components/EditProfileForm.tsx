@@ -36,6 +36,13 @@ export default function EditProfileForm({
     formState: { errors },
   } = methods;
 
+  // 👉 Compute selected country data based on country_id
+  const selectedCountryId =
+    methods.watch("country_id") || user?.country_id?.toString() || "";
+  const countryData = countries.find(
+    (c) => c.id.toString() === selectedCountryId
+  );
+
   useEffect(() => {
     if (user?.id) {
       reset({
@@ -46,6 +53,7 @@ export default function EditProfileForm({
         latitude: user.latitude,
         longitude: user.longitude,
         country_id: user.country_id?.toString(),
+        phone: user?.phone ?? undefined
       });
     }
   }, [reset, user]);
@@ -83,6 +91,7 @@ export default function EditProfileForm({
       setIsPending(false);
     }
   };
+  console.log("user =========", user);
 
   return (
     <FormProvider {...methods}>
@@ -122,7 +131,14 @@ export default function EditProfileForm({
             errors.password?.message ? t(errors.password?.message) : undefined
           }
         />
-
+        <InputField
+          label={t("phone_number")}
+          type="phone"
+          id="phone"
+          placeholder="(123) 456-7890"
+          {...register("phone")}
+          error={errors.phone?.message ? t(errors.phone?.message) : undefined}
+        />
         <Controller
           name="country_id"
           control={methods.control}
@@ -156,30 +172,47 @@ export default function EditProfileForm({
           }}
         />
 
-        <InputField
-          label={t("zip_code")}
-          id="zip_code"
-          placeholder={t("enter_zip")}
-          {...register("zip_code")}
-          error={
-            errors.zip_code?.message ? t(errors.zip_code?.message) : undefined
-          }
-        />
-
-        <InputField
-          id="address"
-          readOnly
-          placeholder={t("address")}
-          {...register("address")}
-          error={
-            errors.address?.message ? t(errors.address?.message) : undefined
-          }
-        />
+        {methods.watch("country_id") === "1" && (
+          <>
+            <InputField
+              label={t("zip_code")}
+              id="zip_code"
+              placeholder={t("enter_zip")}
+              {...register("zip_code")}
+              error={
+                errors.zip_code?.message
+                  ? t(errors.zip_code?.message)
+                  : undefined
+              }
+            />
+            <input
+              id="address"
+              readOnly
+              {...register("address")}
+              className="px-2 text-xs -mt-5 h-[28px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
+            />
+          </>
+        )}
 
         <input type="hidden" {...register("latitude")} />
         <input type="hidden" {...register("longitude")} />
+        {methods.watch("country_id") !== "1" ? (
+          <ZipMapSearch
+            countryId={methods.watch("country_id")}
+            country={countryData as Country}
+          />
+        ) : (
+          <div className="hidden">
+            <ZipMapSearch
+              countryId={methods.watch("country_id")}
+              country={countryData as Country}
+            />
+          </div>
+        )}
 
-        <ZipMapSearch countryId={methods.watch("country_id")} />
+
+
+
 
         <button
           type="submit"
