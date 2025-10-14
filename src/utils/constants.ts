@@ -33,6 +33,16 @@ export const CONDITIONS = [
     value: "used",
   },
 ];
+export const TYPES = [
+  {
+    name: "Sale",
+    value: "sale",
+  },
+  {
+    name: "Wanted",
+    value: "wanted",
+  },
+];
 
 export const SHIPPING_METHODS = [
   {

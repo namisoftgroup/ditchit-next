@@ -53,6 +53,7 @@ export default function RoomLink({ room }: { room: Room }) {
       setShowConfirm(false);
     },
   });
+console.log("room for siderbar chat =======" , room);
 
   return (
     <Link

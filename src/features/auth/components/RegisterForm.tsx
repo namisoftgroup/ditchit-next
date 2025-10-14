@@ -120,9 +120,8 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
                 field.onChange(val);
 
                 const selected = countries.find((c) => c.id?.toString() === val);
-                if (selected) {
-                  setValue("country", selected);
-                }
+                // We don't need to set the country field directly anymore
+                // The ZipMapSearch component will get the country from the countries array
               }}
               options={countries.map((country) => ({
                 label: (country as { title?: string })?.title ?? "",
@@ -162,10 +161,16 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
         <input type="hidden" {...register("latitude")} />
         <input type="hidden" {...register("longitude")} />
         {methods.watch("country_id") !== "1" ? (
-          <ZipMapSearch countryId={methods.watch("country_id")} country={methods.watch("country")} />
+          <ZipMapSearch 
+            countryId={methods.watch("country_id")} 
+            country={countries.find(c => c.id?.toString() === methods.watch("country_id")) as Country} 
+          />
         ) : (
           <div className="hidden">
-            <ZipMapSearch countryId={methods.watch("country_id")} country={methods.watch("country")} />
+            <ZipMapSearch 
+              countryId={methods.watch("country_id")} 
+              country={countries.find(c => c.id?.toString() === methods.watch("country_id")) as Country} 
+            />
           </div>
         )}
 
