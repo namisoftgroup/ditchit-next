@@ -8,6 +8,9 @@ export default function MessageUI({
   message: Message;
   otherUserId: number;
 }) {
+  {
+    console.log(message);
+  }
   return (
     <div className="flex flex-col gap-1">
       <div
@@ -30,7 +33,9 @@ export default function MessageUI({
             {message.msg_type === "files" && (
               <>
                 {message.type === "audio" && (
-                  <audio src={message.file} controls />
+                  <>
+                    <audio src={message.file} controls />
+                  </>
                 )}
                 {message.type === "image" && (
                   <Image
@@ -39,6 +44,53 @@ export default function MessageUI({
                     height={200}
                     alt={message.file}
                   />
+                )}
+                {message.type === "other" && (
+                  <div className="flex justify-between items-center gap-3 p-2 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src="/images/doc_image.png"
+                        alt="file image"
+                        width={60}
+                        height={60}
+                      />
+                      <span className="text-[14px]">{message.name}</span>
+                    </div>
+                    <button
+                      onClick={async () => {
+                        try {
+                          const response = await fetch(message.file);
+                          const blob = await response.blob();
+                          const url = window.URL.createObjectURL(blob);
+                          const link = document.createElement("a");
+                          link.href = url;
+                          link.download = message.name || "download";
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                          window.URL.revokeObjectURL(url);
+                        } catch (error) {
+                          console.error("Download failed:", error);
+                          alert("Failed to download file");
+                        }
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5 "
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M7.5 10.5l4.5 4.5m0 0l4.5-4.5m-4.5 4.5V3"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 )}
                 {message.type === "video" && (
                   <video
@@ -63,9 +115,10 @@ export default function MessageUI({
       </div>
 
       <span
-        className={`text-[12px] text-[var(--grayColor)] px-1 flex ${message.sender_id !== otherUserId ? "justify-end" : "justify-start"}`}
+        className={`text-[12px] text-[var(--grayColor)] px-1 flex gap-2 ${message.sender_id !== otherUserId ? "justify-end" : "justify-start"}`}
       >
-        {message.time}
+        <span>{message.time}</span>
+        <span>{message.duration}</span>
       </span>
     </div>
   );

@@ -19,7 +19,7 @@ type EmailFormValues = z.infer<typeof emailSchema>;
 
 export default function SendCodeForm() {
   const router = useRouter();
-  const t = useTranslations("auth");
+  const t = useTranslations();
   const [isPending, setIsPending] = useState<boolean>(false);
   const setEmail = useResetPasswordStore((state) => state.setEmail);
 
@@ -33,6 +33,10 @@ export default function SendCodeForm() {
   });
 
   const onSubmit = async (values: EmailFormValues) => {
+    if (!navigator.onLine) {
+      toast.error(t("error.offline"));
+      return; 
+    }
     setIsPending(true);
     try {
       const res = await sendCode(values.email);
@@ -40,13 +44,13 @@ export default function SendCodeForm() {
       if (res.code === 200) {
         setEmail(values.email);
         router.push("/reset-password/verify-otp");
-        toast.success(t("code_sent", { email: values.email }));
+        toast.success(t("auth.code_sent", { email: values.email }));
       } else {
         toast.error(res.message || "Failed to send code");
       }
     } catch (error) {
       console.error(error);
-      toast.error(t("something_went_wrong"));
+      toast.error(t("error.offline"));
     } finally {
       setIsPending(false);
     }
@@ -66,10 +70,10 @@ export default function SendCodeForm() {
       />
 
       <InputField
-        label={t("email")}
+        label={t("auth.email")}
         type="email"
         id="email"
-        placeholder={t("email")}
+        placeholder={t("auth.email")}
         {...register("email")}
         error={errors.email?.message}
       />
@@ -79,7 +83,7 @@ export default function SendCodeForm() {
         className="customBtn w-full rounded-full mt-3"
         disabled={isPending}
       >
-        {isPending ? t("loading") : t("send_code")}
+        {isPending ? t("auth.loading") : t("auth.send_code")}
       </button>
     </form>
   );

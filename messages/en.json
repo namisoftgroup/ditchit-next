@@ -85,7 +85,8 @@
     "inconvenience": "We're sorry for the inconvenience. Please try again.",
     "page_not_found": "Oops! Page Not Found",
     "not_found_text": " Looks like you've wandered off the map. This page doesn't exist or has been moved.",
-    "back_home": "Go Back Home"
+    "back_home": "Go Back Home",
+    "offline": "You are offline. Please check your internet connection"
   },
   "post": {
     "promote": "Promote",
@@ -155,6 +156,7 @@
     "email_validation": "Invalid email address",
     "password": "Password",
     "password_validation": "Password must be at least 6 characters",
+    "password_required": "password is required",
     "forget_password": "Forgot your password?",
     "reset_your_password": "Reset your password",
     "reset_password": "Reset Password",
@@ -253,7 +255,9 @@
     "post_published_promoted": "Post published and promoted successfully",
     "promote_error": "something went wrong during promte",
     "select_country": "Select Country",
-    "country": "Country"
+    "country": "Country",
+    "form_error": "Please fill in the required fields correctly.",
+    "offline": "You are offline. Please check your internet connection"
   },
   "ditchNote": {
     "title": "Introducing Ditchit - The Ultimate Local Marketplace!",

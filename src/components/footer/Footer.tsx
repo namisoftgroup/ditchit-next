@@ -12,10 +12,10 @@ export default async function Footer() {
       <div className="container flex items-center flex-wrap py-2 pb-4 gap-y-1 gap-x-4 text-[var(--whiteColor)]">
         <LogoBrand />
         <div className="px-1 py-1 flex flex-wrap md:justify-center justify-start md:gap-4 gap-3 my-3 text-[14px]">
-          <Link href="/">{t("home")}</Link>
+          {/* <Link href="/">{t("home")}</Link>
           <Link href="/categories">{t("categories")}</Link>
           <Link href="/posts">{t("posts")}</Link>
-          <Link href="/chats">{t("chats")}</Link>
+          <Link href="/chats">{t("chats")}</Link> */}
           <Link href="/contact-us">{t("contact")}</Link>
           <Link href="/about">{t("about")}</Link>
           <Link href="/terms-conditions">{t("terms")}</Link>

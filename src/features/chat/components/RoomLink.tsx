@@ -119,7 +119,10 @@ export default function RoomLink({ room }: { room: Room }) {
             )}
           </p>
 
-          <span className="text-[10px]">{room.latest_message?.time}</span>
+          <div className="flex gap-2">
+            <span className="text-[10px]">{room.latest_message?.time}</span>
+            <span className="text-[10px]">{room.latest_message?.date}</span>
+          </div>
         </div>
 
         <DropdownMenu>

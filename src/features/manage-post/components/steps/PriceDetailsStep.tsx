@@ -9,6 +9,7 @@ import type { PostFormData } from "../../schema";
 import InputField from "@/components/shared/InputField";
 import BoostAndPublish from "@/components/modals/BoostAndPublish";
 import FormFooter from "../FormFooter";
+import { toast } from "sonner";
 
 export default function PriceDetailsStep({
   back,
@@ -34,16 +35,23 @@ export default function PriceDetailsStep({
 
   const handleNextClick = async (e: React.FormEvent) => {
     e.preventDefault();
-    const isValid = await trigger("price");
+   // Check offline status
+   if (typeof navigator !== "undefined" && !navigator.onLine) {
+     toast.error(t("offline") );
+     return;
+   }
+     const isValid = await trigger("price");
 
-    if (isValid) {
-      if (postId) {
-        handleSubmit(onSubmit)();
-      } else {
-        setShow(true);
-      }
-    }
-  };
+     if (isValid) {
+       if (postId) {
+         handleSubmit(onSubmit)();
+       } else {
+         setShow(true);
+       }
+    } else {
+      toast.error(t("form_error"));
+     }
+   };
 
   useEffect(() => {
     const handleCloseModal = () => setShow(false);
