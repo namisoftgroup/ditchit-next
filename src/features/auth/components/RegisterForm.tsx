@@ -39,11 +39,14 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
 
   const onSubmit = async (data: registerFormValues) => {
     setIsPending(true);
+
+    // delete confirm_password before send to api 
+    const { confirm_password, ...filteredData } = data;
     const formData = new FormData();
 
-    // console.log("Form data submitted:", data);
+    // console.log("Form data submitted:", filteredData);
 
-    Object.entries(data).forEach(([key, value]) => {
+    Object.entries(filteredData).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
         if (key === "image" && value instanceof File) {
           formData.append(key, value);
@@ -107,6 +110,18 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
             errors.password?.message ? t(errors.password?.message) : undefined
           }
         />
+        <InputField
+          label={t("password_confirmation")}
+          type="password"
+          id="confirm_password"
+          placeholder={t("password_confirmation")}
+          {...register("confirm_password")}
+          error={
+            errors.confirm_password?.message
+              ? t(errors.confirm_password?.message)
+              : undefined
+          }
+        />
         <Controller
           name="country_id"
           control={methods.control}
@@ -119,7 +134,7 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
               onChange={(val) => {
                 field.onChange(val);
 
-                const selected = countries.find((c) => c.id?.toString() === val);
+                // const selected = countries.find((c) => c.id?.toString() === val);
                 // We don't need to set the country field directly anymore
                 // The ZipMapSearch component will get the country from the countries array
               }}
@@ -161,19 +176,26 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
         <input type="hidden" {...register("latitude")} />
         <input type="hidden" {...register("longitude")} />
         {methods.watch("country_id") !== "1" ? (
-          <ZipMapSearch 
-            countryId={methods.watch("country_id")} 
-            country={countries.find(c => c.id?.toString() === methods.watch("country_id")) as Country} 
+          <ZipMapSearch
+            countryId={methods.watch("country_id")}
+            country={
+              countries.find(
+                (c) => c.id?.toString() === methods.watch("country_id")
+              ) as Country
+            }
           />
         ) : (
           <div className="hidden">
-            <ZipMapSearch 
-              countryId={methods.watch("country_id")} 
-              country={countries.find(c => c.id?.toString() === methods.watch("country_id")) as Country} 
+            <ZipMapSearch
+              countryId={methods.watch("country_id")}
+              country={
+                countries.find(
+                  (c) => c.id?.toString() === methods.watch("country_id")
+                ) as Country
+              }
             />
           </div>
         )}
-
 
         <InputField
           label={t("phone_number")}

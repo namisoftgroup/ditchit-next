@@ -12,10 +12,13 @@ import { checkCodeAction } from "../actions";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { getCookie } from "@/lib/utils";
+import { sendCode } from "../service";
 
 export default function VerifyOtpForm() {
   const [code, setCode] = useState("");
   const [isPending, setIsPending] = useState(false);
+  const [timer, setTimer] = useState(60);
   const router = useRouter();
   const t = useTranslations("auth");
 
@@ -27,6 +30,16 @@ export default function VerifyOtpForm() {
       router.push("/reset-password/send-code");
     }
   }, [email, router]);
+
+  // count timer
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [timer]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,10 +53,12 @@ export default function VerifyOtpForm() {
       const res = await checkCodeAction(formData);
 
       if (res.code === 200) {
+        document.cookie =
+          "verifyEmail=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
         setUser(res.data.user);
         setToken(res.data.auth.token);
         router.push("/reset-password/new-password");
-        toast.success(t("login_success"));
+        toast.success(t("verified_success"));
       } else {
         toast.error(res.message);
       }
@@ -55,6 +70,33 @@ export default function VerifyOtpForm() {
     }
   };
 
+  const resendCode = async () => {
+    if (!navigator.onLine) {
+      toast.error(t("offline"));
+      return;
+    }
+    setIsPending(true);
+    try {
+      const verifyEmail = getCookie("verifyEmail");
+      if (!verifyEmail) {
+        toast.error(t("error.missing_email"));
+        return;
+      }
+      const res = await sendCode(verifyEmail);
+
+      if (res.code === 200) {
+        setTimer(60);
+        toast.success(t("code_sent", { email: verifyEmail }));
+      } else {
+        toast.error(res.message || "Failed to send code");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(t("offline"));
+    } finally {
+      setIsPending(false);
+    }
+  };
   return (
     <form
       onSubmit={handleSubmit}
@@ -93,6 +135,22 @@ export default function VerifyOtpForm() {
           ))}
         </InputOTPGroup>
       </InputOTP>
+      <div className="flex items-center justify-center gap-2 mt-2">
+        {timer === 0 ? (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              resendCode();
+            }}
+            className="text-green-600 underline cursor-pointer "
+          >
+            {t("resend_code")}
+          </button>
+        ) : (
+          <p className="text-gray-700">{t("timer_count")}</p>
+        )}
+        {timer === 0 ? <p></p> : <p className="text-green-600">{timer}s</p>}
+      </div>
 
       <button
         type="submit"

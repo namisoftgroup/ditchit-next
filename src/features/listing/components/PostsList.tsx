@@ -5,6 +5,7 @@ import PostCard from "@/components/cards/PostCard";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import useGetPostsList from "@/features/listing/useGetPostsList";
 import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
+import { useTranslations } from "next-intl";
 
 type PostListProps = {
   userId: number | null;
@@ -23,7 +24,7 @@ export default function PostsList(props: PostListProps) {
       props.kilometers,
       props.delivery_method
     );
-
+  const t = useTranslations("common");
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -55,14 +56,11 @@ export default function PostsList(props: PostListProps) {
         <div className="w-full flex flex-col justify-center items-center py-4">
           <NoDataPlaceHolder />
           <h4 className="font-bold text-[#000] text-[18px] mb-2">
-            No posts availble here yet.
+            {t("no_available")}
           </h4>
-          <p className="text-sm text-gray-600">
-            Come back soon to discover new and exciting content!
-          </p>
+          <p className="text-sm text-gray-600">{t("no_available_text")}</p>
         </div>
       )}
-
       {(isFetchingNextPage || isLoading) &&
         Array.from({ length: 3 }).map((_, i) => (
           <div key={`skeleton-${i}`} className="w-full lg:w-4/12 p-2">

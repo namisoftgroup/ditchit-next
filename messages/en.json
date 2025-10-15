@@ -186,6 +186,10 @@
     "code_sent": "Code sent successfully to your email: {email}",
     "enter_code_sent_to": "Please enter the verification code sent to",
     "verify_otp": "Verify OTP",
+    "verified_success": "Verified Success",
+    "resend_code": "Resend Code",
+    "timer_count": "Timer Count:",
+    "offline": "You are offline. Please check your internet connection",
     "address_validation": "Address must be at least 3 characters",
     "pass_confirm_length": "Password confirmation must be at least 6 characters",
     "register_success": "Register successful",
@@ -260,7 +264,8 @@
     "select_country": "Select Country",
     "country": "Country",
     "form_error": "Please fill in the required fields correctly.",
-    "offline": "You are offline. Please check your internet connection"
+    "offline": "You are offline. Please check your internet connection",
+    "choose_delivery_methods": "must choose delivery methods"
   },
   "ditchNote": {
     "title": "Introducing Ditchit - The Ultimate Local Marketplace!",

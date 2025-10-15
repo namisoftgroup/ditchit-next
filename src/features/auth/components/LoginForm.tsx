@@ -89,8 +89,8 @@ export default function LoginForm() {
       />
 
       <FormFooterLink
-        question={t("forget_password")}
-        linkText={t("reset_your_password")}
+        // question={t("forget_password")}
+        linkText={t("forget_password")}
         href="/reset-password"
       />
 

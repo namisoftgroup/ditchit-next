@@ -15,7 +15,7 @@ export default function PostCard({
   showActions: boolean;
 }) {
   const t = useTranslations("post");
-
+  
   return (
     <div className="relative flex flex-col gap-1 h-full rounded-2xl border border-[var(--lightBorderColor)] bg-[var(--whiteColor)] transition-all">
       <PostActions post={post} showActions={showActions} />

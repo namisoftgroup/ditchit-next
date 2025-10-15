@@ -99,22 +99,22 @@ export default function PostActions({ post, showActions }: propsTypes) {
                   </button>
                 </DropdownMenuItem>
               )}
-
-              <DropdownMenuItem asChild>
-                <button
-                  className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-4 py-2 text-sm"
-                  disabled={isPendingSell}
-                  onClick={() => sellActivePost(post?.id)}
-                >
-                  <Tag
-                    width={16}
-                    height={16}
-                    className="text-[var(--mainColor)]"
-                  />
-                  {post.is_sold ? t("active") : t("sold")}
-                </button>
-              </DropdownMenuItem>
-
+              {post.type === 'sale' &&  (
+                <DropdownMenuItem asChild>
+                  <button
+                    className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-4 py-2 text-sm"
+                    disabled={isPendingSell}
+                    onClick={() => sellActivePost(post?.id)}
+                  >
+                    <Tag
+                      width={16}
+                      height={16}
+                      className="text-[var(--mainColor)]"
+                    />
+                    {post.is_sold ? t("active") : t("sold")}
+                  </button>
+                </DropdownMenuItem>
+              )}
               <DropdownMenuItem asChild>
                 <Link
                   href={`/edit-post/${post.id}`}

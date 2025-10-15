@@ -35,13 +35,15 @@ export default function SendCodeForm() {
   const onSubmit = async (values: EmailFormValues) => {
     if (!navigator.onLine) {
       toast.error(t("error.offline"));
-      return; 
+      return;
     }
     setIsPending(true);
     try {
       const res = await sendCode(values.email);
 
+      console.log(res);
       if (res.code === 200) {
+        document.cookie = `verifyEmail=${values.email}; path=/; max-age=3600`;
         setEmail(values.email);
         router.push("/reset-password/verify-otp");
         toast.success(t("auth.code_sent", { email: values.email }));

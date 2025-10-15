@@ -8,6 +8,7 @@ import useSendMessage from "../useSendMessage";
 import Recorder from "./Recorder";
 import ChooseLocationModal from "@/components/modals/ChooseLocationModal";
 import QuestionAndOffers from "./QuestionAndOffers";
+import { toast } from "sonner";
 
 export default function ChatForm({
   roomId,
@@ -19,7 +20,7 @@ export default function ChatForm({
   const [show, setShow] = useState(false);
   const [sound, setSound] = useState<File | null>(null);
   const [soundUrl, setSoundUrl] = useState<string | null>(null);
-  const t = useTranslations("chat");
+  const t = useTranslations();
 
   const [message, setMessage] = useState<MessagePayload>({
     type: "text",
@@ -42,7 +43,10 @@ export default function ChatForm({
 
   const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    if (typeof navigator !== "undefined" && !navigator.onLine) {
+      toast.error(t("error.offline"));
+      return;
+    }
     const formData: MessagePayload = {
       type: message.type,
       room_id: message.room_id,
@@ -90,7 +94,7 @@ export default function ChatForm({
               type="text"
               id="text-message"
               name="text-message"
-              placeholder={t("write_here")}
+              placeholder={t("chat.write_here")}
               autoComplete="off"
               value={message.message || ""}
               onChange={(e) =>

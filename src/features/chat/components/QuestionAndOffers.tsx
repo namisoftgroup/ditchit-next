@@ -37,7 +37,8 @@ export default function QuestionAndOffers({
     sendMessageMutation(formData);
     setActiveTab(null);
   };
-
+  console.log("questions :" , questions);
+  
   return (
     <div className="flex bg-white rounded-[12px] p-2 text-center relative gap-2">
       <button

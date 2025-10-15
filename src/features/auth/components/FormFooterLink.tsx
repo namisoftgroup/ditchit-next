@@ -1,7 +1,7 @@
 import { Link } from "@/i18n/navigation";
 
 interface FormFooterLinkProps {
-  question: string;
+  question?: string;
   linkText: string;
   href: string;
 }

@@ -28,6 +28,7 @@ export default function PriceDetailsStep({
   } = useFormContext<PostFormData>();
 
   const [show, setShow] = useState(false);
+  const [deliveryError, setDeliveryError] = useState(false);
   const { savePost, savePromote, isSavingNormal, isSavingPromote } =
     usePostForm();
   const selectedDelivery = watch("delivery_method");
@@ -35,23 +36,30 @@ export default function PriceDetailsStep({
 
   const handleNextClick = async (e: React.FormEvent) => {
     e.preventDefault();
-   // Check offline status
-   if (typeof navigator !== "undefined" && !navigator.onLine) {
-     toast.error(t("offline") );
-     return;
-   }
-     const isValid = await trigger("price");
+    // Check offline status
+    if (typeof navigator !== "undefined" && !navigator.onLine) {
+      toast.error(t("offline"));
+      return;
+    }
 
-     if (isValid) {
-       if (postId) {
-         handleSubmit(onSubmit)();
-       } else {
-         setShow(true);
-       }
+    const isValid = await trigger("price");
+    if (!selectedDelivery) {
+      setDeliveryError(true)
+      return
+    }else{
+      setDeliveryError(false)
+    }
+
+    if (isValid) {
+      if (postId) {
+        handleSubmit(onSubmit)();
+      } else {
+        setShow(true);
+      }
     } else {
       toast.error(t("form_error"));
-     }
-   };
+    }
+  };
 
   useEffect(() => {
     const handleCloseModal = () => setShow(false);
@@ -124,6 +132,7 @@ export default function PriceDetailsStep({
             </label>
           ))}
         </div>
+        {deliveryError && <p className="text-red-500 mt-2 text-xs">{t("choose_delivery_methods")}</p>}
       </div>
 
       <FormFooter
