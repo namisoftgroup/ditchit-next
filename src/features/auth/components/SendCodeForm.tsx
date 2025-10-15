@@ -11,17 +11,16 @@ import { useTranslations } from "next-intl";
 import InputField from "@/components/shared/InputField";
 import Image from "next/image";
 
-const emailSchema = z.object({
-  email: z.string().email("email_validation"),
-});
-
-type EmailFormValues = z.infer<typeof emailSchema>;
-
 export default function SendCodeForm() {
   const router = useRouter();
   const t = useTranslations();
   const [isPending, setIsPending] = useState<boolean>(false);
   const setEmail = useResetPasswordStore((state) => state.setEmail);
+  type EmailFormValues = z.infer<typeof emailSchema>;
+
+  const emailSchema = z.object({
+    email: z.string().email(t("auth.email_validation")),
+  });
 
   const {
     register,
