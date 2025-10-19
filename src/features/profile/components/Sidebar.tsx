@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart, LogOut, Megaphone, UserPen } from "lucide-react";
+import { Edit2, Heart, LogOut, Megaphone, UserPen } from "lucide-react";
 import { logOutAction } from "@/features/auth/actions";
 import { useAuthStore } from "@/features/auth/store";
 import { useRouter } from "next/navigation";
@@ -75,6 +75,18 @@ export default function Sidebar() {
             className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
           />
           {t("edit_profile")}
+        </Link>
+        
+        <Link
+          href="/profile/change-password"
+          className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)] whitespace-nowrap"
+        >
+          <Edit2
+            width={20}
+            height={20}
+            className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
+          />
+          {t("change_password")}
         </Link>
 
         <button

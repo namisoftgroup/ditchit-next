@@ -42,12 +42,6 @@ export default function AdvertiserPostsList({
 
   return (
     <div ref={sectionRef} className="flex flex-wrap ">
-      {posts.map((post, index) => (
-        <div key={index} className="w-full lg:w-4/12 p-2">
-          <PostCard post={post} showActions={false} />
-        </div>
-      ))}
-
       {(isFetchingNextPage || isLoading) && (
         <>
           {Array.from({ length: 3 }).map((_, index) => (
@@ -64,6 +58,12 @@ export default function AdvertiserPostsList({
           {t("no_posts_found")}
         </div>
       )}
+
+      {posts.map((post, index) => (
+        <div key={index} className="w-full lg:w-4/12 p-2">
+          <PostCard post={post} showActions={false} />
+        </div>
+      ))}
     </div>
   );
 }

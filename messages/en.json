@@ -126,6 +126,7 @@
     "my_posts": "My Posts",
     "favorites": "Favorites",
     "edit_profile": "Edit Profile",
+    "change_password": "Change Password",
     "logout": "Logout",
     "get_app": "get the app"
   },
@@ -197,7 +198,10 @@
     "select_country": "Select Country",
     "country": "Country",
     "location_error": "We could not determine your location. Default location is (United States)",
-    "zipcode_error": "No location found with this zip code"
+    "zipcode_error": "No location found with this zip code", 
+    "current_password":"Current Password",
+    "new_password":"New Password",
+    "confirm_new_password":"Confirm New Password"
   },
   "contact": {
     "full_name": "Full Name",

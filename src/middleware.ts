@@ -19,6 +19,7 @@ export function middleware(request: NextRequest) {
     "/profile",
     "/profile/my-favorites",
     "/profile/edit-profile",
+    "/profile/change-password",
     "/create-post",
     "/edit-post",
     "/chats",
