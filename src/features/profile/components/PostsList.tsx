@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import useGetMyPosts from "@/features/profile/hooks/useGetMyPosts";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
@@ -10,8 +10,8 @@ import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
 export default function PostsList() {
   const { posts, hasNextPage, isFetchingNextPage, fetchNextPage } =
     useGetMyPosts();
-  const t = useTranslations("post");
-
+  const t = useTranslations("common");
+  const [filteredPosts, setFilteredPosts] = useState(posts);
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -29,11 +29,26 @@ export default function PostsList() {
       observer.disconnect();
     };
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
-  console.log("posts " , posts);
-  
+  console.log("posts ", posts);
+
   return (
     <section className="flex flex-wrap ">
-      {posts.map((post) => (
+      <div className="w-full p-2">
+        <input
+          placeholder={t("search")}
+          onChange={(e) => {
+            const searchValue = e.target.value.toLowerCase();
+            setFilteredPosts(
+              posts.filter((post) =>
+                post.title.toLowerCase().includes(searchValue)
+              )
+            );
+          }}
+          className="w-full border border-gray-100 rounded-4xl py-2 px-5"
+        />
+      </div>
+
+      {filteredPosts.map((post) => (
         <div key={post.id} className="w-full lg:w-4/12 p-2">
           <PostCard post={post} showActions={true} />
         </div>
