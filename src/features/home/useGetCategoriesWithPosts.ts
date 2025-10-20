@@ -14,8 +14,6 @@ export default function useGetCategoriesWithPosts(filter: HomeFilterInterface) {
       initialPageParam: 1,
 
       getNextPageParam: (lastPage, allPages, lastPageParam) => {
-        console.log( "all pages",allPages);
-        console.log( "last page",lastPage);
         if (
 
           allPages.length === 1 &&

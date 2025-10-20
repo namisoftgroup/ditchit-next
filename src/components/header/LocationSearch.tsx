@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Search, MapPin } from "lucide-react";
 import { useHomeFilter } from "@/features/listing/store";
 import { useRouter } from "next/navigation";
@@ -37,7 +37,10 @@ export default function LocationSearch({
       router.push(`/posts?search=${encodeURIComponent(searchQuery)}`);
     }
   };
-  
+    // ✅ استخدم useMemo لتجنب إعادة إنشاء array في كل render
+  const memoizedCountries = useMemo(() => countries || [], [countries]);
+  const memoizedProfileData = useMemo(() => profileData || null, [profileData]);
+
   return (
     <div
       className={`items-center flex-1 gap-2 ${
@@ -45,7 +48,7 @@ export default function LocationSearch({
       }`}
     >
       <div className="flex items-center gap-8 w-full md:flex-row flex-row-reverse">
-        <LanguagesAndCountries countries={countries} profileData={profileData} />
+        <LanguagesAndCountries countries={memoizedCountries} profileData={memoizedProfileData} />
 
         <form
           className="flex-1 m-0 mb-0 min-w-[250px] relative md:bg-[#f3f3f3] bg-[#fff] border border-[#e6e6e6] rounded-full"

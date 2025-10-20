@@ -45,7 +45,6 @@ export default function LanguagesAndCountries({
   function revalidateQueries() {
     queryClient.clear();
   }
-console.log(profileData, countries);
 
   return (
     <DropdownMenu>

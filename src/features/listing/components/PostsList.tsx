@@ -43,11 +43,10 @@ export default function PostsList(props: PostListProps) {
 
     return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
-
   return (
     <div className="flex flex-wrap ">
-      {posts.map((post) => (
-        <div key={post.id} className="w-full lg:w-4/12 p-2">
+      {posts.map((post ,index) => (
+        <div key={`${post.id || 'post'}-${index}`} className="w-full lg:w-4/12 p-2">
           <PostCard post={post} showActions={false} />
         </div>
       ))}
