@@ -23,7 +23,8 @@ export default function CategoriesList({
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    if (!bottomRef.current || !hasNextPage) return;
+    const bottomElement = bottomRef.current;
+    if (!bottomElement || !hasNextPage) return;
 
     if (observerRef.current) observerRef.current.disconnect();
 
@@ -37,11 +38,10 @@ export default function CategoriesList({
       { rootMargin: "300px" }
     );
 
-    observerRef.current.observe(bottomRef.current);
+    observerRef.current.observe(bottomElement);
 
     return () => observerRef.current?.disconnect();
-    // 👇 لاحظ هنا أن dependencies فقط على bottomRef.current و hasNextPage
-  }, [bottomRef.current, hasNextPage]);
+  }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
 
   const allEmpty =
     categories.length > 0 &&
