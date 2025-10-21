@@ -46,7 +46,7 @@ export default function ZipMapSearch({
   }));
   const [searchValue, setSearchValue] = useState("");
   const [lastZip, setLastZip] = useState("");
-  const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || "");
+  const [ , setSelectCountryBounds] = useState(country?.code || "");
   const [lastValidPosition, setLastValidPosition] = useState<{ lat: number; lng: number }>({
     lat: country?.center_lat,
     lng: country?.center_lng,
@@ -323,7 +323,7 @@ export default function ZipMapSearch({
   // }, []);
 
   // Debug logging (from original code)
-  console.log(country, selectCountryBounds, mapCenter, savedLat, savedLng);
+  // console.log( selectCountryBounds);
 
   // ============================================
   // RENDER

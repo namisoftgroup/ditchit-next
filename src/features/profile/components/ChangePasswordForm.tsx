@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {  FormProvider, useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
@@ -9,7 +8,7 @@ import InputField from "@/components/shared/InputField";
 
 export default function ChangePasswordForm() {
   // const { user, setUser } = useAuthStore();
-  const [isPending, setIsPending] = useState(false);
+  // const [isPending, setIsPending] = useState(false);
   const t = useTranslations("auth");
 
   const methods = useForm<changePasswordSchema>({
@@ -106,9 +105,10 @@ export default function ChangePasswordForm() {
         <button
           type="submit"
           className="customBtn rounded-full w-fit px-12 ms-auto me-0 mt-4"
-          disabled={isPending}
+          // disabled={isPending}
         >
-          {isPending ? t("loading") : t("update")}
+          {/* {isPending ? t("loading") : t("update")} */}
+          {t("update")}
         </button>
       </form>
     </FormProvider>

@@ -40,7 +40,7 @@ export default function LocationSearchMap({
   const t = useTranslations("common");
   const locale = useLocale();
 
-  const [selectCountryBounds, setSelectCountryBounds] = useState(
+  const [, setSelectCountryBounds] = useState(
     countryData?.code || ""
   );
   const [lastValidPosition, setLastValidPosition] = useState<{
@@ -211,14 +211,14 @@ export default function LocationSearchMap({
   );
 
   // Handle map drag end
-  const handleMapDragEnd = useCallback(() => {
-    const newCenter = mapRef.current?.getCenter();
-    if (newCenter) {
-      const lat = newCenter.lat();
-      const lng = newCenter.lng();
-      updateAddressFromCoords(lat, lng);
-    }
-  }, [updateAddressFromCoords]);
+  // const handleMapDragEnd = useCallback(() => {
+  //   const newCenter = mapRef.current?.getCenter();
+  //   if (newCenter) {
+  //     const lat = newCenter.lat();
+  //     const lng = newCenter.lng();
+  //     updateAddressFromCoords(lat, lng);
+  //   }
+  // }, [updateAddressFromCoords]);
 
   useEffect(() => {
     if (defaultCountry) handleSearch();

@@ -40,7 +40,7 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
   const onSubmit = async (data: registerFormValues) => {
     setIsPending(true);
 
-    // delete confirm_password before send to api 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirm_password, ...filteredData } = data;
     const formData = new FormData();
 
