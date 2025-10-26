@@ -24,6 +24,7 @@ export function middleware(request: NextRequest) {
     "/edit-post",
     "/chats",
     "/reset-password/new-password",
+
   ];
 
   const AUTH_ROUTES = [
@@ -31,8 +32,18 @@ export function middleware(request: NextRequest) {
     "/register",
     "/reset-password",
     "/reset-password/verify-otp",
+    // "/reset-password/new-password",
+
   ];
 
+  // if (normalizedPath === "/reset-password/new-password") {
+  //   const verifiedReset = request.cookies.get("verifiedReset")?.value;
+  //   if (!verifiedReset) {
+  //     return NextResponse.redirect(
+  //       new URL(`/${locale}/reset-password/send-code`, request.url)
+  //     );
+  //   }
+  // }
   const isProtectedRoute =
     PROTECTED_ROUTES.includes(normalizedPath) ||
     normalizedPath.startsWith("/chats/");
@@ -47,9 +58,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(`/${locale}`, request.url));
   }
 
+
   return intlMiddleware(request);
 }
 
 export const config = {
   matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
 };
+

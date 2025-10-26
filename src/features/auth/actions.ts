@@ -103,6 +103,12 @@ export async function checkCodeAction(formData: FormData) {
         maxAge: 60 * 60 * 24 * 7,
       });
     }
+    // if (responseData.code === 200) {
+    //   (await cookies()).set("verifiedReset", "true", {
+    //     path: "/",
+    //     maxAge: 60 * 5, // 5 دقائق فقط
+    //   });
+    // }
 
     return responseData;
   } catch (error: unknown) {
