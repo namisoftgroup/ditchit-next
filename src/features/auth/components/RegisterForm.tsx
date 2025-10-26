@@ -219,7 +219,13 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
               </label>
 
               <PhoneInput
-                country={"us"} // default country
+                country={
+                  (
+                    countries.find(
+                      (c) => c.id?.toString() === methods.watch("country_id")
+                    ) as Country | undefined
+                  )?.code?.toLowerCase() || "us"
+                }
                 value={field.value}
                 onChange={(phone) => field.onChange(phone)}
                 enableSearch={true}
