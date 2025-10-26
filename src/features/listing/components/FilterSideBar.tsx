@@ -72,6 +72,12 @@ export default function FilterSideBar({
             <div className="w-full rounded-xl border border-[var(--lightBorderColor)]">
               <AccordionFilter categories={categories} />
             </div>
+            <button
+              className=" flex items-center justify-center bg-green-500 text-[14px] border rounded-full px-12 py-3 text-white mt-auto"
+              onClick={() => setOpenFilter(false)}
+            >
+              See Results
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

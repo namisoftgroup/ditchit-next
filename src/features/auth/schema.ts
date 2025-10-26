@@ -17,7 +17,7 @@ export const registerSchema = z
     phone: z
       .string()
       .regex(
-        /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{5})$/,
+        /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{6})$/,
         "phone_validation"
       )
       .optional()

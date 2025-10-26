@@ -127,7 +127,8 @@
     "favorites": "المفضلات",
     "edit_profile": "تعديل الملف الشخصي",
     "logout": "تسجيل خروج",
-    "get_app": "احصل على التطبيق"
+    "get_app": "احصل على التطبيق",
+    "change_password": "تغيير كلمة المرور"
   },
   "chat": {
     "choose_your_location": "اختر موقعك",
@@ -196,7 +197,11 @@
     "select_country": "اختر الدولة",
     "country": "دولة",
     "location_error": "لم نتمكن من تحديد موقعك، الموقع الافتراضي (الولايات المتحدة الأمريكية)",
-    "zipcode_error": "لم يتم العثور على موقع بهذا الرمز البريدي"
+    "zipcode_error": "لم يتم العثور على موقع بهذا الرمز البريدي",
+    "verified_success": "تم التحقق بنجاح",
+    "current_password": "كلمة المرور الحالية",
+    "new_password": "كلمة المرور الجديدة",
+    "confirm_new_password": "تأكيد كلمة المرور الجديدة"
   },
   "contact": {
     "full_name": "الاسم الكامل",

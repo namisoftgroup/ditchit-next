@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -10,12 +10,16 @@ import { toast } from "sonner";
 import InputField from "@/components/shared/InputField";
 import TextField from "@/components/shared/TextField";
 
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
 export default function ContactForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    control,
   } = useForm<ContactFormValues>({
     mode: "onChange",
     resolver: zodResolver(contactSchema),
@@ -50,7 +54,11 @@ export default function ContactForm() {
             id="username"
             placeholder={t("full_name")}
             {...register("name")}
-            error={errors.name?.message ? t(errors.name?.message as string) : undefined}
+            error={
+              errors.name?.message
+                ? t(errors.name?.message as string)
+                : undefined
+            }
           />
 
           <InputField
@@ -58,25 +66,72 @@ export default function ContactForm() {
             id="email"
             placeholder={t("email")}
             {...register("email")}
-            error={errors.email?.message ? t(errors.email?.message as string) : undefined}
+            error={
+              errors.email?.message
+                ? t(errors.email?.message as string)
+                : undefined
+            }
           />
         </div>
 
         <div className="flex gap-4">
-          <InputField
-            label={t("phone")}
-            id="phone"
-            placeholder={t("phone")}
-            {...register("phone")}
-            error={errors.phone?.message ? t(errors.phone?.message as string) : undefined}
-          />
+          <Controller
+            name="phone"
+            control={control}
+            render={({ field }) => (
+              <div className="flex flex-col w-full gap-1">
+                <label
+                  htmlFor="phone"
+                  className="text-sm font-bold mb-1 text-gray-700"
+                >
+                  {t("phone")}
+                </label>
 
+                <PhoneInput
+                  country={"us"} // الدولة الافتراضية، يمكن جعلها ديناميكية لاحقًا
+                  value={field.value}
+                  onChange={(phone) => field.onChange(phone)}
+                  enableSearch={true}
+                  searchPlaceholder={t("search_country")}
+                  inputProps={{
+                    id: "phone",
+                    name: "phone",
+                    required: true,
+                  }}
+                  inputStyle={{
+                    width: "100%",
+                    height: "45px",
+                    borderRadius: "14px",
+                    border: "1px solid var(--lightBorderColor)",
+                    padding: "24px 12px 24px 48px",
+                    fontSize: "14px",
+                  }}
+                  buttonStyle={{
+                    borderRadius: "8px 0 0 8px",
+                  }}
+                  dropdownStyle={{
+                    zIndex: 10000,
+                  }}
+                />
+
+                {errors.phone?.message && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {t(errors.phone.message as string)}
+                  </p>
+                )}
+              </div>
+            )}
+          />
           <InputField
             label={t("subject")}
             id="subject"
             placeholder={t("subject")}
             {...register("subject")}
-            error={errors.subject?.message ? t(errors.subject?.message as string) : undefined}
+            error={
+              errors.subject?.message
+                ? t(errors.subject?.message as string)
+                : undefined
+            }
           />
         </div>
 
@@ -84,7 +139,11 @@ export default function ContactForm() {
           label={t("message")}
           placeholder={t("message_placeholder")}
           {...register("message")}
-          error={errors.message?.message ? t(errors.message?.message as string) : undefined}
+          error={
+            errors.message?.message
+              ? t(errors.message?.message as string)
+              : undefined
+          }
           id="message"
         />
 

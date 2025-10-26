@@ -17,6 +17,8 @@ import FormFooterLink from "./FormFooterLink";
 import SelectField from "@/components/shared/SelectField";
 import { Country } from "@/types/country";
 import { getCookie } from "@/lib/utils";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 export default function RegisterForm({ countries }: { countries: Country[] }) {
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -197,12 +199,57 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
           </div>
         )}
 
-        <InputField
+        {/* <InputField
           label={t("phone_number")}
           id="phone"
           placeholder="(123) 456-7890"
           {...register("phone")}
           error={errors.phone?.message ? t(errors.phone?.message) : undefined}
+        /> */}
+        <Controller
+          name="phone"
+          control={methods.control}
+          render={({ field }) => (
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="phone"
+                className="text-sm font-medium text-gray-700"
+              >
+                {t("phone_number")}
+              </label>
+
+              <PhoneInput
+                country={"us"} // default country
+                value={field.value}
+                onChange={(phone) => field.onChange(phone)}
+                enableSearch={true}
+                inputProps={{
+                  id: "phone",
+                  name: "phone",
+                  required: true,
+                }}
+                inputStyle={{
+                  width: "100%",
+                  borderRadius: "8px",
+                  border: "1px solid var(--lightBorderColor)",
+                  padding: "10px 12px 10px 48px",
+                  fontSize: "14px",
+                }}
+                buttonStyle={{
+                  borderRadius: "8px 0 0 8px",
+                }}
+                dropdownStyle={{
+                  zIndex: 10000,
+                }}
+              />
+
+              {errors.phone?.message && (
+                <p className="text-red-500 text-xs mt-1">
+                  {t(errors.phone.message)}
+                </p>
+              )}
+            </div>
+          )}
         />
 
         <button

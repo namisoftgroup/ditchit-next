@@ -6,11 +6,12 @@ import useGetMyPosts from "@/features/profile/hooks/useGetMyPosts";
 import PostCardSkeleton from "@/components/loaders/PostCardSkeleton";
 import PostCard from "@/components/cards/PostCard";
 import NoDataPlaceHolder from "@/components/shared/NoDataPlaceHolder";
+import { ListFilter, Search } from "lucide-react";
 
 export default function PostsList() {
   const { posts, hasNextPage, isFetchingNextPage, fetchNextPage } =
     useGetMyPosts();
-  const t = useTranslations("common");
+  const t = useTranslations();
   const [filteredPosts, setFilteredPosts] = useState(posts);
   const observerRef = useRef<HTMLDivElement | null>(null);
 
@@ -29,13 +30,12 @@ export default function PostsList() {
       observer.disconnect();
     };
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
-  console.log("posts ", posts);
 
   return (
     <section className="flex flex-wrap ">
-      <div className="w-full p-2">
+      <div className="w-full p-2 relative mb-4">
         <input
-          placeholder={t("search")}
+          placeholder={t("common.search")}
           onChange={(e) => {
             const searchValue = e.target.value.toLowerCase();
             setFilteredPosts(
@@ -46,6 +46,19 @@ export default function PostsList() {
           }}
           className="w-full border border-gray-100 rounded-4xl py-2 px-5"
         />
+        <button
+          type="submit"
+          className="absolute end-3 top-5  p-0 w-9 flex items-center justify-center rounded-xl text-[var(--mainColor)]"
+        >
+          <Search height={20} width={20} />
+        </button>
+              <button
+        className="ms-auto flex items-center gap-2 text-[14px] md:hidden"
+        // onClick={() => setOpenFilter(true)}
+      >
+        <ListFilter width={16} height={16} /> {t("sort_by")}
+      </button>
+
       </div>
 
       {filteredPosts.map((post) => (
@@ -67,7 +80,7 @@ export default function PostsList() {
       {posts.length === 0 && (
         <div className="w-full flex flex-col justify-center items-center">
           <NoDataPlaceHolder />
-          {t("no_posts")}
+          {t("post.no_posts")}
         </div>
       )}
     </section>

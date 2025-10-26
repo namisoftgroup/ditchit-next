@@ -13,6 +13,8 @@ import clientAxios from "@/lib/axios/clientAxios";
 import ZipMapSearch from "@/components/shared/ZipMapSearch";
 import { Country } from "@/types/country";
 import SelectField from "@/components/shared/SelectField";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 export default function EditProfileForm({
   countries,
@@ -53,7 +55,7 @@ export default function EditProfileForm({
         latitude: user.latitude,
         longitude: user.longitude,
         country_id: user.country_id?.toString(),
-        phone: user?.phone ?? undefined
+        phone: user.phone || "", // ✅ تأكد أن الرقم يُعاد ضبطه هنا
       });
     }
   }, [reset, user]);
@@ -131,14 +133,53 @@ export default function EditProfileForm({
             errors.password?.message ? t(errors.password?.message) : undefined
           }
         />
-        <InputField
-          label={t("phone_number")}
-          type="phone"
-          id="phone"
-          placeholder="(123) 456-7890"
-          {...register("phone")}
-          error={errors.phone?.message ? t(errors.phone?.message) : undefined}
+        <Controller
+          name="phone"
+          control={methods.control}
+          render={({ field }) => (
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="phone"
+                className="text-sm font-medium text-gray-700"
+              >
+                {t("phone_number")}
+              </label>
+
+              <PhoneInput
+                country={user?.country.code?.toLowerCase() || "us"} // الدولة الافتراضية
+                value={field.value || user?.phone || ""} // عرض الرقم الموجود
+                onChange={(phone) => field.onChange(phone)}
+                enableSearch={true}
+                searchPlaceholder={t("search_country")}
+                inputProps={{
+                  id: "phone",
+                  name: "phone",
+                  required: true,
+                }}
+                inputStyle={{
+                  width: "100%",
+                  borderRadius: "8px",
+                  border: "1px solid var(--lightBorderColor)",
+                  padding: "10px 12px 10px 48px",
+                  fontSize: "14px",
+                }}
+                buttonStyle={{
+                  borderRadius: "8px 0 0 8px",
+                }}
+                dropdownStyle={{
+                  zIndex: 10000,
+                }}
+              />
+
+              {errors.phone?.message && (
+                <p className="text-red-500 text-xs mt-1">
+                  {t(errors.phone.message)}
+                </p>
+              )}
+            </div>
+          )}
         />
+
         <Controller
           name="country_id"
           control={methods.control}
@@ -209,10 +250,6 @@ export default function EditProfileForm({
             />
           </div>
         )}
-
-
-
-
 
         <button
           type="submit"
