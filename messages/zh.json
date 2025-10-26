@@ -77,7 +77,10 @@
     "new": "新的",
     "used": "用过的",
     "no_available": "这里尚无帖子。",
-    "no_available_text": "快来回来发现新的令人兴奋的内容！"
+    "no_available_text": "快来回来发现新的令人兴奋的内容！",
+    "type": "类型",
+    "sale": "销售",
+    "wanted": "通缉"
   },
   "error": {
     "somthing_went_wrong": "哎呀！出了点问题",
@@ -85,7 +88,8 @@
     "inconvenience": "给您带来不便，我们深表歉意。请重试。",
     "page_not_found": "哎呀！页面未找到",
     "not_found_text": "看起来你已经偏离了地图。此页面不存在或已被移动。",
-    "back_home": "返回首页"
+    "back_home": "返回首页",
+    "offline": "您已离线。请检查您的互联网连接"
   },
   "post": {
     "promote": "推广",
@@ -123,7 +127,8 @@
     "favorites": "收藏夹",
     "edit_profile": "编辑个人资料",
     "logout": "登出",
-    "get_app": "下载应用程序"
+    "get_app": "下载应用程序",
+    "change_password": "更改密码"
   },
   "chat": {
     "choose_your_location": "选择您的位置",
@@ -188,7 +193,15 @@
     "select_country": "选择国家",
     "country": "国家",
     "location_error": "我们无法确定您的位置。默认位置是（美国）",
-    "zipcode_error": "该邮政编码找不到位置"
+    "zipcode_error": "该邮政编码找不到位置",
+    "password_required": "需要密码",
+    "verified_success": "已验证成功",
+    "resend_code": "重新发送代码",
+    "timer_count": "定时器计数：",
+    "offline": "您已离线。请检查您的互联网连接",
+    "current_password": "当前密码",
+    "new_password": "新密码",
+    "confirm_new_password": "确认新密码"
   },
   "contact": {
     "full_name": "全名",
@@ -253,7 +266,10 @@
     "post_published_promoted": "帖子已成功发布并促进",
     "promote_error": "提前期间出了问题",
     "select_country": "选择国家",
-    "country": "国家"
+    "country": "国家",
+    "form_error": "请正确填写必填字段。",
+    "offline": "您已离线。请检查您的互联网连接",
+    "choose_delivery_methods": "必须选择送货方式"
   },
   "ditchNote": {
     "title": "介绍 Ditchit —— 终极本地市场！",

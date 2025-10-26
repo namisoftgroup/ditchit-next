@@ -77,7 +77,10 @@
     "new": "Neu",
     "used": "Gebraucht",
     "no_available": "Hier noch keine Beiträge zur Verfügung.",
-    "no_available_text": "Kommen Sie bald zurück, um neue und aufregende Inhalte zu entdecken!"
+    "no_available_text": "Kommen Sie bald zurück, um neue und aufregende Inhalte zu entdecken!",
+    "type": "Typ",
+    "sale": "Verkauf",
+    "wanted": "Gesucht"
   },
   "error": {
     "somthing_went_wrong": "Hoppla! Etwas ist schiefgegangen.",
@@ -85,7 +88,8 @@
     "inconvenience": "Es tut uns leid für die Unannehmlichkeiten. Bitte versuchen Sie es erneut.",
     "page_not_found": "Ups! Seite nicht gefunden",
     "not_found_text": "Es sieht so aus, als ob Sie vom Weg abgekommen sind. Diese Seite existiert nicht oder wurde verschoben.",
-    "back_home": "Gehe nach Hause"
+    "back_home": "Gehe nach Hause",
+    "offline": "Du bist offline. Bitte überprüfen Sie Ihre Internetverbindung"
   },
   "post": {
     "promote": "Fördern",
@@ -123,7 +127,8 @@
     "favorites": "Favoriten",
     "edit_profile": "Profil bearbeiten",
     "logout": "Abmelden",
-    "get_app": "Lade die App herunter"
+    "get_app": "Lade die App herunter",
+    "change_password": "Kennwort ändern"
   },
   "chat": {
     "choose_your_location": "Wählen Sie Ihren Standort",
@@ -188,7 +193,15 @@
     "select_country": "Wählen Sie Land aus",
     "country": "Land",
     "location_error": "Wir konnten Ihren Standort nicht bestimmen. Standardstandort ist (USA)",
-    "zipcode_error": "Kein Ort mit dieser Postleitzahl gefunden"
+    "zipcode_error": "Kein Ort mit dieser Postleitzahl gefunden",
+    "password_required": "Passwort ist erforderlich",
+    "verified_success": "Bestätigter Erfolg",
+    "resend_code": "Code erneut senden",
+    "timer_count": "Timer-Zählung:",
+    "offline": "Du bist offline. Bitte überprüfen Sie Ihre Internetverbindung",
+    "current_password": "Aktuelles Passwort",
+    "new_password": "Neues Passwort",
+    "confirm_new_password": "Bestätigen Sie das neue Passwort"
   },
   "contact": {
     "full_name": "Vollständiger Name",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post veröffentlicht und erfolgreich gefördert",
     "promote_error": "Während des Promte ging etwas schief",
     "select_country": "Wählen Sie Land aus",
-    "country": "Land"
+    "country": "Land",
+    "form_error": "Bitte füllen Sie die erforderlichen Felder korrekt aus.",
+    "offline": "Du bist offline. Bitte überprüfen Sie Ihre Internetverbindung",
+    "choose_delivery_methods": "Sie müssen die Versandart wählen"
   },
   "ditchNote": {
     "title": "Einführung von Ditchit - Der ultimative lokale Marktplatz!",

@@ -77,7 +77,10 @@
     "new": "Nou",
     "used": "Folosit",
     "no_available": "Nu există încă postări aici.",
-    "no_available_text": "Reveniți în curând pentru a descoperi conținut nou și interesant!"
+    "no_available_text": "Reveniți în curând pentru a descoperi conținut nou și interesant!",
+    "type": "Tip",
+    "sale": "Vânzare",
+    "wanted": "Dorit"
   },
   "error": {
     "somthing_went_wrong": "Oops! Ceva a mers prost",
@@ -85,7 +88,8 @@
     "inconvenience": "Ne pare rău pentru inconvenient. Te rugăm să încerci din nou.",
     "page_not_found": "Ups! Pagina nu a fost găsită.",
     "not_found_text": "Se pare că ai ieșit de pe hartă. Această pagină nu există sau a fost mutată.",
-    "back_home": "Întoarce-te acasă"
+    "back_home": "Întoarce-te acasă",
+    "offline": "Ești offline. Vă rugăm să vă verificați conexiunea la internet"
   },
   "post": {
     "promote": "Promovează",
@@ -123,7 +127,8 @@
     "favorites": "Preferate",
     "edit_profile": "Editează profilul",
     "logout": "Deconectare",
-    "get_app": "descarcă aplicația"
+    "get_app": "descarcă aplicația",
+    "change_password": "Schimbaţi parola"
   },
   "chat": {
     "choose_your_location": "Alegeți locația dvs.",
@@ -188,7 +193,15 @@
     "select_country": "Selectați țară",
     "country": "Ţară",
     "location_error": "Nu am putut determina locația dvs. Locația implicită este (Statele Unite)",
-    "zipcode_error": "Nu se găsește nicio locație cu acest cod poștal"
+    "zipcode_error": "Nu se găsește nicio locație cu acest cod poștal",
+    "password_required": "parola este necesară",
+    "verified_success": "Succes verificat",
+    "resend_code": "Retrimite codul",
+    "timer_count": "Număr cronometru:",
+    "offline": "Ești offline. Vă rugăm să vă verificați conexiunea la internet",
+    "current_password": "Parola actuală",
+    "new_password": "Parolă Nouă",
+    "confirm_new_password": "Confirmați parola nouă"
   },
   "contact": {
     "full_name": "Nume complet",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post publicat și promovat cu succes",
     "promote_error": "Ceva nu a mers prost în timpul promului",
     "select_country": "Selectați țară",
-    "country": "Ţară"
+    "country": "Ţară",
+    "form_error": "Vă rugăm să completați corect câmpurile obligatorii.",
+    "offline": "Ești offline. Vă rugăm să vă verificați conexiunea la internet",
+    "choose_delivery_methods": "trebuie să aleagă metodele de livrare"
   },
   "ditchNote": {
     "title": "Introducerea Ditchit - Piața Locală Ultimativă!",

@@ -77,7 +77,10 @@
     "new": "Bago",
     "used": "Ginamit",
     "no_available": "Wala pang mga post dito.",
-    "no_available_text": "Bumalik kaagad upang matuklasan ang bago at kapana -panabik na nilalaman!"
+    "no_available_text": "Bumalik kaagad upang matuklasan ang bago at kapana -panabik na nilalaman!",
+    "type": "I -type",
+    "sale": "Benta",
+    "wanted": "Wanted"
   },
   "error": {
     "somthing_went_wrong": "Naku! May nangyaring mali.",
@@ -85,7 +88,8 @@
     "inconvenience": "Ikinalulutan namin ang abala. Mangyaring subukan muli.",
     "page_not_found": "Sino! Hindi Natagpuan ang Pahina",
     "not_found_text": "Mukhang naligaw ka sa mapa. Ang pahinang ito ay hindi umiiral o nailipat.",
-    "back_home": "Bumalik sa Bahay"
+    "back_home": "Bumalik sa Bahay",
+    "offline": "Offline ka. Mangyaring suriin ang iyong koneksyon sa internet"
   },
   "post": {
     "promote": "Itaguyod",
@@ -123,7 +127,8 @@
     "favorites": "Paborito",
     "edit_profile": "I-edit ang Profilo",
     "logout": "Mag-logout",
-    "get_app": "kunin ang app"
+    "get_app": "kunin ang app",
+    "change_password": "Baguhin ang password"
   },
   "chat": {
     "choose_your_location": "Pumili ng Iyong Lokasyon",
@@ -188,7 +193,15 @@
     "select_country": "Piliin ang Bansa",
     "country": "Bansa",
     "location_error": "Hindi namin matukoy ang iyong lokasyon. Default na lokasyon ay (Estados Unidos)",
-    "zipcode_error": "Walang lokasyon na natagpuan sa zip code na ito"
+    "zipcode_error": "Walang lokasyon na natagpuan sa zip code na ito",
+    "password_required": "Kinakailangan ang password",
+    "verified_success": "Napatunayan na tagumpay",
+    "resend_code": "Magpatuloy ng code",
+    "timer_count": "Bilang ng Timer:",
+    "offline": "Offline ka. Mangyaring suriin ang iyong koneksyon sa internet",
+    "current_password": "Kasalukuyang password",
+    "new_password": "Bagong password",
+    "confirm_new_password": "Kumpirmahin ang bagong password"
   },
   "contact": {
     "full_name": "Buong pangalan",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Ang nai -publish na nai -publish at matagumpay na na -promote",
     "promote_error": "May mali sa promte",
     "select_country": "Piliin ang Bansa",
-    "country": "Bansa"
+    "country": "Bansa",
+    "form_error": "Mangyaring punan nang tama ang mga kinakailangang patlang.",
+    "offline": "Offline ka. Mangyaring suriin ang iyong koneksyon sa internet",
+    "choose_delivery_methods": "dapat pumili ng mga pamamaraan ng paghahatid"
   },
   "ditchNote": {
     "title": "Ipinapakilala ang Ditchit - Ang Pinakamahusay na Lokal na Pamilihan!",

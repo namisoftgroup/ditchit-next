@@ -77,7 +77,10 @@
     "new": "新しい",
     "used": "使用済み",
     "no_available": "ここにはまだ投稿がありません。",
-    "no_available_text": "すぐに戻って、新しいエキサイティングなコンテンツを発見してください！"
+    "no_available_text": "すぐに戻って、新しいエキサイティングなコンテンツを発見してください！",
+    "type": "タイプ",
+    "sale": "販売",
+    "wanted": "募集中"
   },
   "error": {
     "somthing_went_wrong": "おっと！何かがうまくいきませんでした。",
@@ -85,7 +88,8 @@
     "inconvenience": "ご不便をおかけして申し訳ございません。もう一度お試しください。",
     "page_not_found": "おっと！ページが見つかりません",
     "not_found_text": "地図から外れてしまったようです。このページは存在しないか、移動しました。",
-    "back_home": "家に帰る"
+    "back_home": "家に帰る",
+    "offline": "あなたはオフラインです。インターネット接続を確認してください"
   },
   "post": {
     "promote": "プロモート",
@@ -123,7 +127,8 @@
     "favorites": "お気に入り",
     "edit_profile": "プロフィールを編集",
     "logout": "ログアウト",
-    "get_app": "アプリをダウンロードする"
+    "get_app": "アプリをダウンロードする",
+    "change_password": "パスワードを変更する"
   },
   "chat": {
     "choose_your_location": "場所を選択してください",
@@ -188,7 +193,15 @@
     "select_country": "国を選択します",
     "country": "国",
     "location_error": "私たちはあなたの場所を決定することができませんでした。デフォルトの場所は（米国）です",
-    "zipcode_error": "この郵便番号には場所が見つかりません"
+    "zipcode_error": "この郵便番号には場所が見つかりません",
+    "password_required": "パスワードが必要です",
+    "verified_success": "検証された成功",
+    "resend_code": "コードを再送信する",
+    "timer_count": "タイマーカウント:",
+    "offline": "あなたはオフラインです。インターネット接続を確認してください",
+    "current_password": "現在のパスワード",
+    "new_password": "新しいパスワード",
+    "confirm_new_password": "新しいパスワードを確認する"
   },
   "contact": {
     "full_name": "フルネーム",
@@ -253,7 +266,10 @@
     "post_published_promoted": "公開され、宣伝された投稿",
     "promote_error": "プロポーション中に何かがうまくいかなかった",
     "select_country": "国を選択します",
-    "country": "国"
+    "country": "国",
+    "form_error": "必須フィールドに正確に入力してください。",
+    "offline": "あなたはオフラインです。インターネット接続を確認してください",
+    "choose_delivery_methods": "配送方法を選択する必要があります"
   },
   "ditchNote": {
     "title": "Ditchitのご紹介 - 究極のローカルマーケットプレイス！",

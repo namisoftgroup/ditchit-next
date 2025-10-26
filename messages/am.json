@@ -77,7 +77,10 @@
     "new": "አዲስ",
     "used": "ያገለገለው",
     "no_available": "ገና እዚህ አይገኝም.",
-    "no_available_text": "አዲስ እና አስደሳች ይዘት ለማግኘት በቅርቡ ተመልሰው ይምጡ!"
+    "no_available_text": "አዲስ እና አስደሳች ይዘት ለማግኘት በቅርቡ ተመልሰው ይምጡ!",
+    "type": "ዓይነት",
+    "sale": "ሽያጭ",
+    "wanted": "ተፈላጊ"
   },
   "error": {
     "somthing_went_wrong": "ውይ! ነገር ተሳስቷል",
@@ -85,7 +88,8 @@
     "inconvenience": "የተከሰተውን እንደገና ይቅርታ።",
     "page_not_found": "ውይ! ገጽ አልተገኘም",
     "not_found_text": "ይመስላል የጠፋህ። ይህ ገጽ አይኖርም ወይም ተንቀሳቅሷል።",
-    "back_home": "ወደ መነሻ ተመለስ"
+    "back_home": "ወደ መነሻ ተመለስ",
+    "offline": "ከመስመር ውጭ ነዎት. እባክዎ የበይነመረብ ግንኙነትዎን ያረጋግጡ"
   },
   "post": {
     "promote": "አስተዋውቅ",
@@ -123,7 +127,8 @@
     "favorites": "ተወዳጆች",
     "edit_profile": "መገለጫ አርትዕ",
     "logout": "ውጣ",
-    "get_app": "መተግበሪያውን ያግኙ"
+    "get_app": "መተግበሪያውን ያግኙ",
+    "change_password": "የይለፍ ቃል ይለውጡ"
   },
   "chat": {
     "choose_your_location": "አካባቢህን ምረጥ",
@@ -188,7 +193,15 @@
     "select_country": "አገር ይምረጡ",
     "country": "ሀገር",
     "location_error": "አካባቢዎን መወሰን አልቻልንም. ነባሪ ሥፍራ (አሜሪካ ዩናይትድ ስቴትስ)",
-    "zipcode_error": "በዚህ ዚፕ ኮድ አልተገኘም"
+    "zipcode_error": "በዚህ ዚፕ ኮድ አልተገኘም",
+    "password_required": "የይለፍ ቃል ያስፈልጋል",
+    "verified_success": "የተረጋገጠ ስኬት",
+    "resend_code": "ኮድን ተመራረ",
+    "timer_count": "ሰዓት ቆጣሪ: -",
+    "offline": "ከመስመር ውጭ ነዎት. እባክዎ የበይነመረብ ግንኙነትዎን ያረጋግጡ",
+    "current_password": "የአሁኑ ሚስጥራዊ ማለፊያ ቁልፍ",
+    "new_password": "አዲስ የይለፍ ቃል",
+    "confirm_new_password": "አዲስ የይለፍ ቃል ያረጋግጡ"
   },
   "contact": {
     "full_name": "ሙሉ ስም",
@@ -253,7 +266,10 @@
     "post_published_promoted": "ፖስት የታተመ እና በተሳካ ሁኔታ ያበረታታል",
     "promote_error": "አንድ ነገር በገባው ጊዜ ውስጥ ተሳስቷል",
     "select_country": "አገር ይምረጡ",
-    "country": "ሀገር"
+    "country": "ሀገር",
+    "form_error": "እባክዎን የሚፈለጉትን መስኮች በትክክል ይሙሉ.",
+    "offline": "ከመስመር ውጭ ነዎት. እባክዎ የበይነመረብ ግንኙነትዎን ያረጋግጡ",
+    "choose_delivery_methods": "የመላኪያ ዘዴዎችን መምረጥ አለበት"
   },
   "ditchNote": {
     "title": "እንኳን ወደ Ditchit - ዋነኛው አካባቢ ገበያ እንኳን መጣችሁ!",

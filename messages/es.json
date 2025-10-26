@@ -77,7 +77,10 @@
     "new": "Nuevo",
     "used": "Usado",
     "no_available": "No hay publicaciones disponibles aquí todavía.",
-    "no_available_text": "¡Vuelve pronto para descubrir contenido nuevo y emocionante!"
+    "no_available_text": "¡Vuelve pronto para descubrir contenido nuevo y emocionante!",
+    "type": "Tipo",
+    "sale": "Venta",
+    "wanted": "Buscado"
   },
   "error": {
     "somthing_went_wrong": "¡Vaya! Algo salió mal.",
@@ -85,7 +88,8 @@
     "inconvenience": "Lamentamos las molestias. Por favor, inténtalo de nuevo.",
     "page_not_found": "¡Ups! Página no encontrada",
     "not_found_text": "Parece que te has salido del mapa. Esta página no existe o ha sido movida.",
-    "back_home": "Regresar a casa"
+    "back_home": "Regresar a casa",
+    "offline": "Estás desconectado. Por favor revisa tu conexión a internet"
   },
   "post": {
     "promote": "Promover",
@@ -123,7 +127,8 @@
     "favorites": "Favoritos",
     "edit_profile": "Editar perfil",
     "logout": "Cerrar sesión",
-    "get_app": "descarga la aplicación"
+    "get_app": "descarga la aplicación",
+    "change_password": "Cambiar la contraseña"
   },
   "chat": {
     "choose_your_location": "Elige tu ubicación",
@@ -188,7 +193,15 @@
     "select_country": "País seleccionado",
     "country": "País",
     "location_error": "No pudimos determinar su ubicación. La ubicación predeterminada es (Estados Unidos)",
-    "zipcode_error": "No se encuentra la ubicación con este código postal"
+    "zipcode_error": "No se encuentra la ubicación con este código postal",
+    "password_required": "se requiere contraseña",
+    "verified_success": "Éxito verificado",
+    "resend_code": "Reenviar código",
+    "timer_count": "Conteo del temporizador:",
+    "offline": "Estás desconectado. Por favor revisa tu conexión a internet",
+    "current_password": "Contraseña actual",
+    "new_password": "Nueva contraseña",
+    "confirm_new_password": "Confirmar nueva contraseña"
   },
   "contact": {
     "full_name": "Nombre completo",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Publicación publicada y promovida con éxito",
     "promote_error": "Algo salió mal durante Promte",
     "select_country": "País seleccionado",
-    "country": "País"
+    "country": "País",
+    "form_error": "Por favor complete los campos requeridos correctamente.",
+    "offline": "Estás desconectado. Por favor revisa tu conexión a internet",
+    "choose_delivery_methods": "debe elegir métodos de entrega"
   },
   "ditchNote": {
     "title": "Presentamos Ditchit - ¡El Mercado Local Definitivo!",

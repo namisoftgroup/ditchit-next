@@ -77,7 +77,10 @@
     "new": "Jauns",
     "used": "Lietots",
     "no_available": "Šeit vēl nav pieejamu ziņu.",
-    "no_available_text": "Drīz atgriezieties, lai atklātu jaunu un aizraujošu saturu!"
+    "no_available_text": "Drīz atgriezieties, lai atklātu jaunu un aizraujošu saturu!",
+    "type": "Tips",
+    "sale": "Izpārdošana",
+    "wanted": "Vēlējās"
   },
   "error": {
     "somthing_went_wrong": "Ups! Kaut kas nogāja greizi.",
@@ -85,7 +88,8 @@
     "inconvenience": "Mēs atvainojamies par neērtībām. Lūdzu, mēģiniet vēlreiz.",
     "page_not_found": "Ojd! Lapa netika atrasta",
     "not_found_text": "Izskatās, ka esi apdullis no kartes. Šī lapa neeksistē vai ir pārvietota.",
-    "back_home": "Dodieties atpakaļ mājās"
+    "back_home": "Dodieties atpakaļ mājās",
+    "offline": "Jūs esat bezsaistē. Lūdzu, pārbaudiet savu interneta savienojumu"
   },
   "post": {
     "promote": "Veicināt",
@@ -123,7 +127,8 @@
     "favorites": "Izlases",
     "edit_profile": "Rediģēt profilu",
     "logout": "Izrakstīties",
-    "get_app": "iegūstiet lietotni"
+    "get_app": "iegūstiet lietotni",
+    "change_password": "Mainīt paroli"
   },
   "chat": {
     "choose_your_location": "Izvēlieties savu atrašanās vietu",
@@ -188,7 +193,15 @@
     "select_country": "Izvēlēties valsti",
     "country": "Apvidus",
     "location_error": "Mēs nevarējām noteikt jūsu atrašanās vietu. Noklusējuma atrašanās vieta ir (Amerikas Savienotās Valstis)",
-    "zipcode_error": "Ar šo pasta indeksu nav atrasta vieta"
+    "zipcode_error": "Ar šo pasta indeksu nav atrasta vieta",
+    "password_required": "ir nepieciešama parole",
+    "verified_success": "Pārbaudīti panākumi",
+    "resend_code": "Atkārtoti nosūtīt kodu",
+    "timer_count": "Taimera skaits:",
+    "offline": "Jūs esat bezsaistē. Lūdzu, pārbaudiet savu interneta savienojumu",
+    "current_password": "Pašreizējā parole",
+    "new_password": "Jauna parole",
+    "confirm_new_password": "Apstipriniet jauno paroli"
   },
   "contact": {
     "full_name": "Pilnais vārds",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post publicēts un veiksmīgi reklamēts",
     "promote_error": "Promes laikā kaut kas nogāja greizi",
     "select_country": "Izvēlēties valsti",
-    "country": "Apvidus"
+    "country": "Apvidus",
+    "form_error": "Lūdzu, pareizi aizpildiet obligātos laukus.",
+    "offline": "Jūs esat bezsaistē. Lūdzu, pārbaudiet savu interneta savienojumu",
+    "choose_delivery_methods": "jāizvēlas piegādes veidi"
   },
   "ditchNote": {
     "title": "Iepazīstinām ar Ditchit - Galīgo Vietējo Tirgu!",

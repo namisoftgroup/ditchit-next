@@ -77,7 +77,10 @@
     "new": "Mpya",
     "used": "Kutumika",
     "no_available": "Hakuna machapisho yanayopatikana hapa bado.",
-    "no_available_text": "Rudi hivi karibuni kugundua yaliyomo mpya na ya kufurahisha!"
+    "no_available_text": "Rudi hivi karibuni kugundua yaliyomo mpya na ya kufurahisha!",
+    "type": "Aina",
+    "sale": "Uuzaji",
+    "wanted": "Inataka"
   },
   "error": {
     "somthing_went_wrong": "Ups! Kitu fulani kilikwenda mrama",
@@ -85,7 +88,8 @@
     "inconvenience": "Samahani kwa usumbufu. Tafadhali jaribu tena.",
     "page_not_found": "Ups! Ukurasa Haukupatikani",
     "not_found_text": "Inaonekana umeelekea mahali pasipo kwenye ramani. Ukurasa huu haupo au umehamishwa.",
-    "back_home": "Rudi Nyumbani"
+    "back_home": "Rudi Nyumbani",
+    "offline": "Uko nje ya mtandao. Tafadhali angalia muunganisho wako wa mtandao"
   },
   "post": {
     "promote": "Kukuza",
@@ -123,7 +127,8 @@
     "favorites": "Vipendwa",
     "edit_profile": "Hariri Wasifu",
     "logout": "Toka njehi",
-    "get_app": "pata programu"
+    "get_app": "pata programu",
+    "change_password": "Badilisha nywila"
   },
   "chat": {
     "choose_your_location": "Chagua Eneo Lako",
@@ -188,7 +193,15 @@
     "select_country": "Chagua nchi",
     "country": "Nchi",
     "location_error": "Hatukuweza kuamua eneo lako. Mahali pa msingi ni (Merika)",
-    "zipcode_error": "Hakuna eneo linalopatikana na nambari hii ya zip"
+    "zipcode_error": "Hakuna eneo linalopatikana na nambari hii ya zip",
+    "password_required": "nywila inahitajika",
+    "verified_success": "Mafanikio yaliyothibitishwa",
+    "resend_code": "Rekege nambari",
+    "timer_count": "Hesabu ya Timer:",
+    "offline": "Uko nje ya mtandao. Tafadhali angalia muunganisho wako wa mtandao",
+    "current_password": "Nenosiri la sasa",
+    "new_password": "Nywila mpya",
+    "confirm_new_password": "Thibitisha nywila mpya"
   },
   "contact": {
     "full_name": "Jina Kamili",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Chapisho lililochapishwa na kukuzwa kwa mafanikio",
     "promote_error": "Kuna kitu kilienda vibaya wakati wa Promte",
     "select_country": "Chagua nchi",
-    "country": "Nchi"
+    "country": "Nchi",
+    "form_error": "Tafadhali jaza shamba zinazohitajika kwa usahihi.",
+    "offline": "Uko nje ya mtandao. Tafadhali angalia muunganisho wako wa mtandao",
+    "choose_delivery_methods": "Lazima uchague njia za utoaji"
   },
   "ditchNote": {
     "title": "Tunukuza Ditchit - Soko Lako la Kijiji Lisilo na Mlinganyo!",

@@ -77,7 +77,10 @@
     "new": "Ny",
     "used": "Begagnad",
     "no_available": "Inga inlägg finns tillgängliga här än.",
-    "no_available_text": "Kom tillbaka snart för att upptäcka nytt och spännande innehåll!"
+    "no_available_text": "Kom tillbaka snart för att upptäcka nytt och spännande innehåll!",
+    "type": "Typ",
+    "sale": "Försäljning",
+    "wanted": "Efterlyst"
   },
   "error": {
     "somthing_went_wrong": "Hoppsan! Något gick fel",
@@ -85,7 +88,8 @@
     "inconvenience": "Vi ber om ursäkt för besväret. Vänligen försök igen.",
     "page_not_found": "Hoppsan! Sidan kunde inte hittas",
     "not_found_text": "Det ser ut som att du har gått vilse från kartan. Den här sidan finns inte eller har flyttats.",
-    "back_home": "Gå tillbaka hem"
+    "back_home": "Gå tillbaka hem",
+    "offline": "Du är offline. Kontrollera din internetanslutning"
   },
   "post": {
     "promote": "Främja",
@@ -123,7 +127,8 @@
     "favorites": "Favoriter",
     "edit_profile": "Redigera profil",
     "logout": "Logga ut",
-    "get_app": "skaffa appen"
+    "get_app": "skaffa appen",
+    "change_password": "Ändra lösenord"
   },
   "chat": {
     "choose_your_location": "Välj din plats",
@@ -188,7 +193,15 @@
     "select_country": "Välj land",
     "country": "Land",
     "location_error": "Vi kunde inte bestämma din plats. Standardplats är (USA)",
-    "zipcode_error": "Ingen plats hittades med denna postnummer"
+    "zipcode_error": "Ingen plats hittades med denna postnummer",
+    "password_required": "lösenord krävs",
+    "verified_success": "Verifierad framgång",
+    "resend_code": "Skicka kod igen",
+    "timer_count": "Timerräkning:",
+    "offline": "Du är offline. Kontrollera din internetanslutning",
+    "current_password": "Aktuellt lösenord",
+    "new_password": "Nytt lösenord",
+    "confirm_new_password": "Bekräfta nytt lösenord"
   },
   "contact": {
     "full_name": "Fullständigt namn",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post publicerad och befordrad framgångsrikt",
     "promote_error": "något gick fel under promte",
     "select_country": "Välj land",
-    "country": "Land"
+    "country": "Land",
+    "form_error": "Vänligen fyll i de obligatoriska fälten korrekt.",
+    "offline": "Du är offline. Kontrollera din internetanslutning",
+    "choose_delivery_methods": "måste välja leveranssätt"
   },
   "ditchNote": {
     "title": "Introducerar Ditchit - Den ultimata lokala marknadsplatsen!",

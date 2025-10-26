@@ -77,7 +77,10 @@
     "new": "Novo",
     "used": "Uporabljen",
     "no_available": "Tukaj še ni na voljo nobenih objav.",
-    "no_available_text": "Kmalu se vrnite in odkrijte nove in vznemirljive vsebine!"
+    "no_available_text": "Kmalu se vrnite in odkrijte nove in vznemirljive vsebine!",
+    "type": "Vrsta",
+    "sale": "Prodaja",
+    "wanted": "Iskana"
   },
   "error": {
     "somthing_went_wrong": "Ups! Nekaj je šlo narobe",
@@ -85,7 +88,8 @@
     "inconvenience": "Opravičujemo se za nevšečnosti. Prosimo, poskusite znova.",
     "page_not_found": "Ups! Stran ni najdena",
     "not_found_text": "Zdi se, da ste zašli s poti. Ta stran ne obstaja ali je bila premaknjena.",
-    "back_home": "Pojdi nazaj domov"
+    "back_home": "Pojdi nazaj domov",
+    "offline": "Nisi povezan. Preverite internetno povezavo"
   },
   "post": {
     "promote": "Spodbujati",
@@ -123,7 +127,8 @@
     "favorites": "Priljubljene",
     "edit_profile": "Uredi profil",
     "logout": "Odjava",
-    "get_app": "prenesi aplikacijo"
+    "get_app": "prenesi aplikacijo",
+    "change_password": "Spremeni geslo"
   },
   "chat": {
     "choose_your_location": "Izberite svojo lokacijo",
@@ -188,7 +193,15 @@
     "select_country": "Izberi državo",
     "country": "Država",
     "location_error": "Nismo mogli določiti vaše lokacije. Privzeta lokacija je (ZDA)",
-    "zipcode_error": "S to poštno kodo ni mogoče najti lokacije"
+    "zipcode_error": "S to poštno kodo ni mogoče najti lokacije",
+    "password_required": "geslo je potrebno",
+    "verified_success": "Preverjen uspeh",
+    "resend_code": "Ponovno pošlji kodo",
+    "timer_count": "Števec časovnika:",
+    "offline": "Nisi povezan. Preverite internetno povezavo",
+    "current_password": "Trenutno geslo",
+    "new_password": "Novo geslo",
+    "confirm_new_password": "Potrdite novo geslo"
   },
   "contact": {
     "full_name": "Polno ime",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Objava, objavljena in uspešno promovirana",
     "promote_error": "Med Promteom je šlo nekaj narobe",
     "select_country": "Izberi državo",
-    "country": "Država"
+    "country": "Država",
+    "form_error": "Prosimo, da zahtevana polja pravilno izpolnite.",
+    "offline": "Nisi povezan. Preverite internetno povezavo",
+    "choose_delivery_methods": "mora izbrati načine dostave"
   },
   "ditchNote": {
     "title": "Predstavljamo Ditchit - Najboljše lokalno tržnico!",

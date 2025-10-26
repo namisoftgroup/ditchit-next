@@ -77,7 +77,10 @@
     "new": "Uus",
     "used": "Kasutatud",
     "no_available": "Siin pole veel ühtegi postitust saadaval.",
-    "no_available_text": "Tulge varsti tagasi, et avastada uut ja põnevat sisu!"
+    "no_available_text": "Tulge varsti tagasi, et avastada uut ja põnevat sisu!",
+    "type": "Tüüp",
+    "sale": "Müük",
+    "wanted": "Tahtis"
   },
   "error": {
     "somthing_went_wrong": "Uups! Midagi läks valesti",
@@ -85,7 +88,8 @@
     "inconvenience": "Vabandame ebamugavuste pärast. Palun proovige uuesti.",
     "page_not_found": "Oops! Leht ei leitud",
     "not_found_text": "Tundub, et olete kaardilt eksinud. See leht ei eksisteeri või on see viidud teise kohta.",
-    "back_home": "Mine tagasi koju"
+    "back_home": "Mine tagasi koju",
+    "offline": "Olete võrguühenduseta. Kontrollige oma Interneti-ühendust"
   },
   "post": {
     "promote": "Edendama",
@@ -123,7 +127,8 @@
     "favorites": "Lemmikud",
     "edit_profile": "Muuda profiili",
     "logout": "Logi välja",
-    "get_app": "lae rakendus"
+    "get_app": "lae rakendus",
+    "change_password": "Muuda parooli"
   },
   "chat": {
     "choose_your_location": "Valige oma asukoht",
@@ -188,7 +193,15 @@
     "select_country": "Vali riik",
     "country": "Riik",
     "location_error": "Me ei saanud teie asukohta kindlaks teha. Vaikimisi asukoht on (Ameerika Ühendriigid)",
-    "zipcode_error": "Selle postiinoodiga ei leitud asukohta"
+    "zipcode_error": "Selle postiinoodiga ei leitud asukohta",
+    "password_required": "parool on nõutav",
+    "verified_success": "Kinnitatud edu",
+    "resend_code": "Saada kood uuesti",
+    "timer_count": "Taimeri arv:",
+    "offline": "Olete võrguühenduseta. Kontrollige oma Interneti-ühendust",
+    "current_password": "Praegune parool",
+    "new_password": "Uus parool",
+    "confirm_new_password": "Kinnitage uus parool"
   },
   "contact": {
     "full_name": "Täisnimi",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post avaldas ja reklaamiti edukalt",
     "promote_error": "PromTe ajal läks midagi valesti",
     "select_country": "Vali riik",
-    "country": "Riik"
+    "country": "Riik",
+    "form_error": "Palun täitke nõutud väljad õigesti.",
+    "offline": "Olete võrguühenduseta. Kontrollige oma Interneti-ühendust",
+    "choose_delivery_methods": "tuleb valida tarneviisid"
   },
   "ditchNote": {
     "title": "Tutvustame Ditchit - Parim Kohalik Turg!",

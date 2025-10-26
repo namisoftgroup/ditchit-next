@@ -77,7 +77,10 @@
     "new": "Nieuw",
     "used": "Gebruikt",
     "no_available": "Er zijn hier nog geen berichten beschikbaar.",
-    "no_available_text": "Kom snel terug om nieuwe en opwindende inhoud te ontdekken!"
+    "no_available_text": "Kom snel terug om nieuwe en opwindende inhoud te ontdekken!",
+    "type": "Type",
+    "sale": "Verkoop",
+    "wanted": "Gewild"
   },
   "error": {
     "somthing_went_wrong": "Oeps! Er is iets misgegaan.",
@@ -85,7 +88,8 @@
     "inconvenience": "Onze excuses voor het ongemak. Probeer het alstublieft opnieuw.",
     "page_not_found": "Oeps! Pagina Niet Gevonden",
     "not_found_text": "Het lijkt erop dat je van de kaart bent afgeweken. Deze pagina bestaat niet of is verplaatst.",
-    "back_home": "Ga Terug Naar Huis"
+    "back_home": "Ga Terug Naar Huis",
+    "offline": "Je bent offline. Controleer uw internetverbinding"
   },
   "post": {
     "promote": "Promoten",
@@ -123,7 +127,8 @@
     "favorites": "Favorieten",
     "edit_profile": "Profiel bewerken",
     "logout": "Uitloggen",
-    "get_app": "krijg de app"
+    "get_app": "krijg de app",
+    "change_password": "Wachtwoord wijzigen"
   },
   "chat": {
     "choose_your_location": "Kies uw locatie",
@@ -188,7 +193,15 @@
     "select_country": "Selecteer land",
     "country": "Land",
     "location_error": "We konden uw locatie niet bepalen. Standaardlocatie is (Verenigde Staten)",
-    "zipcode_error": "Geen locatie gevonden met deze postcode"
+    "zipcode_error": "Geen locatie gevonden met deze postcode",
+    "password_required": "wachtwoord is vereist",
+    "verified_success": "Geverifieerd succes",
+    "resend_code": "Code opnieuw verzenden",
+    "timer_count": "Timertelling:",
+    "offline": "Je bent offline. Controleer uw internetverbinding",
+    "current_password": "Huidig ​​wachtwoord",
+    "new_password": "Nieuw wachtwoord",
+    "confirm_new_password": "Bevestig nieuw wachtwoord"
   },
   "contact": {
     "full_name": "Volledige naam",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post gepubliceerd en met succes gepromoot",
     "promote_error": "Er is iets misgegaan tijdens Promte",
     "select_country": "Selecteer land",
-    "country": "Land"
+    "country": "Land",
+    "form_error": "Vul de verplichte velden correct in.",
+    "offline": "Je bent offline. Controleer uw internetverbinding",
+    "choose_delivery_methods": "moet bezorgmethoden kiezen"
   },
   "ditchNote": {
     "title": "Maak kennis met Ditchit - De Ultieme Lokale Marktplaats!",

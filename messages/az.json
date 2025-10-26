@@ -77,7 +77,10 @@
     "new": "Yeni",
     "used": "İstifadə olunan",
     "no_available": "Hələ ismarıc yoxdur.",
-    "no_available_text": "Tezliklə yeni və maraqlı məzmun kəşf etmək üçün geri qayıdın!"
+    "no_available_text": "Tezliklə yeni və maraqlı məzmun kəşf etmək üçün geri qayıdın!",
+    "type": "Tip",
+    "sale": "Silmək",
+    "wanted": "İstənilən"
   },
   "error": {
     "somthing_went_wrong": "Aha! Bir şey səhv getdi.",
@@ -85,7 +88,8 @@
     "inconvenience": "Təəssüf edirik, narahatçılıq üçün. Zəhmət olmasa, yenidən cəhd edin.",
     "page_not_found": "Aah! Səhifə Tapılmadı",
     "not_found_text": "Görünür ki, xəritədən kənara çıxmısınız. Bu səhifə yoxdur və ya köçürülüb.",
-    "back_home": "Evə qayıt"
+    "back_home": "Evə qayıt",
+    "offline": "Sən oflaynsan. Zəhmət olmasa internet bağlantınızı yoxlayın"
   },
   "post": {
     "promote": "Təşviq et",
@@ -123,7 +127,8 @@
     "favorites": "Sevimlilər",
     "edit_profile": "Profili Redaktə Et",
     "logout": "Çıxış et",
-    "get_app": "proqramı yükləyin"
+    "get_app": "proqramı yükləyin",
+    "change_password": "Parol dəyişdirmək"
   },
   "chat": {
     "choose_your_location": "Məkanınızı Seçin",
@@ -188,7 +193,15 @@
     "select_country": "Ölkə seçin",
     "country": "Ölkə",
     "location_error": "Yerinizi təyin edə bilmədik. Defolt Yer (Amerika Birləşmiş Ştatları)",
-    "zipcode_error": "Bu poçt kodu ilə heç bir yer tapılmadı"
+    "zipcode_error": "Bu poçt kodu ilə heç bir yer tapılmadı",
+    "password_required": "Şifrə tələb olunur",
+    "verified_success": "Təsdiqlənmiş uğur",
+    "resend_code": "Kodu yenidən göndərin",
+    "timer_count": "Taymer sayımı:",
+    "offline": "Sən oflaynsan. Zəhmət olmasa internet bağlantınızı yoxlayın",
+    "current_password": "Cari parol",
+    "new_password": "Yeni parol",
+    "confirm_new_password": "Yeni Şifrə təsdiqləyin"
   },
   "contact": {
     "full_name": "Tam adı",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Yazı yayımlanıb və uğurla təbliğ olunur",
     "promote_error": "Promte zamanı bir şey səhv oldu",
     "select_country": "Ölkə seçin",
-    "country": "Ölkə"
+    "country": "Ölkə",
+    "form_error": "Zəhmət olmasa lazımi sahələri düzgün doldurun.",
+    "offline": "Sən oflaynsan. Zəhmət olmasa internet bağlantınızı yoxlayın",
+    "choose_delivery_methods": "Çatdırılma üsullarını seçməlidir"
   },
   "ditchNote": {
     "title": "Ditchit - Ən Yaxşı Lokal Bazarla Tanış Olun!",

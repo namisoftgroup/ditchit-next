@@ -77,7 +77,10 @@
     "new": "Baru",
     "used": "Digunakan",
     "no_available": "Belum ada jawatan di sini.",
-    "no_available_text": "Kembali tidak lama lagi untuk menemui kandungan baru dan menarik!"
+    "no_available_text": "Kembali tidak lama lagi untuk menemui kandungan baru dan menarik!",
+    "type": "Jenis",
+    "sale": "Jualan",
+    "wanted": "Dikehendaki"
   },
   "error": {
     "somthing_went_wrong": "Oops! Sesuatu telah berlaku kesalahan",
@@ -85,7 +88,8 @@
     "inconvenience": "Kami mohon maaf atas kesulitan ini. Sila cuba sekali lagi.",
     "page_not_found": "Oops! Halaman Tidak Ditemukan",
     "not_found_text": "Nampaknya anda telah tersasar dari peta. Halaman ini tidak wujud atau telah dipindahkan.",
-    "back_home": "Kembali ke Rumah"
+    "back_home": "Kembali ke Rumah",
+    "offline": "Anda berada di luar talian. Sila periksa sambungan internet anda"
   },
   "post": {
     "promote": "Mempromosikan",
@@ -123,7 +127,8 @@
     "favorites": "Favorit",
     "edit_profile": "Edit Profil",
     "logout": "Keluar",
-    "get_app": "dapatkan aplikasi"
+    "get_app": "dapatkan aplikasi",
+    "change_password": "Tukar kata laluan"
   },
   "chat": {
     "choose_your_location": "Pilih Lokasi Anda",
@@ -188,7 +193,15 @@
     "select_country": "Pilih Negara",
     "country": "Negara",
     "location_error": "Kami tidak dapat menentukan lokasi anda. Lokasi lalai adalah (Amerika Syarikat)",
-    "zipcode_error": "Tiada lokasi yang dijumpai dengan kod zip ini"
+    "zipcode_error": "Tiada lokasi yang dijumpai dengan kod zip ini",
+    "password_required": "Kata laluan diperlukan",
+    "verified_success": "Kejayaan yang disahkan",
+    "resend_code": "Kod Resend",
+    "timer_count": "Kiraan pemasa:",
+    "offline": "Anda berada di luar talian. Sila periksa sambungan internet anda",
+    "current_password": "Kata laluan semasa",
+    "new_password": "Kata laluan baru",
+    "confirm_new_password": "Sahkan kata laluan baru"
   },
   "contact": {
     "full_name": "Nama Penuh",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Catatan yang diterbitkan dan dinaikkan pangkat",
     "promote_error": "ada yang tidak kena semasa promte",
     "select_country": "Pilih Negara",
-    "country": "Negara"
+    "country": "Negara",
+    "form_error": "Sila isi medan yang diperlukan dengan betul.",
+    "offline": "Anda berada di luar talian. Sila periksa sambungan internet anda",
+    "choose_delivery_methods": "mesti memilih kaedah penghantaran"
   },
   "ditchNote": {
     "title": "Memperkenalkan Ditchit - Pasar Tempatan Terbaik!",

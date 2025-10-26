@@ -77,7 +77,10 @@
     "new": "I ri",
     "used": "I përdorur",
     "no_available": "Asnjë postim nuk është i dobishëm këtu.",
-    "no_available_text": "Kthehuni së shpejti për të zbuluar përmbajtje të re dhe emocionuese!"
+    "no_available_text": "Kthehuni së shpejti për të zbuluar përmbajtje të re dhe emocionuese!",
+    "type": "Lloji",
+    "sale": "Shitje",
+    "wanted": "Në kërkim"
   },
   "error": {
     "somthing_went_wrong": "Ups! Diçka shkoi gabim",
@@ -85,7 +88,8 @@
     "inconvenience": "Na vjen keq për shqetësimin. Ju lutemi provo përsëri.",
     "page_not_found": "Ups! Faqja Nuk U Gjet",
     "not_found_text": "Duket sikur ke dalë nga harta. Kjo faqe nuk ekziston ose është zhvendosur.",
-    "back_home": "Kthehu në Shtëpi"
+    "back_home": "Kthehu në Shtëpi",
+    "offline": "Ju jeni jashtë linje. Ju lutemi kontrolloni lidhjen tuaj të internetit"
   },
   "post": {
     "promote": "Promovoje",
@@ -123,7 +127,8 @@
     "favorites": "Të preferuarat",
     "edit_profile": "Ndrysho Profilin",
     "logout": "Dilni",
-    "get_app": "merr aplikacionin"
+    "get_app": "merr aplikacionin",
+    "change_password": "Ndrysho fjalëkalimin"
   },
   "chat": {
     "choose_your_location": "Zgjidh Vendndodhjen Tuaj",
@@ -188,7 +193,15 @@
     "select_country": "Zgjidhni vendin",
     "country": "Vend",
     "location_error": "Ne nuk mund të përcaktonim vendndodhjen tuaj. Vendndodhja e paracaktuar është (Shtetet e Bashkuara)",
-    "zipcode_error": "Asnjë vendndodhje nuk është gjetur me këtë kod zip"
+    "zipcode_error": "Asnjë vendndodhje nuk është gjetur me këtë kod zip",
+    "password_required": "kërkohet fjalëkalimi",
+    "verified_success": "Sukses i verifikuar",
+    "resend_code": "Ridërgo kodin",
+    "timer_count": "Numri i kohëmatësit:",
+    "offline": "Ju jeni jashtë linje. Ju lutemi kontrolloni lidhjen tuaj të internetit",
+    "current_password": "Fjalëkalimi aktual",
+    "new_password": "Fjalëkalim i ri",
+    "confirm_new_password": "Konfirmo fjalëkalimin e ri"
   },
   "contact": {
     "full_name": "Emri i plotë",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Postimi i botuar dhe promovuar me sukses",
     "promote_error": "Diçka shkoi keq gjatë promte",
     "select_country": "Zgjidhni vendin",
-    "country": "Vend"
+    "country": "Vend",
+    "form_error": "Ju lutemi plotësoni saktë fushat e kërkuara.",
+    "offline": "Ju jeni jashtë linje. Ju lutemi kontrolloni lidhjen tuaj të internetit",
+    "choose_delivery_methods": "duhet të zgjedhë metodat e dorëzimit"
   },
   "ditchNote": {
     "title": "Prezantojmë Ditchit - Tregu Lokal Më i Mirë!",

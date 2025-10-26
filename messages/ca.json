@@ -77,7 +77,10 @@
     "new": "Nou",
     "used": "Usada",
     "no_available": "Encara no hi ha publicacions disponibles aquí.",
-    "no_available_text": "Torneu aviat per descobrir contingut nou i emocionant."
+    "no_available_text": "Torneu aviat per descobrir contingut nou i emocionant.",
+    "type": "Tipus",
+    "sale": "Venda",
+    "wanted": "Volgut"
   },
   "error": {
     "somthing_went_wrong": "Ostres! Alguna cosa ha anat malament",
@@ -85,7 +88,8 @@
     "inconvenience": "Ho sentim pel inconvenient. Si us plau, torneu a intentar.",
     "page_not_found": "Ops! Pàgina no trobada",
     "not_found_text": "Sembla que t'has allunyat del mapa. Aquesta pàgina no existeix o ha estat moguda.",
-    "back_home": "Torna a casa"
+    "back_home": "Torna a casa",
+    "offline": "Estàs fora de línia. Comproveu la vostra connexió a Internet"
   },
   "post": {
     "promote": "Promoure",
@@ -123,7 +127,8 @@
     "favorites": "Favorits",
     "edit_profile": "Edita el perfil",
     "logout": "Tanca sessió",
-    "get_app": "descarrega l'aplicació"
+    "get_app": "descarrega l'aplicació",
+    "change_password": "Canvia la contrasenya"
   },
   "chat": {
     "choose_your_location": "Tria la teva ubicació",
@@ -188,7 +193,15 @@
     "select_country": "Seleccioneu el país",
     "country": "País",
     "location_error": "No hem pogut determinar la vostra ubicació. La ubicació per defecte és (Estats Units)",
-    "zipcode_error": "No es troba cap ubicació amb aquest codi postal"
+    "zipcode_error": "No es troba cap ubicació amb aquest codi postal",
+    "password_required": "és necessària la contrasenya",
+    "verified_success": "Èxit verificat",
+    "resend_code": "Torna a enviar el codi",
+    "timer_count": "Recompte de temporitzadors:",
+    "offline": "Estàs fora de línia. Comproveu la vostra connexió a Internet",
+    "current_password": "Contrasenya actual",
+    "new_password": "Contrasenya nova",
+    "confirm_new_password": "Confirmeu la nova contrasenya"
   },
   "contact": {
     "full_name": "Nom complet",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Publicat publicat i promocionat amb èxit",
     "promote_error": "Alguna cosa va passar malament durant Promte",
     "select_country": "Seleccioneu el país",
-    "country": "País"
+    "country": "País",
+    "form_error": "Ompliu correctament els camps obligatoris.",
+    "offline": "Estàs fora de línia. Comproveu la vostra connexió a Internet",
+    "choose_delivery_methods": "ha de triar els mètodes de lliurament"
   },
   "ditchNote": {
     "title": "Presentant Ditchit - El mercat local definitiu!",

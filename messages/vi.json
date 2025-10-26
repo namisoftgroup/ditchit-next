@@ -77,7 +77,10 @@
     "new": "Mới",
     "used": "Đã sử dụng",
     "no_available": "Không có bài viết có sẵn ở đây.",
-    "no_available_text": "Hãy quay lại sớm để khám phá nội dung mới và thú vị!"
+    "no_available_text": "Hãy quay lại sớm để khám phá nội dung mới và thú vị!",
+    "type": "Kiểu",
+    "sale": "Doanh thu",
+    "wanted": "Muốn"
   },
   "error": {
     "somthing_went_wrong": "Úi! Có sự cố xảy ra",
@@ -85,7 +88,8 @@
     "inconvenience": "Chúng tôi xin lỗi vì sự bất tiện này. Vui lòng thử lại.",
     "page_not_found": "Úi! Không tìm thấy trang",
     "not_found_text": "Có vẻ như bạn đã đi lạc khỏi bản đồ. Trang này không tồn tại hoặc đã bị di chuyển.",
-    "back_home": "Quay Về Nhà"
+    "back_home": "Quay Về Nhà",
+    "offline": "Bạn đang ngoại tuyến. Vui lòng kiểm tra kết nối internet của bạn"
   },
   "post": {
     "promote": "Thúc đẩy",
@@ -123,7 +127,8 @@
     "favorites": "Mục yêu thích",
     "edit_profile": "Chỉnh sửa hồ sơ",
     "logout": "Đăng xuất",
-    "get_app": "tải ứng dụng"
+    "get_app": "tải ứng dụng",
+    "change_password": "Thay đổi mật khẩu"
   },
   "chat": {
     "choose_your_location": "Chọn Vị Trí Của Bạn",
@@ -188,7 +193,15 @@
     "select_country": "Chọn quốc gia",
     "country": "Quốc gia",
     "location_error": "Chúng tôi không thể xác định vị trí của bạn. Vị trí mặc định là (Hoa Kỳ)",
-    "zipcode_error": "Không tìm thấy vị trí nào với mã zip này"
+    "zipcode_error": "Không tìm thấy vị trí nào với mã zip này",
+    "password_required": "mật khẩu là cần thiết",
+    "verified_success": "Đã xác minh thành công",
+    "resend_code": "Gửi lại mã",
+    "timer_count": "Đếm thời gian:",
+    "offline": "Bạn đang ngoại tuyến. Vui lòng kiểm tra kết nối internet của bạn",
+    "current_password": "Mật khẩu hiện tại",
+    "new_password": "Mật khẩu mới",
+    "confirm_new_password": "Xác nhận mật khẩu mới"
   },
   "contact": {
     "full_name": "Họ và tên",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Bài đăng được xuất bản và quảng bá thành công",
     "promote_error": "Có gì đó không ổn trong thời gian Promte",
     "select_country": "Chọn quốc gia",
-    "country": "Quốc gia"
+    "country": "Quốc gia",
+    "form_error": "Vui lòng điền chính xác vào các trường bắt buộc.",
+    "offline": "Bạn đang ngoại tuyến. Vui lòng kiểm tra kết nối internet của bạn",
+    "choose_delivery_methods": "phải chọn phương thức giao hàng"
   },
   "ditchNote": {
     "title": "Giới thiệu Ditchit - Thị trường địa phương tuyệt vời nhất!",

@@ -77,7 +77,10 @@
     "new": "Új",
     "used": "Használt",
     "no_available": "Még nincs itt bejegyzés.",
-    "no_available_text": "Gyere vissza hamarosan, hogy felfedezzék az új és izgalmas tartalmat!"
+    "no_available_text": "Gyere vissza hamarosan, hogy felfedezzék az új és izgalmas tartalmat!",
+    "type": "Írja be",
+    "sale": "Eladás",
+    "wanted": "Wanted"
   },
   "error": {
     "somthing_went_wrong": "Hoppá! Valami hiba történt.",
@@ -85,7 +88,8 @@
     "inconvenience": "Elnézést kérünk a kellemetlenségért. Kérjük, próbálja meg újra.",
     "page_not_found": "Hoppá! Az oldal nem található",
     "not_found_text": "Úgy tűnik, hogy letértél a térképről. Ez az oldal nem létezik, vagy áthelyezték.",
-    "back_home": "Menj vissza haza"
+    "back_home": "Menj vissza haza",
+    "offline": "Ön offline állapotban van. Kérjük, ellenőrizze internetkapcsolatát"
   },
   "post": {
     "promote": "Népszerűsít",
@@ -123,7 +127,8 @@
     "favorites": "Kedvencek",
     "edit_profile": "Profil szerkesztése",
     "logout": "Kijelentkezés",
-    "get_app": "szerezd meg az alkalmazást"
+    "get_app": "szerezd meg az alkalmazást",
+    "change_password": "Jelszó módosítása"
   },
   "chat": {
     "choose_your_location": "Válaszd ki a helyszínt",
@@ -188,7 +193,15 @@
     "select_country": "Válassza ki az országot",
     "country": "Ország",
     "location_error": "Nem tudtuk meghatározni a helyét. Az alapértelmezett hely (Egyesült Államok)",
-    "zipcode_error": "Nem található hely ezzel a irányítószámmal"
+    "zipcode_error": "Nem található hely ezzel a irányítószámmal",
+    "password_required": "jelszó szükséges",
+    "verified_success": "Igazolt siker",
+    "resend_code": "Kód újraküldése",
+    "timer_count": "Időzítő száma:",
+    "offline": "Ön offline állapotban van. Kérjük, ellenőrizze internetkapcsolatát",
+    "current_password": "Jelenlegi jelszó",
+    "new_password": "Új jelszó",
+    "confirm_new_password": "Új jelszó megerősítése"
   },
   "contact": {
     "full_name": "Teljes név",
@@ -253,7 +266,10 @@
     "post_published_promoted": "A bejegyzés sikeresen közzétett és előléptetett",
     "promote_error": "Valami rosszul ment a PROPTE alatt",
     "select_country": "Válassza ki az országot",
-    "country": "Ország"
+    "country": "Ország",
+    "form_error": "Kérjük, helyesen töltse ki a kötelező mezőket.",
+    "offline": "Ön offline állapotban van. Kérjük, ellenőrizze internetkapcsolatát",
+    "choose_delivery_methods": "ki kell választani a szállítási módokat"
   },
   "ditchNote": {
     "title": "Bemutatjuk a Ditchit - Az Ultimátum Helyi Piacot!",

@@ -77,7 +77,10 @@
     "new": "Nowy",
     "used": "Używany",
     "no_available": "Brak dostępnych tutaj postów.",
-    "no_available_text": "Wróć wkrótce, aby odkryć nowe i ekscytujące treści!"
+    "no_available_text": "Wróć wkrótce, aby odkryć nowe i ekscytujące treści!",
+    "type": "Typ",
+    "sale": "Sprzedaż",
+    "wanted": "Poszukiwany"
   },
   "error": {
     "somthing_went_wrong": "Ups! Coś poszło nie tak.",
@@ -85,7 +88,8 @@
     "inconvenience": "Przepraszamy za niedogodności. Proszę spróbować ponownie.",
     "page_not_found": "Ups! Strona nie znaleziona",
     "not_found_text": "Wygląda na to, że zgubiłeś się na mapie. Ta strona nie istnieje lub została przeniesiona.",
-    "back_home": "Wróć do domu"
+    "back_home": "Wróć do domu",
+    "offline": "Jesteś offline. Sprawdź swoje połączenie internetowe"
   },
   "post": {
     "promote": "Promować",
@@ -123,7 +127,8 @@
     "favorites": "Ulubione",
     "edit_profile": "Edytuj profil",
     "logout": "Wyloguj się",
-    "get_app": "pobierz aplikację"
+    "get_app": "pobierz aplikację",
+    "change_password": "Zmień hasło"
   },
   "chat": {
     "choose_your_location": "Wybierz swoją lokalizację",
@@ -188,7 +193,15 @@
     "select_country": "Wybierz kraj",
     "country": "Kraj",
     "location_error": "Nie mogliśmy określić Twojej lokalizacji. Domyślna lokalizacja to (Stany Zjednoczone)",
-    "zipcode_error": "Brak lokalizacji z tym kodem pocztowym"
+    "zipcode_error": "Brak lokalizacji z tym kodem pocztowym",
+    "password_required": "wymagane jest hasło",
+    "verified_success": "Sprawdzony sukces",
+    "resend_code": "Wyślij ponownie kod",
+    "timer_count": "Liczba timerów:",
+    "offline": "Jesteś offline. Sprawdź swoje połączenie internetowe",
+    "current_password": "Aktualne hasło",
+    "new_password": "Nowe hasło",
+    "confirm_new_password": "Potwierdź nowe hasło"
   },
   "contact": {
     "full_name": "Pełne imię i nazwisko",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Opublikowane i promowane skutecznie",
     "promote_error": "coś poszło nie tak podczas ProSte",
     "select_country": "Wybierz kraj",
-    "country": "Kraj"
+    "country": "Kraj",
+    "form_error": "Proszę poprawnie wypełnić wymagane pola.",
+    "offline": "Jesteś offline. Sprawdź swoje połączenie internetowe",
+    "choose_delivery_methods": "należy wybrać metody dostawy"
   },
   "ditchNote": {
     "title": "Przedstawiamy Ditchit - Ostateczny Lokalny Rynek!",

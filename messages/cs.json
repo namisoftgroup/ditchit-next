@@ -77,7 +77,10 @@
     "new": "Nový",
     "used": "Použitý",
     "no_available": "Zde se dosud neposkytují žádné příspěvky.",
-    "no_available_text": "Vraťte se brzy a objevte nový a vzrušující obsah!"
+    "no_available_text": "Vraťte se brzy a objevte nový a vzrušující obsah!",
+    "type": "Typ",
+    "sale": "Prodej",
+    "wanted": "Hledaný"
   },
   "error": {
     "somthing_went_wrong": "Omlouvám se! Něco se pokazilo.",
@@ -85,7 +88,8 @@
     "inconvenience": "Omlouváme se za nepříjemnosti. Prosím, zkuste to znovu.",
     "page_not_found": "Omlouváme se! Stránka nebyla nalezena",
     "not_found_text": "Vypadá to, že jste se odchýlili od mapy. Tato stránka neexistuje nebo byla přesunuta.",
-    "back_home": "Jít zpět domů"
+    "back_home": "Jít zpět domů",
+    "offline": "Jste offline. Zkontrolujte prosím své internetové připojení"
   },
   "post": {
     "promote": "Propagovat",
@@ -123,7 +127,8 @@
     "favorites": "Oblíbené",
     "edit_profile": "Upravit profil",
     "logout": "Odhlásit se",
-    "get_app": "získejte aplikaci"
+    "get_app": "získejte aplikaci",
+    "change_password": "Změnit heslo"
   },
   "chat": {
     "choose_your_location": "Vyberte si svou lokalitu",
@@ -188,7 +193,15 @@
     "select_country": "Vyberte zemi",
     "country": "Země",
     "location_error": "Nemohli jsme určit vaši polohu. Výchozí umístění je (Spojené státy)",
-    "zipcode_error": "S tímto kódem PSČ nebylo nalezeno žádné umístění"
+    "zipcode_error": "S tímto kódem PSČ nebylo nalezeno žádné umístění",
+    "password_required": "je vyžadováno heslo",
+    "verified_success": "Ověřený úspěch",
+    "resend_code": "Znovu odeslat kód",
+    "timer_count": "Počet časovačů:",
+    "offline": "Jste offline. Zkontrolujte prosím své internetové připojení",
+    "current_password": "Aktuální heslo",
+    "new_password": "Nové heslo",
+    "confirm_new_password": "Potvrďte nové heslo"
   },
   "contact": {
     "full_name": "Celé jméno",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Příspěvek publikoval a úspěšně propagoval",
     "promote_error": "Během Promte se něco pokazilo",
     "select_country": "Vyberte zemi",
-    "country": "Země"
+    "country": "Země",
+    "form_error": "Vyplňte prosím správně požadovaná pole.",
+    "offline": "Jste offline. Zkontrolujte prosím své internetové připojení",
+    "choose_delivery_methods": "musí zvolit způsob doručení"
   },
   "ditchNote": {
     "title": "Představujeme Ditchit - Nejlepší místní tržiště!",

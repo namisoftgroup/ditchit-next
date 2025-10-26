@@ -77,7 +77,10 @@
     "new": "Yeni",
     "used": "Kullanılmış",
     "no_available": "Henüz burada yayın yok.",
-    "no_available_text": "Yeni ve heyecan verici içerik keşfetmek için yakında geri gelin!"
+    "no_available_text": "Yeni ve heyecan verici içerik keşfetmek için yakında geri gelin!",
+    "type": "Tip",
+    "sale": "Satış",
+    "wanted": "Aranan"
   },
   "error": {
     "somthing_went_wrong": "Tüh! Bir şeyler yanlış gitti",
@@ -85,7 +88,8 @@
     "inconvenience": "Yaşanan aksaklık için özür dileriz. Lütfen tekrar deneyin.",
     "page_not_found": "Ups! Sayfa Bulunamadı",
     "not_found_text": "Görünüşe göre haritanın dışına çıkmışsınız. Bu sayfa mevcut değil veya taşınmış.",
-    "back_home": "Eve Dön"
+    "back_home": "Eve Dön",
+    "offline": "Çevrimdışısınız. Lütfen internet bağlantınızı kontrol edin"
   },
   "post": {
     "promote": "Teşvik etmek",
@@ -123,7 +127,8 @@
     "favorites": "Favoriler",
     "edit_profile": "Profili Düzenle",
     "logout": "Çıkış Yap",
-    "get_app": "uygulamayı indir"
+    "get_app": "uygulamayı indir",
+    "change_password": "Şifre değiştir"
   },
   "chat": {
     "choose_your_location": "Konumunuzu Seçin",
@@ -188,7 +193,15 @@
     "select_country": "Ülke Seçin",
     "country": "Ülke",
     "location_error": "Konumunuzu belirleyemedik. Varsayılan konum (Amerika Birleşik Devletleri)",
-    "zipcode_error": "Bu posta kodu ile konum bulunamadı"
+    "zipcode_error": "Bu posta kodu ile konum bulunamadı",
+    "password_required": "şifre gerekli",
+    "verified_success": "Doğrulanmış Başarı",
+    "resend_code": "Kodu Yeniden Gönder",
+    "timer_count": "Zamanlayıcı Sayısı:",
+    "offline": "Çevrimdışısınız. Lütfen internet bağlantınızı kontrol edin",
+    "current_password": "Mevcut Şifre",
+    "new_password": "Yeni Şifre",
+    "confirm_new_password": "Yeni Şifreyi Onayla"
   },
   "contact": {
     "full_name": "Tam Adı",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Yayınlanan ve başarılı bir şekilde tanıtılan gönderi",
     "promote_error": "Promte sırasında bir şeyler ters gitti",
     "select_country": "Ülke Seçin",
-    "country": "Ülke"
+    "country": "Ülke",
+    "form_error": "Lütfen gerekli alanları doğru bir şekilde doldurunuz.",
+    "offline": "Çevrimdışısınız. Lütfen internet bağlantınızı kontrol edin",
+    "choose_delivery_methods": "teslimat yöntemlerini seçmelisiniz"
   },
   "ditchNote": {
     "title": "Ditchit'i Tanıtıyoruz - En İyi Yerel Pazar Yeri!",

@@ -77,7 +77,10 @@
     "new": "Ny",
     "used": "Brugt",
     "no_available": "Ingen indlæg er tilgængelige her endnu.",
-    "no_available_text": "Kom snart tilbage for at opdage nyt og spændende indhold!"
+    "no_available_text": "Kom snart tilbage for at opdage nyt og spændende indhold!",
+    "type": "Type",
+    "sale": "Udsalg",
+    "wanted": "Eftersøgt"
   },
   "error": {
     "somthing_went_wrong": "Ups! Noget gik galt.",
@@ -85,7 +88,8 @@
     "inconvenience": "Vi beklager ulejligheden. Venligst prøv igen.",
     "page_not_found": "Ups! Siden blev ikke fundet",
     "not_found_text": "Det ser ud til, at du er gået væk fra kortet. Denne side findes ikke eller er blevet flyttet.",
-    "back_home": "Gå tilbage hjem"
+    "back_home": "Gå tilbage hjem",
+    "offline": "Du er offline. Tjek venligst din internetforbindelse"
   },
   "post": {
     "promote": "Fremme",
@@ -123,7 +127,8 @@
     "favorites": "Favoritter",
     "edit_profile": "Rediger profil",
     "logout": "Log ud",
-    "get_app": "hent appen"
+    "get_app": "hent appen",
+    "change_password": "Skift adgangskode"
   },
   "chat": {
     "choose_your_location": "Vælg din placering",
@@ -188,7 +193,15 @@
     "select_country": "Vælg land",
     "country": "Land",
     "location_error": "Vi kunne ikke bestemme din placering. Standardplacering er (USA)",
-    "zipcode_error": "Ingen placering fundet med denne postnummer"
+    "zipcode_error": "Ingen placering fundet med denne postnummer",
+    "password_required": "adgangskode er påkrævet",
+    "verified_success": "Verificeret succes",
+    "resend_code": "Send kode igen",
+    "timer_count": "Timertælling:",
+    "offline": "Du er offline. Tjek venligst din internetforbindelse",
+    "current_password": "Nuværende adgangskode",
+    "new_password": "Ny adgangskode",
+    "confirm_new_password": "Bekræft ny adgangskode"
   },
   "contact": {
     "full_name": "Fulde navn",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post offentliggjort og forfremmet med succes",
     "promote_error": "Noget gik galt under promte",
     "select_country": "Vælg land",
-    "country": "Land"
+    "country": "Land",
+    "form_error": "Udfyld venligst de påkrævede felter korrekt.",
+    "offline": "Du er offline. Tjek venligst din internetforbindelse",
+    "choose_delivery_methods": "skal vælge leveringsmetoder"
   },
   "ditchNote": {
     "title": "Præsentation af Ditchit - Den Ultimative Lokale Markedsplads!",

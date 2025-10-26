@@ -77,7 +77,10 @@
     "new": "Novi",
     "used": "Upotrijebljen",
     "no_available": "Ovdje još nisu dostupni postovi.",
-    "no_available_text": "Vratite se uskoro da biste otkrili novi i uzbudljiv sadržaj!"
+    "no_available_text": "Vratite se uskoro da biste otkrili novi i uzbudljiv sadržaj!",
+    "type": "Tip",
+    "sale": "Prodaja",
+    "wanted": "tražen"
   },
   "error": {
     "somthing_went_wrong": "Oups! Nešto je pošlo po zlu.",
@@ -85,7 +88,8 @@
     "inconvenience": "Žao nam je zbog neugodnosti. Molimo pokušajte ponovo.",
     "page_not_found": "Oups! Stranica nije pronađena",
     "not_found_text": "Izgleda da ste skrenuli s mape. Ova stranica ne postoji ili je premještena.",
-    "back_home": "Idi natrag kući"
+    "back_home": "Idi natrag kući",
+    "offline": "Vi ste izvan mreže. Provjerite svoju internetsku vezu"
   },
   "post": {
     "promote": "Promoviraj",
@@ -123,7 +127,8 @@
     "favorites": "Favorites - Omiljeni",
     "edit_profile": "Uredi profil",
     "logout": "Odjava",
-    "get_app": "preuzmi aplikaciju"
+    "get_app": "preuzmi aplikaciju",
+    "change_password": "Promjena lozinke"
   },
   "chat": {
     "choose_your_location": "Odaberite svoju lokaciju",
@@ -188,7 +193,15 @@
     "select_country": "Odaberite zemlju",
     "country": "Zemlja",
     "location_error": "Nismo mogli odrediti vašu lokaciju. Zadana lokacija je (Sjedinjene Države)",
-    "zipcode_error": "Nije pronađena lokacija s ovim poštanskim brojem"
+    "zipcode_error": "Nije pronađena lokacija s ovim poštanskim brojem",
+    "password_required": "lozinka je potrebna",
+    "verified_success": "Potvrđeni uspjeh",
+    "resend_code": "Ponovno pošalji kod",
+    "timer_count": "Brojač vremena:",
+    "offline": "Vi ste izvan mreže. Provjerite svoju internetsku vezu",
+    "current_password": "Trenutna lozinka",
+    "new_password": "Nova lozinka",
+    "confirm_new_password": "Potvrdite novu lozinku"
   },
   "contact": {
     "full_name": "Puno ime",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post objavljen i promoviran uspješno",
     "promote_error": "Nešto je pošlo po zlu za vrijeme premtea",
     "select_country": "Odaberite zemlju",
-    "country": "Zemlja"
+    "country": "Zemlja",
+    "form_error": "Molimo ispunite obavezna polja ispravno.",
+    "offline": "Vi ste izvan mreže. Provjerite svoju internetsku vezu",
+    "choose_delivery_methods": "mora odabrati načine dostave"
   },
   "ditchNote": {
     "title": "Upoznajte Ditchit - Ultimativna lokalna tržnica!",

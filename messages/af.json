@@ -77,7 +77,10 @@
     "new": "Nuut",
     "used": "Gebruik",
     "no_available": "Geen plasings beskikbaar hier nie.",
-    "no_available_text": "Kom binnekort terug om nuwe en opwindende inhoud te ontdek!"
+    "no_available_text": "Kom binnekort terug om nuwe en opwindende inhoud te ontdek!",
+    "type": "Tik",
+    "sale": "Uitverkoping",
+    "wanted": "Gesoek"
   },
   "error": {
     "somthing_went_wrong": "Oeps! Iets het verkeerd gegaan",
@@ -85,7 +88,8 @@
     "inconvenience": "Ons is jammer vir die ongerief. Probeer asseblief weer.",
     "page_not_found": "Oeps! Bladsy nie gevind",
     "not_found_text": "Dit lyk of jy van die kaart af gekom het. Hierdie bladsy bestaan nie of is verskuif nie.",
-    "back_home": "Gaan terug huis toe"
+    "back_home": "Gaan terug huis toe",
+    "offline": "Jy is vanlyn. Gaan asseblief jou internetverbinding na"
   },
   "post": {
     "promote": "Bevorder",
@@ -123,7 +127,8 @@
     "favorites": "Gunstele",
     "edit_profile": "Wysig Profiel",
     "logout": "Teken uit",
-    "get_app": "krijg die app"
+    "get_app": "krijg die app",
+    "change_password": "Verander wagwoord"
   },
   "chat": {
     "choose_your_location": "Kies jou ligging",
@@ -188,7 +193,15 @@
     "select_country": "Kies land",
     "country": "Nasie",
     "location_error": "Ons kon nie u ligging bepaal nie. Standaardligging is (Verenigde State)",
-    "zipcode_error": "Geen ligging gevind met hierdie poskode nie"
+    "zipcode_error": "Geen ligging gevind met hierdie poskode nie",
+    "password_required": "wagwoord word vereis",
+    "verified_success": "Geverifieerde sukses",
+    "resend_code": "Stuur kode weer",
+    "timer_count": "Timer telling:",
+    "offline": "Jy is vanlyn. Gaan asseblief jou internetverbinding na",
+    "current_password": "Huidige wagwoord",
+    "new_password": "Nuwe wagwoord",
+    "confirm_new_password": "Bevestig nuwe wagwoord"
   },
   "contact": {
     "full_name": "Volledige Naam",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Pos gepubliseer en suksesvol bevorder",
     "promote_error": "Iets het verkeerd geloop tydens Promte",
     "select_country": "select country",
-    "country": "Nasie"
+    "country": "Nasie",
+    "form_error": "Vul asseblief die vereiste velde korrek in.",
+    "offline": "Jy is vanlyn. Gaan asseblief jou internetverbinding na",
+    "choose_delivery_methods": "moet afleweringsmetodes kies"
   },
   "ditchNote": {
     "title": "Bied Ditchit aan - Die Ultieme Plaaslike Markplek!",

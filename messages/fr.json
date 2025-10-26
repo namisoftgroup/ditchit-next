@@ -77,7 +77,10 @@
     "new": "Nouveau",
     "used": "Utilisé",
     "no_available": "Aucun message disponible ici encore.",
-    "no_available_text": "Revenez bientôt pour découvrir un contenu nouveau et passionnant!"
+    "no_available_text": "Revenez bientôt pour découvrir un contenu nouveau et passionnant!",
+    "type": "Taper",
+    "sale": "Vente",
+    "wanted": "Recherché"
   },
   "error": {
     "somthing_went_wrong": "Oups ! Quelque chose s'est mal passé.",
@@ -85,7 +88,8 @@
     "inconvenience": "Nous sommes désolés pour les désagréments. Veuillez essayer à nouveau.",
     "page_not_found": "Oups ! Page non trouvée",
     "not_found_text": "On dirait que vous avez quitté la carte. Cette page n'existe pas ou a été déplacée.",
-    "back_home": "Retournez chez vous"
+    "back_home": "Retournez chez vous",
+    "offline": "Vous êtes hors ligne. Veuillez vérifier votre connexion Internet"
   },
   "post": {
     "promote": "Promouvoir",
@@ -123,7 +127,8 @@
     "favorites": "Favoris",
     "edit_profile": "Modifier le profil",
     "logout": "Déconnexion",
-    "get_app": "téléchargez l'application"
+    "get_app": "téléchargez l'application",
+    "change_password": "Changer le mot de passe"
   },
   "chat": {
     "choose_your_location": "Choisissez votre emplacement",
@@ -188,7 +193,15 @@
     "select_country": "Pays de sélection",
     "country": "Pays",
     "location_error": "Nous n'avons pas pu déterminer votre emplacement. L'emplacement par défaut est (États-Unis)",
-    "zipcode_error": "Aucun emplacement trouvé avec ce code postal"
+    "zipcode_error": "Aucun emplacement trouvé avec ce code postal",
+    "password_required": "un mot de passe est requis",
+    "verified_success": "Succès vérifié",
+    "resend_code": "Renvoyer le code",
+    "timer_count": "Nombre de minuterie :",
+    "offline": "Vous êtes hors ligne. Veuillez vérifier votre connexion Internet",
+    "current_password": "Mot de passe actuel",
+    "new_password": "Nouveau mot de passe",
+    "confirm_new_password": "Confirmer le nouveau mot de passe"
   },
   "contact": {
     "full_name": "Nom complet",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post publié et promu avec succès",
     "promote_error": "Quelque chose a mal tourné pendant Prom",
     "select_country": "Pays de sélection",
-    "country": "Pays"
+    "country": "Pays",
+    "form_error": "Veuillez remplir correctement les champs obligatoires.",
+    "offline": "Vous êtes hors ligne. Veuillez vérifier votre connexion Internet",
+    "choose_delivery_methods": "doit choisir les modes de livraison"
   },
   "ditchNote": {
     "title": "Présentation de Ditchit - Le Marché Local Ultime !",

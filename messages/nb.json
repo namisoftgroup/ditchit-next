@@ -77,7 +77,10 @@
     "new": "Ny",
     "used": "Brukt",
     "no_available": "Ingen innlegg tilgjengelige her ennå.",
-    "no_available_text": "Kom snart tilbake for å oppdage nytt og spennende innhold!"
+    "no_available_text": "Kom snart tilbake for å oppdage nytt og spennende innhold!",
+    "type": "Type",
+    "sale": "Salg",
+    "wanted": "Etterlyst"
   },
   "error": {
     "somthing_went_wrong": "Oops! Noe gikk galt",
@@ -85,7 +88,8 @@
     "inconvenience": "Vi beklager ulempen. Vennligst prøv igjen.",
     "page_not_found": "Oops! Siden ble ikke funnet",
     "not_found_text": "Det ser ut som om du har vandret av kartet. Denne siden eksisterer ikke eller har blitt flyttet.",
-    "back_home": "Gå tilbake hjem"
+    "back_home": "Gå tilbake hjem",
+    "offline": "Du er frakoblet. Sjekk internettforbindelsen din"
   },
   "post": {
     "promote": "Fremme",
@@ -123,7 +127,8 @@
     "favorites": "Favoritter",
     "edit_profile": "Rediger profil",
     "logout": "Logg ut",
-    "get_app": "få appen"
+    "get_app": "få appen",
+    "change_password": "Endre passord"
   },
   "chat": {
     "choose_your_location": "Velg ditt sted",
@@ -188,7 +193,15 @@
     "select_country": "Velg land",
     "country": "Land",
     "location_error": "Vi kunne ikke bestemme din beliggenhet. Standardplassering er (USA)",
-    "zipcode_error": "Ingen plassering funnet med dette postnummeret"
+    "zipcode_error": "Ingen plassering funnet med dette postnummeret",
+    "password_required": "passord kreves",
+    "verified_success": "Verifisert suksess",
+    "resend_code": "Send kode på nytt",
+    "timer_count": "Timertelling:",
+    "offline": "Du er frakoblet. Sjekk internettforbindelsen din",
+    "current_password": "Gjeldende passord",
+    "new_password": "Nytt passord",
+    "confirm_new_password": "Bekreft nytt passord"
   },
   "contact": {
     "full_name": "Fullt navn",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post publisert og forfremmet vellykket",
     "promote_error": "noe gikk galt under promte",
     "select_country": "Velg land",
-    "country": "Land"
+    "country": "Land",
+    "form_error": "Fyll ut de obligatoriske feltene riktig.",
+    "offline": "Du er frakoblet. Sjekk internettforbindelsen din",
+    "choose_delivery_methods": "må velge leveringsmåter"
   },
   "ditchNote": {
     "title": "Presenterer Ditchit - Det ultimate lokale markedet!",

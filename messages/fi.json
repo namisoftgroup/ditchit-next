@@ -77,7 +77,10 @@
     "new": "Uusi",
     "used": "Käytetty",
     "no_available": "Viestejä ei vielä ole täällä.",
-    "no_available_text": "Tule pian takaisin löytämään uutta ja jännittävää sisältöä!"
+    "no_available_text": "Tule pian takaisin löytämään uutta ja jännittävää sisältöä!",
+    "type": "Tyyppi",
+    "sale": "Myynti",
+    "wanted": "Halusi"
   },
   "error": {
     "somthing_went_wrong": "Oi! Jotain meni pieleen.",
@@ -85,7 +88,8 @@
     "inconvenience": "Anteeksi häiriöstä. Yritä uudelleen.",
     "page_not_found": "Hups! Sivua ei löytynyt",
     "not_found_text": "Näyttää siltä, että olet harhautunut kartalta. Tätä sivua ei ole olemassa tai se on siirretty.",
-    "back_home": "Mene takaisin kotiin"
+    "back_home": "Mene takaisin kotiin",
+    "offline": "Olet offline-tilassa. Tarkista Internet-yhteytesi"
   },
   "post": {
     "promote": "Edistää",
@@ -123,7 +127,8 @@
     "favorites": "Suosikit",
     "edit_profile": "Muokkaa profiilia",
     "logout": "Kirjaudu ulos",
-    "get_app": "hanki sovellus"
+    "get_app": "hanki sovellus",
+    "change_password": "Vaihda salasana"
   },
   "chat": {
     "choose_your_location": "Valitse sijaintisi",
@@ -188,7 +193,15 @@
     "select_country": "Maasta",
     "country": "Maa",
     "location_error": "Emme voineet määrittää sijaintiasi. Oletuspaikka on (Yhdysvallat)",
-    "zipcode_error": "Tämän postinumeron kanssa ei löydy sijaintia"
+    "zipcode_error": "Tämän postinumeron kanssa ei löydy sijaintia",
+    "password_required": "salasana vaaditaan",
+    "verified_success": "Todennettu menestys",
+    "resend_code": "Lähetä koodi uudelleen",
+    "timer_count": "Ajastimen määrä:",
+    "offline": "Olet offline-tilassa. Tarkista Internet-yhteytesi",
+    "current_password": "Nykyinen salasana",
+    "new_password": "Uusi salasana",
+    "confirm_new_password": "Vahvista uusi salasana"
   },
   "contact": {
     "full_name": "Koko nimi",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Viesti julkaistu ja mainostettiin onnistuneesti",
     "promote_error": "Jotain meni pieleen promten aikana",
     "select_country": "Maasta",
-    "country": "Maa"
+    "country": "Maa",
+    "form_error": "Täytä vaaditut kentät oikein.",
+    "offline": "Olet offline-tilassa. Tarkista Internet-yhteytesi",
+    "choose_delivery_methods": "täytyy valita toimitustavat"
   },
   "ditchNote": {
     "title": "Esittelyssä Ditchit - Huippuluokan paikallinen markkinapaikka!",

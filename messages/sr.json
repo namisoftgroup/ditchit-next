@@ -77,7 +77,10 @@
     "new": "Нов",
     "used": "Коришћен",
     "no_available": "Још увек није овде доступно.",
-    "no_available_text": "Врати се ускоро да откријете нови и узбудљиви садржај!"
+    "no_available_text": "Врати се ускоро да откријете нови и узбудљиви садржај!",
+    "type": "Тип",
+    "sale": "Сале",
+    "wanted": "Траже се"
   },
   "error": {
     "somthing_went_wrong": "Ups! Nešto je pošlo po zlu",
@@ -85,7 +88,8 @@
     "inconvenience": "Izvinjavamo se zbog neprijatnosti. Molimo pokušajte ponovo.",
     "page_not_found": "Ups! Stranica nije pronađena",
     "not_found_text": "Izgleda da ste zalutali sa mape. Ova stranica ne postoji ili je premeštena.",
-    "back_home": "Врати се кући"
+    "back_home": "Врати се кући",
+    "offline": "Ви сте ван мреже. Проверите своју интернет везу"
   },
   "post": {
     "promote": "Promovisati",
@@ -123,7 +127,8 @@
     "favorites": "Омиљени",
     "edit_profile": "Измени профил",
     "logout": "Odjavi se",
-    "get_app": "преузмите апликацију"
+    "get_app": "преузмите апликацију",
+    "change_password": "Промени лозинку"
   },
   "chat": {
     "choose_your_location": "Izaberite svoju lokaciju",
@@ -188,7 +193,15 @@
     "select_country": "Изаберите земљу",
     "country": "Земља",
     "location_error": "Нисмо могли да утврдимо вашу локацију. Подразумевана локација је (Сједињене Државе)",
-    "zipcode_error": "Није пронађена локација са овим поштанским бројем"
+    "zipcode_error": "Није пронађена локација са овим поштанским бројем",
+    "password_required": "потребна је лозинка",
+    "verified_success": "Верифиед Суццесс",
+    "resend_code": "Поново пошаљи код",
+    "timer_count": "Бројач тајмера:",
+    "offline": "Ви сте ван мреже. Проверите своју интернет везу",
+    "current_password": "Тренутна лозинка",
+    "new_password": "Нова лозинка",
+    "confirm_new_password": "Потврдите нову лозинку"
   },
   "contact": {
     "full_name": "Puno ime",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Пост објављен и успешно промовисан",
     "promote_error": "нешто је пошло по злу током промте-а",
     "select_country": "Изаберите земљу",
-    "country": "Земља"
+    "country": "Земља",
+    "form_error": "Молимо Вас да исправно попуните обавезна поља.",
+    "offline": "Ви сте ван мреже. Проверите своју интернет везу",
+    "choose_delivery_methods": "мора изабрати методе испоруке"
   },
   "ditchNote": {
     "title": "Predstavljamo Ditchit - ultimativno lokalno tržište!",

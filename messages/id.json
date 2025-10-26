@@ -77,7 +77,10 @@
     "new": "Baru",
     "used": "Digunakan",
     "no_available": "Belum ada pos yang tersedia di sini.",
-    "no_available_text": "Segera kembali untuk menemukan konten baru dan menarik!"
+    "no_available_text": "Segera kembali untuk menemukan konten baru dan menarik!",
+    "type": "Jenis",
+    "sale": "Penjualan",
+    "wanted": "Diinginkan"
   },
   "error": {
     "somthing_went_wrong": "Ups! Ada yang salah.",
@@ -85,13 +88,14 @@
     "inconvenience": "Kami mohon maaf atas ketidaknyamanan ini. Silakan coba lagi.",
     "page_not_found": "Ups! Halaman Tidak Ditemukan",
     "not_found_text": "Sepertinya Anda telah tersesat dari peta. Halaman ini tidak ada atau telah dipindahkan.",
-    "back_home": "Kembali ke Rumah"
+    "back_home": "Kembali ke Rumah",
+    "offline": "Anda sedang luring. Silakan periksa koneksi internet Anda"
   },
   "post": {
     "promote": "Promosikan",
     "active": "Aktif",
     "sold": "Terjual",
-    "edit": "Edit",
+    "edit": "Sunting",
     "delete": "Hapus",
     "promoted": "Dipromosikan",
     "available": "Tersedia",
@@ -123,7 +127,8 @@
     "favorites": "Favorit",
     "edit_profile": "Edit Profil",
     "logout": "Keluar",
-    "get_app": "dapatkan aplikasinya"
+    "get_app": "dapatkan aplikasinya",
+    "change_password": "Ubah Kata Sandi"
   },
   "chat": {
     "choose_your_location": "Pilih Lokasi Anda",
@@ -188,7 +193,15 @@
     "select_country": "Pilih Negara",
     "country": "Negara",
     "location_error": "Kami tidak dapat menentukan lokasi Anda. Lokasi default adalah (Amerika Serikat)",
-    "zipcode_error": "Tidak ada lokasi yang ditemukan dengan kode pos ini"
+    "zipcode_error": "Tidak ada lokasi yang ditemukan dengan kode pos ini",
+    "password_required": "kata sandi diperlukan",
+    "verified_success": "Sukses Terverifikasi",
+    "resend_code": "Kirim Ulang Kode",
+    "timer_count": "Jumlah Pengatur Waktu:",
+    "offline": "Anda sedang luring. Silakan periksa koneksi internet Anda",
+    "current_password": "Kata Sandi Saat Ini",
+    "new_password": "Kata Sandi Baru",
+    "confirm_new_password": "Konfirmasi Kata Sandi Baru"
   },
   "contact": {
     "full_name": "Nama Lengkap",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Posting diterbitkan dan dipromosikan dengan sukses",
     "promote_error": "ada yang salah selama promte",
     "select_country": "Pilih Negara",
-    "country": "Negara"
+    "country": "Negara",
+    "form_error": "Silakan isi kolom yang diperlukan dengan benar.",
+    "offline": "Anda sedang luring. Silakan periksa koneksi internet Anda",
+    "choose_delivery_methods": "harus memilih metode pengiriman"
   },
   "ditchNote": {
     "title": "Memperkenalkan Ditchit - Pasar Lokal Terbaik!",

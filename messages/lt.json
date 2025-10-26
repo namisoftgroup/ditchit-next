@@ -77,7 +77,10 @@
     "new": "Nauja",
     "used": "Naudojamas",
     "no_available": "Čia dar nėra pranešimų.",
-    "no_available_text": "Netrukus sugrįžkite sužinoti naujo ir įdomaus turinio!"
+    "no_available_text": "Netrukus sugrįžkite sužinoti naujo ir įdomaus turinio!",
+    "type": "Tipas",
+    "sale": "Išpardavimas",
+    "wanted": "Norėjosi"
   },
   "error": {
     "somthing_went_wrong": "Oho! Kažkas negerai.",
@@ -85,7 +88,8 @@
     "inconvenience": "Atsiprašome už nepatogumus. Prašome bandyti dar kartą.",
     "page_not_found": "Ups! Puslapis nerastas",
     "not_found_text": "Atrodo, kad paklaidžiojai žemėlapyje. Ši puslapis neegzistuoja arba buvo perkelta.",
-    "back_home": "Grįžti namo"
+    "back_home": "Grįžti namo",
+    "offline": "Esate neprisijungęs. Patikrinkite interneto ryšį"
   },
   "post": {
     "promote": "Reklamuoti",
@@ -123,7 +127,8 @@
     "favorites": "Mėgstamiausi",
     "edit_profile": "Redaguoti profilį",
     "logout": "Atsijungti",
-    "get_app": "atsisiųskite programėlę"
+    "get_app": "atsisiųskite programėlę",
+    "change_password": "Keisti slaptažodį"
   },
   "chat": {
     "choose_your_location": "Pasirinkite savo vietą",
@@ -188,7 +193,15 @@
     "select_country": "Pasirinkite Šalis",
     "country": "Šalis",
     "location_error": "Negalėjome nustatyti jūsų vietos. Numatytoji vieta yra (JAV)",
-    "zipcode_error": "Nėra vietos su šiuo pašto kodu"
+    "zipcode_error": "Nėra vietos su šiuo pašto kodu",
+    "password_required": "reikalingas slaptažodis",
+    "verified_success": "Patvirtinta sėkmė",
+    "resend_code": "Iš naujo siųsti kodą",
+    "timer_count": "Laikmačio skaičius:",
+    "offline": "Esate neprisijungęs. Patikrinkite interneto ryšį",
+    "current_password": "Dabartinis slaptažodis",
+    "new_password": "Naujas slaptažodis",
+    "confirm_new_password": "Patvirtinkite naują slaptažodį"
   },
   "contact": {
     "full_name": "Pilnas vardas",
@@ -253,7 +266,10 @@
     "post_published_promoted": "„Post“ paskelbta ir sėkmingai reklamuojama",
     "promote_error": "„Promte“ metu kažkas nutiko",
     "select_country": "Pasirinkite Šalis",
-    "country": "Šalis"
+    "country": "Šalis",
+    "form_error": "Prašome teisingai užpildyti reikiamus laukus.",
+    "offline": "Esate neprisijungęs. Patikrinkite interneto ryšį",
+    "choose_delivery_methods": "turi pasirinkti pristatymo būdus"
   },
   "ditchNote": {
     "title": "Pristatau Ditchit - galutinis vietinis turgus!",

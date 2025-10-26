@@ -77,7 +77,10 @@
     "new": "Yangi",
     "used": "Ishlatilgan",
     "no_available": "Bu erda hech qanday xabar yo'q.",
-    "no_available_text": "Yaqinda yangi va qiziqarli tarkibni kashf etish uchun qaytib keling!"
+    "no_available_text": "Yaqinda yangi va qiziqarli tarkibni kashf etish uchun qaytib keling!",
+    "type": "Tur",
+    "sale": "Sotish",
+    "wanted": "Istagan"
   },
   "error": {
     "somthing_went_wrong": "Afsus! Xato yuz berdi",
@@ -85,7 +88,8 @@
     "inconvenience": "Noqulaylik uchun uzr so'raymiz. Iltimos, qayta urinib ko'ring.",
     "page_not_found": "Afsus! Sahifa topilmadi",
     "not_found_text": "Ko‘rinishidan xaritadan chiqib ketdingiz. Ushbu sahifa mavjud emas yoki ko‘chirilgan.",
-    "back_home": "Uyga qaytish"
+    "back_home": "Uyga qaytish",
+    "offline": "Siz oflaynsiz. Internetga ulanishingizni tekshiring"
   },
   "post": {
     "promote": "Rag'batlantirish",
@@ -123,7 +127,8 @@
     "favorites": "Sevimlilar",
     "edit_profile": "Profilni tahrirlash",
     "logout": "Chiqish",
-    "get_app": "ilovani yuklab oling"
+    "get_app": "ilovani yuklab oling",
+    "change_password": "Parolni o'zgartirish"
   },
   "chat": {
     "choose_your_location": "Joylashuvingizni tanlang",
@@ -188,7 +193,15 @@
     "select_country": "Mamlakatni tanlang",
     "country": "Mamlakat",
     "location_error": "Sizning joylashuvingizni aniqlay olmadik. Standart joylashgan joy (Amerika Qo'shma Shtatlari)",
-    "zipcode_error": "Ushbu pochta indeksi bilan biron bir joy topilmadi"
+    "zipcode_error": "Ushbu pochta indeksi bilan biron bir joy topilmadi",
+    "password_required": "Parol talab qilinadi",
+    "verified_success": "Tasdiqlangan muvaffaqiyat",
+    "resend_code": "Qaytish kodi",
+    "timer_count": "Taymerlar:",
+    "offline": "Siz oflaynsiz. Internetga ulanishingizni tekshiring",
+    "current_password": "Joriy parol",
+    "new_password": "Yangi parol",
+    "confirm_new_password": "Yangi parolni tasdiqlang"
   },
   "contact": {
     "full_name": "To'liq ism",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Post e'lon qilingan va muvaffaqiyatli targ'ib qilingan",
     "promote_error": "prost paytida nimadir noto'g'ri ketdi",
     "select_country": "Mamlakatni tanlang",
-    "country": "Mamlakat"
+    "country": "Mamlakat",
+    "form_error": "Iltimos, kerakli maydonlarni to'g'ri to'ldiring.",
+    "offline": "Siz oflaynsiz. Internetga ulanishingizni tekshiring",
+    "choose_delivery_methods": "etkazib berish usullarini tanlashi kerak"
   },
   "ditchNote": {
     "title": "Ditchitni taqdim etamiz - Eng zo'r Mahalliy Bozor!",

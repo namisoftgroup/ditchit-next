@@ -77,7 +77,10 @@
     "new": "Nový",
     "used": "Použitý",
     "no_available": "Zatiaľ tu nie sú k dispozícii žiadne príspevky.",
-    "no_available_text": "Vráťte sa čoskoro a objavte nový a vzrušujúci obsah!"
+    "no_available_text": "Vráťte sa čoskoro a objavte nový a vzrušujúci obsah!",
+    "type": "Typ",
+    "sale": "Predaj",
+    "wanted": "Hľadaný"
   },
   "error": {
     "somthing_went_wrong": "Ups! Niečo sa pokazilo",
@@ -85,7 +88,8 @@
     "inconvenience": "Ospravedlňujeme sa za nepríjemnosti. Skúste to prosím znova.",
     "page_not_found": "Ups! Stránka sa nenašla",
     "not_found_text": "Vyzerá to, že ste zišli z mapy. Táto stránka neexistuje alebo bola presunutá.",
-    "back_home": "Ísť späť domov"
+    "back_home": "Ísť späť domov",
+    "offline": "Ste offline. Skontrolujte svoje internetové pripojenie"
   },
   "post": {
     "promote": "Propagovať",
@@ -123,7 +127,8 @@
     "favorites": "Obľúbené položky",
     "edit_profile": "Upraviť profil",
     "logout": "Odhlásiť sa",
-    "get_app": "získajte aplikáciu"
+    "get_app": "získajte aplikáciu",
+    "change_password": "Zmeniť heslo"
   },
   "chat": {
     "choose_your_location": "Vyberte si svoju lokalitu",
@@ -188,7 +193,15 @@
     "select_country": "Vyberacia krajina",
     "country": "Krajina",
     "location_error": "Nemohli sme určiť vašu polohu. Predvolená poloha je (USA)",
-    "zipcode_error": "S týmto PSČ sa nenašla žiadne miesto"
+    "zipcode_error": "S týmto PSČ sa nenašla žiadne miesto",
+    "password_required": "vyžaduje sa heslo",
+    "verified_success": "Overený úspech",
+    "resend_code": "Znova odoslať kód",
+    "timer_count": "Počet časovačov:",
+    "offline": "Ste offline. Skontrolujte svoje internetové pripojenie",
+    "current_password": "Aktuálne heslo",
+    "new_password": "Nové heslo",
+    "confirm_new_password": "Potvrďte nové heslo"
   },
   "contact": {
     "full_name": "Celé meno",
@@ -253,7 +266,10 @@
     "post_published_promoted": "Príspevok publikoval a úspešne propagoval",
     "promote_error": "Niečo sa pokazilo počas Promte",
     "select_country": "Vyberacia krajina",
-    "country": "Krajina"
+    "country": "Krajina",
+    "form_error": "Vyplňte prosím správne povinné polia.",
+    "offline": "Ste offline. Skontrolujte svoje internetové pripojenie",
+    "choose_delivery_methods": "musíte zvoliť spôsob doručenia"
   },
   "ditchNote": {
     "title": "Predstavujeme Ditchit - Najlepší miestny trh!",
