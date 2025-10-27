@@ -123,16 +123,7 @@ export default function EditProfileForm({
           error={errors.email?.message ? t(errors.email?.message) : undefined}
         />
 
-        <InputField
-          label={t("password")}
-          type="password"
-          id="password"
-          placeholder={t("password")}
-          {...register("password")}
-          error={
-            errors.password?.message ? t(errors.password?.message) : undefined
-          }
-        />
+       
         <Controller
           name="phone"
           control={methods.control}

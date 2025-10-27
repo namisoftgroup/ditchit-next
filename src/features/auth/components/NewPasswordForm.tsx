@@ -87,3 +87,23 @@ export default function NewPasswordForm() {
     </form>
   );
 }
+
+// import { useAuthStore } from "../store";
+// const { logout } = useAuthStore((state) => ({ logout: state.logout }));
+
+// if (res.data.code === 200) {
+//   toast.success(t("password_updated"));
+//   // Invalidate existing auth token (if any) by calling the logout endpoint
+//   try {
+//     await clientAxios.get(API_URL + "/profile/logout");
+//   } catch (err) {
+//     // Ignore errors; the goal is to ensure cookie removal even if request fails
+//     console.error("Failed to hit logout endpoint", err);
+//   }
+//   // Clear auth state on client side
+//   logout();
+//   // Navigate user to login page after successful password reset
+//   router.push("/login");
+// } else {
+//   toast.error(res.data.message);
+// }
