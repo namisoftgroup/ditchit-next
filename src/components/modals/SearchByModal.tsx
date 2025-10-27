@@ -12,7 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useHomeFilter } from "@/features/listing/store";
 import { saveLocationFilters } from "@/features/listing/action";
 import { SHIPPING_METHODS } from "@/utils/constants";
-import { useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { Input } from "../ui/input";
 import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
@@ -55,27 +55,109 @@ export default function SearchByModal({
     setFilter({ [key]: value });
   };
 
+  // Cache for ZIP code lookups
+  const zipCodeCache = useRef<{
+    [zipCode: string]: {
+      latitude: number;
+      longitude: number;
+      address: string;
+      timestamp: number;
+    };
+  }>({});
+
+  // Throttling for ZIP code lookups
+  const lastZipCodeRequestRef = useRef<number>(0);
+  const zipCodeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const prevZipCodeRef = useRef<string>("");
+
   const fetchCoordinates = async (zipCode: string) => {
     if (!zipCode) return;
 
-    const result = await getCoordinates(String(zipCode));
-    if (result) {
-      setFilter({
-        latitude: result.latitude,
-        longitude: result.longitude,
-        address: result.address,
-      });
-    } else {
-      toast.error("Could not fetch coordinates. Please try a valid ZIP.");
+    // Skip if same as previous ZIP code
+    if (zipCode === prevZipCodeRef.current) return;
+    prevZipCodeRef.current = zipCode;
+
+    // Check cache first
+    if (zipCodeCache.current[zipCode]) {
+      const cachedResult = zipCodeCache.current[zipCode];
+      // Only use cache if it's recent (less than 1 hour old)
+      if (Date.now() - cachedResult.timestamp < 3600000) {
+        setFilter({
+          latitude: String(cachedResult.latitude),
+          longitude: String(cachedResult.longitude),
+          address: cachedResult.address,
+        });
+        return;
+      }
+    }
+
+    // Throttle requests to prevent too many API calls
+    const now = Date.now();
+    if (now - lastZipCodeRequestRef.current < 1000) {
+      // 1 second throttle
+      return;
+    }
+
+    lastZipCodeRequestRef.current = now;
+
+    try {
+      const result = await getCoordinates(String(zipCode));
+      if (result) {
+        // Cache the result
+        zipCodeCache.current[zipCode] = {
+          ...result,
+          timestamp: now,
+        };
+
+        setFilter({
+          latitude: result.latitude,
+          longitude: result.longitude,
+          address: result.address,
+        });
+      } else {
+        toast.error(
+          t("zipcode_error") ||
+            "Could not fetch coordinates. Please try a valid ZIP."
+        );
+      }
+    } catch (error) {
+      toast.error(
+        t("zipcode_error") ||
+          "Could not fetch coordinates. Please try a valid ZIP."
+      );
     }
   };
 
-  const handleGetLocation = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter({ zip_code: String(e.target.value) });
-    fetchCoordinates(e.target.value);
+  const handleGetLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const zipCode = e.target.value;
+    setFilter({ zip_code: String(zipCode) });
+
+    // Clear any existing timeout
+    if (zipCodeTimeoutRef.current) {
+      clearTimeout(zipCodeTimeoutRef.current);
+    }
+
+    // Debounce ZIP code lookup
+    zipCodeTimeoutRef.current = setTimeout(() => {
+      fetchCoordinates(zipCode);
+    }, 800); // 800ms debounce
   };
 
+  // Cleanup function for timeouts
+  useEffect(() => {
+    return () => {
+      if (zipCodeTimeoutRef.current) {
+        clearTimeout(zipCodeTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleSeeListings = () => {
+    // Clear any pending timeouts when saving
+    if (zipCodeTimeoutRef.current) {
+      clearTimeout(zipCodeTimeoutRef.current);
+    }
+
     startTransition(() => {
       let lat, lng, address;
 
