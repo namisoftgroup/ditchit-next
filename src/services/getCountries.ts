@@ -4,7 +4,7 @@ import { API_URL } from "@/utils/constants";
 export async function getCountries(
   lang: string,
   page = 1,
-  limit = 10
+  limit = 15
 ): Promise<CountriesResponse> {
   const response = await fetch(
     `${API_URL}/main/countries?page=${page}&limit=${limit}`,

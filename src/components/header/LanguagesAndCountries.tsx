@@ -15,7 +15,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 import { User } from "@/types/user";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import useGetCountries from "@/hooks/useGetCountries";
 
 export default function LanguagesAndCountries({
   countries,
@@ -30,34 +31,172 @@ export default function LanguagesAndCountries({
   const queryString = searchParams.toString();
   const queryClient = useQueryClient();
   const t = useTranslations("common");
-
   const [langCode, countryCode] = locale.split("-");
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useGetCountries(langCode);
 
-  // Pagination state for countries list
-  const [countryPage, setCountryPage] = useState(0);
-  const pageSize = 10;
-  const totalCountryPages = Math.ceil(countries.length / pageSize);
-  const paginatedCountries = countries.slice(
-    countryPage * pageSize,
-    countryPage * pageSize + pageSize
-  );
+  const fetchedCountries = data?.pages.flatMap((p) => p.data.data) ?? [];
+  const [filteredCountries, setFilteredCountries] = useState<Country[]>(fetchedCountries);
+  
+  const searchCache = useRef<Record<string, { countries: Country[]; timestamp: number }>>({});
+  const isSearchingRef = useRef<boolean>(false);
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  function changeLang(newLang: string) {
-    if (!locale) return pathname;
-    return `/${newLang}-${countryCode}${pathname}${queryString ? `?${queryString}` : ""}`;
-  }
+  // Debounced search handler
+  const handleSearch = useCallback((query: string) => {
+    setSearchQuery(query);
+    
+    // Clear previous timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    // If empty query, show all countries
+    if (!query.trim()) {
+      setFilteredCountries(fetchedCountries);
+      return;
+    }
+
+    // Check cache first
+    const cacheKey = `search_${query.trim().toLowerCase()}`;
+    if (searchCache.current[cacheKey]) {
+      const cachedResult = searchCache.current[cacheKey];
+      // Only use cache if it's recent (less than 1 hour old)
+      if (Date.now() - cachedResult.timestamp < 3600000) {
+        setFilteredCountries(cachedResult.countries);
+        return;
+      }
+    }
+
+    // Skip if we're already searching
+    if (isSearchingRef.current) {
+      return;
+    }
+
+    isSearchingRef.current = true;
+
+    // Debounce the search
+    searchTimeoutRef.current = setTimeout(() => {
+      // Filter countries
+      const filtered = fetchedCountries.filter(country => 
+        country.title.toLowerCase().includes(query.toLowerCase()) ||
+        country.code.toLowerCase().includes(query.toLowerCase())
+      );
+
+      // Update state with filtered results
+      setFilteredCountries(filtered);
+
+      // Cache the result
+      searchCache.current[cacheKey] = {
+        countries: filtered,
+        timestamp: Date.now(),
+      };
+
+      isSearchingRef.current = false;
+    }, 300);
+  }, [fetchedCountries]);
+
+  const allCountries = data?.pages.flatMap((p) => p.data.data) ?? [];
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  // Setup IntersectionObserver بعد ما الـ dropdown يفتح
+  useEffect(() => {
+    // لو الـ dropdown مش مفتوح، نوقف الـ observer
+    if (!isOpen) {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
+      return;
+    }
+
+    // ننتظر شوية عشان الـ DOM يتحدث بعد فتح الـ dropdown
+    const timer = setTimeout(() => {
+      const scrollContainer = scrollContainerRef.current;
+      if (!scrollContainer) return;
+
+      // ننظف الـ observer القديم لو موجود
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+
+      // ننشئ observer جديد
+      observerRef.current = new IntersectionObserver(
+        (entries) => {
+          const target = entries[0];
+
+          console.log("Observer triggered:", {
+            isIntersecting: target.isIntersecting,
+            hasNextPage,
+            isFetchingNextPage,
+            scrollHeight: scrollContainer.scrollHeight,
+            scrollTop: scrollContainer.scrollTop,
+            clientHeight: scrollContainer.clientHeight,
+          });
+
+          // لو العنصر ظاهر وفيه صفحة تانية ومش بنحمل دلوقتي
+          if (target.isIntersecting && hasNextPage && !isFetchingNextPage) {
+            console.log("✅ Fetching next page of countries...");
+            fetchNextPage();
+          }
+        },
+        {
+          root: scrollContainer, // الـ scrollable container
+          rootMargin: "50px", // نبدأ التحميل قبل الوصول للنهاية بـ 50px
+          threshold: 0, // نشتغل بمجرد ما جزء صغير من العنصر يظهر
+        }
+      );
+
+      // نلاقي الـ sentinel element ونبدأ نراقبه
+      const sentinel = scrollContainer.querySelector("[data-sentinel]");
+      if (sentinel) {
+        observerRef.current.observe(sentinel);
+        console.log("Observer attached to sentinel");
+      }
+    }, 100); // delay صغير عشان الـ DOM يكون جاهز
+
+    return () => {
+      clearTimeout(timer);
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
+    };
+  }, [
+    isOpen,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    allCountries.length,
+  ]);
 
   function changeCountry(newCountryCode: string) {
     if (!locale) return pathname;
     return `/${langCode}-${newCountryCode}${pathname}${queryString ? `?${queryString}` : ""}`;
   }
 
+  function changeLang(newLang: string) {
+    if (!locale) return pathname;
+    return `/${newLang}-${countryCode}${pathname}${queryString ? `?${queryString}` : ""}`;
+  }
+
   function revalidateQueries() {
     queryClient.clear();
   }
 
+  console.log("📊 Pagination data:", {
+    totalCountries: allCountries.length,
+    pages: data?.pages.length,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+  });
+
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger className="flex items-center gap-2 whitespace-nowrap ">
         <Image
           src={
@@ -82,60 +221,74 @@ export default function LanguagesAndCountries({
             {t("country")}
           </h6>
 
-          <div className="max-h-[360px] w-[200px] overflow-y-auto flex-col">
-            {paginatedCountries.map((country) => (
-              <DropdownMenuItem key={country.id} className="p-0">
-                <Link
-                  href={changeCountry(country.code)}
-                  onClick={() => {
-                    document.cookie = `countryId=${country.id}; path=/`;
-                    revalidateQueries();
-                  }}
-                  className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-3 py-2 text-[14px] w-full rounded-[8px]"
-                >
-                  <Image
-                    src={country.flag}
-                    width={24}
-                    height={18}
-                    alt={country.title}
-                    className="w-[24px] h-[18px] object-cover rounded"
+          <div
+            ref={scrollContainerRef}
+            className="max-h-[360px] w-[200px] overflow-y-auto overflow-x-hidden flex-col"
+          >
+            {isLoading ? (
+              // Loading state للتحميل الأولي
+              <div className="flex flex-col gap-2 px-3 py-2">
+                {[...Array(10)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-8 bg-gray-200 animate-pulse rounded-md"
                   />
-                  {country.title}
-                </Link>
-              </DropdownMenuItem>
-            ))}
-
-            {/* Pagination controls */}
-            {totalCountryPages > 1 && (
-              <div className="flex justify-between items-center px-3 py-2 text-sm  ">
-                <button
-                  className="px-2 py-1 disabled:opacity-40"
-                  disabled={countryPage === 0}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setCountryPage((p) => Math.max(0, p - 1));
-                  }}
-                >
-                  ‹
-                </button>
-                <span>
-                  {countryPage + 1} / {totalCountryPages}
-                </span>
-                <button
-                  className="px-2 py-1 disabled:opacity-40"
-                  disabled={countryPage === totalCountryPages - 1}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setCountryPage((p) =>
-                      Math.min(totalCountryPages - 1, p + 1)
-                    );
-                  }}
-                >
-                  ›
-                </button>
+                ))}
               </div>
+            ) : (
+              <>
+                {allCountries?.map((country) => (
+                  <DropdownMenuItem key={country.id} className="p-0">
+                    <Link
+                      href={changeCountry(country.code)}
+                      onClick={() => {
+                        document.cookie = `countryId=${country.id}; path=/`;
+                        revalidateQueries();
+                        setIsOpen(false); // نقفل الـ dropdown بعد الاختيار
+                      }}
+                      className="flex items-center gap-2 whitespace-nowrap 
+                      text-[var(--darkColor)] hover:bg-[#f1f1f1] px-3 py-2 text-[14px] w-full rounded-[8px]"
+                    >
+                      <Image
+                        src={country.flag}
+                        width={24}
+                        height={18}
+                        alt={country.title}
+                        className="w-[24px] h-[18px] object-cover rounded"
+                      />
+                      {country.title}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+
+                {/* Loading skeleton للصفحات التالية */}
+                {isFetchingNextPage && (
+                  <div className="flex flex-col gap-2 px-3 py-2">
+                    {[...Array(5)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="h-8 bg-gray-200 animate-pulse rounded-md"
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Sentinel element - العنصر اللي هنراقبه */}
+                {hasNextPage && (
+                  <div
+                    data-sentinel
+                    className="h-4 w-full"
+                    style={{ minHeight: "1px" }}
+                  />
+                )}
+
+                {/* رسالة لما نخلص كل الدول */}
+                {!hasNextPage && allCountries.length > 0 && (
+                  <div className="px-3 py-2 text-center text-xs text-gray-500">
+                    {/* يمكن تضيف رسالة هنا لو عايز */}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -154,7 +307,10 @@ export default function LanguagesAndCountries({
               <DropdownMenuItem key={code} className="p-0">
                 <Link
                   href={changeLang(code)}
-                  onClick={revalidateQueries}
+                  onClick={() => {
+                    revalidateQueries();
+                    setIsOpen(false); // نقفل الـ dropdown بعد الاختيار
+                  }}
                   className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-3 py-2 text-[14px] w-full rounded-[8px]"
                 >
                   {name}

@@ -33,7 +33,6 @@ export async function getClientHomeCategories(
         ...request,
       },
     });
- console.log("res" , res.data);
 
     return res.data;
   } catch (error) {

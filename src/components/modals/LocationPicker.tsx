@@ -378,9 +378,9 @@ export default function LocationSearchMap({
     }
 
     // Set a timeout for debouncing - only search after user stops typing
-    searchTimeoutRef.current = setTimeout(() => {
-      handleSearch();
-    }, 800); // 800ms debounce
+    // searchTimeoutRef.current = setTimeout(() => {
+    //   handleSearch();
+    // }, 5000); // 800ms debounce
 
     return () => {
       if (searchTimeoutRef.current) {
@@ -426,17 +426,17 @@ export default function LocationSearchMap({
 
         {/* Search Icon */}
         <Search
-          className="absolute right-12 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors"
           onClick={handleSearch}
           size={20}
         />
 
         {/* Current Location Icon */}
-        <button
+        {/* <button
           type="button"
           onClick={handleGetCurrentLocation}
           className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-500 transition-colors"
-          title={t("use_current_location") || "Use current location"}
+          title={ "Use current location"}
         >
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path
@@ -445,7 +445,7 @@ export default function LocationSearchMap({
               clipRule="evenodd"
             />
           </svg>
-        </button>
+        </button> */}
       </div>
 
       {isLoaded && window.google && (
