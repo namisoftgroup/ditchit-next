@@ -65,7 +65,6 @@ export default function LocationSearchMap({
   const searchCache = useRef<SearchCache>({});
   const lastGeocodeTimestampRef = useRef<number>(0);
   const isUpdatingRef = useRef<boolean>(false);
-  const prevSearchQueryRef = useRef<string>("");
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastDragPositionRef = useRef<{ lat: number; lng: number } | null>(null);
 
@@ -116,6 +115,7 @@ export default function LocationSearchMap({
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
   }, []);
+
   // Convert coordinates to address with country validation (with caching and throttling)
   const updateAddressFromCoords = useCallback(
     async (lat: number, lng: number, preFetchedAddress?: string) => {
@@ -222,15 +222,16 @@ export default function LocationSearchMap({
             isUpdatingRef.current = false;
           }
         );
-      } catch (error) {
+      } catch {
         toast.error(t("geocode_failed") || "Failed to geocode location");
         revertToLastValid();
         isUpdatingRef.current = false;
       }
     },
-    [countryData?.code, lastValidAddress, lastValidPosition, onChange, t]
+    [countryData?.code, onChange, t]
   );
-  // Get current location
+
+  // Get current location on mount
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -246,16 +247,12 @@ export default function LocationSearchMap({
         }
       );
     }
-  }, [countryData]);
+  }, [countryData, updateAddressFromCoords]);
 
   // Search with country validation, debouncing and caching
   const handleSearch = useCallback(() => {
     if (!searchQuery.trim()) return;
     if (!("google" in window) || !google.maps?.Geocoder) return;
-
-    // Skip if same as previous search
-    if (searchQuery === prevSearchQueryRef.current) return;
-    prevSearchQueryRef.current = searchQuery;
 
     // Check cache first
     const cacheKey = `search_${searchQuery.trim().toLowerCase()}`;
@@ -272,11 +269,8 @@ export default function LocationSearchMap({
       }
     }
 
-    // Skip if we're already updating or need to throttle
-    if (
-      isUpdatingRef.current ||
-      Date.now() - lastGeocodeTimestampRef.current < THROTTLE_DELAY
-    ) {
+    // Skip if we're already updating
+    if (isUpdatingRef.current) {
       return;
     }
 
@@ -307,12 +301,12 @@ export default function LocationSearchMap({
         }
         isUpdatingRef.current = false;
       });
-    } catch (error) {
+    } catch {
       toast.error("Failed to geocode location");
       revertToLastValid();
       isUpdatingRef.current = false;
     }
-  }, [searchQuery, t, updateAddressFromCoords]);
+  }, [searchQuery, updateAddressFromCoords]);
 
   // Revert to last valid position and address
   const revertToLastValid = useCallback(() => {
@@ -338,17 +332,15 @@ export default function LocationSearchMap({
       const lng = e.latLng?.lng();
 
       if (lat && lng) {
-        // Check if position has changed significantly (at least 0.0001 degree difference)
         const lastPos = lastDragPositionRef.current;
         if (
           lastPos &&
           Math.abs(lastPos.lat - lat) < 0.0001 &&
           Math.abs(lastPos.lng - lng) < 0.0001
         ) {
-          return; // Skip if position hasn't changed enough
+          return;
         }
 
-        // Update last position
         lastDragPositionRef.current = { lat, lng };
         updateAddressFromCoords(lat, lng);
       }
@@ -356,33 +348,14 @@ export default function LocationSearchMap({
     [updateAddressFromCoords]
   );
 
-  // Handle map drag end with throttling
-  const handleMapDragEnd = useCallback(() => {
-    const newCenter = mapRef.current?.getCenter();
-    if (newCenter) {
-      const lat = newCenter.lat();
-      const lng = newCenter.lng();
-
-      // Check if position has changed significantly
-      const lastPos = lastDragPositionRef.current;
-      if (
-        lastPos &&
-        Math.abs(lastPos.lat - lat) < 0.0001 &&
-        Math.abs(lastPos.lng - lng) < 0.0001
-      ) {
-        return; // Skip if position hasn't changed enough
-      }
-
-      // Update last position
-      lastDragPositionRef.current = { lat, lng };
-      updateAddressFromCoords(lat, lng);
-    }
-  }, [updateAddressFromCoords]);
-
+  // Handle default country search
   useEffect(() => {
-    if (defaultCountry) handleSearch();
-  }, [defaultCountry, handleSearch]);
+    if (defaultCountry && searchQuery !== defaultCountry) {
+      setSearchQuery(defaultCountry);
+    }
+  }, [defaultCountry]);
 
+  // Handle filter updates
   useEffect(() => {
     if (filter.latitude && filter.longitude) {
       const newPos = {
@@ -394,19 +367,17 @@ export default function LocationSearchMap({
     }
   }, [filter.latitude, filter.longitude, updateAddressFromCoords]);
 
-  // Implement debounced search
+  // Implement debounced search - allows free typing, searches after user stops
   useEffect(() => {
-    // Clear any existing timeout
     if (searchTimeoutRef.current) {
       clearTimeout(searchTimeoutRef.current);
     }
 
-    // Skip if search query is empty or same as previous
-    if (!searchQuery.trim() || searchQuery === prevSearchQueryRef.current) {
+    if (!searchQuery.trim()) {
       return;
     }
 
-    // Set a timeout for debouncing
+    // Set a timeout for debouncing - only search after user stops typing
     searchTimeoutRef.current = setTimeout(() => {
       handleSearch();
     }, 800); // 800ms debounce
@@ -418,6 +389,26 @@ export default function LocationSearchMap({
     };
   }, [searchQuery, handleSearch]);
 
+  // Get current location from button
+  const handleGetCurrentLocation = useCallback(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          const newPos = { lat, lng };
+          setMapCenter(newPos);
+          updateAddressFromCoords(lat, lng);
+        },
+        () => {
+          toast.error(
+            t("failed_to_get_location") || "Failed to get current location"
+          );
+        }
+      );
+    }
+  }, [t, updateAddressFromCoords]);
+
   return (
     <div className="flex flex-col gap-3">
       <div className="relative w-full">
@@ -425,21 +416,44 @@ export default function LocationSearchMap({
           placeholder={t("search")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="pr-10 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
+          className="pr-20 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
         />
+
+        {/* Search Icon */}
         <Search
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+          className="absolute right-12 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors"
           onClick={handleSearch}
+          size={20}
         />
+
+        {/* Current Location Icon */}
+        <button
+          type="button"
+          onClick={handleGetCurrentLocation}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-500 transition-colors"
+          title={t("use_current_location") || "Use current location"}
+        >
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm0-6a1 1 0 100-2 1 1 0 000 2z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
       </div>
 
       {isLoaded && window.google && (
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={mapCenter}
-          zoom={5} // Increased zoom for better country view
+          zoom={5}
           onLoad={onLoad}
-          // onDragEnd={handleMapDragEnd}
           options={{
             streetViewControl: false,
             mapTypeControl: false,

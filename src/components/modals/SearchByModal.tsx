@@ -120,7 +120,7 @@ export default function SearchByModal({
             "Could not fetch coordinates. Please try a valid ZIP."
         );
       }
-    } catch (error) {
+    } catch {
       toast.error(
         t("zipcode_error") ||
           "Could not fetch coordinates. Please try a valid ZIP."
