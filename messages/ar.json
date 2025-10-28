@@ -204,7 +204,8 @@
     "verified_success": "تم التحقق بنجاح",
     "current_password": "كلمة المرور الحالية",
     "new_password": "كلمة المرور الجديدة",
-    "confirm_new_password": "تأكيد كلمة المرور الجديدة"
+    "confirm_new_password": "تأكيد كلمة المرور الجديدة",
+    "search_country": "ابحث عن دولة..."
   },
   "contact": {
     "full_name": "الاسم الكامل",

@@ -114,6 +114,7 @@ export default function EditProfileForm({
         />
 
         <InputField
+          disabled={true}
           label={t("email")}
           type="email"
           id="email"
@@ -122,7 +123,6 @@ export default function EditProfileForm({
           error={errors.email?.message ? t(errors.email?.message) : undefined}
         />
 
-       
         <Controller
           name="phone"
           control={methods.control}

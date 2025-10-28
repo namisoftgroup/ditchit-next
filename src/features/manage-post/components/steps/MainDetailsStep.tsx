@@ -74,7 +74,6 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
     ]);
     if (isValid) next();
   };
-  console.log("countries :", countries, countryData, countryId);
 
   return (
     <form className="flex flex-col gap-[16px]" onSubmit={handleSubmit}>

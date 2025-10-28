@@ -22,7 +22,8 @@ export default function Sidebar() {
       router.push("/");
     }
   };
-
+  // console.log(user);
+  
   const onSubmit = async () => {
     if (!navigator.onLine) {
       toast.error(t("error.offline"));

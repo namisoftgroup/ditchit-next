@@ -127,19 +127,9 @@ export default function LanguagesAndCountries({
       observerRef.current = new IntersectionObserver(
         (entries) => {
           const target = entries[0];
-
-          console.log("Observer triggered:", {
-            isIntersecting: target.isIntersecting,
-            hasNextPage,
-            isFetchingNextPage,
-            scrollHeight: scrollContainer.scrollHeight,
-            scrollTop: scrollContainer.scrollTop,
-            clientHeight: scrollContainer.clientHeight,
-          });
-
+          
           // لو العنصر ظاهر وفيه صفحة تانية ومش بنحمل دلوقتي
           if (target.isIntersecting && hasNextPage && !isFetchingNextPage) {
-            console.log("✅ Fetching next page of countries...");
             fetchNextPage();
           }
         },
@@ -154,7 +144,7 @@ export default function LanguagesAndCountries({
       const sentinel = scrollContainer.querySelector("[data-sentinel]");
       if (sentinel) {
         observerRef.current.observe(sentinel);
-        console.log("Observer attached to sentinel");
+        // console.log("Observer attached to sentinel");
       }
     }, 100); // delay صغير عشان الـ DOM يكون جاهز
 
@@ -186,14 +176,6 @@ export default function LanguagesAndCountries({
   function revalidateQueries() {
     queryClient.clear();
   }
-
-  console.log("📊 Pagination data:", {
-    totalCountries: allCountries.length,
-    pages: data?.pages.length,
-    hasNextPage,
-    isFetchingNextPage,
-    isLoading,
-  });
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>

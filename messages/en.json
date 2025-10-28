@@ -204,7 +204,8 @@
     "zipcode_error": "No location found with this zip code", 
     "current_password":"Current Password",
     "new_password":"New Password",
-    "confirm_new_password":"Confirm New Password"
+    "confirm_new_password":"Confirm New Password",
+    "search_country":"Search Country..."
   },
   "contact": {
     "full_name": "Full Name",
