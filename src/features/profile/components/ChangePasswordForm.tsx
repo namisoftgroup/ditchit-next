@@ -1,15 +1,20 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {  FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { changePasswordSchema, passwordSchema } from "../passwordSchema";
 import InputField from "@/components/shared/InputField";
+import clientAxios from "@/lib/axios/clientAxios";
+import { toast } from "sonner";
+import { API_URL } from "@/utils/constants";
+import { useState } from "react";
 
 export default function ChangePasswordForm() {
   // const { user, setUser } = useAuthStore();
-  // const [isPending, setIsPending] = useState(false);
+  const [isPending, setIsPending] = useState(false);
   const t = useTranslations("auth");
+  // const router = useRouter();
 
   const methods = useForm<changePasswordSchema>({
     mode: "onChange",
@@ -20,7 +25,31 @@ export default function ChangePasswordForm() {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = methods;
+
+  const onSubmit = async (values: changePasswordSchema) => {
+    setIsPending(true);
+
+    try {
+      const res = await clientAxios.post(API_URL + "/auth/updatePassword", {
+        password: values.new_password,
+        type: "change",
+      });
+
+      if (res.data.code === 200) {
+        toast.success(t("password_updated"));
+        reset();
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(t("something_went_wrong"));
+    } finally {
+      setIsPending(false);
+    }
+  };
 
   // const handleFormSubmit = async (data: changePasswordSchema) => {
   //   setIsPending(true);
@@ -55,16 +84,13 @@ export default function ChangePasswordForm() {
   //     setIsPending(false);
   //   }
   // };
-  const handleFormSubmit = (data: changePasswordSchema) => {
-    console.log(data);
-  };
   return (
     <FormProvider {...methods}>
       <form
-        className="flex flex-col gap-[16px]"
-        onSubmit={handleSubmit(handleFormSubmit)}
+        className="flex flex-col gap-[16px] mt-4 "
+        onSubmit={handleSubmit(onSubmit)}
       >
-        <InputField
+        {/* <InputField
           label={t("current_password")}
           type="password"
           id="current_password"
@@ -75,7 +101,7 @@ export default function ChangePasswordForm() {
               ? t(errors.current_password?.message)
               : undefined
           }
-        />
+        /> */}
         <InputField
           label={t("new_password")}
           type="password"
@@ -105,10 +131,9 @@ export default function ChangePasswordForm() {
         <button
           type="submit"
           className="customBtn rounded-full w-fit px-12 ms-auto me-0 mt-4"
-          // disabled={isPending}
+          disabled={isPending}
         >
-          {/* {isPending ? t("loading") : t("update")} */}
-          {t("update")}
+          {isPending ? t("loading") : t("update")}
         </button>
       </form>
     </FormProvider>

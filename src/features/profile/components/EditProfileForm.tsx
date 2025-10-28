@@ -93,7 +93,6 @@ export default function EditProfileForm({
       setIsPending(false);
     }
   };
-  console.log("user =========", user);
 
   return (
     <FormProvider {...methods}>

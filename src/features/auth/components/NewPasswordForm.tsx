@@ -32,11 +32,12 @@ export default function NewPasswordForm() {
     try {
       const res = await clientAxios.post(API_URL + "/auth/updatePassword", {
         password: values.password,
+        type: "reset",
       });
 
       if (res.data.code === 200) {
         toast.success(t("password_updated"));
-        router.push("/profile");
+        router.push("/login");
       } else {
         toast.error(res.data.message);
       }

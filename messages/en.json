@@ -80,7 +80,10 @@
     "new": "New",
     "used": "Used",
     "no_available": "No posts availble here yet.",
-    "no_available_text": "Come back soon to discover new and exciting content!"
+    "no_available_text": "Come back soon to discover new and exciting content!",
+    "all":"All",
+    "available":"Available",
+    "sold":"Sold"
   },
   "error": {
     "somthing_went_wrong": "Oops! Something went wrong",

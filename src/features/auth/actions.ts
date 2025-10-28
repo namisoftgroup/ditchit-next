@@ -95,7 +95,7 @@ export async function checkCodeAction(formData: FormData) {
     const responseData = response.data;
 
     if (responseData.code === 200) {
-      (await cookies()).set("token", responseData.data.auth.token, {
+      (await cookies()).set("tokenRestPass", responseData.data.auth.token, {
         path: "/",
         httpOnly: true,
         secure: true,

@@ -23,7 +23,6 @@ export function middleware(request: NextRequest) {
     "/create-post",
     "/edit-post",
     "/chats",
-    "/reset-password/new-password",
 
   ];
 

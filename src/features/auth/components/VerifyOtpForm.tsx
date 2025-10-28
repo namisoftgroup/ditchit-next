@@ -24,6 +24,7 @@ export default function VerifyOtpForm() {
 
   const { setUser, setToken } = useAuthStore((state) => state);
   const { email } = useResetPasswordStore((state) => state);
+  const url = window.location.href;
 
   useEffect(() => {
     if (!email) {
@@ -53,11 +54,16 @@ export default function VerifyOtpForm() {
       const res = await checkCodeAction(formData);
 
       if (res.code === 200) {
-        document.cookie =
-          "verifyEmail=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        // document.cookie =
+        //   "verifyEmail=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
         setUser(res.data.user);
         setToken(res.data.auth.token);
-        router.push("/reset-password/new-password");
+
+        if (url.includes("reset-password")) {
+          router.push("/reset-password/new-password");
+        } else if (url.includes("profile")) {
+          router.push("/profile/change-password");
+        }
         toast.success(t("verified_success"));
       } else {
         toast.error(res.message);
