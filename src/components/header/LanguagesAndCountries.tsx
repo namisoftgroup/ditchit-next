@@ -15,6 +15,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 import { User } from "@/types/user";
+import { useState } from "react";
 
 export default function LanguagesAndCountries({
   countries,
@@ -32,14 +33,23 @@ export default function LanguagesAndCountries({
 
   const [langCode, countryCode] = locale.split("-");
 
+  // Pagination state for countries list
+  const [countryPage, setCountryPage] = useState(0);
+  const pageSize = 10;
+  const totalCountryPages = Math.ceil(countries.length / pageSize);
+  const paginatedCountries = countries.slice(
+    countryPage * pageSize,
+    countryPage * pageSize + pageSize
+  );
+
   function changeLang(newLang: string) {
     if (!locale) return pathname;
     return `/${newLang}-${countryCode}${pathname}${queryString ? `?${queryString}` : ""}`;
   }
 
-  function changeCountry(countryCode: string) {
+  function changeCountry(newCountryCode: string) {
     if (!locale) return pathname;
-    return `/${langCode}-${countryCode}${pathname}${queryString ? `?${queryString}` : ""}`;
+    return `/${langCode}-${newCountryCode}${pathname}${queryString ? `?${queryString}` : ""}`;
   }
 
   function revalidateQueries() {
@@ -48,15 +58,14 @@ export default function LanguagesAndCountries({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-2 whitespace-nowrap">
+      <DropdownMenuTrigger className="flex items-center gap-2 whitespace-nowrap ">
         <Image
           src={
             countries.find((c) => c.code === countryCode)?.flag ??
             profileData?.country?.flag ??
-            countries.find((c) => c.code  === "US")?.flag ??
+            countries.find((c) => c.code === "US")?.flag ??
             "/placeholder-flag.png"
           }
-          
           width={24}
           height={16}
           alt="current country"
@@ -67,13 +76,14 @@ export default function LanguagesAndCountries({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="bg-[var(--whiteColor)] shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[99999] min-w-[200px] flex gap-2 border border-[var(--lightBorderColor)]">
+        {/* === Countries List === */}
         <div>
           <h6 className="px-[16px] py-[8px] text-[var(--mainColor)]">
             {t("country")}
           </h6>
 
-          <div className="max-h-[360px] overflow-y-auto flex-col">
-            {countries.map((country) => (
+          <div className="max-h-[360px] w-[200px] overflow-y-auto flex-col">
+            {paginatedCountries.map((country) => (
               <DropdownMenuItem key={country.id} className="p-0">
                 <Link
                   href={changeCountry(country.code)}
@@ -94,11 +104,46 @@ export default function LanguagesAndCountries({
                 </Link>
               </DropdownMenuItem>
             ))}
+
+            {/* Pagination controls */}
+            {totalCountryPages > 1 && (
+              <div className="flex justify-between items-center px-3 py-2 text-sm  ">
+                <button
+                  className="px-2 py-1 disabled:opacity-40"
+                  disabled={countryPage === 0}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setCountryPage((p) => Math.max(0, p - 1));
+                  }}
+                >
+                  ‹
+                </button>
+                <span>
+                  {countryPage + 1} / {totalCountryPages}
+                </span>
+                <button
+                  className="px-2 py-1 disabled:opacity-40"
+                  disabled={countryPage === totalCountryPages - 1}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setCountryPage((p) =>
+                      Math.min(totalCountryPages - 1, p + 1)
+                    );
+                  }}
+                >
+                  ›
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
-        <span className=" block w-[1px] h-[400px] bg-[var(--lightBorderColor)]" />
+        {/* Divider */}
+        <span className="block w-[1px] h-[400px] bg-[var(--lightBorderColor)]" />
 
+        {/* === Languages List === */}
         <div>
           <h6 className="px-[16px] py-[8px] text-[var(--mainColor)]">
             {t("language")}

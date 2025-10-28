@@ -235,7 +235,7 @@ import { defineRouting } from "next-intl/routing";
 //   "ZW",
 // ];
 
-const ISO_CODES = ["US", "CA", "IN"];
+const ISO_CODES = ["US", "CA", "IN", "AL"];
 
 const LOCALES = [
   "af",
