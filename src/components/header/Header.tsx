@@ -25,7 +25,7 @@ export default async function Header({ locale, data }: HeaderProps) {
   const profileData = await getProfile();
   const categories = categoriesRes.data;
   const countries = countriesRes.data.data;
-  // console.log("countriesRes", locale, countriesRes , countries);
+  console.log("countriesRes", locale, countriesRes , countries);
  
   return (
     <>

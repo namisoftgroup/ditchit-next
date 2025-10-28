@@ -7,6 +7,15 @@ import { toast } from "sonner";
 import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
 import { useTranslations, useLocale } from "next-intl";
 import { Country } from "@/types/country";
+type GeocodeCacheEntry = {
+  lat?: number;
+  lng?: number;
+  latitude?: number;
+  longitude?: number;
+  address?: string;
+  results?: google.maps.GeocoderResult[];
+  status?: google.maps.GeocoderStatus;
+};
 
 const containerStyle = {
   borderRadius: "16px",
@@ -144,7 +153,8 @@ export default function ZipMapSearch({
   // CORE FUNCTION: Convert coordinates to address & validate country
   // ============================================
   // Cache for geocoding results
-  const geocodeCache = useRef<Record<string, any>>({});
+  const geocodeCache = useRef<Record<string, GeocodeCacheEntry>>({});
+
   // Timestamp for throttling
   const lastGeocodeTimestampRef = useRef<number>(0);
   // Minimum time between geocode requests (in ms)
@@ -175,8 +185,8 @@ export default function ZipMapSearch({
         if (geocodeCache.current[cacheKey] && !preFetchedAddress) {
           const cachedResult = geocodeCache.current[cacheKey];
           handleGeocodeResult(
-            cachedResult.results,
-            cachedResult.status,
+            cachedResult.results ?? null,
+            cachedResult.status ?? google.maps.GeocoderStatus.ERROR,
             roundedLat,
             roundedLng,
             cachedResult.address
@@ -367,11 +377,13 @@ export default function ZipMapSearch({
     const cacheKey = `zip_${zipCode}`;
     if (geocodeCache.current[cacheKey]) {
       const cachedResult = geocodeCache.current[cacheKey];
-      updateAddressFromCoords(
-        cachedResult.latitude,
-        cachedResult.longitude,
-        cachedResult.address
-      );
+      if (cachedResult.latitude !== undefined && cachedResult.longitude !== undefined) {
+        updateAddressFromCoords(
+          cachedResult.latitude,
+          cachedResult.longitude,
+          cachedResult.address
+        );
+      }
       setLastZip(zipCode);
       return;
     }
@@ -431,10 +443,10 @@ export default function ZipMapSearch({
       const cacheKey = `search_${searchValue.trim()}`;
       if (geocodeCache.current[cacheKey]) {
         const cachedResult = geocodeCache.current[cacheKey];
-        const lat = cachedResult.lat;
-        const lng = cachedResult.lng;
-        updateAddressFromCoords(lat, lng, cachedResult.address);
-        return;
+        if (typeof cachedResult.lat === 'number' && typeof cachedResult.lng === 'number') {
+          updateAddressFromCoords(cachedResult.lat, cachedResult.lng, cachedResult.address);
+          return;
+        }
       }
 
       // Only proceed if we're not updating and enough time has passed

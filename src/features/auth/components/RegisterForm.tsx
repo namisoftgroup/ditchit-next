@@ -27,7 +27,9 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
   const t = useTranslations("auth");
   const countryId = getCookie("countryId");
 
-  const methods = useForm<registerFormValues>({
+  const methods = useForm<
+    registerFormValues & { country_changed?: number }
+  >({
     mode: "onChange",
     resolver: zodResolver(registerSchema),
   });
@@ -137,7 +139,6 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
                 field.onChange(val);
                 // Force re-render of map when country changes
                 // Force re-render of map when country changes
-                // @ts-ignore
                 setValue("country_changed", Date.now());
               }}
               options={countries.map((country) => ({
@@ -177,7 +178,6 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
 
         <input type="hidden" {...register("latitude")} />
         <input type="hidden" {...register("longitude")} />
-        {/* @ts-ignore */}
         <input type="hidden" {...register("country_changed")} />
         <div
           className={`${methods.watch("country_id") === "1" ? "hidden" : ""}`}

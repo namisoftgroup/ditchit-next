@@ -74,7 +74,9 @@ export default function PostsList() {
           {/* <ListFilter width={16} height={16} /> */}
           <select
             value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value as "all" | "available" | "sold")}
+            onChange={(e) =>
+              setStatusFilter(e.target.value as "all" | "available" | "sold")
+            }
             className="border border-gray-300  px-2 py-1 text-[14px] focus:outline-none rounded-xl"
           >
             <option value="all">{t("common.all")}</option>
