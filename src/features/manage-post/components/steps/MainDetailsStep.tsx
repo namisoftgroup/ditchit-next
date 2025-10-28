@@ -29,9 +29,22 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
 
   const t = useTranslations("manage_post");
   const [countryId, setCountryId] = useState<string>(
-    getCookie("countryId") || ""
+    getCookie("countryId") || watch("country_id") || ""
   );
   const [countryData, setCountryData] = useState<Country | null>(null);
+  // Keep state in sync if country_id in form changes externally (e.g., editing post)
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (
+        name === "country_id" &&
+        value.country_id &&
+        value.country_id !== countryId
+      ) {
+        setCountryId(value.country_id as string);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, countryId]);
 
   useEffect(() => {
     if (countryId) {
@@ -61,6 +74,7 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
     ]);
     if (isValid) next();
   };
+  console.log("countries :", countries, countryData, countryId);
 
   return (
     <form className="flex flex-col gap-[16px]" onSubmit={handleSubmit}>
