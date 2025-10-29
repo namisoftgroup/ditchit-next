@@ -390,24 +390,24 @@ export default function LocationSearchMap({
   }, [searchQuery, handleSearch]);
 
   // Get current location from button
-  const handleGetCurrentLocation = useCallback(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const lat = pos.coords.latitude;
-          const lng = pos.coords.longitude;
-          const newPos = { lat, lng };
-          setMapCenter(newPos);
-          updateAddressFromCoords(lat, lng);
-        },
-        () => {
-          toast.error(
-            t("failed_to_get_location") || "Failed to get current location"
-          );
-        }
-      );
-    }
-  }, [t, updateAddressFromCoords]);
+  // const handleGetCurrentLocation = useCallback(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (pos) => {
+  //         const lat = pos.coords.latitude;
+  //         const lng = pos.coords.longitude;
+  //         const newPos = { lat, lng };
+  //         setMapCenter(newPos);
+  //         updateAddressFromCoords(lat, lng);
+  //       },
+  //       () => {
+  //         toast.error(
+  //           t("failed_to_get_location") || "Failed to get current location"
+  //         );
+  //       }
+  //     );
+  //   }
+  // }, [t, updateAddressFromCoords]);
 
   return (
     <div className="flex flex-col gap-3">

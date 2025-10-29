@@ -15,7 +15,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 import { User } from "@/types/user";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {  useEffect, useRef, useState } from "react";
 import useGetCountries from "@/hooks/useGetCountries";
 
 export default function LanguagesAndCountries({
@@ -33,70 +33,70 @@ export default function LanguagesAndCountries({
   const t = useTranslations("common");
   const [langCode, countryCode] = locale.split("-");
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [, setSearchQuery] = useState("");
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useGetCountries(langCode);
 
-  const fetchedCountries = data?.pages.flatMap((p) => p.data.data) ?? [];
-  const [filteredCountries, setFilteredCountries] = useState<Country[]>(fetchedCountries);
+  // const fetchedCountries = data?.pages.flatMap((p) => p.data.data) ?? [];
+  // const [, setFilteredCountries] = useState<Country[]>(fetchedCountries);
   
-  const searchCache = useRef<Record<string, { countries: Country[]; timestamp: number }>>({});
-  const isSearchingRef = useRef<boolean>(false);
-  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  // const searchCache = useRef<Record<string, { countries: Country[]; timestamp: number }>>({});
+  // const isSearchingRef = useRef<boolean>(false);
+  // const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Debounced search handler
-  const handleSearch = useCallback((query: string) => {
-    setSearchQuery(query);
+  // // Debounced search handler
+  // const handleSearch = useCallback((query: string) => {
+  //   setSearchQuery(query);
     
-    // Clear previous timeout
-    if (searchTimeoutRef.current) {
-      clearTimeout(searchTimeoutRef.current);
-    }
+  //   // Clear previous timeout
+  //   if (searchTimeoutRef.current) {
+  //     clearTimeout(searchTimeoutRef.current);
+  //   }
 
-    // If empty query, show all countries
-    if (!query.trim()) {
-      setFilteredCountries(fetchedCountries);
-      return;
-    }
+  //   // If empty query, show all countries
+  //   if (!query.trim()) {
+  //     setFilteredCountries(fetchedCountries);
+  //     return;
+  //   }
 
-    // Check cache first
-    const cacheKey = `search_${query.trim().toLowerCase()}`;
-    if (searchCache.current[cacheKey]) {
-      const cachedResult = searchCache.current[cacheKey];
-      // Only use cache if it's recent (less than 1 hour old)
-      if (Date.now() - cachedResult.timestamp < 3600000) {
-        setFilteredCountries(cachedResult.countries);
-        return;
-      }
-    }
+  //   // Check cache first
+  //   const cacheKey = `search_${query.trim().toLowerCase()}`;
+  //   if (searchCache.current[cacheKey]) {
+  //     const cachedResult = searchCache.current[cacheKey];
+  //     // Only use cache if it's recent (less than 1 hour old)
+  //     if (Date.now() - cachedResult.timestamp < 3600000) {
+  //       setFilteredCountries(cachedResult.countries);
+  //       return;
+  //     }
+  //   }
 
-    // Skip if we're already searching
-    if (isSearchingRef.current) {
-      return;
-    }
+  //   // Skip if we're already searching
+  //   if (isSearchingRef.current) {
+  //     return;
+  //   }
 
-    isSearchingRef.current = true;
+  //   isSearchingRef.current = true;
 
-    // Debounce the search
-    searchTimeoutRef.current = setTimeout(() => {
-      // Filter countries
-      const filtered = fetchedCountries.filter(country => 
-        country.title.toLowerCase().includes(query.toLowerCase()) ||
-        country.code.toLowerCase().includes(query.toLowerCase())
-      );
+  //   // Debounce the search
+  //   searchTimeoutRef.current = setTimeout(() => {
+  //     // Filter countries
+  //     const filtered = fetchedCountries.filter(country => 
+  //       country.title.toLowerCase().includes(query.toLowerCase()) ||
+  //       country.code.toLowerCase().includes(query.toLowerCase())
+  //     );
 
-      // Update state with filtered results
-      setFilteredCountries(filtered);
+  //     // Update state with filtered results
+  //     setFilteredCountries(filtered);
 
-      // Cache the result
-      searchCache.current[cacheKey] = {
-        countries: filtered,
-        timestamp: Date.now(),
-      };
+  //     // Cache the result
+  //     searchCache.current[cacheKey] = {
+  //       countries: filtered,
+  //       timestamp: Date.now(),
+  //     };
 
-      isSearchingRef.current = false;
-    }, 300);
-  }, [fetchedCountries]);
+  //     isSearchingRef.current = false;
+  //   }, 300);
+  // }, [fetchedCountries]);
 
   const allCountries = data?.pages.flatMap((p) => p.data.data) ?? [];
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
