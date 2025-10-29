@@ -49,9 +49,7 @@ export default function ZipMapSearch({
   );
   const [searchValue, setSearchValue] = useState("");
   const [lastZip, setLastZip] = useState("");
-  const [, setSelectCountryBounds] = useState(
-    country?.code || ""
-  );
+  const [, setSelectCountryBounds] = useState(country?.code || "");
   const [lastValidPosition, setLastValidPosition] = useState<{
     lat: number;
     lng: number;
@@ -136,7 +134,7 @@ export default function ZipMapSearch({
   // ============================================
   // CORE FUNCTION: Convert coordinates to address
   // ============================================
-  const geocodeCache = useRef<Record<string, any>>({});
+  const geocodeCache = useRef<Record<string, any>>({}); // eslint-disable-line @typescript-eslint/no-explicit-any
   const lastGeocodeTimestampRef = useRef<number>(0);
   const THROTTLE_DELAY = 1000;
 
@@ -203,7 +201,7 @@ export default function ZipMapSearch({
         isUpdatingRef.current = false;
       }
     },
-    [country?.code, lastValidAddress, lastValidPosition, setValue, t]
+    [country?.code, lastValidAddress, lastValidPosition, setValue, t] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   const handleGeocodeResult = useCallback(
@@ -271,7 +269,7 @@ export default function ZipMapSearch({
         setSearchValue(lastValidAddress);
       }
     },
-    [country?.code, lastValidAddress, lastValidPosition, setValue, t]
+    [country?.code, lastValidAddress, lastValidPosition, setValue, t] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   // ============================================
@@ -325,7 +323,7 @@ export default function ZipMapSearch({
         }
       );
     }
-  }, [country, countryId, isLoaded]);
+  }, [country, countryId, isLoaded]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ============================================
   // SECTION 6: Fetch coordinates from ZIP code

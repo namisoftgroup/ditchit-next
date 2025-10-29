@@ -43,9 +43,11 @@ type SearchCache = {
   };
 };
 
-export default function LocationSearchMap({ onChange, countryData }: Props) {
-  console.log(countryData);
-
+export default function LocationSearchMap({
+  defaultCountry,
+  onChange,
+  countryData,
+}: Props) {
   const { filter } = useHomeFilter();
   const [isLoaded, setIsLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
@@ -63,6 +65,7 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
   const searchCache = useRef<SearchCache>({});
   const lastGeocodeTimestampRef = useRef<number>(0);
   const isUpdatingRef = useRef<boolean>(false);
+  const prevSearchQueryRef = useRef<string>("");
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastDragPositionRef = useRef<{ lat: number; lng: number } | null>(null);
 
@@ -113,7 +116,6 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
   }, []);
-
   // Convert coordinates to address with country validation (with caching and throttling)
   const updateAddressFromCoords = useCallback(
     async (lat: number, lng: number, preFetchedAddress?: string) => {
@@ -220,49 +222,16 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
             isUpdatingRef.current = false;
           }
         );
-      } catch {
+      } catch (error) {
+        console.log(error);
         toast.error(t("geocode_failed") || "Failed to geocode location");
         revertToLastValid();
         isUpdatingRef.current = false;
       }
     },
-    [countryData?.code, onChange, t]
+    [countryData?.code, lastValidAddress, lastValidPosition, onChange, t] // eslint-disable-line react-hooks/exhaustive-deps
   );
-  useEffect(() => {
-    if (!countryData) return;
-
-    const newPos = {
-      lat: countryData.center_lat ?? 0,
-      lng: countryData.center_lng ?? 0,
-    };
-
-    // إعادة تعيين القيم مباشرة بدون الاعتماد على cache أو lastValid
-    setMapCenter(newPos);
-    setLastValidPosition(newPos);
-    setLastValidAddress("");
-    setSearchQuery("");
-
-    // إعادة تهيئة cache
-    geocodeCache.current = {};
-    searchCache.current = {};
-    lastDragPositionRef.current = null;
-
-    // تحديث Marker مباشرة
-    if (markerRef.current) {
-      markerRef.current.setPosition(newPos);
-    }
-
-    // تحديث الخريطة مباشرة
-    if (mapRef.current) {
-      mapRef.current.panTo(newPos);
-      mapRef.current.setZoom(5); // لو عايز تحدد zoom افتراضي
-    }
-
-    // تحديث العنوان من الإحداثيات مباشرة
-    updateAddressFromCoords(newPos.lat, newPos.lng);
-  }, [countryData, updateAddressFromCoords]);
-
-  // Get current location on mount
+  // Get current location
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -278,12 +247,16 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
         }
       );
     }
-  }, [countryData, updateAddressFromCoords]);
+  }, [countryData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Search with country validation, debouncing and caching
   const handleSearch = useCallback(() => {
     if (!searchQuery.trim()) return;
     if (!("google" in window) || !google.maps?.Geocoder) return;
+
+    // Skip if same as previous search
+    if (searchQuery === prevSearchQueryRef.current) return;
+    prevSearchQueryRef.current = searchQuery;
 
     // Check cache first
     const cacheKey = `search_${searchQuery.trim().toLowerCase()}`;
@@ -300,8 +273,11 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
       }
     }
 
-    // Skip if we're already updating
-    if (isUpdatingRef.current) {
+    // Skip if we're already updating or need to throttle
+    if (
+      isUpdatingRef.current ||
+      Date.now() - lastGeocodeTimestampRef.current < THROTTLE_DELAY
+    ) {
       return;
     }
 
@@ -332,12 +308,14 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
         }
         isUpdatingRef.current = false;
       });
-    } catch {
+    } catch (error) {
+      console.log(error);
+
       toast.error("Failed to geocode location");
       revertToLastValid();
       isUpdatingRef.current = false;
     }
-  }, [searchQuery, updateAddressFromCoords]);
+  }, [searchQuery, t, updateAddressFromCoords]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Revert to last valid position and address
   const revertToLastValid = useCallback(() => {
@@ -363,15 +341,17 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
       const lng = e.latLng?.lng();
 
       if (lat && lng) {
+        // Check if position has changed significantly (at least 0.0001 degree difference)
         const lastPos = lastDragPositionRef.current;
         if (
           lastPos &&
           Math.abs(lastPos.lat - lat) < 0.0001 &&
           Math.abs(lastPos.lng - lng) < 0.0001
         ) {
-          return;
+          return; // Skip if position hasn't changed enough
         }
 
+        // Update last position
         lastDragPositionRef.current = { lat, lng };
         updateAddressFromCoords(lat, lng);
       }
@@ -379,14 +359,33 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
     [updateAddressFromCoords]
   );
 
-  // Handle default country search
-  // useEffect(() => {
-  //   if (countryData && searchQuery !== countryData) {
-  //     setSearchQuery(countryData);
-  //   }
-  // }, [countryData]);
+  // // Handle map drag end with throttling
+  // const handleMapDragEnd = useCallback(() => {
+  //   const newCenter = mapRef.current?.getCenter();
+  //   if (newCenter) {
+  //     const lat = newCenter.lat();
+  //     const lng = newCenter.lng();
 
-  // Handle filter updates
+  //     // Check if position has changed significantly
+  //     const lastPos = lastDragPositionRef.current;
+  //     if (
+  //       lastPos &&
+  //       Math.abs(lastPos.lat - lat) < 0.0001 &&
+  //       Math.abs(lastPos.lng - lng) < 0.0001
+  //     ) {
+  //       return; // Skip if position hasn't changed enough
+  //     }
+
+  //     // Update last position
+  //     lastDragPositionRef.current = { lat, lng };
+  //     updateAddressFromCoords(lat, lng);
+  //   }
+  // }, [updateAddressFromCoords]);
+
+  useEffect(() => {
+    if (defaultCountry) handleSearch();
+  }, [defaultCountry, handleSearch]);
+
   useEffect(() => {
     if (filter.latitude && filter.longitude) {
       const newPos = {
@@ -398,15 +397,22 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
     }
   }, [filter.latitude, filter.longitude, updateAddressFromCoords]);
 
-  // Implement debounced search - allows free typing, searches after user stops
+  // Implement debounced search
   useEffect(() => {
+    // Clear any existing timeout
     if (searchTimeoutRef.current) {
       clearTimeout(searchTimeoutRef.current);
     }
 
-    if (!searchQuery.trim()) {
+    // Skip if search query is empty or same as previous
+    if (!searchQuery.trim() || searchQuery === prevSearchQueryRef.current) {
       return;
     }
+
+    // Set a timeout for debouncing
+    searchTimeoutRef.current = setTimeout(() => {
+      handleSearch();
+    }, 800); // 800ms debounce
 
     return () => {
       if (searchTimeoutRef.current) {
@@ -415,26 +421,6 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
     };
   }, [searchQuery, handleSearch]);
 
-  // Get current location from button
-  // const handleGetCurrentLocation = useCallback(() => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (pos) => {
-  //         const lat = pos.coords.latitude;
-  //         const lng = pos.coords.longitude;
-  //         const newPos = { lat, lng };
-  //         setMapCenter(newPos);
-  //         updateAddressFromCoords(lat, lng);
-  //       },
-  //       () => {
-  //         toast.error(
-  //           t("failed_to_get_location") || "Failed to get current location"
-  //         );
-  //       }
-  //     );
-  //   }
-  // }, [t, updateAddressFromCoords]);
-
   return (
     <div className="flex flex-col gap-3">
       <div className="relative w-full">
@@ -442,19 +428,11 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
           placeholder={t("search")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-          className="pr-20 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
+          className="pr-10 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
         />
-
-        {/* Search Icon */}
         <Search
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
           onClick={handleSearch}
-          size={20}
         />
       </div>
 
@@ -462,8 +440,9 @@ export default function LocationSearchMap({ onChange, countryData }: Props) {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={mapCenter}
-          zoom={5}
+          zoom={5} // Increased zoom for better country view
           onLoad={onLoad}
+          // onDragEnd={handleMapDragEnd}
           options={{
             streetViewControl: false,
             mapTypeControl: false,

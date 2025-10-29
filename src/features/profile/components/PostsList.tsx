@@ -28,7 +28,7 @@ export default function PostsList() {
     }
 
     setFilteredPosts(list);
-  }, [statusFilter]);
+  }, [statusFilter]); // eslint-disable-line react-hooks/exhaustive-deps
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {

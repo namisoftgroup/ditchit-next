@@ -16,6 +16,7 @@
 // import { useQueryClient } from "@tanstack/react-query";
 // import { User } from "@/types/user";
 // import { getCookie } from "@/lib/utils";
+// import { useState, useEffect } from "react";
 
 // export default function LanguagesAndCountries({
 //   countries,
@@ -31,34 +32,50 @@
 //   const queryClient = useQueryClient();
 //   const t = useTranslations("common");
 
-//   const currentCountryFlag = (() => {
-//     if (!profileData) {
-//       return (
+//   const [currentCountryFlag, setCurrentCountryFlag] = useState<string>(
+//     countries.find((c) => c.code === "US")?.flag ?? "/placeholder-flag.png"
+//   );
+
+//   useEffect(() => {
+//     const updateFlag = () => {
+//       if (!profileData) {
+//         setCurrentCountryFlag(
+//           countries.find((c) => c.code === "US")?.flag ??
+//             "/placeholder-flag.png"
+//         );
+//         return;
+//       }
+
+//       const countryFromCookie = getCookie("countryId");
+//       if (countryFromCookie) {
+//         const countryByCookie = countries.find(
+//           (c) => c.id?.toString() === countryFromCookie
+//         );
+//         if (countryByCookie?.flag) {
+//           setCurrentCountryFlag(countryByCookie.flag);
+//           return;
+//         }
+//       }
+
+//       const countryFromProfile = countries.find(
+//         (c) => c.id === Number(profileData.country_id)
+//       );
+//       if (countryFromProfile?.flag) {
+//         setCurrentCountryFlag(countryFromProfile.flag);
+//         return;
+//       }
+
+//       setCurrentCountryFlag(
 //         countries.find((c) => c.code === "US")?.flag ?? "/placeholder-flag.png"
 //       );
-//     }
+//     };
 
-//     const countryFromCookie = getCookie("countryId");
-//     console.log("countryFromCookie", countryFromCookie);
+//     updateFlag();
 
-//     if (countryFromCookie) {
-//       const countryByCookie = countries.find(
-//         (c) => c.id?.toString() === countryFromCookie
-//       );
-//       console.log(countryByCookie?.flag);
-
-//       if (countryByCookie?.flag) return countryByCookie.flag;
-//     }
-
-//     const countryFromProfile = countries.find(
-//       (c) => c.id === Number(profileData.country_id)
-//     );
-//     if (countryFromProfile?.flag) return countryFromProfile.flag;
-
-//     return (
-//       countries.find((c) => c.code === "US")?.flag ?? "/placeholder-flag.png"
-//     );
-//   })();
+//     // مراقبة الكوكيز لو اتغيرت
+//     const interval = setInterval(updateFlag, 2000); // كل ثانيتين
+//     return () => clearInterval(interval);
+//   }, [countries, profileData]);
 
 //   function changeLang(newLang: string) {
 //     return `/${newLang}${pathname}${queryString ? `?${queryString}` : ""}`;
@@ -122,7 +139,7 @@ import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 import { User } from "@/types/user";
 import { getCookie } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function LanguagesAndCountries({
   countries,
@@ -143,44 +160,38 @@ export default function LanguagesAndCountries({
   );
 
   useEffect(() => {
-    const updateFlag = () => {
-      if (!profileData) {
-        setCurrentCountryFlag(
-          countries.find((c) => c.code === "US")?.flag ??
-            "/placeholder-flag.png"
-        );
-        return;
-      }
+    const countryFromCookie = getCookie("countryId");
+    let selectedCountry: Country | undefined;
 
-      const countryFromCookie = getCookie("countryId");
-      if (countryFromCookie) {
-        const countryByCookie = countries.find(
-          (c) => c.id?.toString() === countryFromCookie
-        );
-        if (countryByCookie?.flag) {
-          setCurrentCountryFlag(countryByCookie.flag);
-          return;
-        }
-      }
+    /**
+     * ✅ Selection priority:
+     * 1️⃣ User exists + cookie exists => use cookie
+     * 2️⃣ User exists + no cookie => use user country
+     * 3️⃣ No user + cookie exists => use cookie
+     * 4️⃣ No user + no cookie => default to US
+     */
 
-      const countryFromProfile = countries.find(
+    if (profileData && countryFromCookie) {
+      // user + cookie → use cookie
+      selectedCountry = countries.find(
+        (c) => c.id?.toString() === countryFromCookie
+      );
+    } else if (profileData && !countryFromCookie) {
+      // user + no cookie → use user's profile country
+      selectedCountry = countries.find(
         (c) => c.id === Number(profileData.country_id)
       );
-      if (countryFromProfile?.flag) {
-        setCurrentCountryFlag(countryFromProfile.flag);
-        return;
-      }
-
-      setCurrentCountryFlag(
-        countries.find((c) => c.code === "US")?.flag ?? "/placeholder-flag.png"
+    } else if (!profileData && countryFromCookie) {
+      // no user + cookie → use cookie
+      selectedCountry = countries.find(
+        (c) => c.id?.toString() === countryFromCookie
       );
-    };
+    } else {
+      // no user + no cookie → default to US
+      selectedCountry = countries.find((c) => c.code === "US");
+    }
 
-    updateFlag();
-
-    // مراقبة الكوكيز لو اتغيرت
-    const interval = setInterval(updateFlag, 2000); // كل ثانيتين
-    return () => clearInterval(interval);
+    setCurrentCountryFlag(selectedCountry?.flag ?? "/placeholder-flag.png");
   }, [countries, profileData]);
 
   function changeLang(newLang: string) {
@@ -215,7 +226,7 @@ export default function LanguagesAndCountries({
             <DropdownMenuItem key={code} className="p-0">
               <Link
                 href={changeLang(code)}
-                onClick={() => revalidateQueries()}
+                onClick={revalidateQueries}
                 className="flex items-center gap-2 whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-3 py-2 text-[14px] w-full rounded-[8px]"
               >
                 {name}
