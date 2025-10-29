@@ -7,15 +7,15 @@ import ChatForm from "@/features/chat/components/ChatForm";
 interface PageProps {
   params: Promise<{
     roomId: string;
-    "country-locale": string;
+    locale: string;
   }>;
 }
 
 export default async function page({ params }: PageProps) {
   const id = (await params).roomId;
-  const { "country-locale": fullLocale } = await params;
-  const lang = fullLocale.split("-")[0];
-  const { data: questions } = await getQuestions(lang);
+  const { locale } = await params;
+
+  const { data: questions } = await getQuestions(locale);
 
   const {
     data: { messages, room },

@@ -5,12 +5,10 @@ import Image from "next/image";
 export default async function Page({
   params,
 }: {
-  params: Promise<{ "country-locale": string }>;
+  params: Promise<{ locale: string }>;
 }) {
-  const { "country-locale": fullLocale } = await params;
-  const lang = fullLocale.split("-")[0];
-  
-  const { data: categories } = await getCategories(lang);
+  const { locale } = await params;
+  const { data: categories } = await getCategories(locale);
 
   return (
     <div className="container py-5">

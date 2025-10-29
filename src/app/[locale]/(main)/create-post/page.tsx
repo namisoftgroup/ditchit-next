@@ -5,13 +5,12 @@ export default async function page({
   params,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-  params: Promise<{ "country-locale": string }>;
+  params: Promise<{ locale: string }>;
 }) {
   const sParams = await searchParams;
   const type = sParams.type as string;
 
-  const { "country-locale": fullLocale } = await params;
-  const lang = fullLocale.split("-")[0];
+  const { locale } = await params;
 
-  return <PostFormWrapper type={type} lang={lang} />;
+  return <PostFormWrapper type={type} lang={locale} />;
 }

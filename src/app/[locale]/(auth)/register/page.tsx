@@ -6,16 +6,15 @@ import { getCountries } from "@/services/getCountries";
 export default async function Page({
   params,
 }: {
-  params: Promise<{ "country-locale": string }>;
+  params: Promise<{ locale: string }>;
 }) {
-  const { "country-locale": fullLocale } = await params;
-  const lang = fullLocale.split("-")[0];
+  const { locale } = await params;
 
   const t = await getTranslations("common");
-  
-  const countriesRes = await getCountries(lang);
+
+  const countriesRes = await getCountries(locale);
   const countries = countriesRes.data.data;
-    
+
   return (
     <>
       <PageBanner

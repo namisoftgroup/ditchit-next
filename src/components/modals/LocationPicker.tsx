@@ -10,7 +10,7 @@ import { Country } from "@/types/country";
 import { toast } from "sonner";
 
 const LIBRARIES = ["places"] as const;
-const THROTTLE_DELAY = 1000; // 1 second throttle for API calls
+const THROTTLE_DELAY = 1000;
 
 const containerStyle = {
   borderRadius: "16px",
@@ -43,11 +43,9 @@ type SearchCache = {
   };
 };
 
-export default function LocationSearchMap({
-  defaultCountry,
-  onChange,
-  countryData,
-}: Props) {
+export default function LocationSearchMap({ onChange, countryData }: Props) {
+  console.log(countryData);
+
   const { filter } = useHomeFilter();
   const [isLoaded, setIsLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
@@ -230,6 +228,39 @@ export default function LocationSearchMap({
     },
     [countryData?.code, onChange, t]
   );
+  useEffect(() => {
+    if (!countryData) return;
+
+    const newPos = {
+      lat: countryData.center_lat ?? 0,
+      lng: countryData.center_lng ?? 0,
+    };
+
+    // إعادة تعيين القيم مباشرة بدون الاعتماد على cache أو lastValid
+    setMapCenter(newPos);
+    setLastValidPosition(newPos);
+    setLastValidAddress("");
+    setSearchQuery("");
+
+    // إعادة تهيئة cache
+    geocodeCache.current = {};
+    searchCache.current = {};
+    lastDragPositionRef.current = null;
+
+    // تحديث Marker مباشرة
+    if (markerRef.current) {
+      markerRef.current.setPosition(newPos);
+    }
+
+    // تحديث الخريطة مباشرة
+    if (mapRef.current) {
+      mapRef.current.panTo(newPos);
+      mapRef.current.setZoom(5); // لو عايز تحدد zoom افتراضي
+    }
+
+    // تحديث العنوان من الإحداثيات مباشرة
+    updateAddressFromCoords(newPos.lat, newPos.lng);
+  }, [countryData, updateAddressFromCoords]);
 
   // Get current location on mount
   useEffect(() => {
@@ -349,11 +380,11 @@ export default function LocationSearchMap({
   );
 
   // Handle default country search
-  useEffect(() => {
-    if (defaultCountry && searchQuery !== defaultCountry) {
-      setSearchQuery(defaultCountry);
-    }
-  }, [defaultCountry]);
+  // useEffect(() => {
+  //   if (countryData && searchQuery !== countryData) {
+  //     setSearchQuery(countryData);
+  //   }
+  // }, [countryData]);
 
   // Handle filter updates
   useEffect(() => {
@@ -377,11 +408,6 @@ export default function LocationSearchMap({
       return;
     }
 
-    // Set a timeout for debouncing - only search after user stops typing
-    // searchTimeoutRef.current = setTimeout(() => {
-    //   handleSearch();
-    // }, 5000); // 800ms debounce
-
     return () => {
       if (searchTimeoutRef.current) {
         clearTimeout(searchTimeoutRef.current);
@@ -390,24 +416,24 @@ export default function LocationSearchMap({
   }, [searchQuery, handleSearch]);
 
   // Get current location from button
-  const handleGetCurrentLocation = useCallback(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const lat = pos.coords.latitude;
-          const lng = pos.coords.longitude;
-          const newPos = { lat, lng };
-          setMapCenter(newPos);
-          updateAddressFromCoords(lat, lng);
-        },
-        () => {
-          toast.error(
-            t("failed_to_get_location") || "Failed to get current location"
-          );
-        }
-      );
-    }
-  }, [t, updateAddressFromCoords]);
+  // const handleGetCurrentLocation = useCallback(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (pos) => {
+  //         const lat = pos.coords.latitude;
+  //         const lng = pos.coords.longitude;
+  //         const newPos = { lat, lng };
+  //         setMapCenter(newPos);
+  //         updateAddressFromCoords(lat, lng);
+  //       },
+  //       () => {
+  //         toast.error(
+  //           t("failed_to_get_location") || "Failed to get current location"
+  //         );
+  //       }
+  //     );
+  //   }
+  // }, [t, updateAddressFromCoords]);
 
   return (
     <div className="flex flex-col gap-3">
@@ -430,22 +456,6 @@ export default function LocationSearchMap({
           onClick={handleSearch}
           size={20}
         />
-
-        {/* Current Location Icon */}
-        {/* <button
-          type="button"
-          onClick={handleGetCurrentLocation}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-500 transition-colors"
-          title={ "Use current location"}
-        >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm0-6a1 1 0 100-2 1 1 0 000 2z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button> */}
       </div>
 
       {isLoaded && window.google && (

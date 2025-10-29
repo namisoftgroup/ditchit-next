@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Search, MapPin } from "lucide-react";
 import { useHomeFilter } from "@/features/listing/store";
 import { useRouter } from "next/navigation";
@@ -15,11 +15,11 @@ import { getCookie } from "@/lib/utils";
 export default function LocationSearch({
   hideSm,
   countries,
-  profileData
+  profileData,
 }: {
   hideSm: boolean;
   countries: Country[];
-  profileData: User | null
+  profileData: User | null;
 }) {
   const { filter } = useHomeFilter();
   const [show, setShow] = useState(false);
@@ -27,6 +27,17 @@ export default function LocationSearch({
 
   const router = useRouter();
   const t = useTranslations("header");
+
+  const [currentCountry, setCurrentCountry] = useState<string>("us");
+
+  useEffect(() => {
+    if (profileData) {
+      const cookieCountry = getCookie("countryId");
+      setCurrentCountry(cookieCountry || profileData.country_id || "us");
+    } else {
+      setCurrentCountry("us");
+    }
+  }, [profileData]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,7 +48,7 @@ export default function LocationSearch({
       router.push(`/posts?search=${encodeURIComponent(searchQuery)}`);
     }
   };
-    // ✅ استخدم useMemo لتجنب إعادة إنشاء array في كل render
+
   const memoizedCountries = useMemo(() => countries || [], [countries]);
   const memoizedProfileData = useMemo(() => profileData || null, [profileData]);
 
@@ -48,7 +59,10 @@ export default function LocationSearch({
       }`}
     >
       <div className="flex items-center gap-8 w-full md:flex-row flex-row-reverse">
-        <LanguagesAndCountries countries={memoizedCountries} profileData={memoizedProfileData} />
+        <LanguagesAndCountries
+          countries={memoizedCountries}
+          profileData={memoizedProfileData}
+        />
 
         <form
           className="flex-1 m-0 mb-0 min-w-[250px] relative md:bg-[#f3f3f3] bg-[#fff] border border-[#e6e6e6] rounded-full"
@@ -84,13 +98,10 @@ export default function LocationSearch({
             {t("current_location")}
           </p>
           <h4 className="text-[var(--darkColor)] capitalize overflow-hidden [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] text-[16px]">
-            {filter.address === "" 
-              ? (() => {
-                  const countryId = getCookie("countryId");
-                  const country = countries.find(c => c.id === Number(countryId));
-                  return country ? country.title : "United States";
-                })()
-              : filter.address}
+            {filter.address
+              ? filter.address
+              : countries.find((c) => c.id === Number(currentCountry))?.title ||
+                "United States"}
           </h4>
         </div>
       </div>
@@ -98,11 +109,8 @@ export default function LocationSearch({
       <SearchByModal
         show={show}
         handleClose={() => setShow(false)}
-        handleZipSearch={() => {
-          setZipCodeSearch(true);
-          setShow(false);
-        }}
         countries={countries}
+        user={profileData}
       />
 
       <ZipSearch

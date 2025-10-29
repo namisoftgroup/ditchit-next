@@ -7,13 +7,12 @@ import ContactForm from "@/features/contact/ContactForm";
 export default async function page({
   params,
 }: {
-  params: Promise<{ "country-locale": string }>;
+  params: Promise<{ locale: string }>;
 }) {
-  const { "country-locale": fullLocale } = await params;
-  const lang = fullLocale.split("-")[0];
+  const { locale } = await params;
 
   const t = await getTranslations("common");
-  const { data } = await getSettings(lang);
+  const { data } = await getSettings(locale);
 
   return (
     <>

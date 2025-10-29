@@ -49,7 +49,7 @@ export default function ZipMapSearch({
   );
   const [searchValue, setSearchValue] = useState("");
   const [lastZip, setLastZip] = useState("");
-  const [selectCountryBounds, setSelectCountryBounds] = useState(
+  const [, setSelectCountryBounds] = useState(
     country?.code || ""
   );
   const [lastValidPosition, setLastValidPosition] = useState<{

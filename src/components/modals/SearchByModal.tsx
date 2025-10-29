@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Dialog,
   DialogContent,
@@ -19,29 +18,38 @@ import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
 import { toast } from "sonner";
 import { Country } from "@/types/country";
 import SelectField from "../shared/SelectField";
+import { getCookie, setCookie } from "@/lib/utils";
+import { User } from "@/types/user";
 import LocationSearchMap from "./LocationPicker";
-import { getCookie } from "@/lib/utils";
+import ZipMapSearch from "../shared/ZipMapSearch";
 
 interface SearchByModalProps {
   show: boolean;
   handleClose: () => void;
-  handleZipSearch: () => void;
   countries: Country[];
+  user: User | null;
 }
 
 export default function SearchByModal({
   show,
   handleClose,
   countries,
+  user,
 }: SearchByModalProps) {
   const t = useTranslations("common");
-  const countryId = getCookie("countryId");
+
+  // Determine initial country
+  const cookieCountry = getCookie("countryId");
+  const initialCountry =
+    cookieCountry ||
+    (user?.country_id
+      ? String(user?.country_id)
+      : String(countries[0]?.id ?? ""));
 
   const { filter, setFilter } = useHomeFilter();
   const [isPending, startTransition] = useTransition();
-  const [selectedCountry, setSelectedCountry] = useState<string>(
-    countryId ?? "1"
-  );
+  const [selectedCountry, setSelectedCountry] =
+    useState<string>(initialCountry);
   const selectedMethod = filter.delivery_method;
   const [selected, setSelected] = useState<{
     lat: number;
@@ -49,13 +57,16 @@ export default function SearchByModal({
     address?: string;
     kilometers: number;
   } | null>(null);
-  const [countryData, setCountryData] = useState<Country | null>(null);
+  const [countryData, setCountryData] = useState<Country | null>(
+    countries.find((el) => el.id === Number(initialCountry)) || null
+  );
 
+  // Handle filter updates
   const onUpdateFilter = ({ key, value }: { key: string; value: string }) => {
     setFilter({ [key]: value });
   };
 
-  // Cache for ZIP code lookups
+  // ZIP code logic
   const zipCodeCache = useRef<{
     [zipCode: string]: {
       latitude: number;
@@ -64,54 +75,39 @@ export default function SearchByModal({
       timestamp: number;
     };
   }>({});
-
-  // Throttling for ZIP code lookups
   const lastZipCodeRequestRef = useRef<number>(0);
   const zipCodeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const prevZipCodeRef = useRef<string>("");
 
   const fetchCoordinates = async (zipCode: string) => {
     if (!zipCode) return;
-
-    // Skip if same as previous ZIP code
     if (zipCode === prevZipCodeRef.current) return;
     prevZipCodeRef.current = zipCode;
 
-    // Check cache first
-    if (zipCodeCache.current[zipCode]) {
-      const cachedResult = zipCodeCache.current[zipCode];
-      // Only use cache if it's recent (less than 1 hour old)
-      if (Date.now() - cachedResult.timestamp < 3600000) {
-        setFilter({
-          latitude: String(cachedResult.latitude),
-          longitude: String(cachedResult.longitude),
-          address: cachedResult.address,
-        });
-        return;
-      }
-    }
-
-    // Throttle requests to prevent too many API calls
-    const now = Date.now();
-    if (now - lastZipCodeRequestRef.current < 1000) {
-      // 1 second throttle
+    if (
+      zipCodeCache.current[zipCode] &&
+      Date.now() - zipCodeCache.current[zipCode].timestamp < 3600000
+    ) {
+      const cached = zipCodeCache.current[zipCode];
+      setFilter({
+        latitude: String(cached.latitude),
+        longitude: String(cached.longitude),
+        address: cached.address,
+      });
       return;
     }
 
+    const now = Date.now();
+    if (now - lastZipCodeRequestRef.current < 1000) return;
     lastZipCodeRequestRef.current = now;
 
     try {
-      const result = await getCoordinates(String(zipCode));
+      const result = await getCoordinates(zipCode);
       if (result) {
-        // Cache the result
-        zipCodeCache.current[zipCode] = {
-          ...result,
-          timestamp: now,
-        };
-
+        zipCodeCache.current[zipCode] = { ...result, timestamp: now };
         setFilter({
-          latitude: result.latitude,
-          longitude: result.longitude,
+          latitude: String(result.latitude),
+          longitude: String(result.longitude),
           address: result.address,
         });
       } else {
@@ -132,63 +128,45 @@ export default function SearchByModal({
     const zipCode = e.target.value;
     setFilter({ zip_code: String(zipCode) });
 
-    // Clear any existing timeout
-    if (zipCodeTimeoutRef.current) {
-      clearTimeout(zipCodeTimeoutRef.current);
-    }
+    if (zipCodeTimeoutRef.current) clearTimeout(zipCodeTimeoutRef.current);
 
-    // Debounce ZIP code lookup
     zipCodeTimeoutRef.current = setTimeout(() => {
       fetchCoordinates(zipCode);
-    }, 800); // 800ms debounce
+    }, 800);
   };
 
-  // Cleanup function for timeouts
   useEffect(() => {
     return () => {
-      if (zipCodeTimeoutRef.current) {
-        clearTimeout(zipCodeTimeoutRef.current);
-      }
+      if (zipCodeTimeoutRef.current) clearTimeout(zipCodeTimeoutRef.current);
     };
   }, []);
 
+  // Save filters and cookie on Change button
   const handleSeeListings = () => {
-    // Clear any pending timeouts when saving
-    if (zipCodeTimeoutRef.current) {
-      clearTimeout(zipCodeTimeoutRef.current);
-    }
+    if (zipCodeTimeoutRef.current) clearTimeout(zipCodeTimeoutRef.current);
 
     startTransition(() => {
       let lat, lng, address;
-
-      // 🗺️ الحالة الأولى: لو المستخدم اختار من الخريطة
       if (selected && selected.lat && selected.lng) {
         lat = selected.lat;
         lng = selected.lng;
         address = selected.address;
-      }
-      // 📮 الحالة الثانية: لو المستخدم اختار بالدولة 1 (ZIP code)
-      else {
+      } else {
         lat = filter.latitude;
         lng = filter.longitude;
         address = filter.address;
       }
 
-      // حفظ الإحداثيات في الفلتر العام
-      setFilter({
-        latitude: String(lat),
-        longitude: String(lng),
-        address: address,
-      });
-
-      // حفظها في السيرفر أو الحالة العامة
+      setFilter({ latitude: String(lat), longitude: String(lng), address });
       saveLocationFilters({
         zip_code: String(filter.zip_code),
         latitude: String(lat),
         longitude: String(lng),
-        address: address,
+        address,
         kilometers: String(filter.kilometers),
       });
+
+      // Save cookie here
     });
 
     handleClose();
@@ -196,8 +174,7 @@ export default function SearchByModal({
 
   return (
     <Dialog open={show} onOpenChange={(isOpen) => !isOpen && handleClose()}>
-      <DialogContent className="max-w-md p-6 rounded-lg shadow-xl space-y-6 overflow-y-auto *:h-auto max-h-[95vh]">
-        {/* Header */}
+      <DialogContent className="max-w-md p-6 rounded-lg shadow-xl space-y-6 overflow-y-auto max-h-[95vh]">
         <DialogHeader className="relative">
           <DialogTitle className="text-[28px] font-bold">
             {t("location")}
@@ -205,9 +182,9 @@ export default function SearchByModal({
           <DialogClose className="absolute top-4 end-4 text-gray-400 hover:text-gray-600 focus:outline-none" />
         </DialogHeader>
 
+        {/* Delivery Methods */}
         <div className="flex flex-col gap-1">
           <label className="font-bold mb-2">{t("delivery_methods")}</label>
-
           <RadioGroup
             defaultValue={selectedMethod}
             onValueChange={(val) =>
@@ -217,8 +194,8 @@ export default function SearchByModal({
           >
             {SHIPPING_METHODS.map((item) => (
               <div
-                className="flex items-center gap-3 rtl:flex-row-reverse"
                 key={item.value}
+                className="flex items-center gap-3 rtl:flex-row-reverse"
               >
                 <RadioGroupItem
                   value={item.value}
@@ -231,130 +208,70 @@ export default function SearchByModal({
           </RadioGroup>
         </div>
 
+        {/* Country Select */}
         <SelectField
           label={t("country")}
           id="country_id"
           value={selectedCountry}
           onChange={(val) => {
             setSelectedCountry(val);
-            // ✅ فلترة الدولة المختارة من قائمة الدول
             const foundCountry =
               countries.find((el) => el.id === Number(val)) || null;
             setCountryData(foundCountry);
-
-            // ✅ لو الدولة المختارة ID = 1 (نظام ZIP)
-            if (val === "1") {
-              // نعمل reset للبيانات الخاصة بالخريطة
-              setSelected(null);
-
-              // ونمسح إحداثيات أي دولة تانية كانت محددة قبل كده
-              setFilter({
-                zip_code: "",
-                latitude: "",
-                longitude: "",
-                address: "",
-                kilometers: 60,
-              });
-            } else {
-              // ✅ لو اختار أي دولة تانية (خريطة)
-              // نعمل reset لبيانات ZIP code
-              setFilter({
-                zip_code: "",
-                latitude: "",
-                longitude: "",
-                address: "",
-                kilometers: 60,
-              });
-
-              // كمان نمسح أي بيانات سابقة من ZIP
-              setSelected({
-                lat: 0,
-                lng: 0,
-                address: "",
-                kilometers: 60,
-              });
-            }
+            setCookie("countryId", selectedCountry);
+            // reset map/search on country change
+            setSelected({ lat: 0, lng: 0, address: "", kilometers: 60 });
+            setFilter({
+              zip_code: "",
+              latitude: "",
+              longitude: "",
+              address: "",
+              kilometers: 60,
+            });
           }}
           options={countries.map((country) => ({
-            label: (country as { title?: string })?.title ?? "",
-            value: (country as { id?: number }).id?.toString() ?? "",
+            label: country.title ?? "",
+            value: country.id?.toString() ?? "",
           }))}
           placeholder={t("search")}
-          // error={!selectedCountry ? undefined : "error to selected country"}
         />
 
-        {selectedCountry ? (
-          selectedCountry === "1" ? (
-            <div className="flex flex-col gap-6">
-              <div className="grid w-full gap-1 relative">
-                <Label htmlFor="zip" className="font-bold mb-2">
-                  {t("enter_zip")}
-                </Label>
-                <Input
-                  id="zip"
-                  placeholder={t("enter_zip")}
-                  value={filter.zip_code}
-                  onChange={handleGetLocation}
-                  className="px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
-                />
-              </div>
-
-              <input
-                id="address"
-                readOnly
-                value={filter.address}
-                className="px-2 text-xs -mt-5 h-[28px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
+        {/* ZIP Code / Map */}
+        {selectedCountry === "1" ? (
+          <div className="flex flex-col gap-6">
+            <div className="grid w-full gap-1 relative">
+              <Label htmlFor="zip" className="font-bold mb-2">
+                {t("enter_zip")}
+              </Label>
+              <Input
+                id="zip"
+                placeholder={t("enter_zip")}
+                value={filter.zip_code}
+                onChange={handleGetLocation}
+                className="px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
               />
             </div>
-          ) : (
-            <>
-              <div className=" py-2 space-y-4">
-                <h1 className="font-semibold -mt-8 mb-0">{t("search")}</h1>
-                <LocationSearchMap
-                  countryData={countryData ?? undefined}
-                  defaultCountry={
-                    (selectedCountry &&
-                      countries.find((el) => el.id === Number(selectedCountry))
-                        ?.title) ||
-                    undefined
-                  }
-                  onChange={(pos) =>
-                    setSelected({ ...pos, kilometers: filter.kilometers ?? 60 })
-                  }
-                />
-                {/* []
-              {selected && (
-                <div className="text-sm bg-gray-50 p-3 rounded-lg">
-                  <p>
-                    <strong>Lat:</strong> {selected.lat}
-                  </p>
-                  <p>
-                    <strong>Lng:</strong> {selected.lng}
-                  </p>
-                  {selected.address && (
-                    <p>
-                      <strong>Address:</strong> {selected.address}
-                    </p>
-                  )}
-                </div>
-              )} */}
-              </div>
-            </>
-          )
-        ) : null}
-
-        {/*zip code delete */}
-        {/* <div className="flex flex-col gap-1">
-          <label className="font-bold mb-2">{t("zip_code")}</label>
-          <div
-            className="flex justify-between items-center border-0 cursor-pointer"
-            onClick={handleZipSearch}
-          >
-            <p className="text-sm text-dark">{filter.address}</p>
-            <span className="text-lg font-bold">&gt;</span>
+            <input
+              id="address"
+              readOnly
+              value={filter.address}
+              className="px-2 text-xs -mt-5 h-[28px] border-[var(--lightBorderColor)] border-t-0 border-r-0 border-l-0 shadow-none"
+            />
           </div>
-        </div> */}
+        ) : (
+          <div className="py-2 space-y-4">
+            <h1 className="font-semibold -mt-8 mb-0">{t("search")}</h1>
+           <LocationSearchMap
+              countryData={countryData ?? undefined}
+              onChange={(pos) =>
+                setSelected({ ...pos, kilometers: filter.kilometers ?? 60 })
+              }
+            />
+          
+          </div>
+        )}
 
+        {/* Distance Range */}
         <div className="flex flex-col gap-2">
           <label htmlFor="distanceRange" className="font-bold">
             {t("miles")}:
@@ -363,7 +280,6 @@ export default function SearchByModal({
             <input
               type="range"
               id="distanceRange"
-              name="distanceRange"
               min="0"
               max="100"
               step="1"
@@ -373,7 +289,7 @@ export default function SearchByModal({
               }
               className="flex-1 h-[10px] rounded-full bg-[#ddd] accent-[var(--mainColor)] appearance-none"
             />
-            <div className="relative min-w-[100px] px-6 py-2 bg-[var(--mainColor)] text-[var(--whiteColor)] rounded-md flex justify-center items-center gap-1 text-sm">
+            <div className="relative min-w-[100px] px-6 py-2 bg-[var(--mainColor)] text-white rounded-md flex justify-center items-center gap-1 text-sm">
               <span className="font-bold">
                 {filter.kilometers === 100
                   ? t("maximum")
@@ -384,6 +300,7 @@ export default function SearchByModal({
           </div>
         </div>
 
+        {/* Apply Button */}
         <div className="flex items-center gap-2 mb-0">
           <button
             className="w-full px-4 py-2 rounded-full bg-[var(--mainColor)] text-white font-medium"

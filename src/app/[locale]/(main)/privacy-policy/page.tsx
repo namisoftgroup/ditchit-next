@@ -3,12 +3,11 @@ import { getSettings } from "@/services/getSettings";
 export default async function page({
   params,
 }: {
-  params: Promise<{ "country-locale": string }>;
+  params: Promise<{ locale: string }>;
 }) {
-  const { "country-locale": fullLocale } = await params;
-  const lang = fullLocale.split("-")[0];
+  const { locale } = await params;
 
-  const { data } = await getSettings(lang);
+  const { data } = await getSettings(locale);
 
   return (
     <div
