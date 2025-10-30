@@ -21,11 +21,13 @@ import {
   useCallback,
 } from "react";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { Input } from "../ui/input";
 import { getCoordinates } from "@/utils/getCoordinatesByZipCode";
 import { toast } from "sonner";
 import { Country } from "@/types/country";
 import SelectField from "../shared/SelectField";
+import { getCountries } from "@/services/getCountries";
 import { getCookie, setCookie } from "@/lib/utils";
 import { User } from "@/types/user";
 import LocationSearchMap from "./LocationPicker";
@@ -44,6 +46,7 @@ export default function SearchByModal({
   user,
 }: SearchByModalProps) {
   const t = useTranslations("common");
+  const locale = useLocale();
 
   // -------------------------
   // Initial Country
@@ -61,10 +64,41 @@ export default function SearchByModal({
   const [selectedCountry, setSelectedCountry] =
     useState<string>(initialCountry);
 
-  // Memoize the country object to avoid causing loops on re-render
+  // Countries pagination state for Select
+  const [countryOptions, setCountryOptions] = useState<Country[]>(countries);
+  const [countryPage, setCountryPage] = useState<number>(1);
+  const [countriesHasMore, setCountriesHasMore] = useState<boolean>(true);
+  const [countriesLoading, setCountriesLoading] = useState<boolean>(false);
+
+  const loadMoreCountries = async () => {
+    if (countriesLoading || !countriesHasMore) return;
+    try {
+      setCountriesLoading(true);
+      const nextPage = countryPage + 1;
+      const res = await getCountries(locale, nextPage, 15);
+      const newItems = res.data?.data || [];
+
+      // Deduplicate by id
+      const existingIds = new Set(countryOptions.map((c) => c.id));
+      const merged = [
+        ...countryOptions,
+        ...newItems.filter((c) => !existingIds.has(c.id)),
+      ];
+      setCountryOptions(merged);
+      setCountryPage(nextPage);
+      setCountriesHasMore(Boolean(res.data?.next_page_url));
+    } catch (error) {
+      console.error("Failed to load more countries", error);
+      setCountriesHasMore(false);
+    } finally {
+      setCountriesLoading(false);
+    }
+  };
+
+  // Memoize selected country using the current paginated options
   const countryData = useMemo(
-    () => countries.find((el) => el.id === Number(selectedCountry)) || null,
-    [countries, selectedCountry]
+    () => countryOptions.find((el) => el.id === Number(selectedCountry)) || null,
+    [countryOptions, selectedCountry]
   );
 
   const [selectedLocation, setSelectedLocation] = useState<{
@@ -240,11 +274,14 @@ export default function SearchByModal({
           id="country_id"
           value={selectedCountry}
           onChange={handleCountryChange}
-          options={countries.map((c) => ({
+          options={countryOptions.map((c) => ({
             label: c.title || "",
             value: c.id?.toString() || "",
           }))}
           placeholder={t("search")}
+          onLoadMore={loadMoreCountries}
+          hasMore={countriesHasMore}
+          loading={countriesLoading}
         />
 
         {/* ZIP or Map */}
@@ -272,7 +309,7 @@ export default function SearchByModal({
         ) : (
           <div className="py-2 space-y-4">
             <h1 className="font-semibold -mt-8 mb-0">{t("search")}</h1>
-            {/* ✅ Enhanced map component */}
+            {/*  Enhanced map component */}
             <LocationSearchMap
               key={countryData?.code}
               countryData={countryData || undefined}

@@ -19,6 +19,9 @@ type SelectFieldProps = {
   options: Option[];
   placeholder?: string;
   error?: string;
+  onLoadMore?: () => void;
+  hasMore?: boolean;
+  loading?: boolean;
 };
 
 export default function SelectField({
@@ -29,7 +32,20 @@ export default function SelectField({
   options,
   placeholder,
   error,
+  onLoadMore,
+  hasMore = false,
+  loading = false,
 }: SelectFieldProps) {
+  const handleScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
+    const target = e.currentTarget;
+    const threshold = 16; // px from bottom
+    const reachedBottom =
+      target.scrollTop + target.clientHeight >= target.scrollHeight - threshold;
+
+    if (reachedBottom && hasMore && !loading) {
+      onLoadMore?.();
+    }
+  };
   return (
     <div className="space-y-1">
       <label htmlFor={id} className="font-bold text-sm mb-2">
@@ -42,12 +58,18 @@ export default function SelectField({
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent onScroll={handleScroll} onViewportScroll={handleScroll} className="max-h-60">
           {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
               {option.label}
             </SelectItem>
           ))}
+          {loading && (
+            <div className="px-2 py-2 text-xs text-gray-500">Loading…</div>
+          )}
+          {!loading && !hasMore && options.length > 0 && (
+            <div className="px-2 py-2 text-[11px] text-gray-400">No more results</div>
+          )}
         </SelectContent>
       </Select>
       {error && <p className="text-[12px] text-red-500">{error}</p>}
