@@ -163,14 +163,6 @@ export default function LanguagesAndCountries({
     const countryFromCookie = getCookie("countryId");
     let selectedCountry: Country | undefined;
 
-    /**
-     * ✅ Selection priority:
-     * 1️⃣ User exists + cookie exists => use cookie
-     * 2️⃣ User exists + no cookie => use user country
-     * 3️⃣ No user + cookie exists => use cookie
-     * 4️⃣ No user + no cookie => default to US
-     */
-
     if (profileData && countryFromCookie) {
       // user + cookie → use cookie
       selectedCountry = countries.find(
