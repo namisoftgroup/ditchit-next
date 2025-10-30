@@ -5,7 +5,7 @@ import { AvatarUpload } from "@/components/shared/AvatarUpload";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useAuthStore } from "@/features/auth/store";
 import { editProfileFormValues, editProfileSchema } from "../schema";
 import InputField from "@/components/shared/InputField";
@@ -15,12 +15,18 @@ import { Country } from "@/types/country";
 import SelectField from "@/components/shared/SelectField";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { getCountries } from "@/services/getCountries";
 
 export default function EditProfileForm({
   countries,
 }: {
   countries: Country[];
 }) {
+  const locale = useLocale();
+  const [countryOptions, setCountryOptions] = useState<Country[]>(countries);
+  const [countryPage, setCountryPage] = useState<number>(1);
+  const [countriesHasMore, setCountriesHasMore] = useState<boolean>(true);
+  const [countriesLoading, setCountriesLoading] = useState<boolean>(false);
   const { user, setUser } = useAuthStore();
   const [isPending, setIsPending] = useState(false);
   const t = useTranslations("auth");
@@ -41,7 +47,7 @@ export default function EditProfileForm({
   // 👉 Compute selected country data based on country_id
   const selectedCountryId =
     methods.watch("country_id") || user?.country_id?.toString() || "";
-  const countryData = countries.find(
+  const countryData = countryOptions.find(
     (c) => c.id.toString() === selectedCountryId
   );
 
@@ -94,6 +100,30 @@ export default function EditProfileForm({
     }
   };
 
+  const loadMoreCountries = async () => {
+    if (countriesLoading || !countriesHasMore) return;
+    try {
+      setCountriesLoading(true);
+      const nextPage = countryPage + 1;
+      const res = await getCountries(locale, nextPage, 15);
+      const newItems = res.data?.data || [];
+
+      // Deduplicate by id
+      const existingIds = new Set(countryOptions.map((c) => c.id));
+      const merged = [
+        ...countryOptions,
+        ...newItems.filter((c) => !existingIds.has(c.id)),
+      ];
+      setCountryOptions(merged);
+      setCountryPage(nextPage);
+      setCountriesHasMore(Boolean(res.data?.next_page_url));
+    } catch (error) {
+      console.error("Failed to load more countries", error);
+      setCountriesHasMore(false);
+    } finally {
+      setCountriesLoading(false);
+    }
+  };
   return (
     <FormProvider {...methods}>
       <form
@@ -174,8 +204,8 @@ export default function EditProfileForm({
           name="country_id"
           control={methods.control}
           render={({ field }) => {
-            const countryOptions =
-              countries?.map((country) => ({
+            const allCountryOptions =
+              countryOptions?.map((country) => ({
                 label: country.title,
                 value: country.id.toString(),
               })) || [];
@@ -191,7 +221,10 @@ export default function EditProfileForm({
                 onChange={(selectedValue) => {
                   field.onChange(selectedValue);
                 }}
-                options={countryOptions}
+                options={allCountryOptions}
+                onLoadMore={loadMoreCountries}
+                hasMore={countriesHasMore}
+                loading={countriesLoading}
                 placeholder={t("select_country")}
                 error={
                   errors.country_id?.message
