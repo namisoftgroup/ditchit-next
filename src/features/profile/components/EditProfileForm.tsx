@@ -603,7 +603,7 @@ export default function EditProfileForm({
   const { user, setUser } = useAuthStore();
   const [isPending, setIsPending] = useState(false);
   const t = useTranslations("auth");
-
+  
   const methods = useForm<editProfileFormValues>({
     mode: "onChange",
     resolver: zodResolver(editProfileSchema),
@@ -673,6 +673,8 @@ export default function EditProfileForm({
       });
       if (res?.data.code === 200) {
         setUser(res.data.data.user);
+        document.cookie =
+          "countryId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         toast.success(t("update"));
       } else {
         toast.error(res?.data.message || "update profile failed");

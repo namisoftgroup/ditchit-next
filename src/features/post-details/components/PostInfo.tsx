@@ -159,6 +159,11 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
               {t("firm_price")}
             </span>
           )}
+          {post.virtual_tour && (
+            <span className="flex justify-center items-center gap-1 bg-[var(--mainColor)] text-[var(--whiteColor)] text-[14px] px-4 py-2 rounded-full">
+              {t("virtual_tour")}
+            </span>
+          )}
         </div>
       </div>
 

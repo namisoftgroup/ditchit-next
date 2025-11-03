@@ -31,6 +31,7 @@ export default function ZipMapSearch({
   const t = useTranslations();
   const locale = useLocale();
   const { watch, setValue } = useFormContext();
+// console.log("countries" , country);
 
   // Form values
   const zipCode = watch("zip_code");

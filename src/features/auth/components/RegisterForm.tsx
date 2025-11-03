@@ -70,6 +70,8 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
       if (res?.code === 200) {
         setUser(res.data.user);
         setToken(res.data.auth.token);
+        document.cookie =
+          "countryId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         toast.success(t("register_success"));
         router.push("/");
       } else {

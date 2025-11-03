@@ -1,7 +1,7 @@
 "use client";
 
 import { Controller, useFormContext } from "react-hook-form";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import InputField from "@/components/shared/InputField";
 import MediaUpload from "@/lib/media/MediaUpload";
 import ZipMapSearch from "@/components/shared/ZipMapSearch";
@@ -10,6 +10,7 @@ import SelectField from "@/components/shared/SelectField";
 import { Country } from "@/types/country";
 import { useState, useEffect } from "react";
 import { getCookie } from "@/lib/utils";
+import { getCountries } from "@/services/getCountries";
 
 type propTypes = {
   next: () => void;
@@ -27,11 +28,21 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
     formState: { errors },
   } = useFormContext();
 
+    const [countryOptions, setCountryOptions] = useState<Country[]>(countries);
+  const [countriesHasMore, setCountriesHasMore] = useState<boolean>(true);
+  const [countriesLoading, setCountriesLoading] = useState<boolean>(false);
+  const [countryPage, setCountryPage] = useState<number>(1);
+  const locale = useLocale();
+  const selectedCountryId = watch("country_id");
+  const countryData = countryOptions.find(
+    (c) => c.id.toString() === selectedCountryId
+  );
+
+
   const t = useTranslations("manage_post");
   const [countryId, setCountryId] = useState<string>(
     getCookie("countryId") || watch("country_id") || ""
   );
-  const [countryData, setCountryData] = useState<Country | null>(null);
   // Keep state in sync if country_id in form changes externally (e.g., editing post)
   useEffect(() => {
     const subscription = watch((value, { name }) => {
@@ -52,14 +63,14 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
     }
   }, [countryId, setValue]);
 
-  useEffect(() => {
-    if (countryId) {
-      const selected = countries.find(
-        (country) => country.id.toString() === countryId
-      );
-      setCountryData(selected || null);
-    }
-  }, [countryId, countries]);
+  // useEffect(() => {
+  //   if (countryId) {
+  //     const selected = countries.find(
+  //       (country) => country.id.toString() === countryId
+  //     );
+  //     setCountryData(selected || null);
+  //   }
+  // }, [countryId, countries]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,6 +86,30 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
     if (isValid) next();
   };
 
+    const loadMoreCountries = async () => {
+      if (countriesLoading || !countriesHasMore) return;
+      try {
+        setCountriesLoading(true);
+        const nextPage = countryPage + 1;
+        const res = await getCountries(locale, nextPage, 15);
+        const newItems = res.data?.data || [];
+  
+        // Deduplicate by id
+        const existingIds = new Set(countryOptions.map((c) => c.id));
+        const merged = [
+          ...countryOptions,
+          ...newItems.filter((c) => !existingIds.has(c.id)),
+        ];
+        setCountryOptions(merged);
+        setCountryPage(nextPage);
+        setCountriesHasMore(Boolean(res.data?.next_page_url));
+      } catch (error) {
+        console.error("Failed to load more countries", error);
+        setCountriesHasMore(false);
+      } finally {
+        setCountriesLoading(false);
+      }
+    };
   return (
     <form className="flex flex-col gap-[16px]" onSubmit={handleSubmit}>
       <div className="flex gap-4 md:flex-row flex-col">
@@ -114,16 +149,15 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
         }
       />
 
-      {/* 🔽 اختيار الدولة */}
       <Controller
         name="country_id"
         control={control}
         render={({ field }) => {
-          const countryOptions =
-            countries?.map((country) => ({
-              label: country.title,
-              value: country.id.toString(),
-            })) || [];
+            const allCountryOptions =
+              countryOptions?.map((country) => ({
+                label: country.title,
+                value: country.id.toString(),
+              })) || [];
 
           return (
             <SelectField
@@ -134,8 +168,13 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
                 field.onChange(val);
                 setCountryId(val);
                 setValue("zip_code", "");
+                console.log("val :" , val);
+                
               }}
-              options={countryOptions}
+              onLoadMore={loadMoreCountries}
+              hasMore={countriesHasMore}
+              loading={countriesLoading}          
+              options={allCountryOptions}
               placeholder={t("select_country")}
               error={
                 errors.country_id?.message
@@ -147,7 +186,6 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
         }}
       />
 
-      {/* 🔽 لو الدولة 1 → يظهر zip_code فقط */}
       {countryId === "1" && (
         <>
           <InputField
@@ -172,7 +210,6 @@ export default function MainDetailsStep({ next, back, countries }: propTypes) {
         </>
       )}
 
-      {/* 🔽 لو الدولة ليست 1 → تظهر الخريطة */}
       {countryId !== "1" && countryData ? (
         <ZipMapSearch country={countryData} countryId={countryId} />
       ) : (
