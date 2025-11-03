@@ -185,7 +185,6 @@ export default function LanguagesAndCountries({
       // no user + no cookie → default to US
       selectedCountry = countries.find((c) => c.code === "US");
     }
-    console.log("search_country" , selectedCountry);
     
     setCurrentCountryFlag(selectedCountry?.flag ?? "/placeholder-flag.png");
   }, [countries, user]);

@@ -48,7 +48,6 @@ export default function SearchByModal({
   const t = useTranslations("common");
   const locale = useLocale();
 
-  
   // -------------------------
   // Initial Country
   // -------------------------
@@ -61,7 +60,6 @@ export default function SearchByModal({
 
   const { filter, setFilter } = useHomeFilter();
   const [isPending, startTransition] = useTransition();
-
 
   const [selectedCountry, setSelectedCountry] = useState<string>("");
 
@@ -111,22 +109,25 @@ export default function SearchByModal({
     lng: number;
     address?: string;
     kilometers: number;
-  } | null>( null );
+  } | null>(null);
 
-    useEffect(() => {
+  useEffect(() => {
     setSelectedLocation(
-       countries.find((c) => c.id === Number(selectedCountry))
-      ? {
-          lat: countries.find((c) => c.id === Number(selectedCountry))?.center_lat || 0,
-          lng:countries.find((c) => c.id === Number(selectedCountry))?.center_lng || 0,
-          address: filter.address || "",
-          kilometers: filter.kilometers || 60,
-        }:null
+      countries.find((c) => c.id === Number(selectedCountry))
+        ? {
+            lat:
+              countries.find((c) => c.id === Number(selectedCountry))
+                ?.center_lat || 0,
+            lng:
+              countries.find((c) => c.id === Number(selectedCountry))
+                ?.center_lng || 0,
+            address: filter.address || "",
+            kilometers: filter.kilometers || 60,
+          }
+        : null
     );
   }, [selectedCountry]);
 
-  console.log("selected loca" , selectedLocation);
-  
   const selectedMethod = filter.delivery_method;
 
   // -------------------------

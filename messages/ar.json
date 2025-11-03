@@ -83,7 +83,8 @@
     "no_available_text": "عد قريبًا لاكتشاف محتوى جديد ومثير!",
     "all": "الكل",
     "available": "متاح",
-    "sold": "مباع"
+    "sold": "مباع",
+    "outside_country": "خارج البلد المحدد"
   },
   "error": {
     "somthing_went_wrong": "عذرًا! حدث خطأ ما",

@@ -83,7 +83,8 @@
     "no_available_text": "Come back soon to discover new and exciting content!",
     "all":"All",
     "available":"Available",
-    "sold":"Sold"
+    "sold":"Sold",
+    "outside_country":"Outside selected country"
   },
   "error": {
     "somthing_went_wrong": "Oops! Something went wrong",

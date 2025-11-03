@@ -622,7 +622,7 @@ export default function LocationSearchMap({
 
         if (countryData?.code && detectedCountry !== countryData.code) {
           toast.error(
-            t("outside_country_warning") || "Outside selected country"
+            t("outside_country") || "Outside selected country"
           );
           revertToLastValid();
           return;
@@ -664,7 +664,7 @@ export default function LocationSearchMap({
       log(debug, "[Search] Found:", address, "Country:", detectedCountry);
 
       if (countryData?.code && detectedCountry !== countryData.code) {
-        toast.error(t("outside_country_warning") || "Outside selected country");
+        toast.error(t("outside_country") || "Outside selected country");
         revertToLastValid();
         return;
       }
