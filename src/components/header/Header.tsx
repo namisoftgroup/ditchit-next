@@ -55,7 +55,7 @@ export default async function Header({ locale, data }: HeaderProps) {
 
       <div className="md:hidden block p-3 bg-[var(--mainColor10)]">
         <LocationSearch
-          hideSm={true}
+          hideSm={false}
           countries={countries}
           profileData={profileData.user}
         />

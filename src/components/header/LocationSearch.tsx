@@ -25,7 +25,7 @@ export default function LocationSearch({
   const { filter } = useHomeFilter();
   const [show, setShow] = useState(false);
   const [showZipCodeSearch, setZipCodeSearch] = useState(false);
-  const {user} = useAuthStore()
+  const { user } = useAuthStore();
   const router = useRouter();
   const t = useTranslations("header");
 
@@ -34,7 +34,7 @@ export default function LocationSearch({
   useEffect(() => {
     if (profileData) {
       const cookieCountry = getCookie("countryId");
-      setCurrentCountry( profileData.country_id || cookieCountry || "us");
+      setCurrentCountry(profileData.country_id || cookieCountry || "us");
     } else {
       setCurrentCountry("us");
     }
@@ -56,7 +56,9 @@ export default function LocationSearch({
   return (
     <div
       className={`items-center flex-1 gap-2 ${
-        hideSm ? "md:flex hidden" : "flex md:flex-row flex-col items-start"
+        hideSm
+          ? "md:flex hidden"
+          : "flex md:flex-row flex-col overflow-x-hidden items-start"
       }`}
     >
       <div className="flex items-center gap-8 w-full md:flex-row flex-row-reverse">
@@ -99,10 +101,9 @@ export default function LocationSearch({
             {t("current_location")}
           </p>
           <h4 className="text-[var(--darkColor)] capitalize overflow-hidden [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] text-[16px]">
-            {(filter.address && getCookie("countryId") )
+            {filter.address && getCookie("countryId")
               ? filter.address
-              : user?.address || 
-                "United States"}
+              : user?.address || "United States"}
           </h4>
         </div>
       </div>

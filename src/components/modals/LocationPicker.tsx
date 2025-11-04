@@ -516,6 +516,7 @@ export default function LocationSearchMap({
     lng: countryData?.center_lng ?? 0,
     address: countryData?.title ?? "",
   });
+// console.log("location picker countryData " , countryData );
 
   const geocodeThrottle = useRef<number>(0);
   const isUpdating = useRef<boolean>(false);
@@ -608,10 +609,13 @@ export default function LocationSearchMap({
         }
 
         const address = results[0].formatted_address;
-        const detectedCountry =
+        const detectedCountry = 
           results[0].address_components.find((c) => c.types.includes("country"))
-            ?.short_name || "";
+            ?.short_name  || "";
 
+        // const detectedShortName = results[0].address_components[0].short_name || "";
+        // console.log("address , detected country" , address , "==========detected country============", detectedCountry ,"====results=======", results , detectedShortName);
+            
         log(
           debug,
           "[Geocode] Got address:",

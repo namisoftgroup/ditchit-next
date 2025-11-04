@@ -43,25 +43,69 @@ export async function authAction(formData: FormData, endPoint: string) {
 
 /* ~~~~~~~~~~~~ get profile action ~~~~~~~~~~~~ */
 
-export async function getProfile(): Promise<{
+// export async function getProfile(): Promise<{
+//   user: User | null;
+//   token: string | null;
+// }> {
+//   if (!(await cookies()).get("token")) {
+//     return {
+//       user: null,
+//       token: null,
+//     };
+//   }
+
+//   try {
+//     const response = await serverAxios.get(`${API_URL}/profile`);
+//     const token = (await cookies()).get("token")?.value || null;
+
+//     return {
+//       user: response.data.data.user || null,
+//       token,
+//     };
+//   } catch (error) {
+//     console.error("Failed to fetch profile", error);
+//     return {
+//       user: null,
+//       token: null,
+//     };
+//   }
+// }
+
+
+
+interface ProfileResponse {
   user: User | null;
   token: string | null;
-}> {
-  if (!(await cookies()).get("token")) {
+}
+
+let cachedProfile: ProfileResponse | null = null;
+let lastFetchTime = 0;
+const CACHE_DURATION = 30_000; // 30 seconds
+
+export async function getProfile(): Promise<ProfileResponse> {
+  const token = (await cookies()).get("token")?.value;
+  if (!token) {
     return {
       user: null,
       token: null,
     };
   }
 
-  try {
-    const response = await serverAxios.get(`${API_URL}/profile`);
-    const token = (await cookies()).get("token")?.value || null;
+  const now = Date.now();
+  if (cachedProfile && now - lastFetchTime < CACHE_DURATION) {
+    return cachedProfile;
+  }
 
-    return {
+  try {
+    const response = await serverAxios.get("/profile");
+    const result: ProfileResponse = {
       user: response.data.data.user || null,
       token,
     };
+
+    cachedProfile = result;
+    lastFetchTime = now;
+    return result;
   } catch (error) {
     console.error("Failed to fetch profile", error);
     return {
@@ -70,7 +114,6 @@ export async function getProfile(): Promise<{
     };
   }
 }
-
 /* ~~~~~~~~~~~~ logout action ~~~~~~~~~~~~ */
 
 export async function logOutAction() {
