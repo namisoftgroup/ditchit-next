@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { User } from "@/types/user";
 import { revalidatePath } from "next/cache";
 import serverAxios from "@/lib/axios/serverAxios";
+import { redirect } from "next/navigation";
 
 /* ~~~~~~~~~~~~ login and register actions ~~~~~~~~~~~~ */
 
@@ -22,7 +23,7 @@ export async function authAction(formData: FormData, endPoint: string) {
       (await cookies()).set("token", responseData.data.auth.token, {
         path: "/",
         secure: true,
-        httpOnly: true,
+        httpOnly: false,
         sameSite: "lax",
         maxAge: 60 * 60 * 24 * 7,
       });
@@ -106,7 +107,10 @@ export async function getProfile(): Promise<ProfileResponse> {
     cachedProfile = result;
     lastFetchTime = now;
     return result;
-  } catch (error) {
+  } catch (error ) {
+    if((error as AxiosError<{ message?: string }>).response?.status === 401) {
+        redirect('/api/auth/logout');
+    }
     console.error("Failed to fetch profile", error);
     return {
       user: null,
@@ -117,13 +121,14 @@ export async function getProfile(): Promise<ProfileResponse> {
 /* ~~~~~~~~~~~~ logout action ~~~~~~~~~~~~ */
 
 export async function logOutAction() {
-  const res = await serverAxios.get(`${API_URL}/profile/logout`);
-
-  if (res.data.code === 200) {
+  try {
+    await serverAxios.get(`${API_URL}/profile/logout`);
+  } catch (error) {
+    console.error("Failed to logout from server", error);
+  } finally {
     (await cookies()).delete("token");
     delete serverAxios.defaults.headers.common["Authorization"];
     revalidatePath("/", "layout");
-    return res.data;
   }
 }
 
@@ -140,7 +145,7 @@ export async function checkCodeAction(formData: FormData) {
     if (responseData.code === 200) {
       (await cookies()).set("tokenRestPass", responseData.data.auth.token, {
         path: "/",
-        httpOnly: true,
+        httpOnly: false,
         secure: true,
         sameSite: "lax",
         maxAge: 60 * 60 * 24 * 7,

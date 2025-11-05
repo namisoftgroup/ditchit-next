@@ -47,5 +47,15 @@ clientAxios.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-
+clientAxios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      const locale = getLocaleFromCookie();
+      window.location.href = `/${locale}/login`;
+    }
+    return Promise.reject(error);
+  }
+);
 export default clientAxios;

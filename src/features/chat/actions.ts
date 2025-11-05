@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { getRoomsResponse } from "./types";
 import serverAxios from "@/lib/axios/serverAxios";
+import { AxiosError } from "axios";
+import { redirect } from "next/navigation";
 
 export async function deleteRoomAction(roomId: number) {
   await serverAxios.delete(`/chat/${roomId}`);
@@ -42,6 +44,10 @@ export async function getAllRoomsForSocket(): Promise<getRoomsResponse> {
     lastFetchTime = now;
     return res.data;
   } catch (error) {
+    const err = error as AxiosError;
+    if (err.response?.status === 401) {
+      redirect("/api/auth/logout");
+    }
     console.error("Error fetching chat rooms:", error);
     throw new Error("Failed to fetch chat rooms");
   }
