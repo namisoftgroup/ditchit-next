@@ -119,18 +119,28 @@ export async function getProfile(): Promise<ProfileResponse> {
 }
 /* ~~~~~~~~~~~~ logout action ~~~~~~~~~~~~ */
 
+// export async function logOutAction() {
+//   try {
+//     await serverAxios.get(`${API_URL}/profile/logout`);
+//   } catch (error) {
+//     console.error("Failed to logout from server", error);
+//   } finally {
+//     (await cookies()).delete("token");
+//     delete serverAxios.defaults.headers.common["Authorization"];
+//     revalidatePath("/", "layout");
+//   }
+// }
+
 export async function logOutAction() {
-  try {
-    await serverAxios.get(`${API_URL}/profile/logout`);
-  } catch (error) {
-    console.error("Failed to logout from server", error);
-  } finally {
+  const res = await serverAxios.get(`${API_URL}/profile/logout`);
+
+  if (res.data.code === 200) {
     (await cookies()).delete("token");
     delete serverAxios.defaults.headers.common["Authorization"];
     revalidatePath("/", "layout");
+    return res.data;
   }
 }
-
 /* ~~~~~~~~~~~~ check code action ~~~~~~~~~~~~ */
 
 export async function checkCodeAction(formData: FormData) {
