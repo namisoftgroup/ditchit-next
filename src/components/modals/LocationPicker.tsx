@@ -472,6 +472,7 @@ import { Search } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Country } from "@/types/country";
 import { toast } from "sonner";
+// import { getCookie } from "@/lib/utils";
 
 const LIBRARIES = ["places"] as const;
 const THROTTLE_DELAY = 1000;
@@ -500,6 +501,10 @@ export default function LocationSearchMap({
   debug = false,
 }: Props) {
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // const latCookies = getCookie("latitude");
+  // const lngCookies = getCookie("longitude");
+  // const addressCookies = decodeURIComponent(getCookie("address") || "");
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
     lat: countryData?.center_lat ?? 0,
     lng: countryData?.center_lng ?? 0,
@@ -516,7 +521,7 @@ export default function LocationSearchMap({
     lng: countryData?.center_lng ?? 0,
     address: countryData?.title ?? "",
   });
-// console.log("location picker countryData " , countryData );
+  // console.log("location picker countryData " , countryData );
 
   const geocodeThrottle = useRef<number>(0);
   const isUpdating = useRef<boolean>(false);
@@ -609,13 +614,13 @@ export default function LocationSearchMap({
         }
 
         const address = results[0].formatted_address;
-        const detectedCountry = 
+        const detectedCountry =
           results[0].address_components.find((c) => c.types.includes("country"))
-            ?.short_name  || "";
+            ?.short_name || "";
 
         // const detectedShortName = results[0].address_components[0].short_name || "";
         // console.log("address , detected country" , address , "==========detected country============", detectedCountry ,"====results=======", results , detectedShortName);
-            
+
         log(
           debug,
           "[Geocode] Got address:",
@@ -625,9 +630,7 @@ export default function LocationSearchMap({
         );
 
         if (countryData?.code && detectedCountry !== countryData.code) {
-          toast.error(
-            t("outside_country") || "Outside selected country"
-          );
+          toast.error(t("outside_country") || "Outside selected country");
           revertToLastValid();
           return;
         }
