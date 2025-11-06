@@ -6,7 +6,6 @@ import { cookies } from "next/headers";
 import { User } from "@/types/user";
 import { revalidatePath } from "next/cache";
 import serverAxios from "@/lib/axios/serverAxios";
-import { redirect } from "next/navigation";
 
 /* ~~~~~~~~~~~~ login and register actions ~~~~~~~~~~~~ */
 
@@ -108,9 +107,9 @@ export async function getProfile(): Promise<ProfileResponse> {
     lastFetchTime = now;
     return result;
   } catch (error ) {
-    if((error as AxiosError<{ message?: string }>).response?.status === 401) {
-        redirect('/api/auth/logout');
-    }
+    // if((error as AxiosError<{ message?: string }>).response?.status === 401) {
+    //     redirect('/api/auth/logout');
+    // }
     console.error("Failed to fetch profile", error);
     return {
       user: null,

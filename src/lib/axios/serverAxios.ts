@@ -1,9 +1,9 @@
 "use server";
 
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosError, AxiosInstance } from "axios";
 import { cookies } from "next/headers";
 import { API_URL, COUNTIRES_DATA } from "@/utils/constants";
-import { NextResponse } from "next/server";
+import { redirect } from "next/navigation";
 
 const serverAxios: AxiosInstance = axios.create({
   baseURL: API_URL,
@@ -31,16 +31,14 @@ serverAxios.interceptors.request.use(async (config) => {
   return config;
 });
 
-// serverAxios.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     if (error.response?.status === 401) {
-//         const cookieStore = await cookies();  
-//         cookieStore.delete("token");
-//         NextResponse.redirect('/login')
-//     }
-//     return Promise.reject(error);
-//   }
-// );
+serverAxios.interceptors.response.use(
+  (response) => response,
+   (error) => {
+       if((error as AxiosError<{ message?: string }>).response?.status === 401) {
+           redirect('/api/auth/logout');
+       }
+    return Promise.reject(error);
+  }
+);
 
 export default serverAxios;
