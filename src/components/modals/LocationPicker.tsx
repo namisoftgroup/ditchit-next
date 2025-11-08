@@ -4,10 +4,10 @@
 // import { GoogleMap, Marker } from "@react-google-maps/api";
 // import { Input } from "@/components/ui/input";
 // import { Search } from "lucide-react";
-// import { useHomeFilter } from "@/features/listing/store";
 // import { useTranslations, useLocale } from "next-intl";
 // import { Country } from "@/types/country";
 // import { toast } from "sonner";
+// import { getCookie } from "@/lib/utils";
 
 // const LIBRARIES = ["places"] as const;
 // const THROTTLE_DELAY = 1000;
@@ -19,74 +19,54 @@
 // };
 
 // type Props = {
-//   defaultCountry?: string;
-//   onChange?: (pos: { lat: number; lng: number; address?: string }) => void;
 //   countryData: Country | undefined;
+//   onChange?: (pos: { lat: number; lng: number; address?: string }) => void;
+//   debug?: boolean;
 // };
 
-// // Type for geocode cache entries
-// type GeocodeCache = {
-//   [key: string]: {
-//     address: string;
-//     country: string;
-//     timestamp: number;
-//   };
-// };
-
-// // Type for search cache entries
-// type SearchCache = {
-//   [query: string]: {
-//     lat: number;
-//     lng: number;
-//     address: string;
-//     timestamp: number;
-//   };
+// // Simple logger helper
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// const log = (enabled: boolean, ...args: any[]) => {
+//   if (enabled) console.log(...args);
 // };
 
 // export default function LocationSearchMap({
-//   defaultCountry,
-//   onChange,
 //   countryData,
+//   onChange,
+//   debug = false,
 // }: Props) {
-//   console.log(countryData);
-
-//   const { filter } = useHomeFilter();
 //   const [isLoaded, setIsLoaded] = useState(false);
+
+//   const latCookies = getCookie("latitude");
+//   const lngCookies = getCookie("longitude");
+//   const addressCookies = decodeURIComponent(getCookie("address") || "");
 //   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
 //     lat: countryData?.center_lat ?? 0,
 //     lng: countryData?.center_lng ?? 0,
 //   });
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const mapRef = useRef<google.maps.Map | null>(null);
-//   const markerRef = useRef<google.maps.Marker | null>(null);
+//   const [searchQuery, setSearchQuery] = useState(countryData?.title ?? "");
+
 //   const t = useTranslations("common");
 //   const locale = useLocale();
 
-//   // Refs for caching and throttling
-//   const geocodeCache = useRef<GeocodeCache>({});
-//   const searchCache = useRef<SearchCache>({});
-//   const lastGeocodeTimestampRef = useRef<number>(0);
-//   const isUpdatingRef = useRef<boolean>(false);
-//   const prevSearchQueryRef = useRef<string>("");
-//   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-//   const lastDragPositionRef = useRef<{ lat: number; lng: number } | null>(null);
-
-//   const [, setSelectCountryBounds] = useState(countryData?.code || "");
-//   const [lastValidPosition, setLastValidPosition] = useState<{
-//     lat: number;
-//     lng: number;
-//   }>({
+//   const mapRef = useRef<google.maps.Map | null>(null);
+//   const markerRef = useRef<google.maps.Marker | null>(null);
+//   const lastValidPos = useRef<{ lat: number; lng: number; address: string }>({
 //     lat: countryData?.center_lat ?? 0,
 //     lng: countryData?.center_lng ?? 0,
+//     address: countryData?.title ?? "",
 //   });
-//   const [lastValidAddress, setLastValidAddress] = useState("");
+//   // console.log("location picker countryData " , countryData );
 
-//   // Load Google Maps with current locale
+//   const geocodeThrottle = useRef<number>(0);
+//   const isUpdating = useRef<boolean>(false);
+
+//   // ------------------------------------
+//   // ✅ Load Google Maps once
+//   // ------------------------------------
 //   useEffect(() => {
-//     if (
-//       typeof window !== "undefined" &&
-//       (window as { google?: { maps?: unknown } }).google?.maps
-//     ) {
+//     if (typeof window !== "undefined" && window.google?.maps) {
+//       log(debug, "[Init] Google Maps already loaded.");
 //       setIsLoaded(true);
 //       return;
 //     }
@@ -97,334 +77,181 @@
 //       return;
 //     }
 
-//     const loadGoogleMaps = () => {
-//       return new Promise<void>((resolve, reject) => {
-//         const script = document.createElement("script");
-//         script.id = "google-maps-script";
-//         script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=${LIBRARIES.join(",")}&language=${locale}`;
-//         script.async = true;
-//         script.defer = true;
-//         script.onload = () => resolve();
-//         script.onerror = (err) => reject(err);
-//         document.head.appendChild(script);
-//       });
+//     const script = document.createElement("script");
+//     script.id = "google-maps-script";
+//     script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=${LIBRARIES.join(",")}&language=${locale}`;
+//     script.async = true;
+//     script.defer = true;
+//     script.onload = () => {
+//       log(debug, "[Init] Google Maps script loaded.");
+//       setIsLoaded(true);
+//     };
+//     script.onerror = () => toast.error(t("failed_to_load_google_maps"));
+//     document.head.appendChild(script);
+//   }, [locale, t, debug]);
+
+//   // ------------------------------------
+//   // ✅ On map load
+//   // ------------------------------------
+//   const onLoad = useCallback(
+//     (map: google.maps.Map) => {
+//       log(debug, "[Map] Loaded");
+//       mapRef.current = map;
+//     },
+//     [debug]
+//   );
+
+//   // ------------------------------------
+//   // ✅ When country changes → center + input sync
+//   // ------------------------------------
+//   useEffect(() => {
+//     if (!countryData || !isLoaded) return;
+
+//     const newCenter = {
+//       lat: countryData.center_lat,
+//       lng: countryData.center_lng,
 //     };
 
-//     loadGoogleMaps()
-//       .then(() => setIsLoaded(true))
-//       .catch(() => toast.error(t("failed_to_load_google_maps")));
-//   }, [locale, t]);
+//     // only update if actual change
+//     setMapCenter((prev) => {
+//       if (
+//         Math.abs(prev.lat - newCenter.lat) < 1e-5 &&
+//         Math.abs(prev.lng - newCenter.lng) < 1e-5
+//       ) {
+//         return prev; // no change → no render
+//       }
+//       return newCenter;
+//     }); // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [countryData?.id, isLoaded]);
 
-//   const onLoad = useCallback((map: google.maps.Map) => {
-//     mapRef.current = map;
-//   }, []);
-//   // Convert coordinates to address with country validation (with caching and throttling)
+//   // ------------------------------------
+//   //  Reverse geocode by coordinates
+//   // ------------------------------------
 //   const updateAddressFromCoords = useCallback(
-//     async (lat: number, lng: number, preFetchedAddress?: string) => {
-//       // Skip if already updating or invalid coordinates
-//       if (isUpdatingRef.current || !lat || !lng) {
-//         return;
-//       }
+//     (lat: number, lng: number) => {
+//       if (!isLoaded || !google.maps.Geocoder) return;
+//       if (isUpdating.current) return;
 
-//       if (!("google" in window) || !google.maps?.Geocoder) {
-//         revertToLastValid();
-//         return;
-//       }
-
-//       // Round coordinates to 6 decimal places for consistent caching
-//       const roundedLat = Math.round(lat * 1000000) / 1000000;
-//       const roundedLng = Math.round(lng * 1000000) / 1000000;
-
-//       // Create cache key
-//       const cacheKey = `${roundedLat},${roundedLng}`;
-
-//       // Check if we need to throttle
 //       const now = Date.now();
-//       if (now - lastGeocodeTimestampRef.current < THROTTLE_DELAY) {
-//         return;
-//       }
+//       if (now - geocodeThrottle.current < THROTTLE_DELAY) return;
+//       geocodeThrottle.current = now;
+//       isUpdating.current = true;
 
-//       // Set updating flag and update timestamp
-//       isUpdatingRef.current = true;
-//       lastGeocodeTimestampRef.current = now;
+//       log(debug, "[Geocode] Requesting reverse geocode for:", { lat, lng });
 
-//       // Check cache first
-//       if (geocodeCache.current[cacheKey]) {
-//         const cachedResult = geocodeCache.current[cacheKey];
-
-//         // If the cached result is for the correct country, use it
-//         if (!countryData?.code || cachedResult.country === countryData.code) {
-//           const newPos = { lat: roundedLat, lng: roundedLng };
-//           setMapCenter(newPos);
-//           setSearchQuery(cachedResult.address);
-//           setSelectCountryBounds(cachedResult.country);
-//           setLastValidPosition(newPos);
-//           setLastValidAddress(cachedResult.address);
-//           onChange?.({
-//             ...newPos,
-//             address: cachedResult.address,
-//           });
-//           isUpdatingRef.current = false;
+//       const geocoder = new google.maps.Geocoder();
+//       geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+//         isUpdating.current = false;
+//         if (status !== "OK" || !results?.[0]) {
+//           toast.error(t("geocode_failed"));
+//           revertToLastValid();
 //           return;
 //         }
-//       }
 
-//       // If not in cache or wrong country, proceed with geocoding
-//       try {
-//         const geocoder = new google.maps.Geocoder();
-//         geocoder.geocode(
-//           { location: { lat: roundedLat, lng: roundedLng } },
-//           (results, status) => {
-//             let address = preFetchedAddress;
-//             if (!address && status === "OK" && results && results[0]) {
-//               address = results[0].formatted_address;
-//             }
+//         const address = results[0].formatted_address;
+//         const detectedCountry =
+//           results[0].address_components.find((c) => c.types.includes("country"))
+//             ?.short_name || "";
 
-//             if (status === "OK" && results && results[0]) {
-//               const bounds = results
-//                 .flatMap((res) =>
-//                   res.address_components
-//                     .filter((add) => add.types.includes("country"))
-//                     .map((add) => add.short_name)
-//                 )
-//                 .filter(Boolean);
+//         // const detectedShortName = results[0].address_components[0].short_name || "";
+//         // console.log("address , detected country" , address , "==========detected country============", detectedCountry ,"====results=======", results , detectedShortName);
 
-//               const detectedCountry = bounds[0] ?? "";
-
-//               // Cache the result
-//               geocodeCache.current[cacheKey] = {
-//                 address: address || "",
-//                 country: detectedCountry,
-//                 timestamp: now,
-//               };
-
-//               if (
-//                 detectedCountry === "" ||
-//                 (countryData?.code && detectedCountry !== countryData.code)
-//               ) {
-//                 toast.error("You are outside the selected country");
-//                 revertToLastValid();
-//               } else {
-//                 const newPos = { lat: roundedLat, lng: roundedLng };
-//                 setMapCenter(newPos);
-//                 setSearchQuery(address || "");
-//                 setSelectCountryBounds(detectedCountry);
-//                 setLastValidPosition(newPos);
-//                 setLastValidAddress(address || "");
-//                 onChange?.({
-//                   ...newPos,
-//                   address: address,
-//                 });
-//               }
-//             } else {
-//               toast.error(t("geocode_failed") || "Failed to geocode location");
-//               revertToLastValid();
-//             }
-
-//             isUpdatingRef.current = false;
-//           }
+//         log(
+//           debug,
+//           "[Geocode] Got address:",
+//           address,
+//           "Country:",
+//           detectedCountry
 //         );
-//       } catch (error) {
-//         console.log(error);
-//         toast.error(t("geocode_failed") || "Failed to geocode location");
-//         revertToLastValid();
-//         isUpdatingRef.current = false;
-//       }
-//     },
-//     [countryData?.code, lastValidAddress, lastValidPosition, onChange, t] // eslint-disable-line react-hooks/exhaustive-deps
-//   );
-//   // Get current location
-//   useEffect(() => {
-//     if (navigator.geolocation) {
-//       navigator.geolocation.getCurrentPosition(
-//         (pos) => {
-//           const lat = pos.coords.latitude;
-//           const lng = pos.coords.longitude;
-//           updateAddressFromCoords(lat, lng);
-//         },
-//         () => {
-//           const lat = countryData?.center_lat ?? 0;
-//           const lng = countryData?.center_lng ?? 0;
-//           updateAddressFromCoords(lat, lng);
+
+//         if (countryData?.code && detectedCountry !== countryData.code) {
+//           toast.error(t("outside_country") || "Outside selected country");
+//           revertToLastValid();
+//           return;
 //         }
-//       );
-//     }
-//   }, [countryData]); // eslint-disable-line react-hooks/exhaustive-deps
 
-//   // Search with country validation, debouncing and caching
+//         const newPos = { lat, lng, address };
+//         setMapCenter(newPos);
+//         setSearchQuery(address);
+//         lastValidPos.current = newPos;
+//         onChange?.(newPos);
+//       });
+//     }, // eslint-disable-next-line react-hooks/exhaustive-deps
+//     [isLoaded, onChange, countryData?.code, t, debug]
+//   );
+
+//   // ------------------------------------
+//   //  Forward geocode search input
+//   // ------------------------------------
 //   const handleSearch = useCallback(() => {
-//     if (!searchQuery.trim()) return;
-//     if (!("google" in window) || !google.maps?.Geocoder) return;
+//     if (!isLoaded || !searchQuery.trim() || !google.maps.Geocoder) return;
 
-//     // Skip if same as previous search
-//     if (searchQuery === prevSearchQueryRef.current) return;
-//     prevSearchQueryRef.current = searchQuery;
+//     log(debug, "[Search] Searching for:", searchQuery);
+//     const geocoder = new google.maps.Geocoder();
 
-//     // Check cache first
-//     const cacheKey = `search_${searchQuery.trim().toLowerCase()}`;
-//     if (searchCache.current[cacheKey]) {
-//       const cachedResult = searchCache.current[cacheKey];
-//       // Only use cache if it's recent (less than 1 hour old)
-//       if (Date.now() - cachedResult.timestamp < 3600000) {
-//         updateAddressFromCoords(
-//           cachedResult.lat,
-//           cachedResult.lng,
-//           cachedResult.address
-//         );
+//     geocoder.geocode({ address: searchQuery }, (results, status) => {
+//       if (status !== "OK" || !results?.[0]) {
+//         toast.error(t("location_not_found"));
+//         revertToLastValid();
 //         return;
 //       }
-//     }
 
-//     // Skip if we're already updating or need to throttle
-//     if (
-//       isUpdatingRef.current ||
-//       Date.now() - lastGeocodeTimestampRef.current < THROTTLE_DELAY
-//     ) {
-//       return;
-//     }
+//       const result = results[0];
+//       const location = result.geometry.location;
+//       const address = result.formatted_address;
+//       const detectedCountry =
+//         result.address_components.find((c) => c.types.includes("country"))
+//           ?.short_name || "";
 
-//     isUpdatingRef.current = true;
-//     lastGeocodeTimestampRef.current = Date.now();
+//       log(debug, "[Search] Found:", address, "Country:", detectedCountry);
 
-//     try {
-//       const geocoder = new google.maps.Geocoder();
-//       geocoder.geocode({ address: searchQuery }, (results, status) => {
-//         if (status === "OK" && results && results[0]) {
-//           const location = results[0].geometry.location;
-//           const lat = location.lat();
-//           const lng = location.lng();
-//           const formattedAddress = results[0].formatted_address;
+//       if (countryData?.code && detectedCountry !== countryData.code) {
+//         toast.error(t("outside_country") || "Outside selected country");
+//         revertToLastValid();
+//         return;
+//       }
 
-//           // Cache the result
-//           searchCache.current[cacheKey] = {
-//             lat,
-//             lng,
-//             address: formattedAddress,
-//             timestamp: Date.now(),
-//           };
+//       const newPos = { lat: location.lat(), lng: location.lng(), address };
+//       setMapCenter(newPos);
+//       setSearchQuery(address);
+//       lastValidPos.current = newPos;
+//       onChange?.(newPos);
 
-//           updateAddressFromCoords(lat, lng, formattedAddress);
-//         } else {
-//           toast.error("location not found");
-//           revertToLastValid();
-//         }
-//         isUpdatingRef.current = false;
-//       });
-//     } catch (error) {
-//       console.log(error);
+//       mapRef.current?.panTo(newPos);
+//       markerRef.current?.setPosition(newPos);
+//     }); // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [isLoaded, searchQuery, onChange, countryData?.code, t, debug]);
 
-//       toast.error("Failed to geocode location");
-//       revertToLastValid();
-//       isUpdatingRef.current = false;
-//     }
-//   }, [searchQuery, t, updateAddressFromCoords]); // eslint-disable-line react-hooks/exhaustive-deps
-
-//   // Revert to last valid position and address
-//   const revertToLastValid = useCallback(() => {
-//     const pos = { lat: lastValidPosition.lat, lng: lastValidPosition.lng };
-//     if (mapRef.current) {
-//       mapRef.current.panTo(pos);
-//     }
-//     if (markerRef.current) {
-//       markerRef.current.setPosition(pos);
-//     }
-//     setMapCenter(pos);
-//     setSearchQuery(lastValidAddress);
-//     onChange?.({
-//       ...pos,
-//       address: lastValidAddress,
-//     });
-//   }, [lastValidPosition, lastValidAddress, onChange]);
-
-//   // Handle marker drag end with position tracking
+//   // ------------------------------------
+//   //  Handle marker drag
+//   // ------------------------------------
 //   const handleMarkerDragEnd = useCallback(
 //     (e: google.maps.MapMouseEvent) => {
 //       const lat = e.latLng?.lat();
 //       const lng = e.latLng?.lng();
-
-//       if (lat && lng) {
-//         // Check if position has changed significantly (at least 0.0001 degree difference)
-//         const lastPos = lastDragPositionRef.current;
-//         if (
-//           lastPos &&
-//           Math.abs(lastPos.lat - lat) < 0.0001 &&
-//           Math.abs(lastPos.lng - lng) < 0.0001
-//         ) {
-//           return; // Skip if position hasn't changed enough
-//         }
-
-//         // Update last position
-//         lastDragPositionRef.current = { lat, lng };
-//         updateAddressFromCoords(lat, lng);
-//       }
+//       if (!lat || !lng) return;
+//       log(debug, "[Marker] Drag end:", { lat, lng });
+//       updateAddressFromCoords(lat, lng);
 //     },
-//     [updateAddressFromCoords]
+//     [updateAddressFromCoords, debug]
 //   );
 
-//   // // Handle map drag end with throttling
-//   // const handleMapDragEnd = useCallback(() => {
-//   //   const newCenter = mapRef.current?.getCenter();
-//   //   if (newCenter) {
-//   //     const lat = newCenter.lat();
-//   //     const lng = newCenter.lng();
-
-//   //     // Check if position has changed significantly
-//   //     const lastPos = lastDragPositionRef.current;
-//   //     if (
-//   //       lastPos &&
-//   //       Math.abs(lastPos.lat - lat) < 0.0001 &&
-//   //       Math.abs(lastPos.lng - lng) < 0.0001
-//   //     ) {
-//   //       return; // Skip if position hasn't changed enough
-//   //     }
-
-//   //     // Update last position
-//   //     lastDragPositionRef.current = { lat, lng };
-//   //     updateAddressFromCoords(lat, lng);
-//   //   }
-//   // }, [updateAddressFromCoords]);
-
-//   useEffect(() => {
-//     if (defaultCountry) handleSearch();
-//   }, [defaultCountry, handleSearch]);
-
-//   useEffect(() => {
-//     if (filter.latitude && filter.longitude) {
-//       const newPos = {
-//         lat: Number(filter.latitude),
-//         lng: Number(filter.longitude),
-//       };
-//       setMapCenter(newPos);
-//       updateAddressFromCoords(newPos.lat, newPos.lng);
-//     }
-//   }, [filter.latitude, filter.longitude, updateAddressFromCoords]);
-
-//   // Implement debounced search
-//   useEffect(() => {
-//     // Clear any existing timeout
-//     if (searchTimeoutRef.current) {
-//       clearTimeout(searchTimeoutRef.current);
-//     }
-
-//     // Skip if search query is empty or same as previous
-//     if (!searchQuery.trim() || searchQuery === prevSearchQueryRef.current) {
-//       return;
-//     }
-
-//     // Set a timeout for debouncing
-//     searchTimeoutRef.current = setTimeout(() => {
-//       handleSearch();
-//     }, 800); // 800ms debounce
-
-//     return () => {
-//       if (searchTimeoutRef.current) {
-//         clearTimeout(searchTimeoutRef.current);
-//       }
-//     };
-//   }, [searchQuery, handleSearch]);
+//   // ------------------------------------
+//   //  Revert to last valid
+//   // ------------------------------------
+//   const revertToLastValid = useCallback(() => {
+//     const pos = lastValidPos.current;
+//     log(debug, "[Revert] Reverting to last valid:", pos);
+//     setMapCenter({ lat: pos.lat, lng: pos.lng });
+//     setSearchQuery(pos.address);
+//     onChange?.(pos);
+//     mapRef.current?.panTo({ lat: pos.lat, lng: pos.lng });
+//     markerRef.current?.setPosition({ lat: pos.lat, lng: pos.lng });
+//   }, [onChange, debug]);
 
 //   return (
 //     <div className="flex flex-col gap-3">
+//       {/* Search input */}
 //       <div className="relative w-full">
 //         <Input
 //           placeholder={t("search")}
@@ -433,18 +260,18 @@
 //           className="pr-10 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
 //         />
 //         <Search
-//           className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
 //           onClick={handleSearch}
+//           className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
 //         />
 //       </div>
 
+//       {/* Map */}
 //       {isLoaded && window.google && (
 //         <GoogleMap
 //           mapContainerStyle={containerStyle}
 //           center={mapCenter}
-//           zoom={5} // Increased zoom for better country view
+//           zoom={6}
 //           onLoad={onLoad}
-//           // onDragEnd={handleMapDragEnd}
 //           options={{
 //             streetViewControl: false,
 //             mapTypeControl: false,
@@ -452,7 +279,7 @@
 //           }}
 //         >
 //           <Marker
-//             onLoad={(marker) => (markerRef.current = marker)}
+//             onLoad={(m) => (markerRef.current = m)}
 //             position={mapCenter}
 //             draggable
 //             onDragEnd={handleMarkerDragEnd}
@@ -472,7 +299,7 @@ import { Search } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Country } from "@/types/country";
 import { toast } from "sonner";
-// import { getCookie } from "@/lib/utils";
+import { getCookie } from "@/lib/utils";
 
 const LIBRARIES = ["places"] as const;
 const THROTTLE_DELAY = 1000;
@@ -486,52 +313,85 @@ const containerStyle = {
 type Props = {
   countryData: Country | undefined;
   onChange?: (pos: { lat: number; lng: number; address?: string }) => void;
-  debug?: boolean;
-};
-
-// Simple logger helper
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const log = (enabled: boolean, ...args: any[]) => {
-  if (enabled) console.log(...args);
 };
 
 export default function LocationSearchMap({
   countryData,
   onChange,
-  debug = false,
 }: Props) {
   const [isLoaded, setIsLoaded] = useState(false);
-
-  // const latCookies = getCookie("latitude");
-  // const lngCookies = getCookie("longitude");
-  // const addressCookies = decodeURIComponent(getCookie("address") || "");
-  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
-    lat: countryData?.center_lat ?? 0,
-    lng: countryData?.center_lng ?? 0,
-  });
-  const [searchQuery, setSearchQuery] = useState(countryData?.title ?? "");
-
   const t = useTranslations("common");
   const locale = useLocale();
 
   const mapRef = useRef<google.maps.Map | null>(null);
   const markerRef = useRef<google.maps.Marker | null>(null);
-  const lastValidPos = useRef<{ lat: number; lng: number; address: string }>({
-    lat: countryData?.center_lat ?? 0,
-    lng: countryData?.center_lng ?? 0,
-    address: countryData?.title ?? "",
-  });
-  // console.log("location picker countryData " , countryData );
-
   const geocodeThrottle = useRef<number>(0);
   const isUpdating = useRef<boolean>(false);
+  const isInitialLoad = useRef(true);
+  const lastCountryId = useRef<number | null>(null);
+  const hasManuallySelected = useRef(false);
 
-  // ------------------------------------
-  // ✅ Load Google Maps once
-  // ------------------------------------
+  // Read cookies once on mount
+  const initialCookieValues = useRef({
+    lat: getCookie("latitude") ? parseFloat(getCookie("latitude")!) : null,
+    lng: getCookie("longitude") ? parseFloat(getCookie("longitude")!) : null,
+    address: decodeURIComponent(getCookie("address") || ""),
+    countryId: getCookie("countryId"),
+  });
+
+  // Check if country has changed from cookies
+  const isCountryDifferentFromCookie =
+    countryData?.id &&
+    initialCookieValues.current.countryId &&
+    countryData.id.toString() !== initialCookieValues.current.countryId;
+
+  // Initialize state with priority logic
+  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>(
+    isCountryDifferentFromCookie
+      ? {
+          lat: countryData?.center_lat ?? 0,
+          lng: countryData?.center_lng ?? 0,
+        }
+      : initialCookieValues.current.lat && initialCookieValues.current.lng
+      ? {
+          lat: initialCookieValues.current.lat,
+          lng: initialCookieValues.current.lng,
+        }
+      : {
+          lat: countryData?.center_lat ?? 0,
+          lng: countryData?.center_lng ?? 0,
+        }
+  );
+
+  const [searchQuery, setSearchQuery] = useState(
+    isCountryDifferentFromCookie
+      ? countryData?.title || ""
+      : initialCookieValues.current.address || countryData?.title || ""
+  );
+
+  const lastValidPos = useRef<{ lat: number; lng: number; address: string }>(
+    isCountryDifferentFromCookie
+      ? {
+          lat: countryData?.center_lat ?? 0,
+          lng: countryData?.center_lng ?? 0,
+          address: countryData?.title ?? "",
+        }
+      : initialCookieValues.current.lat && initialCookieValues.current.lng
+      ? {
+          lat: initialCookieValues.current.lat,
+          lng: initialCookieValues.current.lng,
+          address: initialCookieValues.current.address || countryData?.title || "",
+        }
+      : {
+          lat: countryData?.center_lat ?? 0,
+          lng: countryData?.center_lng ?? 0,
+          address: countryData?.title ?? "",
+        }
+  );
+
+  // Load Google Maps script
   useEffect(() => {
     if (typeof window !== "undefined" && window.google?.maps) {
-      log(debug, "[Init] Google Maps already loaded.");
       setIsLoaded(true);
       return;
     }
@@ -547,62 +407,83 @@ export default function LocationSearchMap({
     script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=${LIBRARIES.join(",")}&language=${locale}`;
     script.async = true;
     script.defer = true;
-    script.onload = () => {
-      log(debug, "[Init] Google Maps script loaded.");
-      setIsLoaded(true);
-    };
+    script.onload = () => setIsLoaded(true);
     script.onerror = () => toast.error(t("failed_to_load_google_maps"));
     document.head.appendChild(script);
-  }, [locale, t, debug]);
+  }, [locale, t]);
 
-  // ------------------------------------
-  // ✅ On map load
-  // ------------------------------------
-  const onLoad = useCallback(
-    (map: google.maps.Map) => {
-      log(debug, "[Map] Loaded");
-      mapRef.current = map;
-    },
-    [debug]
-  );
+  const onLoad = useCallback((map: google.maps.Map) => {
+    mapRef.current = map;
+  }, []);
 
-  // ------------------------------------
-  // ✅ When country changes → center + input sync
-  // ------------------------------------
+  // Handle country changes
   useEffect(() => {
     if (!countryData || !isLoaded) return;
 
-    const newCenter = {
+    const currentCountryId = countryData.id;
+    const isCountryChange = lastCountryId.current !== null && lastCountryId.current !== currentCountryId;
+
+    // Skip update on initial load if we have cookies AND it's not a country change
+    if (isInitialLoad.current && initialCookieValues.current.lat && initialCookieValues.current.lng && !isCountryChange) {
+      isInitialLoad.current = false;
+      lastCountryId.current = currentCountryId;
+      return;
+    }
+
+    // If user has manually selected a location and country hasn't changed, don't reset
+    if (hasManuallySelected.current && !isCountryChange) {
+      return;
+    }
+
+    isInitialLoad.current = false;
+    lastCountryId.current = currentCountryId;
+
+    const countryCenter = {
       lat: countryData.center_lat,
       lng: countryData.center_lng,
     };
 
-    // only update if actual change
-    setMapCenter((prev) => {
-      if (
-        Math.abs(prev.lat - newCenter.lat) < 1e-5 &&
-        Math.abs(prev.lng - newCenter.lng) < 1e-5
-      ) {
-        return prev; // no change → no render
-      }
-      return newCenter;
-    }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countryData?.id, isLoaded]);
+    setMapCenter(countryCenter);
+    setSearchQuery(countryData.title || "");
 
-  // ------------------------------------
-  //  Reverse geocode by coordinates
-  // ------------------------------------
+    lastValidPos.current = {
+      lat: countryCenter.lat,
+      lng: countryCenter.lng,
+      address: countryData.title || "",
+    };
+
+    if (onChange) {
+      onChange({
+        lat: countryCenter.lat,
+        lng: countryCenter.lng,
+        address: countryData.title || "",
+      });
+    }
+
+    // Only reset zoom when actually changing countries
+    if (isCountryChange) {
+      hasManuallySelected.current = false;
+      setTimeout(() => {
+        if (mapRef.current) {
+          mapRef.current.setCenter(countryCenter);
+          mapRef.current.setZoom(6);
+        }
+        if (markerRef.current) {
+          markerRef.current.setPosition(countryCenter);
+        }
+      }, 100);
+    }
+  }, [countryData, isLoaded, onChange]);
+
+  // Reverse geocode by coordinates
   const updateAddressFromCoords = useCallback(
     (lat: number, lng: number) => {
-      if (!isLoaded || !google.maps.Geocoder) return;
-      if (isUpdating.current) return;
+      if (!isLoaded || !google.maps.Geocoder || isUpdating.current) return;
 
       const now = Date.now();
       if (now - geocodeThrottle.current < THROTTLE_DELAY) return;
       geocodeThrottle.current = now;
       isUpdating.current = true;
-
-      log(debug, "[Geocode] Requesting reverse geocode for:", { lat, lng });
 
       const geocoder = new google.maps.Geocoder();
       geocoder.geocode({ location: { lat, lng } }, (results, status) => {
@@ -618,42 +499,28 @@ export default function LocationSearchMap({
           results[0].address_components.find((c) => c.types.includes("country"))
             ?.short_name || "";
 
-        // const detectedShortName = results[0].address_components[0].short_name || "";
-        // console.log("address , detected country" , address , "==========detected country============", detectedCountry ,"====results=======", results , detectedShortName);
-
-        log(
-          debug,
-          "[Geocode] Got address:",
-          address,
-          "Country:",
-          detectedCountry
-        );
-
         if (countryData?.code && detectedCountry !== countryData.code) {
           toast.error(t("outside_country") || "Outside selected country");
           revertToLastValid();
           return;
         }
 
+        hasManuallySelected.current = true;
         const newPos = { lat, lng, address };
         setMapCenter(newPos);
         setSearchQuery(address);
         lastValidPos.current = newPos;
         onChange?.(newPos);
       });
-    }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isLoaded, onChange, countryData?.code, t, debug]
+    },
+    [isLoaded, onChange, countryData?.code, t]
   );
 
-  // ------------------------------------
-  //  Forward geocode search input
-  // ------------------------------------
+  // Forward geocode search input
   const handleSearch = useCallback(() => {
     if (!isLoaded || !searchQuery.trim() || !google.maps.Geocoder) return;
 
-    log(debug, "[Search] Searching for:", searchQuery);
     const geocoder = new google.maps.Geocoder();
-
     geocoder.geocode({ address: searchQuery }, (results, status) => {
       if (status !== "OK" || !results?.[0]) {
         toast.error(t("location_not_found"));
@@ -668,60 +535,65 @@ export default function LocationSearchMap({
         result.address_components.find((c) => c.types.includes("country"))
           ?.short_name || "";
 
-      log(debug, "[Search] Found:", address, "Country:", detectedCountry);
-
       if (countryData?.code && detectedCountry !== countryData.code) {
         toast.error(t("outside_country") || "Outside selected country");
         revertToLastValid();
         return;
       }
 
+      hasManuallySelected.current = true;
       const newPos = { lat: location.lat(), lng: location.lng(), address };
       setMapCenter(newPos);
       setSearchQuery(address);
       lastValidPos.current = newPos;
       onChange?.(newPos);
 
-      mapRef.current?.panTo(newPos);
-      markerRef.current?.setPosition(newPos);
-    }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoaded, searchQuery, onChange, countryData?.code, t, debug]);
+      if (mapRef.current) {
+        mapRef.current.panTo(newPos);
+      }
+      if (markerRef.current) {
+        markerRef.current.setPosition(newPos);
+      }
+    });
+  }, [isLoaded, searchQuery, onChange, countryData?.code, t]);
 
-  // ------------------------------------
-  //  Handle marker drag
-  // ------------------------------------
+  // Handle marker drag
   const handleMarkerDragEnd = useCallback(
     (e: google.maps.MapMouseEvent) => {
       const lat = e.latLng?.lat();
       const lng = e.latLng?.lng();
       if (!lat || !lng) return;
-      log(debug, "[Marker] Drag end:", { lat, lng });
       updateAddressFromCoords(lat, lng);
     },
-    [updateAddressFromCoords, debug]
+    [updateAddressFromCoords]
   );
 
-  // ------------------------------------
-  //  Revert to last valid
-  // ------------------------------------
+  // Revert to last valid position
   const revertToLastValid = useCallback(() => {
     const pos = lastValidPos.current;
-    log(debug, "[Revert] Reverting to last valid:", pos);
     setMapCenter({ lat: pos.lat, lng: pos.lng });
     setSearchQuery(pos.address);
     onChange?.(pos);
-    mapRef.current?.panTo({ lat: pos.lat, lng: pos.lng });
-    markerRef.current?.setPosition({ lat: pos.lat, lng: pos.lng });
-  }, [onChange, debug]);
+    if (mapRef.current) {
+      mapRef.current.panTo({ lat: pos.lat, lng: pos.lng });
+    }
+    if (markerRef.current) {
+      markerRef.current.setPosition({ lat: pos.lat, lng: pos.lng });
+    }
+  }, [onChange]);
 
   return (
     <div className="flex flex-col gap-3">
-      {/* Search input */}
       <div className="relative w-full">
         <Input
           placeholder={t("search")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
           className="pr-10 h-[48px] rounded-[12px] border-[var(--lightBorderColor)]"
         />
         <Search
@@ -730,7 +602,6 @@ export default function LocationSearchMap({
         />
       </div>
 
-      {/* Map */}
       {isLoaded && window.google && (
         <GoogleMap
           mapContainerStyle={containerStyle}
@@ -744,7 +615,9 @@ export default function LocationSearchMap({
           }}
         >
           <Marker
-            onLoad={(m) => (markerRef.current = m)}
+            onLoad={(m) => {
+              markerRef.current = m;
+            }}
             position={mapCenter}
             draggable
             onDragEnd={handleMarkerDragEnd}

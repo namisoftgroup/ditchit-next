@@ -9,12 +9,14 @@ export async function saveLocationFilters(data: {
   kilometers?: string;
   address?: string;
   delivery_method?: string;
+  countryId?: string;
 }) {
   const store = await cookies();
 
   if (data.latitude) store.set("latitude", data.latitude, { path: "/" });
   if (data.longitude) store.set("longitude", data.longitude, { path: "/" });
   if (data.address) store.set("address", data.address, { path: "/" });
+  if (data.countryId) store.set("countryId", data.countryId, { path: "/" });
   if (data.kilometers)
     store.set("kilometers", String(data.kilometers), { path: "/" });
   if (data.zip_code)
