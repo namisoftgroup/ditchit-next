@@ -1,5 +1,5 @@
 import { getCategories } from "@/services/getCategories";
-import { getCountries } from "@/services/getCountries";
+import { getCountries, getOneCountry } from "@/services/getCountries";
 import { User } from "@/types/user";
 import GetApp from "./GetApp";
 import LogoBrand from "./LogoBrand";
@@ -10,6 +10,7 @@ import LocationSearch from "./LocationSearch";
 import HeaderCategories from "./HeaderCategories";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { getProfile } from "@/features/auth/actions";
+import { cookies } from "next/headers";
 
 type HeaderProps = {
   locale: string;
@@ -22,9 +23,13 @@ type HeaderProps = {
 export default async function Header({ locale, data }: HeaderProps) {
   const categoriesRes = await getCategories(locale);
   const countriesRes = await getCountries(locale);
+  // const countriesRes = await getCountries(locale, 1, 300);
+  const countryIdCookie = (await cookies()).get("countryId")?.value;
+
   const profileData = await getProfile();
   const categories = categoriesRes.data;
   const countries = countriesRes.data.data;
+  const selectedCountryFromApi = await getOneCountry(locale, countryIdCookie || "us");
 
   return (
     <>
@@ -35,6 +40,7 @@ export default async function Header({ locale, data }: HeaderProps) {
             hideSm={true}
             countries={countries}
             profileData={profileData.user}
+            selectedCountryFromApi={selectedCountryFromApi.data}
           />
           <Navigation isAuthed={!!data.token} />
 
@@ -58,6 +64,7 @@ export default async function Header({ locale, data }: HeaderProps) {
           hideSm={false}
           countries={countries}
           profileData={profileData.user}
+          selectedCountryFromApi={selectedCountryFromApi.data }
         />
       </div>
     </>

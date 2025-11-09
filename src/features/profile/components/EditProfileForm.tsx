@@ -673,7 +673,7 @@ export default function EditProfileForm({
         headers: { "Content-Type": "multipart/form-data" },
       });
       if (res?.data.code === 200) {
-        console.log('edit profile' , res.data);
+        // console.log('edit profile' , res.data);
         
         setUser(res.data.data.user);
               saveLocationFilters({

@@ -17,10 +17,12 @@ export default function LocationSearch({
   hideSm,
   countries,
   profileData,
+  selectedCountryFromApi,
 }: {
   hideSm: boolean;
   countries: Country[];
   profileData: User | null;
+  selectedCountryFromApi: Country | null;
 }) {
   const { filter } = useHomeFilter();
   const [show, setShow] = useState(false);
@@ -65,6 +67,7 @@ export default function LocationSearch({
         <LanguagesAndCountries
           countries={memoizedCountries}
           // profileData={memoizedProfileData}
+          selectedCountryFromApi={selectedCountryFromApi}
         />
 
         <form

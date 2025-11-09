@@ -16,5 +16,6 @@ export interface User {
     id:number
     code:string,
     title: string
+    symbol: string
   }
 }

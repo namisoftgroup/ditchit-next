@@ -144,9 +144,11 @@ import { useAuthStore } from "@/features/auth/store";
 
 export default function LanguagesAndCountries({
   countries,
+  selectedCountryFromApi
   // profileData,
 }: {
   countries: Country[];
+  selectedCountryFromApi: Country | null;
   // profileData: User | null;
 }) {
   const pathname = usePathname();
@@ -158,8 +160,8 @@ export default function LanguagesAndCountries({
   const { user } = useAuthStore();
 
   const [currentCountryFlag, setCurrentCountryFlag] = useState<string>(
-    countries.find((c) => c.code === "US")?.flag ?? "/placeholder-flag.png"
-  );
+    selectedCountryFromApi?.flag ?? "/placeholder-flag.png"
+  );  
 
   useEffect(() => {
     const countryFromCookie = getCookie("countryId");
@@ -186,8 +188,8 @@ export default function LanguagesAndCountries({
       selectedCountry = countries.find((c) => c.code === "US");
     }
     
-    setCurrentCountryFlag(selectedCountry?.flag ?? "/placeholder-flag.png");
-  }, [countries, user]);
+    setCurrentCountryFlag(selectedCountryFromApi?.flag ?? selectedCountry?.flag ?? "/placeholder-flag.png");
+  }, [countries, user , selectedCountryFromApi]);
 
   function changeLang(newLang: string) {
     return `/${newLang}${pathname}${queryString ? `?${queryString}` : ""}`;

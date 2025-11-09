@@ -28,4 +28,7 @@ export interface Post {
   date: string;
   time: string;
   publishing_duration: string;
+  country:{
+    symbol: string;
+  }
 }

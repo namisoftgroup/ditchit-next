@@ -19,13 +19,16 @@ serverAxios.interceptors.request.use(async (config) => {
 
   const baseLocale = locale?.split("-")[0];
   const country = locale?.split("-")[1];
-
+  const countryIdCookie = (await cookies()).get("countryId")?.value;
+  // console.log("countryIDCOookie" , countryIdCookie);
+  
   const normalizedLocale =
     baseLocale === "zh" ? "zh-CN" : baseLocale === "pt" ? "pt-BR" : baseLocale;
 
   config.headers["lang"] = normalizedLocale;
+  // Prefer countryId from cookie if available; otherwise derive from locale as before
   config.headers["country"] =
-    COUNTIRES_DATA.find((c) => c.code === country)?.id || 1;
+    countryIdCookie || COUNTIRES_DATA.find((c) => c.code === country)?.id || 1;
   config.headers.Authorization = token;
 
   return config;
