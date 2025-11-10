@@ -17,6 +17,9 @@ export default async function Home() {
     kilometers: cookieStore.get("kilometers")?.value ?? null,
     delivery_method: cookieStore.get("delivery_method")?.value ?? null,
     user_id: user?.id ?? null,
+    country_id: cookieStore.get("countryId")?.value
+      ? parseInt(cookieStore.get("countryId")!.value, 10)
+      : null,
   };
 
   await queryClient.prefetchInfiniteQuery({
