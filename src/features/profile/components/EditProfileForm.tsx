@@ -604,7 +604,7 @@ export default function EditProfileForm({
   const { user, setUser } = useAuthStore();
   const [isPending, setIsPending] = useState(false);
   const t = useTranslations("auth");
-  
+
   const methods = useForm<editProfileFormValues>({
     mode: "onChange",
     resolver: zodResolver(editProfileSchema),
@@ -673,16 +673,16 @@ export default function EditProfileForm({
         headers: { "Content-Type": "multipart/form-data" },
       });
       if (res?.data.code === 200) {
-        // console.log('edit profile' , res.data);
-        
+        console.log('edit profile' , res.data);
+
         setUser(res.data.data.user);
-              saveLocationFilters({
-                zip_code: String(res.data.data.user.country?.zip_code) ,
-                latitude: res.data.data.user.country?.center_lat,
-                longitude:res.data.data.user.country?.center_lng,
-                address :res.data.data.user.address,
-                countryId: res.data.data.user.country.id,
-              });
+        saveLocationFilters({
+          zip_code: String(res.data.data.user.zip_code),
+          latitude: res.data.data.user.latitude,
+          longitude: res.data.data.user.longitude,
+          address: res.data.data.user.address,
+          countryId: res.data.data.user.country_id,
+        });
         toast.success(t("update"));
       } else {
         toast.error(res?.data.message || "update profile failed");
