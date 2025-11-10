@@ -84,7 +84,8 @@
     "all":"All",
     "available":"Available",
     "sold":"Sold",
-    "outside_country":"Outside selected country"
+    "outside_country":"Outside selected country",
+    "location_required" : "Location is required"
   },
   "error": {
     "somthing_went_wrong": "Oops! Something went wrong",

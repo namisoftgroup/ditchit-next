@@ -84,7 +84,8 @@
     "all": "الكل",
     "available": "متاح",
     "sold": "مباع",
-    "outside_country": "خارج البلد المحدد"
+    "outside_country": "خارج البلد المحدد",
+    "location_required": "اختر الموقع"
   },
   "error": {
     "somthing_went_wrong": "عذرًا! حدث خطأ ما",

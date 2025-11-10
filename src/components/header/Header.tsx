@@ -1,5 +1,5 @@
 import { getCategories } from "@/services/getCategories";
-import { getCountries, getOneCountry } from "@/services/getCountries";
+import { getCountries } from "@/services/getCountries";
 import { User } from "@/types/user";
 import GetApp from "./GetApp";
 import LogoBrand from "./LogoBrand";
@@ -11,6 +11,7 @@ import HeaderCategories from "./HeaderCategories";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { getProfile } from "@/features/auth/actions";
 import { cookies } from "next/headers";
+import { getOneCountry } from "@/services/getOneCountry";
 
 type HeaderProps = {
   locale: string;

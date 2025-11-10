@@ -26,24 +26,3 @@ export async function getCountries(
 
   return response.json();
 }
-
-export async function getOneCountry(
-  lang: string,
-  countryId: string
-) {
-
-  const response = await fetch(`${API_URL}/main/country/${countryId}`, {
-    method: "GET",
-    headers: {
-      lang: lang === "zh" ? "zh-CN" : lang === "pt" ? "pt-BR" : lang,
-    },
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error("Error fetching country:", errorText);
-    throw new Error("Failed to fetch country");
-  }
-
-  return response.json();
-}
