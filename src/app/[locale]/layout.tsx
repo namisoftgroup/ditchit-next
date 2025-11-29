@@ -20,6 +20,7 @@ import Footer from "@/components/footer/Footer";
 
 import "./globals.css";
 import Script from "next/script";
+import AiFloatButton from "@/components/aiFloatButton/AiFloatButton";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://DitchIt.com/"),
@@ -134,7 +135,10 @@ export default async function RootLayout({ children, params }: Props) {
           {!data?.token && <GoogleOneTapAuth />}
 
           <Header locale={lang} data={data} />
-          <main className="min-h-[calc(100vh-316px)]">{children}</main>
+          <main className="min-h-[calc(100vh-316px)]">
+            {children}
+            <AiFloatButton />
+            </main>
 
           <audio id="notify-sound" src="/sounds/notify.mp3" preload="auto" />
           <Footer />
