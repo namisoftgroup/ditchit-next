@@ -80,7 +80,22 @@
     "no_available_text": "Kembali tidak lama lagi untuk menemui kandungan baru dan menarik!",
     "type": "Jenis",
     "sale": "Jualan",
-    "wanted": "Dikehendaki"
+    "wanted": "Dikehendaki",
+    "all": "Semua",
+    "available": "Terdapat",
+    "sold": "Dijual",
+    "outside_country": "Di luar negara terpilih",
+    "location_required": "Lokasi diperlukan",
+    "get_estimate": "Dapatkan anggaran nilai item",
+    "camera": "Kamera",
+    "gallery": "Galeri",
+    "processing_image": "Gambar pemprosesan ...",
+    "min": "Min:",
+    "max": "Maksimum:",
+    "unable_identify": "Tidak dapat mengenal pasti produk. Sila cuba dengan gambar yang lebih jelas.",
+    "sell": "Menjual",
+    "list_similar": "Senaraikan serupa",
+    "avg_price": "Harga purata:"
   },
   "error": {
     "somthing_went_wrong": "Oops! Sesuatu telah berlaku kesalahan",
@@ -201,7 +216,8 @@
     "offline": "Anda berada di luar talian. Sila periksa sambungan internet anda",
     "current_password": "Kata laluan semasa",
     "new_password": "Kata laluan baru",
-    "confirm_new_password": "Sahkan kata laluan baru"
+    "confirm_new_password": "Sahkan kata laluan baru",
+    "search_country": "Cari Negara ..."
   },
   "contact": {
     "full_name": "Nama Penuh",

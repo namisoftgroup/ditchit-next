@@ -7,17 +7,42 @@ import { useRouter } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { toast } from "sonner";
+import { sendCode } from "@/features/auth/service";
 
 export default function Sidebar() {
   const { user, logout } = useAuthStore();
   const router = useRouter();
-  const t = useTranslations("header");
+  const t = useTranslations();
 
   const performLogout = async () => {
     const res = await logOutAction();
     if (res.code === 200) {
       logout();
       router.push("/");
+    }
+  };
+  // console.log(user);
+  
+  const onSubmit = async () => {
+    if (!navigator.onLine) {
+      toast.error(t("error.offline"));
+      return;
+    }
+    try {
+      const res = await sendCode(user?.email || "");
+
+      console.log(res);
+      if (res.code === 200) {
+        router.push("/profile/verify-otp");
+        toast.success(t("auth.code_sent", { email: user?.email || "" }));
+        // toast.success(t("auth.code_sent"));
+      } else {
+        toast.error(res.message || "Failed to send code");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(t("error.offline"));
     }
   };
 
@@ -50,7 +75,7 @@ export default function Sidebar() {
             height={20}
             className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
           />
-          {t("my_posts")}
+          {t("header.my_posts")}
         </Link>
 
         <Link
@@ -62,7 +87,7 @@ export default function Sidebar() {
             height={20}
             className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
           />
-          {t("favorites")}
+          {t("header.favorites")}
         </Link>
 
         <Link
@@ -74,11 +99,11 @@ export default function Sidebar() {
             height={20}
             className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
           />
-          {t("edit_profile")}
+          {t("header.edit_profile")}
         </Link>
-        
-        <Link
-          href="/profile/change-password"
+
+        <button
+          onClick={onSubmit}
           className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)] whitespace-nowrap"
         >
           <Edit2
@@ -86,8 +111,8 @@ export default function Sidebar() {
             height={20}
             className="text-[var(--mainColor)] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
           />
-          {t("change_password")}
-        </Link>
+          {t("header.change_password")}
+        </button>
 
         <button
           className="group px-4 py-3 flex flex-1 gap-3 items-center transition-all duration-300 rounded-[12px] border border-[#eee] capitalize hover:bg-[var(--mainColor)] hover:text-[var(--whiteColor)] whitespace-nowrap"
@@ -98,7 +123,7 @@ export default function Sidebar() {
             height={20}
             className="text-[#FF0000] group-hover:text-[var(--whiteColor)] transition-colors duration-300 whitespace-nowrap"
           />
-          {t("logout")}
+          {t("header.logout")}
         </button>
       </div>
     </aside>

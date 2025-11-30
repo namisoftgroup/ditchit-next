@@ -64,7 +64,7 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
     <>
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex-1 text-[var(--mainColor)] text-[32px] font-bold whitespace-nowrap">
-          ${post.price.toFixed(2)}
+          {post?.country?.symbol} {post.price.toFixed(2)}
         </div>
 
         <button
@@ -157,6 +157,11 @@ export default function PostInfo({ post }: { post: PostDetailsResponse }) {
           {post.firm_price && (
             <span className="flex justify-center items-center gap-1 bg-[var(--mainColor)] text-[var(--whiteColor)] text-[14px] px-4 py-2 rounded-full">
               {t("firm_price")}
+            </span>
+          )}
+          {post.virtual_tour && (
+            <span className="flex justify-center items-center gap-1 bg-[var(--mainColor)] text-[var(--whiteColor)] text-[14px] px-4 py-2 rounded-full">
+              {t("virtual_tour")}
             </span>
           )}
         </div>

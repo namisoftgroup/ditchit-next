@@ -80,7 +80,22 @@
     "no_available_text": "Tule pian takaisin löytämään uutta ja jännittävää sisältöä!",
     "type": "Tyyppi",
     "sale": "Myynti",
-    "wanted": "Halusi"
+    "wanted": "Halusi",
+    "all": "Kaikki",
+    "available": "Saatavilla",
+    "sold": "myyty",
+    "outside_country": "Valitun maan ulkopuolella",
+    "location_required": "Sijainti vaaditaan",
+    "get_estimate": "Hanki tuotteen arvioitu arvo",
+    "camera": "Kamera",
+    "gallery": "Galleria",
+    "processing_image": "Käsitellään kuvaa...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "Tuotetta ei voida tunnistaa. Yritä selkeämmällä kuvalla.",
+    "sell": "Myydä",
+    "list_similar": "Listaa samanlaisia",
+    "avg_price": "Keskihinnat:"
   },
   "error": {
     "somthing_went_wrong": "Oi! Jotain meni pieleen.",
@@ -201,7 +216,8 @@
     "offline": "Olet offline-tilassa. Tarkista Internet-yhteytesi",
     "current_password": "Nykyinen salasana",
     "new_password": "Uusi salasana",
-    "confirm_new_password": "Vahvista uusi salasana"
+    "confirm_new_password": "Vahvista uusi salasana",
+    "search_country": "Hae maata..."
   },
   "contact": {
     "full_name": "Koko nimi",

@@ -105,7 +105,8 @@ export default function PostCard({
           </Link>
 
           <div className="text-lg font-bold">
-            <span>$ {post.price.toFixed(2)}</span>
+            {/* <span>$ {post.price.toFixed(2)}</span> */}
+            <span>{post.country?.symbol || '$'} {post.price.toFixed(2)}</span>
           </div>
         </div>
       </div>

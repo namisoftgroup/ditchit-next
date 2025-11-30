@@ -80,7 +80,22 @@
     "new": "جديد",
     "used": "مستخدم",
     "no_available": "لا توجد وظائف متاحة هنا حتى الآن.",
-    "no_available_text": "عد قريبًا لاكتشاف محتوى جديد ومثير!"
+    "no_available_text": "عد قريبًا لاكتشاف محتوى جديد ومثير!",
+    "all": "الكل",
+    "available": "متاح",
+    "sold": "مباع",
+    "outside_country": "خارج البلد المحدد",
+    "location_required": "اختر الموقع",
+    "get_estimate": "الحصول على القيمة التقديرية للعنصر",
+    "camera": "كاميرا",
+    "gallery": "معرض",
+    "processing_image": "جارٍ معالجة الصورة...",
+    "min": "صغري:",
+    "max": "كبري:",
+    "unable_identify": "تعذر تحديد المنتج. يُرجى المحاولة باستخدام صورة أوضح",
+    "sell": "بيع",
+    "list_similar": "عرض منتجات مشابهة",
+    "avg_price": "متوسط ​​الأسعار:"
   },
   "error": {
     "somthing_went_wrong": "عذرًا! حدث خطأ ما",
@@ -201,7 +216,8 @@
     "verified_success": "تم التحقق بنجاح",
     "current_password": "كلمة المرور الحالية",
     "new_password": "كلمة المرور الجديدة",
-    "confirm_new_password": "تأكيد كلمة المرور الجديدة"
+    "confirm_new_password": "تأكيد كلمة المرور الجديدة",
+    "search_country": "ابحث عن دولة..."
   },
   "contact": {
     "full_name": "الاسم الكامل",

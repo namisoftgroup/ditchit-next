@@ -27,7 +27,7 @@ export default async function Footer() {
       <div className="container">
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#3e3e3e] pt-4">
           <a
-            href="#"
+            
             className="flex items-center gap-2 text-sm text-[var(--whiteColor)] hover:text-[var(--mainColor)]"
             target="_blank"
             rel="noopener noreferrer"

@@ -99,7 +99,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
                   </button>
                 </DropdownMenuItem>
               )}
-              {post.type === 'sale' &&  (
+              {post.type === "sale" && (
                 <DropdownMenuItem asChild>
                   <button
                     className="flex items-center gap-2 w-full whitespace-nowrap text-[var(--darkColor)] hover:bg-[#f1f1f1] px-4 py-2 text-sm"
@@ -138,7 +138,7 @@ export default function PostActions({ post, showActions }: propsTypes) {
           </DropdownMenu>
 
           <span className="bg-white rounded-[40px] px-3 py-1 text-[var(--darkColor)] text-[14px] block border border-[var(--lightBorderColor)]">
-            {t("available")}
+            {post.is_sold ? t("sold") : t("available")}
           </span>
         </div>
       )}

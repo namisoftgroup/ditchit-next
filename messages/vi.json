@@ -80,7 +80,22 @@
     "no_available_text": "Hãy quay lại sớm để khám phá nội dung mới và thú vị!",
     "type": "Kiểu",
     "sale": "Doanh thu",
-    "wanted": "Muốn"
+    "wanted": "Muốn",
+    "all": "Tất cả",
+    "available": "Có sẵn",
+    "sold": "Đã bán",
+    "outside_country": "Bên ngoài quốc gia đã chọn",
+    "location_required": "Vị trí là bắt buộc",
+    "get_estimate": "Nhận giá trị ước tính của mặt hàng",
+    "camera": "Máy ảnh",
+    "gallery": "Phòng trưng bày",
+    "processing_image": "Đang xử lý hình ảnh...",
+    "min": "PHÚT:",
+    "max": "TỐI ĐA:",
+    "unable_identify": "Không thể xác định sản phẩm. Hãy thử với một hình ảnh rõ ràng hơn.",
+    "sell": "Bán",
+    "list_similar": "Danh sách tương tự",
+    "avg_price": "Giá trung bình:"
   },
   "error": {
     "somthing_went_wrong": "Úi! Có sự cố xảy ra",
@@ -201,7 +216,8 @@
     "offline": "Bạn đang ngoại tuyến. Vui lòng kiểm tra kết nối internet của bạn",
     "current_password": "Mật khẩu hiện tại",
     "new_password": "Mật khẩu mới",
-    "confirm_new_password": "Xác nhận mật khẩu mới"
+    "confirm_new_password": "Xác nhận mật khẩu mới",
+    "search_country": "Tìm kiếm quốc gia..."
   },
   "contact": {
     "full_name": "Họ và tên",

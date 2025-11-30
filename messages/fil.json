@@ -80,7 +80,22 @@
     "no_available_text": "Bumalik kaagad upang matuklasan ang bago at kapana -panabik na nilalaman!",
     "type": "I -type",
     "sale": "Benta",
-    "wanted": "Wanted"
+    "wanted": "Wanted",
+    "all": "Lahat",
+    "available": "Magagamit",
+    "sold": "Nabenta",
+    "outside_country": "Sa labas ng napiling bansa",
+    "location_required": "Kinakailangan ang lokasyon",
+    "get_estimate": "Kumuha ng tinantyang halaga ng item",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "processing_image": "Imahe ng pagproseso ...",
+    "min": "Min:",
+    "max": "Max:",
+    "unable_identify": "Hindi matukoy ang produkto. Mangyaring subukan sa isang mas malinaw na imahe.",
+    "sell": "Ibenta",
+    "list_similar": "Maglista ng katulad",
+    "avg_price": "Average na presyo:"
   },
   "error": {
     "somthing_went_wrong": "Naku! May nangyaring mali.",
@@ -201,7 +216,8 @@
     "offline": "Offline ka. Mangyaring suriin ang iyong koneksyon sa internet",
     "current_password": "Kasalukuyang password",
     "new_password": "Bagong password",
-    "confirm_new_password": "Kumpirmahin ang bagong password"
+    "confirm_new_password": "Kumpirmahin ang bagong password",
+    "search_country": "Search Country ..."
   },
   "contact": {
     "full_name": "Buong pangalan",

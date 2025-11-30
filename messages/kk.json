@@ -80,7 +80,22 @@
     "no_available_text": "Жақында жаңа және қызықты мазмұнды ашыңыз!",
     "type": "Басу",
     "sale": "Сату",
-    "wanted": "Қалаған"
+    "wanted": "Қалаған",
+    "all": "Бірі",
+    "available": "Жолы ашық",
+    "sold": "Сатылған",
+    "outside_country": "Сыртқы таңдалған ел",
+    "location_required": "Орналасу қажет",
+    "get_estimate": "Элементтің болжамды мәні",
+    "camera": "Фотоаппарат",
+    "gallery": "Галерея",
+    "processing_image": "Суретті өңдеу ...",
+    "min": "Мин:",
+    "max": "Макс:",
+    "unable_identify": "Өнімді анықтау мүмкін емес. Нақты кескінмен көріңіз.",
+    "sell": "Сату",
+    "list_similar": "Ұқсас тізім",
+    "avg_price": "Орташа бағалар:"
   },
   "error": {
     "somthing_went_wrong": "Ой! Бірдеңе дұрыс емес болды.",
@@ -201,7 +216,8 @@
     "offline": "Сіз желіден тыссіз. Интернет байланысын тексеріңіз",
     "current_password": "ағымдағы құпия сөз",
     "new_password": "Жаңа пароль",
-    "confirm_new_password": "Жаңа парольді растаңыз"
+    "confirm_new_password": "Жаңа парольді растаңыз",
+    "search_country": "Іздеу елі ..."
   },
   "contact": {
     "full_name": "Толық аты-жөні",

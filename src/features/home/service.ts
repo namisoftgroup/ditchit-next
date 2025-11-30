@@ -33,7 +33,6 @@ export async function getClientHomeCategories(
         ...request,
       },
     });
- console.log("res" , res.data);
 
     return res.data;
   } catch (error) {
@@ -63,3 +62,23 @@ export async function getCategoryPosts(
     throw new Error("Failed to fetch category posts");
   }
 }
+
+
+
+// export async function sendAverageByImage(payload) {
+//   try {
+//     const response = await clientAxios.post("/home/getAverageByImage", payload ,{
+//       headers:{
+//         "Content-Type":"multi"
+//       }
+//     });
+//     return response.data;
+//   } catch (error: unknown) {
+//     console.error("Contact form submission error:", error);
+
+//     return {
+//       success: false,
+//       message: "An unexpected error occurred",
+//     };
+//   }
+// }

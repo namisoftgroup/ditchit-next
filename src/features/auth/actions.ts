@@ -22,7 +22,7 @@ export async function authAction(formData: FormData, endPoint: string) {
       (await cookies()).set("token", responseData.data.auth.token, {
         path: "/",
         secure: true,
-        httpOnly: true,
+        httpOnly: false,
         sameSite: "lax",
         maxAge: 60 * 60 * 24 * 7,
       });
@@ -43,26 +43,73 @@ export async function authAction(formData: FormData, endPoint: string) {
 
 /* ~~~~~~~~~~~~ get profile action ~~~~~~~~~~~~ */
 
-export async function getProfile(): Promise<{
+// export async function getProfile(): Promise<{
+//   user: User | null;
+//   token: string | null;
+// }> {
+//   if (!(await cookies()).get("token")) {
+//     return {
+//       user: null,
+//       token: null,
+//     };
+//   }
+
+//   try {
+//     const response = await serverAxios.get(`${API_URL}/profile`);
+//     const token = (await cookies()).get("token")?.value || null;
+
+//     return {
+//       user: response.data.data.user || null,
+//       token,
+//     };
+//   } catch (error) {
+//     console.error("Failed to fetch profile", error);
+//     return {
+//       user: null,
+//       token: null,
+//     };
+//   }
+// }
+
+
+
+interface ProfileResponse {
   user: User | null;
   token: string | null;
-}> {
-  if (!(await cookies()).get("token")) {
+}
+
+let cachedProfile: ProfileResponse | null = null;
+let lastFetchTime = 0;
+const CACHE_DURATION = 30_000; // 30 seconds
+
+export async function getProfile(): Promise<ProfileResponse> {
+  const token = (await cookies()).get("token")?.value;
+  if (!token) {
     return {
       user: null,
       token: null,
     };
   }
 
-  try {
-    const response = await serverAxios.get(`${API_URL}/profile`);
-    const token = (await cookies()).get("token")?.value || null;
+  const now = Date.now();
+  if (cachedProfile && now - lastFetchTime < CACHE_DURATION) {
+    return cachedProfile;
+  }
 
-    return {
+  try {
+    const response = await serverAxios.get("/profile");
+    const result: ProfileResponse = {
       user: response.data.data.user || null,
       token,
     };
-  } catch (error) {
+
+    cachedProfile = result;
+    lastFetchTime = now;
+    return result;
+  } catch (error ) {
+    // if((error as AxiosError<{ message?: string }>).response?.status === 401) {
+    //     redirect('/api/auth/logout');
+    // }
     console.error("Failed to fetch profile", error);
     return {
       user: null,
@@ -70,8 +117,19 @@ export async function getProfile(): Promise<{
     };
   }
 }
-
 /* ~~~~~~~~~~~~ logout action ~~~~~~~~~~~~ */
+
+// export async function logOutAction() {
+//   try {
+//     await serverAxios.get(`${API_URL}/profile/logout`);
+//   } catch (error) {
+//     console.error("Failed to logout from server", error);
+//   } finally {
+//     (await cookies()).delete("token");
+//     delete serverAxios.defaults.headers.common["Authorization"];
+//     revalidatePath("/", "layout");
+//   }
+// }
 
 export async function logOutAction() {
   const res = await serverAxios.get(`${API_URL}/profile/logout`);
@@ -83,7 +141,6 @@ export async function logOutAction() {
     return res.data;
   }
 }
-
 /* ~~~~~~~~~~~~ check code action ~~~~~~~~~~~~ */
 
 export async function checkCodeAction(formData: FormData) {
@@ -95,9 +152,9 @@ export async function checkCodeAction(formData: FormData) {
     const responseData = response.data;
 
     if (responseData.code === 200) {
-      (await cookies()).set("token", responseData.data.auth.token, {
+      (await cookies()).set("tokenRestPass", responseData.data.auth.token, {
         path: "/",
-        httpOnly: true,
+        httpOnly: false,
         secure: true,
         sameSite: "lax",
         maxAge: 60 * 60 * 24 * 7,

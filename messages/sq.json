@@ -80,7 +80,22 @@
     "no_available_text": "Kthehuni së shpejti për të zbuluar përmbajtje të re dhe emocionuese!",
     "type": "Lloji",
     "sale": "Shitje",
-    "wanted": "Në kërkim"
+    "wanted": "Në kërkim",
+    "all": "Të gjitha",
+    "available": "Në dispozicion",
+    "sold": "Shitur",
+    "outside_country": "Jashtë vendit të zgjedhur",
+    "location_required": "Vendndodhja kërkohet",
+    "get_estimate": "Merrni vlerën e vlerësuar të artikullit",
+    "camera": "Kamera",
+    "gallery": "Galeria",
+    "processing_image": "Po përpunohet imazhi...",
+    "min": "MIN.:",
+    "max": "MAX:",
+    "unable_identify": "I paaftë për të identifikuar produktin. Ju lutemi provoni me një imazh më të qartë.",
+    "sell": "Shitet",
+    "list_similar": "Lista e ngjashme",
+    "avg_price": "Çmimet mesatare:"
   },
   "error": {
     "somthing_went_wrong": "Ups! Diçka shkoi gabim",
@@ -201,7 +216,8 @@
     "offline": "Ju jeni jashtë linje. Ju lutemi kontrolloni lidhjen tuaj të internetit",
     "current_password": "Fjalëkalimi aktual",
     "new_password": "Fjalëkalim i ri",
-    "confirm_new_password": "Konfirmo fjalëkalimin e ri"
+    "confirm_new_password": "Konfirmo fjalëkalimin e ri",
+    "search_country": "Kërko shtetin..."
   },
   "contact": {
     "full_name": "Emri i plotë",

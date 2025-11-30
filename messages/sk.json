@@ -80,7 +80,22 @@
     "no_available_text": "Vráťte sa čoskoro a objavte nový a vzrušujúci obsah!",
     "type": "Typ",
     "sale": "Predaj",
-    "wanted": "Hľadaný"
+    "wanted": "Hľadaný",
+    "all": "Všetky",
+    "available": "Dostupné",
+    "sold": "Predané",
+    "outside_country": "Mimo vybranej krajiny",
+    "location_required": "Poloha je povinná",
+    "get_estimate": "Získajte odhadovanú hodnotu položky",
+    "camera": "Fotoaparát",
+    "gallery": "Galéria",
+    "processing_image": "Spracúva sa obrázok...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "Produkt sa nepodarilo identifikovať. Skúste to s jasnejším obrázkom.",
+    "sell": "Predať",
+    "list_similar": "Zoznam podobných",
+    "avg_price": "Priemerné ceny:"
   },
   "error": {
     "somthing_went_wrong": "Ups! Niečo sa pokazilo",
@@ -201,7 +216,8 @@
     "offline": "Ste offline. Skontrolujte svoje internetové pripojenie",
     "current_password": "Aktuálne heslo",
     "new_password": "Nové heslo",
-    "confirm_new_password": "Potvrďte nové heslo"
+    "confirm_new_password": "Potvrďte nové heslo",
+    "search_country": "Hľadať krajinu..."
   },
   "contact": {
     "full_name": "Celé meno",

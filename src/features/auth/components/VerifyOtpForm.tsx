@@ -21,15 +21,10 @@ export default function VerifyOtpForm() {
   const [timer, setTimer] = useState(60);
   const router = useRouter();
   const t = useTranslations("auth");
-
+  const { user } = useAuthStore();
   const { setUser, setToken } = useAuthStore((state) => state);
   const { email } = useResetPasswordStore((state) => state);
-
-  useEffect(() => {
-    if (!email) {
-      router.push("/reset-password/send-code");
-    }
-  }, [email, router]);
+  const url = typeof window !== "undefined" ? window.location.href : "";
 
   // count timer
   useEffect(() => {
@@ -46,18 +41,24 @@ export default function VerifyOtpForm() {
     setIsPending(true);
 
     const formData = new FormData();
-    formData.append("email", email);
+    
+    formData.append("email", user?.email || email) 
     formData.append("code", code);
 
     try {
       const res = await checkCodeAction(formData);
 
       if (res.code === 200) {
-        document.cookie =
-          "verifyEmail=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        // document.cookie =
+        //   "verifyEmail=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
         setUser(res.data.user);
         setToken(res.data.auth.token);
-        router.push("/reset-password/new-password");
+
+        if (url.includes("reset-password")) {
+          router.push("/reset-password/new-password");
+        } else if (url.includes("profile")) {
+          router.push("/profile/change-password");
+        }
         toast.success(t("verified_success"));
       } else {
         toast.error(res.message);
@@ -112,7 +113,7 @@ export default function VerifyOtpForm() {
 
       <p className="text-[var(--darkColor)] text-center text-[16px]">
         {t("enter_code_sent_to")} <br />
-        {email}
+        {email || user?.email}
       </p>
 
       <InputOTP

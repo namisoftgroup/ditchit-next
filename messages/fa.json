@@ -80,7 +80,22 @@
     "no_available_text": "به زودی برگردید تا محتوای جدید و هیجان انگیز را کشف کنید!",
     "type": "تایپ کنید",
     "sale": "فروش",
-    "wanted": "تحت تعقیب"
+    "wanted": "تحت تعقیب",
+    "all": "همه",
+    "available": "موجود است",
+    "sold": "فروخته شد",
+    "outside_country": "خارج از کشور انتخاب شده",
+    "location_required": "مکان مورد نیاز است",
+    "get_estimate": "دریافت ارزش تخمینی مورد",
+    "camera": "دوربین",
+    "gallery": "گالری",
+    "processing_image": "در حال پردازش تصویر...",
+    "min": "MIN:",
+    "max": "حداکثر:",
+    "unable_identify": "قادر به شناسایی محصول نیست. لطفا با یک تصویر واضح تر امتحان کنید.",
+    "sell": "فروش",
+    "list_similar": "فهرست مشابه",
+    "avg_price": "میانگین قیمت ها:"
   },
   "error": {
     "somthing_went_wrong": "اوه! یک مشکلی پیش آمد",
@@ -201,7 +216,8 @@
     "offline": "شما آفلاین هستید. لطفا اتصال اینترنت خود را بررسی کنید",
     "current_password": "رمز عبور فعلی",
     "new_password": "رمز عبور جدید",
-    "confirm_new_password": "رمز عبور جدید را تأیید کنید"
+    "confirm_new_password": "رمز عبور جدید را تأیید کنید",
+    "search_country": "جستجوی کشور..."
   },
   "contact": {
     "full_name": "نام کامل",

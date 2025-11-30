@@ -1,7 +1,5 @@
 import { defineRouting } from "next-intl/routing";
 
-const ISO_CODES = ["US", "CA", "IN"];
-
 const LOCALES = [
   "af",
   "am",
@@ -61,16 +59,8 @@ const LOCALES = [
   "zh",
 ];
 
-const FULL_LOCALES: string[] = [];
-
-LOCALES.forEach((locale) => {
-  ISO_CODES.forEach((code) => {
-    FULL_LOCALES.push(`${locale}-${code}`);
-  });
-});
-
 export const routing = defineRouting({
-  locales: FULL_LOCALES,
-  defaultLocale: "en-us",
+  locales: LOCALES,
+  defaultLocale: "en",
   localePrefix: "always",
 });

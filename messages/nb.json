@@ -80,7 +80,22 @@
     "no_available_text": "Kom snart tilbake for å oppdage nytt og spennende innhold!",
     "type": "Type",
     "sale": "Salg",
-    "wanted": "Etterlyst"
+    "wanted": "Etterlyst",
+    "all": "Alle",
+    "available": "Tilgjengelig",
+    "sold": "Solgt",
+    "outside_country": "Utenfor valgt land",
+    "location_required": "Plassering er påkrevd",
+    "get_estimate": "Få estimert verdi på varen",
+    "camera": "Kamera",
+    "gallery": "Galleri",
+    "processing_image": "Behandler bilde...",
+    "min": "MIN:",
+    "max": "MAKS:",
+    "unable_identify": "Kan ikke identifisere produktet. Prøv med et klarere bilde.",
+    "sell": "Selge",
+    "list_similar": "Liste lignende",
+    "avg_price": "Gjennomsnittspriser:"
   },
   "error": {
     "somthing_went_wrong": "Oops! Noe gikk galt",
@@ -201,7 +216,8 @@
     "offline": "Du er frakoblet. Sjekk internettforbindelsen din",
     "current_password": "Gjeldende passord",
     "new_password": "Nytt passord",
-    "confirm_new_password": "Bekreft nytt passord"
+    "confirm_new_password": "Bekreft nytt passord",
+    "search_country": "Søk etter land..."
   },
   "contact": {
     "full_name": "Fullt navn",

@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import useUrlFilters from "@/hooks/useFilterParams";
 import AccordionFilter from "./AccordionFilter";
+import Link from "next/link";
 
 export default function FilterSideBar({
   categories,
@@ -87,6 +88,12 @@ export default function FilterSideBar({
           <AccordionFilter categories={categories} />
         </div>
       </div>
+      <Link
+        href={"/posts"}
+        className=" flex items-center justify-center py-3  mt-auto hover:scale-105"
+      >
+        Remove Filter
+      </Link>
     </div>
   );
 }

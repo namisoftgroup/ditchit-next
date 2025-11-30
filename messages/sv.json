@@ -80,7 +80,22 @@
     "no_available_text": "Kom tillbaka snart för att upptäcka nytt och spännande innehåll!",
     "type": "Typ",
     "sale": "Försäljning",
-    "wanted": "Efterlyst"
+    "wanted": "Efterlyst",
+    "all": "Alla",
+    "available": "Tillgänglig",
+    "sold": "Såld",
+    "outside_country": "Utanför valt land",
+    "location_required": "Plats krävs",
+    "get_estimate": "Få uppskattat värde på artikeln",
+    "camera": "Kamera",
+    "gallery": "Galleri",
+    "processing_image": "Bearbetar bild...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "Det går inte att identifiera produkten. Försök med en tydligare bild.",
+    "sell": "Sälja",
+    "list_similar": "Lista liknande",
+    "avg_price": "Genomsnittliga priser:"
   },
   "error": {
     "somthing_went_wrong": "Hoppsan! Något gick fel",
@@ -201,7 +216,8 @@
     "offline": "Du är offline. Kontrollera din internetanslutning",
     "current_password": "Aktuellt lösenord",
     "new_password": "Nytt lösenord",
-    "confirm_new_password": "Bekräfta nytt lösenord"
+    "confirm_new_password": "Bekräfta nytt lösenord",
+    "search_country": "Sök land..."
   },
   "contact": {
     "full_name": "Fullständigt namn",

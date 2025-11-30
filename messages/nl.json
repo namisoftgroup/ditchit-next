@@ -80,7 +80,22 @@
     "no_available_text": "Kom snel terug om nieuwe en opwindende inhoud te ontdekken!",
     "type": "Type",
     "sale": "Verkoop",
-    "wanted": "Gewild"
+    "wanted": "Gewild",
+    "all": "Alle",
+    "available": "Beschikbaar",
+    "sold": "Verkocht",
+    "outside_country": "Buiten het geselecteerde land",
+    "location_required": "Locatie is vereist",
+    "get_estimate": "Ontvang de geschatte waarde van het item",
+    "camera": "Camera",
+    "gallery": "Galerij",
+    "processing_image": "Afbeelding verwerken...",
+    "min": "MIN:",
+    "max": "MAXIMUM:",
+    "unable_identify": "Kan product niet identificeren. Probeer het met een duidelijker beeld.",
+    "sell": "Verkopen",
+    "list_similar": "Lijst vergelijkbaar",
+    "avg_price": "Gemiddelde prijzen:"
   },
   "error": {
     "somthing_went_wrong": "Oeps! Er is iets misgegaan.",
@@ -201,7 +216,8 @@
     "offline": "Je bent offline. Controleer uw internetverbinding",
     "current_password": "Huidig ​​wachtwoord",
     "new_password": "Nieuw wachtwoord",
-    "confirm_new_password": "Bevestig nieuw wachtwoord"
+    "confirm_new_password": "Bevestig nieuw wachtwoord",
+    "search_country": "Zoek land..."
   },
   "contact": {
     "full_name": "Volledige naam",

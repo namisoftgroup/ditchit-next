@@ -80,7 +80,22 @@
     "no_available_text": "Vratite se uskoro da biste otkrili novi i uzbudljiv sadržaj!",
     "type": "Tip",
     "sale": "Prodaja",
-    "wanted": "tražen"
+    "wanted": "tražen",
+    "all": "Sve",
+    "available": "na raspolaganju",
+    "sold": "prodano",
+    "outside_country": "Izvan odabrane zemlje",
+    "location_required": "Lokacija je obavezna",
+    "get_estimate": "Dobijte procijenjenu vrijednost stavke",
+    "camera": "Fotoaparat",
+    "gallery": "Galerija",
+    "processing_image": "Obrada slike...",
+    "min": "MIN:",
+    "max": "MAKSIMALNO:",
+    "unable_identify": "Nije moguće identificirati proizvod. Pokušajte s jasnijom slikom.",
+    "sell": "Prodavati",
+    "list_similar": "Popis sličnih",
+    "avg_price": "Prosječne cijene:"
   },
   "error": {
     "somthing_went_wrong": "Oups! Nešto je pošlo po zlu.",
@@ -201,7 +216,8 @@
     "offline": "Vi ste izvan mreže. Provjerite svoju internetsku vezu",
     "current_password": "Trenutna lozinka",
     "new_password": "Nova lozinka",
-    "confirm_new_password": "Potvrdite novu lozinku"
+    "confirm_new_password": "Potvrdite novu lozinku",
+    "search_country": "Traži zemlju..."
   },
   "contact": {
     "full_name": "Puno ime",

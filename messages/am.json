@@ -80,7 +80,22 @@
     "no_available_text": "አዲስ እና አስደሳች ይዘት ለማግኘት በቅርቡ ተመልሰው ይምጡ!",
     "type": "ዓይነት",
     "sale": "ሽያጭ",
-    "wanted": "ተፈላጊ"
+    "wanted": "ተፈላጊ",
+    "all": "ሁሉም",
+    "available": "ይገኛል",
+    "sold": "ሸሸ",
+    "outside_country": "ከተመረጠው ሀገር ውጭ",
+    "location_required": "መገኛ ቦታ ያስፈልጋል",
+    "get_estimate": "የንጥል ግምታዊ ዋጋ ያግኙ",
+    "camera": "ካሜራ",
+    "gallery": "ጋለሪ",
+    "processing_image": "ምስል ማካሄድ ...",
+    "min": "ደቂቃ:",
+    "max": "ማክስ",
+    "unable_identify": "ምርትን መለየት አልተቻለም. እባክዎን ይበልጥ ግልጽ በሆነ ምስል ይሞክሩ.",
+    "sell": "ሽቱ",
+    "list_similar": "ተመሳሳይ ይዘርዝሩ",
+    "avg_price": "አማካኝ ዋጋዎች: -"
   },
   "error": {
     "somthing_went_wrong": "ውይ! ነገር ተሳስቷል",
@@ -201,7 +216,8 @@
     "offline": "ከመስመር ውጭ ነዎት. እባክዎ የበይነመረብ ግንኙነትዎን ያረጋግጡ",
     "current_password": "የአሁኑ ሚስጥራዊ ማለፊያ ቁልፍ",
     "new_password": "አዲስ የይለፍ ቃል",
-    "confirm_new_password": "አዲስ የይለፍ ቃል ያረጋግጡ"
+    "confirm_new_password": "አዲስ የይለፍ ቃል ያረጋግጡ",
+    "search_country": "ፈልግ ሀገር ..."
   },
   "contact": {
     "full_name": "ሙሉ ስም",

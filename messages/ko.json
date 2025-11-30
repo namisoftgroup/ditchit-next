@@ -80,7 +80,22 @@
     "no_available_text": "새롭고 흥미로운 콘텐츠를 발견하기 위해 곧 돌아와!",
     "type": "유형",
     "sale": "판매",
-    "wanted": "구함"
+    "wanted": "구함",
+    "all": "모두",
+    "available": "사용 가능",
+    "sold": "판매된",
+    "outside_country": "선택한 국가 외부",
+    "location_required": "위치는 필수 항목입니다.",
+    "get_estimate": "품목의 추정 가치 얻기",
+    "camera": "카메라",
+    "gallery": "갱도",
+    "processing_image": "이미지 처리 중...",
+    "min": "최소:",
+    "max": "최대:",
+    "unable_identify": "제품을 식별할 수 없습니다. 좀 더 선명한 이미지로 시도해 보세요.",
+    "sell": "팔다",
+    "list_similar": "유사한 목록",
+    "avg_price": "평균 가격:"
   },
   "error": {
     "somthing_went_wrong": "앗! 문제가 발생했습니다.",
@@ -201,7 +216,8 @@
     "offline": "귀하는 오프라인 상태입니다. 인터넷 연결을 확인해주세요",
     "current_password": "현재 비밀번호",
     "new_password": "새 비밀번호",
-    "confirm_new_password": "새 비밀번호 확인"
+    "confirm_new_password": "새 비밀번호 확인",
+    "search_country": "국가 검색..."
   },
   "contact": {
     "full_name": "성명",

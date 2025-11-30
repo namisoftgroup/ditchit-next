@@ -14,8 +14,7 @@ export default function useGetMyPosts() {
       getNextPageParam: (lastPage, _, lastPageParam) => {
         const posts = lastPage?.data ?? [];
         if (posts.length === 0) return undefined;
-        return lastPageParam + 1;
-      },
+        return lastPageParam + 1; },
     });
 
   return {

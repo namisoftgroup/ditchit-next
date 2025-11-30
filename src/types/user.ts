@@ -14,6 +14,8 @@ export interface User {
   country:{
     flag:string
     id:number
-    code:string
+    code:string,
+    title: string
+    symbol: string
   }
 }

@@ -2,11 +2,11 @@ import { z } from "zod";
 
 export const passwordSchema = z
   .object({
-    current_password: z
-      .string()
-      .min(6, "password_validation")
-      .optional()
-      .or(z.literal("")),
+    // current_password: z
+    //   .string()
+    //   .min(6, "password_validation")
+    //   .optional()
+    //   .or(z.literal("")),
     new_password: z
       .string()
       .min(6, "password_validation")

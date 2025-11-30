@@ -33,7 +33,7 @@ export default function InputField({
         id={id}
         {...props}
         type={inputType}
-        className={`px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)] ${id === "phone" ? "" : ""}`}
+        className={`px-4 h-[48px] rounded-[12px] border-[var(--lightBorderColor)] ${id === "phone" ? "" : ""} ${props.disabled ? "bg-gray-300 cursor-not-allowed" : ""} `}
       />
       {/* {id === "phone" && (
         <span className="font-bold text-[var(--mainColor)] absolute start-4 top-[38px] transform">

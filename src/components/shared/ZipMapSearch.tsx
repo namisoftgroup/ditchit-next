@@ -28,28 +28,35 @@ export default function ZipMapSearch({
   country: Country;
   countryId: string | undefined;
 }) {
-  const t = useTranslations("common");
+  const t = useTranslations();
   const locale = useLocale();
   const { watch, setValue } = useFormContext();
-  
+// console.log("countries" , country);
+
   // Form values
   const zipCode = watch("zip_code");
   const savedLat = watch("latitude");
   const savedLng = watch("longitude");
   const savedAddress = watch("address");
+  const countryChanged = watch("country_changed");
 
   // State
   const [isLoaded, setIsLoaded] = useState(false);
-  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>(() => ({
-    lat: country?.center_lat,
-    lng: country?.center_lng,
-  }));
+  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>(
+    () => ({
+      lat: country?.center_lat || 0,
+      lng: country?.center_lng || 0,
+    })
+  );
   const [searchValue, setSearchValue] = useState("");
   const [lastZip, setLastZip] = useState("");
-  const [selectCountryBounds, setSelectCountryBounds] = useState(country?.code || "");
-  const [lastValidPosition, setLastValidPosition] = useState<{ lat: number; lng: number }>({
-    lat: country?.center_lat,
-    lng: country?.center_lng,
+  const [, setSelectCountryBounds] = useState(country?.code || "");
+  const [lastValidPosition, setLastValidPosition] = useState<{
+    lat: number;
+    lng: number;
+  }>({
+    lat: country?.center_lat || 0,
+    lng: country?.center_lng || 0,
   });
   const [lastValidAddress, setLastValidAddress] = useState("");
 
@@ -63,20 +70,17 @@ export default function ZipMapSearch({
   // SECTION 1: Google Maps Script Loading
   // ============================================
   useEffect(() => {
-    // If already loaded, set state and return
     if (typeof window !== "undefined" && window.google?.maps) {
       setIsLoaded(true);
       return;
     }
 
-    // If script exists, wait for it to load
     const existingScript = document.getElementById("google-maps-script");
     if (existingScript) {
       existingScript.addEventListener("load", () => setIsLoaded(true));
       return;
     }
 
-    // Load new script
     const loadGoogleMaps = () => {
       return new Promise<void>((resolve, reject) => {
         const script = document.createElement("script");
@@ -96,68 +100,202 @@ export default function ZipMapSearch({
   }, [locale]);
 
   // ============================================
-  // SECTION 2: Handle Country Change - Reset map to new country center
+  // SECTION 2: Handle Country Change
   // ============================================
   useEffect(() => {
     if (!country?.code || !country?.center_lat || !country?.center_lng) return;
-    
-    // Check if country has changed
-    if (previousCountryCodeRef.current !== country.code) {
+
+    if (previousCountryCodeRef.current !== country.code || countryChanged) {
       const newCenter = {
         lat: country.center_lat,
         lng: country.center_lng,
       };
 
-      // Reset map to new country center
       setMapCenter(newCenter);
       setLastValidPosition(newCenter);
       setSelectCountryBounds(country.code);
-      
-      // Clear previous location data
+
       setSearchValue("");
       setLastValidAddress("");
       setValue("latitude", newCenter.lat);
       setValue("longitude", newCenter.lng);
       setValue("address", "");
       setLastZip("");
-      
-      // Reset initialization flag to allow geolocation for new country
+
       isInitializedRef.current = false;
-      
-      // Update ref to track current country
       previousCountryCodeRef.current = country.code;
 
-      // Pan map if it's already loaded
       if (mapRef.current) {
         mapRef.current.panTo(newCenter);
+        mapRef.current.setZoom(6);
       }
     }
-  }, [country, setValue]);
+  }, [country, setValue, countryChanged]);
 
   // ============================================
-  // SECTION 3: Show saved address in search field (Edit Profile)
+  // CORE FUNCTION: Convert coordinates to address
+  // ============================================
+  const geocodeCache = useRef<Record<string, any>>({}); // eslint-disable-line @typescript-eslint/no-explicit-any
+  const lastGeocodeTimestampRef = useRef<number>(0);
+  const THROTTLE_DELAY = 1000;
+
+  const updateAddressFromCoords = useCallback(
+    async (lat: number, lng: number, preFetchedAddress?: string) => {
+      if (isUpdatingRef.current || !lat || !lng) return;
+
+      const roundedLat = Math.round(lat * 1000000) / 1000000;
+      const roundedLng = Math.round(lng * 1000000) / 1000000;
+      const cacheKey = `${roundedLat},${roundedLng}`;
+
+      const now = Date.now();
+      if (now - lastGeocodeTimestampRef.current < THROTTLE_DELAY) {
+        return;
+      }
+
+      isUpdatingRef.current = true;
+      lastGeocodeTimestampRef.current = now;
+
+      try {
+        if (geocodeCache.current[cacheKey] && !preFetchedAddress) {
+          const cachedResult = geocodeCache.current[cacheKey];
+          handleGeocodeResult(
+            cachedResult.results,
+            cachedResult.status,
+            roundedLat,
+            roundedLng,
+            cachedResult.address
+          );
+          isUpdatingRef.current = false;
+          return;
+        }
+
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode(
+          { location: { lat: roundedLat, lng: roundedLng } },
+          (results, status) => {
+            let address = preFetchedAddress;
+            if (!address && status === "OK" && results && results[0]) {
+              address = results[0].formatted_address;
+            }
+
+            if (status === "OK" && results && results[0]) {
+              geocodeCache.current[cacheKey] = {
+                results,
+                status,
+                address,
+              };
+            }
+
+            handleGeocodeResult(
+              results,
+              status,
+              roundedLat,
+              roundedLng,
+              address
+            );
+            isUpdatingRef.current = false;
+          }
+        );
+      } catch (error) {
+        console.error("Geocoding error:", error);
+        toast.error("Geocode failed");
+        isUpdatingRef.current = false;
+      }
+    },
+    [country?.code, lastValidAddress, lastValidPosition, setValue, t] // eslint-disable-line react-hooks/exhaustive-deps
+  );
+
+  const handleGeocodeResult = useCallback(
+    (
+      results: google.maps.GeocoderResult[] | null,
+      status: google.maps.GeocoderStatus,
+      lat: number,
+      lng: number,
+      address?: string
+    ) => {
+      if (status === "OK" && results && results[0]) {
+        const bounds = results
+          .flatMap((res) =>
+            res.address_components
+              .filter((add) => add.types.includes("country"))
+              .map((add) => add.short_name)
+          )
+          .filter(Boolean);
+
+        const detectedCountry = bounds[0] ?? "";
+
+        if (!isInitializedRef.current) {
+          setMapCenter({ lat, lng });
+          setValue("latitude", lat);
+          setValue("longitude", lng);
+          setValue("address", address || "");
+          setSearchValue(address || "");
+          setSelectCountryBounds(detectedCountry);
+          setLastValidPosition({ lat, lng });
+          setLastValidAddress(address || "");
+          isInitializedRef.current = true;
+          return;
+        }
+
+        if (detectedCountry === "" || detectedCountry !== country?.code) {
+          toast.error("You are outside the selected country");
+
+          if (mapRef.current) {
+            mapRef.current.panTo(lastValidPosition);
+          }
+          setMapCenter(lastValidPosition);
+          setValue("latitude", lastValidPosition.lat);
+          setValue("longitude", lastValidPosition.lng);
+          setValue("address", lastValidAddress);
+          setSearchValue(lastValidAddress);
+        } else {
+          setMapCenter({ lat, lng });
+          setValue("latitude", lat);
+          setValue("longitude", lng);
+          setValue("address", address || "");
+          setSearchValue(address || "");
+          setSelectCountryBounds(detectedCountry);
+          setLastValidPosition({ lat, lng });
+          setLastValidAddress(address || "");
+        }
+      } else {
+        toast.error("Geocode failed");
+        if (mapRef.current) {
+          mapRef.current.panTo(lastValidPosition);
+        }
+        setMapCenter(lastValidPosition);
+        setValue("latitude", lastValidPosition.lat);
+        setValue("longitude", lastValidPosition.lng);
+        setValue("address", lastValidAddress);
+        setSearchValue(lastValidAddress);
+      }
+    },
+    [country?.code, lastValidAddress, lastValidPosition, setValue, t] // eslint-disable-line react-hooks/exhaustive-deps
+  );
+
+  // ============================================
+  // SECTION 3: Show saved address
   // ============================================
   useEffect(() => {
-    if (savedAddress && !searchValue) {
+    if (savedAddress && !searchValue && searchValue !== "") {
       setSearchValue(savedAddress);
       setLastValidAddress(savedAddress);
     }
   }, [savedAddress, searchValue]);
 
   // ============================================
-  // SECTION 4: Initialize with saved coordinates (Edit Profile)
+  // SECTION 4: Initialize with saved coordinates
   // ============================================
   useEffect(() => {
     if (!isLoaded || isInitializedRef.current) return;
 
     const latNum = Number(savedLat);
     const lngNum = Number(savedLng);
-    
+
     if (!isNaN(latNum) && !isNaN(lngNum) && latNum !== 0 && lngNum !== 0) {
       const pos = { lat: latNum, lng: lngNum };
       setMapCenter(pos);
       setLastValidPosition(pos);
-      // Ensure address is resolved
       updateAddressFromCoords(latNum, lngNum);
       isInitializedRef.current = true;
     }
@@ -165,7 +303,7 @@ export default function ZipMapSearch({
   }, [savedLat, savedLng, isLoaded]);
 
   // ============================================
-  // SECTION 5: Get current location (Initial Load)
+  // SECTION 5: Get current location
   // ============================================
   useEffect(() => {
     if (!isLoaded || isInitializedRef.current) return;
@@ -186,116 +324,103 @@ export default function ZipMapSearch({
         }
       );
     }
-  }, [country, countryId, isLoaded]);
+  }, [country, countryId, isLoaded]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ============================================
   // SECTION 6: Fetch coordinates from ZIP code
   // ============================================
+  const zipCodeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
-    const fetchCoordinates = async () => {
-      if (zipCode && zipCode !== lastZip) {
-        const result = await getCoordinates(zipCode);
-        if (result) {
-          updateAddressFromCoords(result.latitude, result.longitude, result.address);
-          setLastZip(zipCode);
-        } else {
-          toast.error(t("zipcode_error"));
-        }
+    if (zipCodeTimeoutRef.current) {
+      clearTimeout(zipCodeTimeoutRef.current);
+    }
+
+    if (!zipCode || zipCode === lastZip) return;
+
+    const cacheKey = `zip_${zipCode}`;
+    if (geocodeCache.current[cacheKey]) {
+      const cachedResult = geocodeCache.current[cacheKey];
+      updateAddressFromCoords(
+        cachedResult.latitude,
+        cachedResult.longitude,
+        cachedResult.address
+      );
+      setLastZip(zipCode);
+      return;
+    }
+
+    zipCodeTimeoutRef.current = setTimeout(async () => {
+      if (
+        isUpdatingRef.current ||
+        Date.now() - lastGeocodeTimestampRef.current < THROTTLE_DELAY
+      ) {
+        return;
+      }
+
+      const result = await getCoordinates(zipCode);
+      if (result) {
+        geocodeCache.current[cacheKey] = result;
+        updateAddressFromCoords(
+          result.latitude,
+          result.longitude,
+          result.address
+        );
+        setLastZip(zipCode);
+      } else {
+        toast.error(t("auth.zipcode_error"));
+      }
+    }, 800);
+
+    return () => {
+      if (zipCodeTimeoutRef.current) {
+        clearTimeout(zipCodeTimeoutRef.current);
       }
     };
-    fetchCoordinates();
-  }, [zipCode, lastZip, t]);
+  }, [zipCode, lastZip, t, updateAddressFromCoords]);
 
   // ============================================
-  // SECTION 7: Interactive search while typing (Debounced)
+  // MANUAL SEARCH FUNCTION
   // ============================================
-  useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      if (!searchValue.trim() || !window.google) return;
+  const handleSearch = useCallback(() => {
+    if (!searchValue.trim() || !window.google || !isLoaded) return;
 
-      const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ address: searchValue }, (results, status) => {
-        if (status === "OK" && results && results[0]) {
-          const loc = results[0].geometry.location;
-          const lat = loc.lat();
-          const lng = loc.lng();
-          const address = results[0].formatted_address;
-          updateAddressFromCoords(lat, lng, address);
-        }
-      });
-    }, 600);
+    const cacheKey = `search_${searchValue.trim()}`;
+    if (geocodeCache.current[cacheKey]) {
+      const cachedResult = geocodeCache.current[cacheKey];
+      const lat = cachedResult.lat;
+      const lng = cachedResult.lng;
+      updateAddressFromCoords(lat, lng, cachedResult.address);
+      return;
+    }
 
-    return () => clearTimeout(delayDebounce);
-  }, [searchValue]);
-
-  // ============================================
-  // CORE FUNCTION: Convert coordinates to address & validate country
-  // ============================================
-  const updateAddressFromCoords = async (
-    lat: number,
-    lng: number,
-    preFetchedAddress?: string
-  ) => {
-    if (isUpdatingRef.current) return;
-    isUpdatingRef.current = true;
+    if (
+      isUpdatingRef.current ||
+      Date.now() - lastGeocodeTimestampRef.current < THROTTLE_DELAY
+    ) {
+      return;
+    }
 
     const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-      let address = preFetchedAddress;
-      if (!address && status === "OK" && results && results[0]) {
-        address = results[0].formatted_address;
-      }
-
+    geocoder.geocode({ address: searchValue.trim() }, (results, status) => {
       if (status === "OK" && results && results[0]) {
-        const bounds = results
-          .flatMap((res) =>
-            res.address_components
-              .filter((add) => add.types.includes("country"))
-              .map((add) => add.short_name)
-          )
-          .filter(Boolean);
+        const loc = results[0].geometry.location;
+        const lat = loc.lat();
+        const lng = loc.lng();
+        const address = results[0].formatted_address;
 
-        const detectedCountry = bounds[0] ?? "";
+        geocodeCache.current[cacheKey] = {
+          lat,
+          lng,
+          address,
+        };
 
-        if (detectedCountry === "" || detectedCountry !== country?.code) {
-          toast.error("You are outside the selected country");
-
-          // Revert to last valid position without clearing address
-          if (mapRef.current) {
-            mapRef.current.panTo(lastValidPosition);
-          }
-          setMapCenter(lastValidPosition);
-          setValue("latitude", lastValidPosition.lat);
-          setValue("longitude", lastValidPosition.lng);
-          setValue("address", lastValidAddress);
-          setSearchValue(lastValidAddress);
-        } else {
-          // Inside country: update everything
-          setMapCenter({ lat, lng });
-          setValue("latitude", lat);
-          setValue("longitude", lng);
-          setValue("address", address || "");
-          setSearchValue(address || "");
-          setSelectCountryBounds(detectedCountry);
-          setLastValidPosition({ lat, lng });
-          setLastValidAddress(address || "");
-        }
+        updateAddressFromCoords(lat, lng, address);
       } else {
-        // Geocode failed: revert without clearing
-        toast.error("Geocode failed");
-        if (mapRef.current) {
-          mapRef.current.panTo(lastValidPosition);
-        }
-        setMapCenter(lastValidPosition);
-        setValue("latitude", lastValidPosition.lat);
-        setValue("longitude", lastValidPosition.lng);
-        setValue("address", lastValidAddress);
-        setSearchValue(lastValidAddress);
+        toast.error("Location not found");
       }
-
-      isUpdatingRef.current = false;
     });
-  };
+  }, [searchValue, isLoaded, updateAddressFromCoords]);
 
   // ============================================
   // EVENT HANDLERS
@@ -304,26 +429,29 @@ export default function ZipMapSearch({
     mapRef.current = map;
   }, []);
 
-  const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
-    const lat = e.latLng?.lat();
-    const lng = e.latLng?.lng();
-    if (lat && lng) {
-      updateAddressFromCoords(lat, lng);
-    }
-  };
+  const lastDragPositionRef = useRef<{ lat: number; lng: number } | null>(null);
 
-  // Note: handleMapDragEnd is commented in original code
-  // const handleMapDragEnd = useCallback(() => {
-  //   const newCenter = mapRef.current?.getCenter();
-  //   if (newCenter) {
-  //     const lat = newCenter.lat();
-  //     const lng = newCenter.lng();
-  //     updateAddressFromCoords(lat, lng);
-  //   }
-  // }, []);
+  const handleMarkerDragEnd = useCallback(
+    (e: google.maps.MapMouseEvent) => {
+      const lat = e.latLng?.lat();
+      const lng = e.latLng?.lng();
 
-  // Debug logging (from original code)
-  console.log(country, selectCountryBounds, mapCenter, savedLat, savedLng);
+      if (lat && lng) {
+        const lastPos = lastDragPositionRef.current;
+        if (
+          lastPos &&
+          Math.abs(lastPos.lat - lat) < 0.0001 &&
+          Math.abs(lastPos.lng - lng) < 0.0001
+        ) {
+          return;
+        }
+
+        lastDragPositionRef.current = { lat, lng };
+        updateAddressFromCoords(lat, lng);
+      }
+    },
+    [updateAddressFromCoords]
+  );
 
   // ============================================
   // RENDER
@@ -332,13 +460,42 @@ export default function ZipMapSearch({
     <div className="space-y-2">
       {isLoaded && window.google ? (
         <>
-          <input
-            type="text"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder={t("search")}
-            className="form-control w-full rounded-xl border border-gray-300 p-2 "
-          />
+          <div className="relative">
+            <input
+              type="text"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleSearch();
+                }
+              }}
+              placeholder={t("common.search")}
+              className="form-control w-full rounded-xl border border-gray-300 p-2 pr-10"
+            />
+            <button
+              type="button"
+              onClick={handleSearch}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              aria-label="Search"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+          </div>
 
           {mapCenter && (
             <GoogleMap
@@ -346,7 +503,6 @@ export default function ZipMapSearch({
               center={mapCenter}
               zoom={3}
               onLoad={onLoad}
-              // onDragEnd={handleMapDragEnd}
               options={{
                 streetViewControl: false,
                 mapTypeControl: false,
@@ -363,7 +519,7 @@ export default function ZipMapSearch({
           )}
         </>
       ) : (
-        <p className="text-gray-500 text-sm">{t("loading")}</p>
+        <p className="text-gray-500 text-sm">{t("common.loading")}</p>
       )}
     </div>
   );

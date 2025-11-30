@@ -2,19 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
 import createMiddleware from "next-intl/middleware";
 
+// Create the next-intl middleware instance
 const intlMiddleware = createMiddleware(routing);
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const pathname = request.nextUrl.pathname;
 
-  const pathSegments = pathname.split("/");
+  // Extract locale from the first path segment
+  const pathSegments = pathname.split("/").filter(Boolean);
+  const locale = routing.locales.includes(pathSegments[0])
+    ? pathSegments[0]
+    : routing.defaultLocale;
 
-  const [, locale] = pathSegments;
-  const normalizedPath = routing.locales.includes(locale)
-    ? `/${pathSegments.slice(2).join("/")}`
+  // Build the path without the locale prefix (for matching)
+  const normalizedPath = routing.locales.includes(pathSegments[0])
+    ? `/${pathSegments.slice(1).join("/")}`
     : pathname;
 
+  // --- AUTH & PROTECTED ROUTES ---
   const PROTECTED_ROUTES = [
     "/profile",
     "/profile/my-favorites",
@@ -23,8 +29,6 @@ export function middleware(request: NextRequest) {
     "/create-post",
     "/edit-post",
     "/chats",
-    "/reset-password/new-password",
-
   ];
 
   const AUTH_ROUTES = [
@@ -32,37 +36,29 @@ export function middleware(request: NextRequest) {
     "/register",
     "/reset-password",
     "/reset-password/verify-otp",
-    // "/reset-password/new-password",
-
   ];
 
-  // if (normalizedPath === "/reset-password/new-password") {
-  //   const verifiedReset = request.cookies.get("verifiedReset")?.value;
-  //   if (!verifiedReset) {
-  //     return NextResponse.redirect(
-  //       new URL(`/${locale}/reset-password/send-code`, request.url)
-  //     );
-  //   }
-  // }
   const isProtectedRoute =
     PROTECTED_ROUTES.includes(normalizedPath) ||
     normalizedPath.startsWith("/chats/");
 
   const isAuthRoute = AUTH_ROUTES.includes(normalizedPath);
 
+  // If protected route → must have token
   if (isProtectedRoute && !token) {
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
   }
 
+  // If auth route → redirect logged-in users away
   if (isAuthRoute && token) {
     return NextResponse.redirect(new URL(`/${locale}`, request.url));
   }
 
-
+  // Let next-intl handle locale and routing
   return intlMiddleware(request);
 }
 
 export const config = {
-  matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
+  // Match all paths except API, assets, etc.
+  matcher: ["/((?!api|trpc|_next|_vercel|.*\\..*).*)"],
 };
-

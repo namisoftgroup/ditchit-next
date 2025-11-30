@@ -80,7 +80,22 @@
     "no_available_text": "Tulge varsti tagasi, et avastada uut ja põnevat sisu!",
     "type": "Tüüp",
     "sale": "Müük",
-    "wanted": "Tahtis"
+    "wanted": "Tahtis",
+    "all": "Kõik",
+    "available": "Saadaval",
+    "sold": "Müüdud",
+    "outside_country": "Väljaspool valitud riiki",
+    "location_required": "Asukoht on nõutav",
+    "get_estimate": "Hankige kauba hinnanguline väärtus",
+    "camera": "Kaamera",
+    "gallery": "Galerii",
+    "processing_image": "Pildi töötlemine...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "Toodet ei õnnestu tuvastada. Proovige selgema pildiga.",
+    "sell": "müüa",
+    "list_similar": "Sarnaste loend",
+    "avg_price": "Keskmised hinnad:"
   },
   "error": {
     "somthing_went_wrong": "Uups! Midagi läks valesti",
@@ -201,7 +216,8 @@
     "offline": "Olete võrguühenduseta. Kontrollige oma Interneti-ühendust",
     "current_password": "Praegune parool",
     "new_password": "Uus parool",
-    "confirm_new_password": "Kinnitage uus parool"
+    "confirm_new_password": "Kinnitage uus parool",
+    "search_country": "Otsi riiki..."
   },
   "contact": {
     "full_name": "Täisnimi",

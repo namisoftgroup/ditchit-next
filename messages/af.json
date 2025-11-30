@@ -80,7 +80,22 @@
     "no_available_text": "Kom binnekort terug om nuwe en opwindende inhoud te ontdek!",
     "type": "Tik",
     "sale": "Uitverkoping",
-    "wanted": "Gesoek"
+    "wanted": "Gesoek",
+    "all": "Almal",
+    "available": "Beskikbaar",
+    "sold": "Verkoop",
+    "outside_country": "Buite gekose land",
+    "location_required": "Ligging word vereis",
+    "get_estimate": "Kry beraamde waarde van item",
+    "camera": "Kamera",
+    "gallery": "Galery",
+    "processing_image": "Verwerk tans prent …",
+    "min": "MIN:",
+    "max": "MAKS:",
+    "unable_identify": "Kan nie produk identifiseer nie. Probeer asseblief met 'n duideliker beeld.",
+    "sell": "Verkoop",
+    "list_similar": "Lys soortgelyk",
+    "avg_price": "Gemiddelde pryse:"
   },
   "error": {
     "somthing_went_wrong": "Oeps! Iets het verkeerd gegaan",
@@ -201,7 +216,8 @@
     "offline": "Jy is vanlyn. Gaan asseblief jou internetverbinding na",
     "current_password": "Huidige wagwoord",
     "new_password": "Nuwe wagwoord",
-    "confirm_new_password": "Bevestig nuwe wagwoord"
+    "confirm_new_password": "Bevestig nuwe wagwoord",
+    "search_country": "Soek land..."
   },
   "contact": {
     "full_name": "Volledige Naam",

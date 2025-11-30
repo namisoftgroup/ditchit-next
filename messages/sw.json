@@ -80,7 +80,22 @@
     "no_available_text": "Rudi hivi karibuni kugundua yaliyomo mpya na ya kufurahisha!",
     "type": "Aina",
     "sale": "Uuzaji",
-    "wanted": "Inataka"
+    "wanted": "Inataka",
+    "all": "Zote",
+    "available": "Inapatikana",
+    "sold": "Kuuzwa",
+    "outside_country": "Nje ya nchi iliyochaguliwa",
+    "location_required": "Mahali inahitajika",
+    "get_estimate": "Pata thamani inayokadiriwa ya bidhaa",
+    "camera": "Kamera",
+    "gallery": "Matunzio",
+    "processing_image": "Usindikaji wa picha ...",
+    "min": "Min:",
+    "max": "Max:",
+    "unable_identify": "Haiwezi kutambua bidhaa. Tafadhali jaribu na picha iliyo wazi.",
+    "sell": "Kuuza",
+    "list_similar": "Orodhesha sawa",
+    "avg_price": "Wastani wa bei:"
   },
   "error": {
     "somthing_went_wrong": "Ups! Kitu fulani kilikwenda mrama",
@@ -201,7 +216,8 @@
     "offline": "Uko nje ya mtandao. Tafadhali angalia muunganisho wako wa mtandao",
     "current_password": "Nenosiri la sasa",
     "new_password": "Nywila mpya",
-    "confirm_new_password": "Thibitisha nywila mpya"
+    "confirm_new_password": "Thibitisha nywila mpya",
+    "search_country": "Tafuta nchi ..."
   },
   "contact": {
     "full_name": "Jina Kamili",

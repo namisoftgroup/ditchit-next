@@ -9,7 +9,7 @@ import { useForm, FormProvider, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { authAction } from "../actions";
 import { useAuthStore } from "../store";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import InputField from "@/components/shared/InputField";
 import SocialAuth from "./SocialAuth";
 import ZipMapSearch from "../../../components/shared/ZipMapSearch";
@@ -19,15 +19,21 @@ import { Country } from "@/types/country";
 import { getCookie } from "@/lib/utils";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { getCountries } from "@/services/getCountries";
 
 export default function RegisterForm({ countries }: { countries: Country[] }) {
   const [isPending, setIsPending] = useState<boolean>(false);
+  const locale = useLocale();
+  const [countryOptions, setCountryOptions] = useState<Country[]>(countries);
+  const [countryPage, setCountryPage] = useState<number>(1);
+  const [countriesHasMore, setCountriesHasMore] = useState<boolean>(true);
+  const [countriesLoading, setCountriesLoading] = useState<boolean>(false);
   const { setUser, setToken } = useAuthStore((state) => state);
   const router = useRouter();
   const t = useTranslations("auth");
   const countryId = getCookie("countryId");
 
-  const methods = useForm<registerFormValues>({
+  const methods = useForm<registerFormValues & { country_changed?: number }>({
     mode: "onChange",
     resolver: zodResolver(registerSchema),
   });
@@ -64,6 +70,8 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
       if (res?.code === 200) {
         setUser(res.data.user);
         setToken(res.data.auth.token);
+        document.cookie =
+          "countryId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         toast.success(t("register_success"));
         router.push("/");
       } else {
@@ -76,7 +84,30 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
       setIsPending(false);
     }
   };
+  const loadMoreCountries = async () => {
+    if (countriesLoading || !countriesHasMore) return;
+    try {
+      setCountriesLoading(true);
+      const nextPage = countryPage + 1;
+      const res = await getCountries(locale, nextPage, 15);
+      const newItems = res.data?.data || [];
 
+      // Deduplicate by id
+      const existingIds = new Set(countryOptions.map((c) => c.id));
+      const merged = [
+        ...countryOptions,
+        ...newItems.filter((c) => !existingIds.has(c.id)),
+      ];
+      setCountryOptions(merged);
+      setCountryPage(nextPage);
+      setCountriesHasMore(Boolean(res.data?.next_page_url));
+    } catch (error) {
+      console.error("Failed to load more countries", error);
+      setCountriesHasMore(false);
+    } finally {
+      setCountriesLoading(false);
+    }
+  };
   return (
     <FormProvider {...methods}>
       <form
@@ -135,12 +166,12 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
               value={field.value}
               onChange={(val) => {
                 field.onChange(val);
-
-                // const selected = countries.find((c) => c.id?.toString() === val);
-                // We don't need to set the country field directly anymore
-                // The ZipMapSearch component will get the country from the countries array
+                setValue("country_changed", Date.now());
               }}
-              options={countries.map((country) => ({
+              onLoadMore={loadMoreCountries}
+              hasMore={countriesHasMore}
+              loading={countriesLoading}
+              options={countryOptions.map((country) => ({
                 label: (country as { title?: string })?.title ?? "",
                 value: (country as { id?: number }).id?.toString() ?? "",
               }))}
@@ -177,28 +208,19 @@ export default function RegisterForm({ countries }: { countries: Country[] }) {
 
         <input type="hidden" {...register("latitude")} />
         <input type="hidden" {...register("longitude")} />
-        {methods.watch("country_id") !== "1" ? (
+        <input type="hidden" {...register("country_changed")} />
+        <div
+          className={`${methods.watch("country_id") === "1" ? "hidden" : ""}`}
+        >
           <ZipMapSearch
             countryId={methods.watch("country_id")}
             country={
-              countries.find(
+              countryOptions.find(
                 (c) => c.id?.toString() === methods.watch("country_id")
               ) as Country
             }
           />
-        ) : (
-          <div className="hidden">
-            <ZipMapSearch
-              countryId={methods.watch("country_id")}
-              country={
-                countries.find(
-                  (c) => c.id?.toString() === methods.watch("country_id")
-                ) as Country
-              }
-            />
-          </div>
-        )}
-
+        </div>
         {/* <InputField
           label={t("phone_number")}
           id="phone"

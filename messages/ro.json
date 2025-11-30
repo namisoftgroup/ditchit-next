@@ -80,7 +80,22 @@
     "no_available_text": "Reveniți în curând pentru a descoperi conținut nou și interesant!",
     "type": "Tip",
     "sale": "Vânzare",
-    "wanted": "Dorit"
+    "wanted": "Dorit",
+    "all": "Toate",
+    "available": "Disponibil",
+    "sold": "Vândut",
+    "outside_country": "În afara țării selectate",
+    "location_required": "Locația este necesară",
+    "get_estimate": "Obțineți valoarea estimată a articolului",
+    "camera": "Camera foto",
+    "gallery": "Galerie",
+    "processing_image": "Se procesează imaginea...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "Nu se poate identifica produsul. Vă rugăm să încercați cu o imagine mai clară.",
+    "sell": "Vinde",
+    "list_similar": "Listă similară",
+    "avg_price": "Preturi medii:"
   },
   "error": {
     "somthing_went_wrong": "Oops! Ceva a mers prost",
@@ -201,7 +216,8 @@
     "offline": "Ești offline. Vă rugăm să vă verificați conexiunea la internet",
     "current_password": "Parola actuală",
     "new_password": "Parolă Nouă",
-    "confirm_new_password": "Confirmați parola nouă"
+    "confirm_new_password": "Confirmați parola nouă",
+    "search_country": "Căutați țara..."
   },
   "contact": {
     "full_name": "Nume complet",
