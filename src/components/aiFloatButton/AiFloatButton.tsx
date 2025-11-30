@@ -65,7 +65,7 @@ const AiFloatButton = () => {
       {/* Floating AI Button */}
       <div
         onClick={() => setShowModalAi(true)}
-        className="fixed bottom-8 right-10 z-50 animate-bounce cursor-pointer"
+        className="fixed bottom-8 right-6 z-50 animate-bounce cursor-pointer"
       >
         <Image
           width={500}
