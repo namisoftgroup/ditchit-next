@@ -80,7 +80,22 @@
     "no_available_text": "Kmalu se vrnite in odkrijte nove in vznemirljive vsebine!",
     "type": "Vrsta",
     "sale": "Prodaja",
-    "wanted": "Iskana"
+    "wanted": "Iskana",
+    "all": "Vse",
+    "available": "Na voljo",
+    "sold": "prodano",
+    "outside_country": "Zunaj izbrane države",
+    "location_required": "Lokacija je obvezna",
+    "get_estimate": "Pridobite ocenjeno vrednost predmeta",
+    "camera": "Kamera",
+    "gallery": "Galerija",
+    "processing_image": "Obdelava slike ...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "Izdelka ni mogoče prepoznati. Poskusite z jasnejšo sliko.",
+    "sell": "Prodaja",
+    "list_similar": "Seznam podobnih",
+    "avg_price": "Povprečne cene:"
   },
   "error": {
     "somthing_went_wrong": "Ups! Nekaj je šlo narobe",
@@ -201,7 +216,8 @@
     "offline": "Nisi povezan. Preverite internetno povezavo",
     "current_password": "Trenutno geslo",
     "new_password": "Novo geslo",
-    "confirm_new_password": "Potrdite novo geslo"
+    "confirm_new_password": "Potrdite novo geslo",
+    "search_country": "Iskanje države ..."
   },
   "contact": {
     "full_name": "Polno ime",

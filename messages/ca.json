@@ -80,7 +80,22 @@
     "no_available_text": "Torneu aviat per descobrir contingut nou i emocionant.",
     "type": "Tipus",
     "sale": "Venda",
-    "wanted": "Volgut"
+    "wanted": "Volgut",
+    "all": "Tots",
+    "available": "Disponible",
+    "sold": "Vengut",
+    "outside_country": "Fora del país seleccionat",
+    "location_required": "La ubicació és necessària",
+    "get_estimate": "Obteniu el valor estimat de l'article",
+    "camera": "Càmera",
+    "gallery": "Galeria",
+    "processing_image": "S'està processant la imatge...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "No es pot identificar el producte. Si us plau, proveu amb una imatge més clara.",
+    "sell": "Vendre",
+    "list_similar": "Llista similar",
+    "avg_price": "Preus mitjans:"
   },
   "error": {
     "somthing_went_wrong": "Ostres! Alguna cosa ha anat malament",
@@ -201,7 +216,8 @@
     "offline": "Estàs fora de línia. Comproveu la vostra connexió a Internet",
     "current_password": "Contrasenya actual",
     "new_password": "Contrasenya nova",
-    "confirm_new_password": "Confirmeu la nova contrasenya"
+    "confirm_new_password": "Confirmeu la nova contrasenya",
+    "search_country": "Cerca país..."
   },
   "contact": {
     "full_name": "Nom complet",

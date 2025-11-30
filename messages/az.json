@@ -80,7 +80,22 @@
     "no_available_text": "Tezliklə yeni və maraqlı məzmun kəşf etmək üçün geri qayıdın!",
     "type": "Tip",
     "sale": "Silmək",
-    "wanted": "İstənilən"
+    "wanted": "İstənilən",
+    "all": "Hamar",
+    "available": "Mövcud",
+    "sold": "Satan",
+    "outside_country": "Xaricində seçilmiş ölkə",
+    "location_required": "Yer tələb olunur",
+    "get_estimate": "Elementin təxmini dəyəri alın",
+    "camera": "Kamera",
+    "gallery": "Qalereya",
+    "processing_image": "İşləmə imic ...",
+    "min": "Min:",
+    "max": "Maks:",
+    "unable_identify": "Məhsulu müəyyənləşdirmək olmur. Xahiş edirəm daha aydın bir görüntü ilə cəhd edin.",
+    "sell": "Satmaq",
+    "list_similar": "Oxşar siyahıya alın",
+    "avg_price": "Orta qiymətlər:"
   },
   "error": {
     "somthing_went_wrong": "Aha! Bir şey səhv getdi.",
@@ -201,7 +216,8 @@
     "offline": "Sən oflaynsan. Zəhmət olmasa internet bağlantınızı yoxlayın",
     "current_password": "Cari parol",
     "new_password": "Yeni parol",
-    "confirm_new_password": "Yeni Şifrə təsdiqləyin"
+    "confirm_new_password": "Yeni Şifrə təsdiqləyin",
+    "search_country": "Axtar Ölkə ..."
   },
   "contact": {
     "full_name": "Tam adı",

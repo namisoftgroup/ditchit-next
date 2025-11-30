@@ -80,7 +80,22 @@
     "no_available_text": "Yaqinda yangi va qiziqarli tarkibni kashf etish uchun qaytib keling!",
     "type": "Tur",
     "sale": "Sotish",
-    "wanted": "Istagan"
+    "wanted": "Istagan",
+    "all": "Hamma",
+    "available": "Mavjud",
+    "sold": "Sotilgan",
+    "outside_country": "Tanlangan tanlangan mamlakat",
+    "location_required": "Joylashuv talab qilinadi",
+    "get_estimate": "Hisobning taxminiy qiymatini oling",
+    "camera": "Kamera",
+    "gallery": "Galereya",
+    "processing_image": "Qayta ishlash tasviri ...",
+    "min": "MIN:",
+    "max": "Maks:",
+    "unable_identify": "Mahsulotni aniqlab bo'lmadi. Iltimos, aniqroq tasvir bilan sinab ko'ring.",
+    "sell": "Sotmoq",
+    "list_similar": "Xuddi shunday ro'yxat",
+    "avg_price": "O'rtacha narxlar:"
   },
   "error": {
     "somthing_went_wrong": "Afsus! Xato yuz berdi",
@@ -201,7 +216,8 @@
     "offline": "Siz oflaynsiz. Internetga ulanishingizni tekshiring",
     "current_password": "Joriy parol",
     "new_password": "Yangi parol",
-    "confirm_new_password": "Yangi parolni tasdiqlang"
+    "confirm_new_password": "Yangi parolni tasdiqlang",
+    "search_country": "Qidiruv mamlakatlari ..."
   },
   "contact": {
     "full_name": "To'liq ism",

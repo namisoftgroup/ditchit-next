@@ -80,7 +80,22 @@
     "no_available_text": "Segera kembali untuk menemukan konten baru dan menarik!",
     "type": "Jenis",
     "sale": "Penjualan",
-    "wanted": "Diinginkan"
+    "wanted": "Diinginkan",
+    "all": "Semua",
+    "available": "Tersedia",
+    "sold": "Terjual",
+    "outside_country": "Di luar negara yang dipilih",
+    "location_required": "Lokasi diperlukan",
+    "get_estimate": "Dapatkan Perkiraan Nilai Barang",
+    "camera": "Kamera",
+    "gallery": "Galeri",
+    "processing_image": "Memproses gambar...",
+    "min": "menit:",
+    "max": "MAKS:",
+    "unable_identify": "Tidak dapat mengidentifikasi produk. Silakan coba dengan gambar yang lebih jelas.",
+    "sell": "Menjual",
+    "list_similar": "Daftar Serupa",
+    "avg_price": "Harga rata-rata:"
   },
   "error": {
     "somthing_went_wrong": "Ups! Ada yang salah.",
@@ -201,7 +216,8 @@
     "offline": "Anda sedang luring. Silakan periksa koneksi internet Anda",
     "current_password": "Kata Sandi Saat Ini",
     "new_password": "Kata Sandi Baru",
-    "confirm_new_password": "Konfirmasi Kata Sandi Baru"
+    "confirm_new_password": "Konfirmasi Kata Sandi Baru",
+    "search_country": "Cari Negara..."
   },
   "contact": {
     "full_name": "Nama Lengkap",

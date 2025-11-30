@@ -80,7 +80,22 @@
     "no_available_text": "Yeni ve heyecan verici içerik keşfetmek için yakında geri gelin!",
     "type": "Tip",
     "sale": "Satış",
-    "wanted": "Aranan"
+    "wanted": "Aranan",
+    "all": "Tüm",
+    "available": "Mevcut",
+    "sold": "Satılmış",
+    "outside_country": "Seçilen ülke dışında",
+    "location_required": "Konum gerekli",
+    "get_estimate": "Öğenin Tahmini Değerini Alın",
+    "camera": "Kamera",
+    "gallery": "Galeri",
+    "processing_image": "Resim işleniyor...",
+    "min": "DK:",
+    "max": "MAKS:",
+    "unable_identify": "Ürün tanımlanamıyor. Lütfen daha net bir görüntüyle deneyin.",
+    "sell": "Satmak",
+    "list_similar": "Benzerleri Listele",
+    "avg_price": "Ortalama fiyatlar:"
   },
   "error": {
     "somthing_went_wrong": "Tüh! Bir şeyler yanlış gitti",
@@ -201,7 +216,8 @@
     "offline": "Çevrimdışısınız. Lütfen internet bağlantınızı kontrol edin",
     "current_password": "Mevcut Şifre",
     "new_password": "Yeni Şifre",
-    "confirm_new_password": "Yeni Şifreyi Onayla"
+    "confirm_new_password": "Yeni Şifreyi Onayla",
+    "search_country": "Ülke Ara..."
   },
   "contact": {
     "full_name": "Tam Adı",

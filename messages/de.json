@@ -80,7 +80,22 @@
     "no_available_text": "Kommen Sie bald zurück, um neue und aufregende Inhalte zu entdecken!",
     "type": "Typ",
     "sale": "Verkauf",
-    "wanted": "Gesucht"
+    "wanted": "Gesucht",
+    "all": "Alle",
+    "available": "Verfügbar",
+    "sold": "Verkauft",
+    "outside_country": "Außerhalb des ausgewählten Landes",
+    "location_required": "Der Standort ist erforderlich",
+    "get_estimate": "Erhalten Sie den geschätzten Wert des Artikels",
+    "camera": "Kamera",
+    "gallery": "Galerie",
+    "processing_image": "Bild wird verarbeitet...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "Produkt konnte nicht identifiziert werden. Bitte versuchen Sie es mit einem klareren Bild.",
+    "sell": "Verkaufen",
+    "list_similar": "Ähnliche Liste auflisten",
+    "avg_price": "Durchschnittspreise:"
   },
   "error": {
     "somthing_went_wrong": "Hoppla! Etwas ist schiefgegangen.",
@@ -201,7 +216,8 @@
     "offline": "Du bist offline. Bitte überprüfen Sie Ihre Internetverbindung",
     "current_password": "Aktuelles Passwort",
     "new_password": "Neues Passwort",
-    "confirm_new_password": "Bestätigen Sie das neue Passwort"
+    "confirm_new_password": "Bestätigen Sie das neue Passwort",
+    "search_country": "Land suchen..."
   },
   "contact": {
     "full_name": "Vollständiger Name",

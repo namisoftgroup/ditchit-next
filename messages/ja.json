@@ -80,7 +80,22 @@
     "no_available_text": "すぐに戻って、新しいエキサイティングなコンテンツを発見してください！",
     "type": "タイプ",
     "sale": "販売",
-    "wanted": "募集中"
+    "wanted": "募集中",
+    "all": "全て",
+    "available": "利用可能",
+    "sold": "販売済み",
+    "outside_country": "選択した国外",
+    "location_required": "場所は必須です",
+    "get_estimate": "アイテムの推定価格を取得する",
+    "camera": "カメラ",
+    "gallery": "ギャラリー",
+    "processing_image": "画像を処理中...",
+    "min": "分:",
+    "max": "マックス:",
+    "unable_identify": "製品を識別できません。より鮮明な画像でお試しください。",
+    "sell": "売る",
+    "list_similar": "類似リスト",
+    "avg_price": "平均価格:"
   },
   "error": {
     "somthing_went_wrong": "おっと！何かがうまくいきませんでした。",
@@ -201,7 +216,8 @@
     "offline": "あなたはオフラインです。インターネット接続を確認してください",
     "current_password": "現在のパスワード",
     "new_password": "新しいパスワード",
-    "confirm_new_password": "新しいパスワードを確認する"
+    "confirm_new_password": "新しいパスワードを確認する",
+    "search_country": "国を検索..."
   },
   "contact": {
     "full_name": "フルネーム",

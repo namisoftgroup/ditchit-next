@@ -80,7 +80,22 @@
     "no_available_text": "Kom snart tilbage for at opdage nyt og spændende indhold!",
     "type": "Type",
     "sale": "Udsalg",
-    "wanted": "Eftersøgt"
+    "wanted": "Eftersøgt",
+    "all": "Alle",
+    "available": "Tilgængelig",
+    "sold": "Solgt",
+    "outside_country": "Uden for valgt land",
+    "location_required": "Placering er påkrævet",
+    "get_estimate": "Få anslået værdi af varen",
+    "camera": "Kamera",
+    "gallery": "Galleri",
+    "processing_image": "Behandler billede...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "Kan ikke identificere produktet. Prøv venligst med et klarere billede.",
+    "sell": "Sælge",
+    "list_similar": "Liste lignende",
+    "avg_price": "Gennemsnitspriser:"
   },
   "error": {
     "somthing_went_wrong": "Ups! Noget gik galt.",
@@ -201,7 +216,8 @@
     "offline": "Du er offline. Tjek venligst din internetforbindelse",
     "current_password": "Nuværende adgangskode",
     "new_password": "Ny adgangskode",
-    "confirm_new_password": "Bekræft ny adgangskode"
+    "confirm_new_password": "Bekræft ny adgangskode",
+    "search_country": "Søg land..."
   },
   "contact": {
     "full_name": "Fulde navn",

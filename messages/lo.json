@@ -80,7 +80,22 @@
     "no_available_text": "ກັບມາໄວໆນີ້ເພື່ອຄົ້ນພົບເນື້ອຫາໃຫມ່ແລະຫນ້າຕື່ນເຕັ້ນ!",
     "type": "ປະເພດ",
     "sale": "ຂາຍ",
-    "wanted": "ຕ້ອງການ"
+    "wanted": "ຕ້ອງການ",
+    "all": "ທັງຫມົດ",
+    "available": "ມີໄວ້",
+    "sold": "ຂາຍ",
+    "outside_country": "ປະເທດທີ່ເລືອກຢູ່ນອກ",
+    "location_required": "ສະຖານທີ່ແມ່ນຕ້ອງການ",
+    "get_estimate": "ໄດ້ຮັບມູນຄ່າການປະມານຂອງລາຍການ",
+    "camera": "ກ້ອງຖ່າຍຮູບ",
+    "gallery": "ຫ້ອງວາງສະແດງ",
+    "processing_image": "ຮູບພາບການປຸງແຕ່ງ ...",
+    "min": "Min:",
+    "max": "ສູງສຸດທີ່ເຄຍ:",
+    "unable_identify": "ບໍ່ສາມາດລະບຸຜະລິດຕະພັນໄດ້. ກະລຸນາລອງດ້ວຍຮູບພາບທີ່ຊັດເຈນກວ່າ.",
+    "sell": "ຂາຍ",
+    "list_similar": "ລາຍຊື່ຄ້າຍຄືກັນ",
+    "avg_price": "ລາຄາສະເລ່ຍ:"
   },
   "error": {
     "somthing_went_wrong": "Oops! Kukuzi kang somi!",
@@ -201,7 +216,8 @@
     "offline": "ທ່ານແມ່ນ offline. ກະລຸນາກວດເບິ່ງການເຊື່ອມຕໍ່ອິນເຕີເນັດຂອງທ່ານ",
     "current_password": "ລະຫັດຜ່ານໃນປະຈຸບັນ",
     "new_password": "ລະຫັດລັບໃຫມ່",
-    "confirm_new_password": "ຢືນຢັນລະຫັດລັບໃຫມ່"
+    "confirm_new_password": "ຢືນຢັນລະຫັດລັບໃຫມ່",
+    "search_country": "ປະເທດຄົ້ນຫາ ..."
   },
   "contact": {
     "full_name": "ຊື່ເຕັມ",

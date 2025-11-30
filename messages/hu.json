@@ -80,7 +80,22 @@
     "no_available_text": "Gyere vissza hamarosan, hogy felfedezzék az új és izgalmas tartalmat!",
     "type": "Írja be",
     "sale": "Eladás",
-    "wanted": "Wanted"
+    "wanted": "Wanted",
+    "all": "Minden",
+    "available": "Elérhető",
+    "sold": "Eladott",
+    "outside_country": "A kiválasztott országon kívül",
+    "location_required": "Helyszín szükséges",
+    "get_estimate": "Szerezze meg a tétel becsült értékét",
+    "camera": "Kamera",
+    "gallery": "Galéria",
+    "processing_image": "Kép feldolgozása...",
+    "min": "MIN.:",
+    "max": "MAX:",
+    "unable_identify": "A terméket nem lehet azonosítani. Kérjük, próbálja meg tisztább képpel.",
+    "sell": "Elad",
+    "list_similar": "Hasonló listázás",
+    "avg_price": "Átlag árak:"
   },
   "error": {
     "somthing_went_wrong": "Hoppá! Valami hiba történt.",
@@ -201,7 +216,8 @@
     "offline": "Ön offline állapotban van. Kérjük, ellenőrizze internetkapcsolatát",
     "current_password": "Jelenlegi jelszó",
     "new_password": "Új jelszó",
-    "confirm_new_password": "Új jelszó megerősítése"
+    "confirm_new_password": "Új jelszó megerősítése",
+    "search_country": "Ország keresése..."
   },
   "contact": {
     "full_name": "Teljes név",

@@ -80,7 +80,22 @@
     "no_available_text": "Врати се ускоро да откријете нови и узбудљиви садржај!",
     "type": "Тип",
     "sale": "Сале",
-    "wanted": "Траже се"
+    "wanted": "Траже се",
+    "all": "Све",
+    "available": "Доступан",
+    "sold": "Продато",
+    "outside_country": "Изван изабране земље",
+    "location_required": "Локација је обавезна",
+    "get_estimate": "Добијте процењену вредност артикла",
+    "camera": "Камера",
+    "gallery": "Галерија",
+    "processing_image": "Слика се обрађује...",
+    "min": "МИН:",
+    "max": "МАКС:",
+    "unable_identify": "Није могуће идентификовати производ. Покушајте са јаснијом сликом.",
+    "sell": "Селл",
+    "list_similar": "Лист Симилар",
+    "avg_price": "Просечне цене:"
   },
   "error": {
     "somthing_went_wrong": "Ups! Nešto je pošlo po zlu",
@@ -201,7 +216,8 @@
     "offline": "Ви сте ван мреже. Проверите своју интернет везу",
     "current_password": "Тренутна лозинка",
     "new_password": "Нова лозинка",
-    "confirm_new_password": "Потврдите нову лозинку"
+    "confirm_new_password": "Потврдите нову лозинку",
+    "search_country": "Тражи земљу..."
   },
   "contact": {
     "full_name": "Puno ime",

@@ -80,7 +80,22 @@
     "no_available_text": "Drīz atgriezieties, lai atklātu jaunu un aizraujošu saturu!",
     "type": "Tips",
     "sale": "Izpārdošana",
-    "wanted": "Vēlējās"
+    "wanted": "Vēlējās",
+    "all": "Visi",
+    "available": "Pieejams",
+    "sold": "Pārdots",
+    "outside_country": "Ārpus izvēlētās valsts",
+    "location_required": "Nepieciešama atrašanās vieta",
+    "get_estimate": "Iegūstiet preces aptuveno vērtību",
+    "camera": "Kamera",
+    "gallery": "Galerija",
+    "processing_image": "Notiek attēla apstrāde...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "Nevar identificēt produktu. Lūdzu, mēģiniet ar skaidrāku attēlu.",
+    "sell": "Pārdod",
+    "list_similar": "Saraksts līdzīgi",
+    "avg_price": "Vidējās cenas:"
   },
   "error": {
     "somthing_went_wrong": "Ups! Kaut kas nogāja greizi.",
@@ -201,7 +216,8 @@
     "offline": "Jūs esat bezsaistē. Lūdzu, pārbaudiet savu interneta savienojumu",
     "current_password": "Pašreizējā parole",
     "new_password": "Jauna parole",
-    "confirm_new_password": "Apstipriniet jauno paroli"
+    "confirm_new_password": "Apstipriniet jauno paroli",
+    "search_country": "Meklēt valsti..."
   },
   "contact": {
     "full_name": "Pilnais vārds",

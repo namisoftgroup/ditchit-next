@@ -80,7 +80,22 @@
     "no_available_text": "Netrukus sugrįžkite sužinoti naujo ir įdomaus turinio!",
     "type": "Tipas",
     "sale": "Išpardavimas",
-    "wanted": "Norėjosi"
+    "wanted": "Norėjosi",
+    "all": "Visi",
+    "available": "Yra",
+    "sold": "Parduota",
+    "outside_country": "Už pasirinktos šalies ribų",
+    "location_required": "Būtina vieta",
+    "get_estimate": "Gaukite numatomą prekės vertę",
+    "camera": "Fotoaparatas",
+    "gallery": "Galerija",
+    "processing_image": "Apdorojamas vaizdas...",
+    "min": "MIN.:",
+    "max": "MAX:",
+    "unable_identify": "Nepavyko identifikuoti produkto. Pabandykite su aiškesniu vaizdu.",
+    "sell": "Parduodu",
+    "list_similar": "Sąrašas panašus",
+    "avg_price": "Vidutinės kainos:"
   },
   "error": {
     "somthing_went_wrong": "Oho! Kažkas negerai.",
@@ -201,7 +216,8 @@
     "offline": "Esate neprisijungęs. Patikrinkite interneto ryšį",
     "current_password": "Dabartinis slaptažodis",
     "new_password": "Naujas slaptažodis",
-    "confirm_new_password": "Patvirtinkite naują slaptažodį"
+    "confirm_new_password": "Patvirtinkite naują slaptažodį",
+    "search_country": "Ieškoti šalies..."
   },
   "contact": {
     "full_name": "Pilnas vardas",

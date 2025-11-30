@@ -80,7 +80,22 @@
     "no_available_text": "快来回来发现新的令人兴奋的内容！",
     "type": "类型",
     "sale": "销售",
-    "wanted": "通缉"
+    "wanted": "通缉",
+    "all": "全部",
+    "available": "可用的",
+    "sold": "卖",
+    "outside_country": "所选国家/地区之外",
+    "location_required": "位置为必填项",
+    "get_estimate": "获取物品的估计价值",
+    "camera": "相机",
+    "gallery": "画廊",
+    "processing_image": "处理图像...",
+    "min": "最小值：",
+    "max": "最大限度：",
+    "unable_identify": "无法识别产品。请尝试使用更清晰的图像。",
+    "sell": "卖",
+    "list_similar": "列出相似的",
+    "avg_price": "平均价格："
   },
   "error": {
     "somthing_went_wrong": "哎呀！出了点问题",
@@ -201,7 +216,8 @@
     "offline": "您已离线。请检查您的互联网连接",
     "current_password": "当前密码",
     "new_password": "新密码",
-    "confirm_new_password": "确认新密码"
+    "confirm_new_password": "确认新密码",
+    "search_country": "搜索国家..."
   },
   "contact": {
     "full_name": "全名",
