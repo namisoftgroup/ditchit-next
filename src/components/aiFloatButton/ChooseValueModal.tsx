@@ -1,96 +1,138 @@
-import { useState } from "react";
+"use client";
+
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { useRef } from "react";
+import { toast } from "sonner";
+
+interface ChooseValueModalProps {
+  showModalAi: boolean;
+  setShowModalAi: (value: boolean) => void;
+  onImageSelect: (file: File) => void;
+  loading: boolean;
+}
 
 const ChooseValueModal = ({
   showModalAi,
   setShowModalAi,
-  handleGalleryClick,
-}: any) => {
+  onImageSelect,
+  loading,
+}: ChooseValueModalProps) => {
+  const  t  = useTranslations("common");
+  const cameraInputRef = useRef<HTMLInputElement | null>(null);
+  const galleryInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleCameraClick = async () => {
+    try {
+      // Check if device supports camera
+      await navigator.mediaDevices.getUserMedia({ video: true });
+      // If camera is available, trigger camera input
+      cameraInputRef.current?.click();
+    } catch {
+      toast.error("This device does not support camera.");
+    }
+  };
+
+  const handleGalleryClick = () => {
+    galleryInputRef.current?.click();
+  };
+
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file && file.type.startsWith("image/")) {
+      onImageSelect(file);
+    } else {
+      toast.error("Please select a valid image file");
+    }
+    // Reset input value so same file can be selected again
+    event.target.value = "";
+  };
+
   return (
-    <Dialog open={showModalAi} onOpenChange={setShowModalAi} >
-      <DialogContent className="sm:max-w-md py-7">
-        <DialogHeader >
-          <DialogTitle className="flex items-center justify-center space-x-2 pt-4">
-            <svg
-              className="w-10 h-10 text-green-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+    <>
+      {loading && <div>loading....</div>}
+      <Dialog open={showModalAi} onOpenChange={setShowModalAi}>
+        <DialogContent className="sm:max-w-md py-7">
+          <DialogHeader>
+            <DialogTitle className="flex items-center justify-center space-x-2 pt-4">
+              <Image
+                width={500}
+                height={500}
+                src="/icons/cameraAi.svg"
+                alt="AI Chat"
+                className="w-14 h-14 cursor-pointer hover:opacity-80"
+              />
+              <span className="ml-2 font-bold">{t("get_estimate")}</span>
+            </DialogTitle>
+          </DialogHeader>
+          <div className="p-[.2px] bg-gray-200"></div>
+          <div className="flex justify-between space-x-8 mt-6 w-2/3 mx-auto">
+            {/* Camera Option */}
+            <div
+              onClick={handleCameraClick}
+              className="flex flex-col items-center space-y-2 cursor-pointer"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            <span className="ml-2 font-bold"> Get Estimated Value Of Item</span>
-          </DialogTitle>
-        </DialogHeader>
-
-        <div className="flex justify-between space-x-8 mt-6 w-2/3 mx-auto">
-          {/* Camera Option */}
-          <div className="flex flex-col items-center space-y-2 cursor-pointer">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center hover:bg-green-200 transition-colors">
-              <svg
-                className="w-8 h-8 text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+              <div className="w-16 h-16 flex items-center justify-center transition-colors hover:opacity-80">
+                <Image
+                  width={500}
+                  height={500}
+                  src="/icons/Layer_1.svg"
+                  alt="Camera"
+                  className="w-12 h-12 cursor-pointer"
                 />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
+              </div>
+              <span className="text-sm text-gray-500 font-medium">
+                {t("camera")}
+              </span>
             </div>
-            <span className="text-sm text-gray-500 font-medium">Camera</span>
+            <div className="p-[.2px] bg-gray-200"></div>
+            {/* Gallery Option */}
+            <div
+              className="flex flex-col items-center space-y-2 cursor-pointer"
+              onClick={handleGalleryClick}
+            >
+              <div className="w-16 h-16 flex items-center justify-center transition-colors hover:opacity-80">
+                <Image
+                  width={500}
+                  height={500}
+                  src="/icons/Vector.svg"
+                  alt="Gallery"
+                  className="w-12 h-12 cursor-pointer"
+                />
+              </div>
+              <span className="text-sm text-gray-500 font-medium">
+                {t("gallery")}
+              </span>
+            </div>
           </div>
 
-          {/* Gallery Option */}
-          <div
-            className="flex flex-col items-center space-y-2 cursor-pointer"
-            onClick={handleGalleryClick}
-          >
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center hover:bg-green-200 transition-colors">
-              <svg
-                className="w-8 h-8 text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-            <span className="text-sm text-gray-500 font-medium">Gallery</span>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
+          {/* Camera Input */}
+          <input
+            type="file"
+            accept="image/*"
+            capture="environment"
+            ref={cameraInputRef}
+            className="hidden"
+            onChange={handleFileSelect}
+          />
+
+          {/* Gallery Input */}
+          <input
+            type="file"
+            accept="image/*"
+            ref={galleryInputRef}
+            className="hidden"
+            onChange={handleFileSelect}
+          />
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

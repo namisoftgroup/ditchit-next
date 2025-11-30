@@ -137,7 +137,10 @@ export default async function RootLayout({ children, params }: Props) {
           <Header locale={lang} data={data} />
           <main className="min-h-[calc(100vh-316px)]">
             {children}
+            <div className="container">
+
             <AiFloatButton />
+            </div>
             </main>
 
           <audio id="notify-sound" src="/sounds/notify.mp3" preload="auto" />

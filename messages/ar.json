@@ -85,7 +85,17 @@
     "available": "متاح",
     "sold": "مباع",
     "outside_country": "خارج البلد المحدد",
-    "location_required": "اختر الموقع"
+    "location_required": "اختر الموقع",
+    "get_estimate": "الحصول على القيمة التقديرية للعنصر",
+    "camera": "كاميرا",
+    "gallery": "معرض",
+    "processing_image": "جارٍ معالجة الصورة...",
+    "min": "صغري:",
+    "max": "كبري:",
+    "unable_identify": "تعذر تحديد المنتج. يُرجى المحاولة باستخدام صورة أوضح",
+    "sell": "بيع",
+    "list_similar": "عرض منتجات مشابهة",
+    "avg_price": "متوسط ​​الأسعار:"
   },
   "error": {
     "somthing_went_wrong": "عذرًا! حدث خطأ ما",

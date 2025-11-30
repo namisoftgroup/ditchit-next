@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import FormFooter from "../FormFooter";
 
+
 interface CategoryStepProps {
   next: () => void;
   categories: Category[];
@@ -16,13 +17,43 @@ export default function CategoryStep({ next, categories }: CategoryStepProps) {
   const selectedCategory = watch("category_id");
   const t = useTranslations("manage_post");
 
+  // const searchParams = useSearchParams();
+  // const categoryIdUrl = searchParams.get("categoryIdUrl");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const isValid = await trigger("category_id");
+
     if (isValid) {
       next();
     }
   };
+
+  // console.log("categoryIdUrl", categoryIdUrl);
+  // console.log("categories", categories);
+
+  // useEffect(() => {
+  //   if (!categoryIdUrl) return;
+
+  //   const categoryExists = categories.some(
+  //     (cat) => String(cat.id) === String(categoryIdUrl)
+  //   );
+
+  //   if (categoryExists) {
+  //     // choose category from url
+  //     setValue("category_id", Number(categoryIdUrl));
+
+  //     // valid from id and go to next CategoryStep
+  //     (async () => {
+  //       const isValid = await trigger("category_id");
+  //       if (isValid) {
+  //         setTimeout(() => {
+  //           next();
+  //         }, 500);
+  //       }
+  //     })();
+  //   }
+  // }, [categoryIdUrl, categories, setValue, trigger, next]);
 
   return (
     <div className="space-y-4">

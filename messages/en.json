@@ -81,11 +81,21 @@
     "used": "Used",
     "no_available": "No posts availble here yet.",
     "no_available_text": "Come back soon to discover new and exciting content!",
-    "all":"All",
-    "available":"Available",
-    "sold":"Sold",
-    "outside_country":"Outside selected country",
-    "location_required" : "Location is required"
+    "all": "All",
+    "available": "Available",
+    "sold": "Sold",
+    "outside_country": "Outside selected country",
+    "location_required": "Location is required",
+    "get_estimate": "Get Estimated Value Of Item",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "processing_image": "Processing image...",
+    "min": "MIN:",
+    "max": "MAX:",
+    "unable_identify": "Unable to identify product. Please try with a clearer image.",
+    "sell": "Sell",
+    "list_similar": "List Similar",
+    "avg_price": "Average prices:"
   },
   "error": {
     "somthing_went_wrong": "Oops! Something went wrong",
@@ -203,11 +213,11 @@
     "select_country": "Select Country",
     "country": "Country",
     "location_error": "We could not determine your location. Default location is (United States)",
-    "zipcode_error": "No location found with this zip code", 
-    "current_password":"Current Password",
-    "new_password":"New Password",
-    "confirm_new_password":"Confirm New Password",
-    "search_country":"Search Country..."
+    "zipcode_error": "No location found with this zip code",
+    "current_password": "Current Password",
+    "new_password": "New Password",
+    "confirm_new_password": "Confirm New Password",
+    "search_country": "Search Country..."
   },
   "contact": {
     "full_name": "Full Name",

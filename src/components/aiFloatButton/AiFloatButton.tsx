@@ -3,28 +3,61 @@
 import { useState } from "react";
 import ChooseValueModal from "./ChooseValueModal";
 import ResultValueModal from "./ResultValueModal";
+import Image from "next/image";
+
+interface PriceData {
+  value: number | null;
+  currency: string | null;
+}
+
+export interface ApiResponse {
+  success: boolean;
+  product_name: string | null;
+  lowest_price: PriceData;
+  average_price: PriceData;
+  highest_price: PriceData;
+}
 
 const AiFloatButton = () => {
   const [showModalAi, setShowModalAi] = useState(false);
   const [showResultModal, setShowResultModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [apiData, setApiData] = useState<ApiResponse | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedImage(file);
-      // Simulate API call or processing
-      setTimeout(() => {
-        setShowModalAi(false);
-        setShowResultModal(true);
-      }, 1000);
+  const handleImageProcess = async (file: File) => {
+    if (!file) return;
+
+    setSelectedImage(file);
+    setLoading(true);
+    setError(null);
+    setShowResultModal(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("country", "EG"); //😒
+
+      const response = await fetch("/api/home/getAverageByImage", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to process image");
+      }
+
+      const result = await response.json();
+      setApiData(result?.data);
+      setShowModalAi(false);
+      setShowResultModal(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
+      console.error("Error processing image:", err);
+    } finally {
+      setLoading(false);
     }
-  };
-
-  const handleGalleryClick = () => {
-    // Trigger the hidden file input
-    const fileInput = document.getElementById("image-upload");
-    fileInput?.click();
   };
 
   return (
@@ -32,34 +65,33 @@ const AiFloatButton = () => {
       {/* Floating AI Button */}
       <div
         onClick={() => setShowModalAi(true)}
-        className="fixed bottom-8 right-10 bg-green-500 rounded-full shadow-lg z-50 animate-bounce cursor-pointer"
+        className="fixed bottom-8 right-10 z-50 animate-bounce cursor-pointer"
       >
-        <img
-          src="/images/avatar.svg"
-          alt="AI Chat"
-          className="w-12 h-12 cursor-pointer hover:opacity-80"
+        <Image
+          width={500}
+          height={500}
+          src="/icons/aiFloatIcon.svg"
+          alt="AI Float Button"
+          className="w-22 h-22 cursor-pointer hover:opacity-80"
         />
       </div>
-
-      {/* Hidden file input */}
-      <input
-        id="image-upload"
-        type="file"
-        accept="image/*"
-        onChange={handleImageSelect}
-        className="hidden"
-      />
 
       {/* First Modal - Image Selection */}
       <ChooseValueModal
         showModalAi={showModalAi}
         setShowModalAi={setShowModalAi}
-        handleGalleryClick={handleGalleryClick}
+        onImageSelect={handleImageProcess}
+        loading={loading}
       />
+
       {/* Second Modal - Result */}
       <ResultValueModal
         showResultModal={showResultModal}
         setShowResultModal={setShowResultModal}
+        selectedImage={selectedImage}
+        apiData={apiData}
+        loading={loading}
+        error={error}
       />
     </>
   );

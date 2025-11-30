@@ -37,6 +37,7 @@ export interface PostDetailsResponse {
   country?: {
     id: number;
     title?: string;
+    symbol?:string;
   };
 }
 
