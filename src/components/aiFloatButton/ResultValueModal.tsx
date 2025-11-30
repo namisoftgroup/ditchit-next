@@ -1,6 +1,6 @@
 "use client";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
 import Image from "next/image";
@@ -49,11 +49,15 @@ const ResultValueModal = ({
     <Dialog open={showResultModal} onOpenChange={setShowResultModal}>
       <DialogContent className="sm:max-w-md p-0">
         <CardContent className="p-0">
+          <DialogHeader>
+            <DialogTitle>
+            </DialogTitle>
+          </DialogHeader>
           {loading ? (
             <div className="w-full h-96 flex items-center justify-center">
               <div className="text-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
-                <p className="text-gray-600">{t('processing_image')}</p>
+                <p className="text-gray-600">{t("processing_image")}</p>
               </div>
             </div>
           ) : error ? (
@@ -93,7 +97,7 @@ const ResultValueModal = ({
                         {apiData.product_name || "Unknown Product"}
                       </h3>
                       <h3 className="text-xs text-gray-500 mb-1">
-                        {t('avg_price')}
+                        {t("avg_price")}
                       </h3>
                       <p className="font-bold">
                         {formatPrice(
@@ -106,7 +110,7 @@ const ResultValueModal = ({
                     {/* Min/Max Prices */}
                     <div className="flex space-x-24 text-sm text-gray-600 mb-6">
                       <div className="flex space-x-1 items-center">
-                        <p className="text-[10px] font-medium">{t('min')}</p>
+                        <p className="text-[10px] font-medium">{t("min")}</p>
                         <span className="text-[11px] text-black font-bold">
                           {formatPrice(
                             apiData.lowest_price.value,
@@ -115,7 +119,7 @@ const ResultValueModal = ({
                         </span>
                       </div>
                       <div className="flex space-x-1 items-center">
-                        <p className="text-[10px] font-medium">{t('max')}</p>
+                        <p className="text-[10px] font-medium">{t("max")}</p>
                         <span className="text-[11px] text-black font-bold">
                           {formatPrice(
                             apiData.highest_price.value,
@@ -128,7 +132,7 @@ const ResultValueModal = ({
                 ) : (
                   <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded">
                     <p className="text-yellow-800 text-sm">
-                      {t('unable_identify')}
+                      {t("unable_identify")}
                     </p>
                   </div>
                 )}
@@ -149,7 +153,7 @@ const ResultValueModal = ({
                         router.push(`/create-post?type=sale`);
                       }}
                     >
-                      {t('sell')}
+                      {t("sell")}
                     </Button>
                     <Button
                       className="flex-1 py-5 rounded-xl text-white bg-green-600 hover:bg-green-500"
@@ -165,7 +169,7 @@ const ResultValueModal = ({
                         );
                       }}
                     >
-                      {t('list_similar')}
+                      {t("list_similar")}
                     </Button>
                   </div>
                 )}
